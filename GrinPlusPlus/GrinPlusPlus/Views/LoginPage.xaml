@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             Title="{Binding Title}"
+             x:Class="GrinPlusPlus.Views.LoginPage">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="StartAndExpand" Margin="40,30,40,0">
+            <Image Source="logo.jpg" WidthRequest="80"/>
+            <Entry Placeholder="Username" Text="{Binding Username}"/>
+            <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True" />
+            <Button Text="Open Wallet" Command="{Binding OpenWalletCommand}" HorizontalOptions="Center" WidthRequest="200" />
+            <Button Text="Create Wallet" Command="{Binding CreateWalletCommand}" BackgroundColor="Transparent" />
+            <Button Text="Restore" Command="{Binding RestoreWalletCommand}"  BackgroundColor="Transparent"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
