@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="GrinPlusPlus.Views.TansactionsHistoryPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:c="clr-namespace:GrinPlusPlus.Converters"
+    xmlns:prism="http://prismlibrary.com"
+    xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
+    xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="{StaticResource BackgroundColor}"
+    IconImageSource="outline_list_alt_white_24.png">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <c:RelativeDateTimeConverter x:Key="RelativeDateTimeConverter" />
+            <Color x:Key="BackgroundColor">#000000</Color>
+            <Color x:Key="CellBackgroundColor">#161616</Color>
+            <Color x:Key="RepostSwipeItemBackgroundColor">
+                #0073e5
+            </Color>
+            <Color x:Key="FinalizeSwipeItemBackgroundColor">#198c19</Color>
+            <Color x:Key="CancelSwipeItemBackgroundColor">#e43632</Color>
+            <Style x:Key="FrameStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{StaticResource CellBackgroundColor}" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="Padding" Value="15" />
+                <Setter Property="Margin" Value="2" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout Margin="30">
+        <Label
+            Grid.Row="0"
+            Text="{x:Static resource:AppResources.History}"
+            TextColor="#2f2f2f"
+            TextTransform="Uppercase"
+            VerticalOptions="End"
+            VerticalTextAlignment="End" />
+        <CollectionView ItemsSource="{Binding Transactions}">
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout ItemSpacing="12" Orientation="Vertical" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <SwipeView>
+                        <SwipeView.Content>
+                            <Frame Style="{StaticResource FrameStyle}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        FontSize="Caption"
+                                        Text="{Binding Status}"
+                                        TextColor="WhiteSmoke"
+                                        TextTransform="Uppercase"
+                                        VerticalOptions="End" />
+                                    <Label
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        FontSize="Caption"
+                                        HorizontalOptions="End"
+                                        Text="{Binding Date, Converter={StaticResource RelativeDateTimeConverter}}"
+                                        TextColor="WhiteSmoke"
+                                        VerticalOptions="End" />
+                                    <Label
+                                        Grid.Row="1"
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="2"
+                                        VerticalOptions="Start">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span
+                                                    FontAttributes="Bold"
+                                                    FontSize="Default"
+                                                    Text="{Binding Amount, StringFormat='{}{0:N0}.'}"
+                                                    TextColor="White" />
+                                                <Span
+                                                    FontAttributes="Bold"
+                                                    FontSize="Body"
+                                                    Text="{Binding Decimals}"
+                                                    TextColor="White" />
+                                                <Span
+                                                    FontSize="Caption"
+                                                    Text=" ツ"
+                                                    TextColor="White" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </Grid>
+                            </Frame>
+                        </SwipeView.Content>
+                    </SwipeView>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            <CollectionView.EmptyView>
+                <Label
+                    FontSize="Default"
+                    HorizontalOptions="Fill"
+                    HorizontalTextAlignment="Center"
+                    Text="The history of Transactions is empty (ᵐ‿ʷ)"
+                    TextColor="#2f2f2f"
+                    VerticalTextAlignment="End" />
+            </CollectionView.EmptyView>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>

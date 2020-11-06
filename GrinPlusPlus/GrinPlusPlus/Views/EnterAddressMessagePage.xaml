@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="GrinPlusPlus.Views.EnterAddressMessagePage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com"
+    xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
+    xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
+    xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+    Title="{x:Static resource:AppResources.Address}"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromRight"
+    BackgroundColor="{StaticResource BackgroundColor}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="BackgroundColor">#000000</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout
+            Margin="20,20,20,0"
+            Spacing="10"
+            VerticalOptions="FillAndExpand">
+            <Label
+                FontAttributes="Bold"
+                Text="{x:Static resource:AppResources.Address}"
+                TextColor="LightGray"
+                TextTransform="Uppercase" />
+            <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                <Entry
+                    HorizontalOptions="FillAndExpand"
+                    IsSpellCheckEnabled="False"
+                    Text="{Binding Address}"
+                    TextColor="Yellow"
+                    TextTransform="Uppercase"
+                    VerticalTextAlignment="Center" />
+                <Button
+                    Command="{Binding OnQRButtonClickedCommand}"
+                    ImageSource="baseline_qr_code_scanner_black_24.png"
+                    WidthRequest="44" />
+            </StackLayout>
+            <Label
+                FontAttributes="Bold"
+                Text="{x:Static resource:AppResources.Message}"
+                TextColor="LightGray"
+                TextTransform="Uppercase" />
+            <Entry
+                IsSpellCheckEnabled="False"
+                Text="{Binding Message}"
+                TextColor="Yellow"
+                VerticalTextAlignment="Center" />
+            <zxing:ZXingScannerView
+                HeightRequest="320"
+                HorizontalOptions="Center"
+                IsScanning="{Binding IsScanning}"
+                IsVisible="{Binding IsScanning}"
+                Options="{Binding ScannerOptions}"
+                ScanResultCommand="{Binding OnScanResultCommand}"
+                VerticalOptions="Center"
+                WidthRequest="240" />
+            <Button
+                Margin="50,30,50,30"
+                BackgroundColor="#191919"
+                Command="{Binding SendButtonClickedCommand}"
+                CornerRadius="5"
+                HeightRequest="44"
+                Text="{x:Static resource:AppResources.Send}"
+                TextColor="Yellow"
+                VerticalOptions="EndAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

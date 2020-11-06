@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="GrinPlusPlus.Views.RestoreWalletPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com"
+    xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
+    xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="Black">
+    <ContentPage.Content>
+        <StackLayout
+            HorizontalOptions="FillAndExpand"
+            Orientation="Vertical"
+            Spacing="10"
+            VerticalOptions="FillAndExpand">
+            <Label
+                Padding="20,20,20,0"
+                FontSize="34"
+                HorizontalOptions="Start"
+                Text="{x:Static resource:AppResources.RestoreWallet}"
+                TextColor="White"
+                VerticalOptions="Center" />
+            <BoxView
+                Margin="20,0,20,40"
+                HeightRequest="1"
+                HorizontalOptions="Start"
+                WidthRequest="60"
+                Color="White" />
+            <Label
+                Margin="40,0,40,0"
+                Text="{x:Static resource:AppResources.Username}"
+                TextColor="White"
+                TextTransform="Uppercase" />
+            <Entry
+                Margin="40,0,40,20"
+                IsSpellCheckEnabled="False"
+                Text="{Binding Username}"
+                TextColor="Yellow"
+                VerticalTextAlignment="Center" />
+            <Label
+                Margin="40,0,40,0"
+                Text="{x:Static resource:AppResources.Password}"
+                TextColor="White"
+                TextTransform="Uppercase" />
+            <Entry
+                Margin="40,0,40,20"
+                IsPassword="True"
+                IsSpellCheckEnabled="False"
+                Text="{Binding Password}"
+                TextColor="Yellow"
+                VerticalTextAlignment="Center" />
+            <Label
+                Margin="40,0,40,0"
+                Text="{x:Static resource:AppResources.WalletSeed}"
+                TextColor="White"
+                TextTransform="Uppercase" />
+            <Editor
+                Margin="40,0,40,20"
+                AutoSize="Disabled"
+                FontSize="Body"
+                HeightRequest="150"
+                IsSpellCheckEnabled="False"
+                Text="{Binding WalletSeed}"
+                TextColor="Yellow" />
+            <Button
+                Margin="40,10,50,0"
+                BackgroundColor="#191919"
+                Command="{Binding RestoreWalletCommand}"
+                CornerRadius="5"
+                HeightRequest="44"
+                HorizontalOptions="FillAndExpand"
+                Text="{x:Static resource:AppResources.Restore}"
+                TextColor="Yellow" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="GrinPlusPlus.Views.WalletPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:c="clr-namespace:GrinPlusPlus.Converters"
+    xmlns:prism="http://prismlibrary.com"
+    xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
+    xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
+    x:Name="Wallet"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="{StaticResource BackgroundColor}"
+    IconImageSource="outline_account_balance_wallet_white_24.png">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <c:RelativeDateTimeConverter x:Key="RelativeDateTimeConverter" />
+            <Color x:Key="BackgroundColor">#000000</Color>
+            <Color x:Key="CellBackgroundColor">#161616</Color>
+            <Color x:Key="RepostSwipeItemBackgroundColor">
+                #0073e5
+            </Color>
+            <Color x:Key="FinalizeSwipeItemBackgroundColor">Green</Color>
+            <Color x:Key="CancelSwipeItemBackgroundColor">#e43632</Color>
+            <Style x:Key="FrameStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{StaticResource CellBackgroundColor}" />
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="Padding" Value="15" />
+                <Setter Property="Margin" Value="2" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Margin="30">
+            <Grid
+                BackgroundColor="#000000"
+                ColumnSpacing="5"
+                HeightRequest="210"
+                RowSpacing="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Text="{x:Static resource:AppResources.Spendable}"
+                    TextColor="#2f2f2f"
+                    TextTransform="Uppercase"
+                    VerticalOptions="End"
+                    VerticalTextAlignment="End" />
+                <Label
+                    Grid.Row="1"
+                    VerticalOptions="Start"
+                    VerticalTextAlignment="Start">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span
+                                FontAttributes="Bold"
+                                FontSize="38"
+                                Text="{Binding Spendable, StringFormat='{}{0:N0}'}"
+                                TextColor="White" />
+                            <Span
+                                FontAttributes="Bold"
+                                FontSize="Default"
+                                Text="."
+                                TextColor="White" />
+                            <Span
+                                FontAttributes="Bold"
+                                FontSize="Medium"
+                                Text="{Binding SpendableDecimals}"
+                                TextColor="White" />
+                            <Span
+                                FontSize="Small"
+                                Text=" ツ"
+                                TextColor="Yellow" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </Grid>
+            <CollectionView
+                Margin="0,0,0,30"
+                ItemsSource="{Binding InProgressTransactions}"
+                SelectedItem="{Binding SelectedTransaction}"
+                SelectionChangedCommand="{Binding OpenTransactionDetailsCommand}"
+                SelectionMode="Single">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="12" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView>
+                            <SwipeView.LeftItems>
+                                <SwipeItems Mode="Reveal" SwipeBehaviorOnInvoked="RemainOpen">
+                                    <SwipeItem
+                                        BackgroundColor="{StaticResource CancelSwipeItemBackgroundColor}"
+                                        Command="{Binding Source={x:Reference Wallet}, Path=BindingContext.CancelTransactionClickedCommand}"
+                                        CommandParameter="{Binding Id}"
+                                        Text="{x:Static resource:AppResources.Cancel}" />
+                                </SwipeItems>
+                            </SwipeView.LeftItems>
+                            <SwipeView.RightItems>
+                                <SwipeItems Mode="Reveal" SwipeBehaviorOnInvoked="RemainOpen">
+                                    <SwipeItem
+                                        BackgroundColor="{StaticResource FinalizeSwipeItemBackgroundColor}"
+                                        Command="{Binding Source={x:Reference Wallet}, Path=BindingContext.FinalizeTransactionClickedCommand}"
+                                        CommandParameter="{Binding Id}"
+                                        Text="{x:Static resource:AppResources.Finalize}" />
+                                </SwipeItems>
+                            </SwipeView.RightItems>
+                            <SwipeView.Content>
+                                <Frame Style="{StaticResource FrameStyle}">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label
+                                            Grid.Row="0"
+                                            Grid.Column="0"
+                                            FontSize="Caption"
+                                            Text="{Binding Status}"
+                                            TextColor="WhiteSmoke"
+                                            TextTransform="Uppercase"
+                                            VerticalOptions="End" />
+                                        <Label
+                                            Grid.Row="0"
+                                            Grid.Column="1"
+                                            FontSize="Caption"
+                                            HorizontalOptions="End"
+                                            Text="{Binding Date, Converter={StaticResource RelativeDateTimeConverter}}"
+                                            TextColor="WhiteSmoke"
+                                            VerticalOptions="End" />
+                                        <Label
+                                            Grid.Row="1"
+                                            Grid.Column="0"
+                                            Grid.ColumnSpan="2"
+                                            VerticalOptions="Start">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span
+                                                        FontAttributes="Bold"
+                                                        FontSize="Default"
+                                                        Text="{Binding Amount, StringFormat='{}{0:N0}.'}"
+                                                        TextColor="White" />
+                                                    <Span
+                                                        FontAttributes="Bold"
+                                                        FontSize="Body"
+                                                        Text="{Binding Decimals}"
+                                                        TextColor="White" />
+                                                    <Span
+                                                        FontSize="Caption"
+                                                        Text=" ツ"
+                                                        TextColor="White" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </Grid>
+                                </Frame>
+                            </SwipeView.Content>
+                        </SwipeView>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.EmptyView>
+                    <Label
+                        FontSize="Default"
+                        HorizontalOptions="Fill"
+                        HorizontalTextAlignment="Center"
+                        Text="No transactions in Progress right now  V(ᵐ‿ʷ)V"
+                        TextColor="#2f2f2f"
+                        VerticalTextAlignment="End" />
+                </CollectionView.EmptyView>
+            </CollectionView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="44" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="5*" />
+                </Grid.ColumnDefinitions>
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    BackgroundColor="#e5e500"
+                    Command="{prism:NavigateTo 'SetAmountPage',
+                                               UseModalNavigation=False,
+                                               Animated=True}"
+                    CornerRadius="5"
+                    HeightRequest="44"
+                    Text="{x:Static resource:AppResources.Send}"
+                    TextColor="Black" />
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    BackgroundColor="#191919"
+                    Command="{Binding ReceiveButtonClickedCommand}"
+                    CornerRadius="5"
+                    HeightRequest="44"
+                    Text="{x:Static resource:AppResources.Receive}"
+                    TextColor="Yellow" />
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

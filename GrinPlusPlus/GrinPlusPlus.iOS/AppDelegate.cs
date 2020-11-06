@@ -3,7 +3,6 @@ using Prism;
 using Prism.Ioc;
 using UIKit;
 
-
 namespace GrinPlusPlus.iOS
 {
     // The UIApplicationDelegate for the application. This class is responsible for launching the 
@@ -21,7 +20,10 @@ namespace GrinPlusPlus.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            Xamarin.Forms.Forms.SetFlags(new string[] { "CarouselView_Experimental", "SwipeView_Experimental" });
             global::Xamarin.Forms.Forms.Init();
+
+            ZXing.Net.Mobile.Forms.iOS.Platform.Init();
             LoadApplication(new App(new iOSInitializer()));
 
             return base.FinishedLaunching(app, options);

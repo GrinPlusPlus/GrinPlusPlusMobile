@@ -1,12 +1,13 @@
 ﻿using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Plugin.Fingerprint;
 using Prism;
 using Prism.Ioc;
 
 namespace GrinPlusPlus.Droid
 {
-    [Activity(Label = "GrinPlusPlus", Icon = "@mipmap/ic_launcher", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Grin++", Icon = "@mipmap/ic_launcher", Theme = "@style/MainTheme", ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -16,8 +17,12 @@ namespace GrinPlusPlus.Droid
 
             base.OnCreate(savedInstanceState);
 
-            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
+            ZXing.Net.Mobile.Forms.Android.Platform.Init();
+
+            CrossFingerprint.SetCurrentActivityResolver(() => this);
+
             LoadApplication(new App(new AndroidInitializer()));
         }
 

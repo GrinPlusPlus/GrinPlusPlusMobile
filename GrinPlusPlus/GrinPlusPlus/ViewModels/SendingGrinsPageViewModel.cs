@@ -7,12 +7,12 @@ using System.Linq;
 
 namespace GrinPlusPlus.ViewModels
 {
-    public class InitPageViewModel : ViewModelBase
+    public class SendingGrinsPageViewModel : ViewModelBase
     {
-        public InitPageViewModel(INavigationService navigationService)
+        public SendingGrinsPageViewModel(INavigationService navigationService)
             : base(navigationService)
         {
-            Title = "Init Page";
-        }   
+
+        }
     }
 }

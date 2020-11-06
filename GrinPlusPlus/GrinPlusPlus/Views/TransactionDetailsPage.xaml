@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="GrinPlusPlus.Views.TransactionDetailsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com"
+    xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
+    xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
+    Title="{Binding Status}"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="Black">
+    <ScrollView>
+        <StackLayout Padding="40">
+            <Label HorizontalOptions="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span
+                            FontAttributes="Bold"
+                            FontSize="38"
+                            Text="{Binding Amount, StringFormat='{}{0:N0}'}"
+                            TextColor="White" />
+                        <Span
+                            FontAttributes="Bold"
+                            FontSize="Default"
+                            Text="."
+                            TextColor="White" />
+                        <Span
+                            FontAttributes="Bold"
+                            FontSize="Medium"
+                            Text="{Binding Decimals}"
+                            TextColor="White" />
+                        <Span
+                            FontSize="Small"
+                            Text=" ツ"
+                            TextColor="Yellow" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label
+                FontSize="Medium"
+                HorizontalOptions="Fill"
+                HorizontalTextAlignment="Center"
+                Text="{Binding Fee, StringFormat='{}{0:N9} ツ'}"
+                TextColor="White" />
+            <BoxView
+                HeightRequest="1"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                WidthRequest="50"
+                Color="#5b5d68" />
+            <Label
+                Margin="0,20,0,0"
+                HorizontalOptions="Fill"
+                Text="{x:Static resource:AppResources.Date}"
+                TextColor="#2f2f2f"
+                TextTransform="Uppercase" />
+            <Label
+                HorizontalOptions="Fill"
+                Text="{Binding Date, StringFormat='{}{0:MM/dd/yyyy a\\t h:mm tt}'}"
+                TextColor="White" />
+            <Label
+                Margin="0,20,0,0"
+                HorizontalOptions="Fill"
+                Text="{x:Static resource:AppResources.Slate}"
+                TextColor="#2f2f2f"
+                TextTransform="Uppercase" />
+            <Label
+                HorizontalOptions="Fill"
+                Text="{Binding Slate}"
+                TextColor="White" />
+            <Label
+                Margin="0,20,0,0"
+                HorizontalOptions="Fill"
+                Text="{x:Static resource:AppResources.Message}"
+                TextColor="#2f2f2f"
+                TextTransform="Uppercase" />
+            <Label
+                HorizontalOptions="Fill"
+                Text="{Binding Message}"
+                TextColor="White" />
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

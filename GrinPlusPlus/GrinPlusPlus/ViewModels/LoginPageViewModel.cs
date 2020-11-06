@@ -5,48 +5,61 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Plugin.Fingerprint;
+using System.Threading;
+using Plugin.Fingerprint.Abstractions;
+using System.Collections.ObjectModel;
+using GrinPlusPlus.Models;
+using Prism.Services;
+using Prism.Services.Dialogs;
 
 namespace GrinPlusPlus.ViewModels
 {
     public class LoginPageViewModel : ViewModelBase
     {
-        private string _username;
-        public string Username
-        {
-            get { return _username; }
-            set { SetProperty(ref _username, value); }
-        }
+        public ObservableCollection<Account> Accounts { get; set; }
 
-        private string _password;
-        public string Password
-        {
-            get { return _password; }
-            set { SetProperty(ref _password, value); }
-        }
+        private CancellationTokenSource _cancel;
 
-        public DelegateCommand OpenWalletCommand => new DelegateCommand(OpenWallet);
-        public DelegateCommand CreateWalletCommand => new DelegateCommand(CreateWallet);
-        public DelegateCommand RestoreWalletCommand => new DelegateCommand(RestoreWallet);
+        private readonly IDialogService _pageDialogService;
 
-        private void OpenWallet()
-        {
-            Title = DateTime.Now.ToString();
-        }
+        public DelegateCommand<string> AccountNameClickedCommand => new DelegateCommand<string>(AccountNameClicked);
 
-        private void CreateWallet()
-        {
-            Title = DateTime.Now.ToString();
-        }
-
-        private void RestoreWallet()
-        {
-            Title = DateTime.Now.ToString();
-        }
-
-        public LoginPageViewModel(INavigationService navigationService)
+        public LoginPageViewModel(INavigationService navigationService, IDialogService pageDialogService)
             : base(navigationService)
         {
-            Title = "Grin++";
+            _pageDialogService = pageDialogService;
+
+            Accounts = new ObservableCollection<Account>();
+            foreach (var account in new string[3] { "donations", "personal", "testing" })
+            {
+                Accounts.Add(new Account() { Name = account});
+            }
+        }
+
+        async void AccountNameClicked(string userName)
+        {
+            if (await CrossFingerprint.Current.IsAvailableAsync(true))
+            {
+                _cancel = new CancellationTokenSource();
+                var dialogConfig = new AuthenticationRequestConfiguration("Grin++", $"Authenticate to open {userName.ToUpper()} Wallet")
+                {
+                    CancelTitle = null,
+                    FallbackTitle = null,
+                    AllowAlternativeAuthentication = true
+                };
+
+                var result = await CrossFingerprint.Current.AuthenticateAsync(dialogConfig, _cancel.Token);
+
+                if (result.Authenticated)
+                {
+                    await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/DashboardCarouselPage");
+                }
+            } else
+            {
+                var parameters = new DialogParameters {{ "username", userName }};
+                await _pageDialogService.ShowDialogAsync("AccountPasswordDialogView", parameters);
+            }
         }
     }
 }

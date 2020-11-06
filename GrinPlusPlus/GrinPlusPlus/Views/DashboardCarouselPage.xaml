@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage
+    x:Class="GrinPlusPlus.Views.DashboardCarouselPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com"
+    xmlns:views="clr-namespace:GrinPlusPlus.Views"
+    Title="{Binding Wallet}"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="Black">
+    <NavigationPage.TitleView>
+        <Grid Margin="0" Padding="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Image
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="0"
+                Aspect="AspectFit"
+                HorizontalOptions="Center"
+                Source="logo.png"
+                WidthRequest="28" />
+            <Label
+                Grid.Row="0"
+                Grid.Column="1"
+                FontSize="22"
+                Text="{Binding Wallet}"
+                TextColor="White"
+                VerticalOptions="Center"
+                VerticalTextAlignment="Center" />
+        </Grid>
+    </NavigationPage.TitleView>
+    <views:ReceivePage />
+    <views:WalletPage />
+    <views:TansactionsHistoryPage />
+</TabbedPage>

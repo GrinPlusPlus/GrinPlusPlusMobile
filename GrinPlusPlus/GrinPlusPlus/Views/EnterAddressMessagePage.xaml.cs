@@ -2,9 +2,9 @@
 
 namespace GrinPlusPlus.Views
 {
-    public partial class InitPage : ContentPage
+    public partial class EnterAddressMessagePage : ContentPage
     {
-        public InitPage()
+        public EnterAddressMessagePage()
         {
             InitializeComponent();
         }

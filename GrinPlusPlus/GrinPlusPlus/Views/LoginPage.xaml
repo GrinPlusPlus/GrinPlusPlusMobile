@@ -1,17 +1,116 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com"
-             Title="{Binding Title}"
-             x:Class="GrinPlusPlus.Views.LoginPage">
+<ContentPage
+    x:Class="GrinPlusPlus.Views.LoginPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com"
+    xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
+    xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
+    x:Name="Login"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromRight"
+    BackgroundColor="Black">
     <ContentPage.Content>
-        <StackLayout VerticalOptions="StartAndExpand" Margin="40,30,40,0">
-            <Image Source="logo.jpg" WidthRequest="80"/>
-            <Entry Placeholder="Username" Text="{Binding Username}"/>
-            <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True" />
-            <Button Text="Open Wallet" Command="{Binding OpenWalletCommand}" HorizontalOptions="Center" WidthRequest="200" />
-            <Button Text="Create Wallet" Command="{Binding CreateWalletCommand}" BackgroundColor="Transparent" />
-            <Button Text="Restore" Command="{Binding RestoreWalletCommand}"  BackgroundColor="Transparent"/>
-        </StackLayout>
+        <Grid
+            Margin="0"
+            Padding="0"
+            BackgroundColor="Black"
+            HorizontalOptions="Start"
+            VerticalOptions="FillAndExpand">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <StackLayout
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="20">
+                <Label
+                    FontSize="48"
+                    HorizontalOptions="Start"
+                    Text="Hello, friend!"
+                    TextColor="White"
+                    VerticalOptions="Center" />
+                <BoxView
+                    HeightRequest="1"
+                    HorizontalOptions="Start"
+                    WidthRequest="60"
+                    Color="White" />
+            </StackLayout>
+            <CollectionView
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="80,0,80,0"
+                ItemsSource="{Binding Accounts}"
+                VerticalOptions="Center">
+                <CollectionView.EmptyView>
+                    <Label
+                        FontSize="Medium"
+                        HorizontalTextAlignment="Center"
+                        Text="No Wallets were found 🤨"
+                        TextColor="White"
+                        VerticalTextAlignment="Center" />
+                </CollectionView.EmptyView>
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout
+                        Orientation="Vertical"
+                        Span="1"
+                        VerticalItemSpacing="10" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame
+                            Margin="0"
+                            Padding="0"
+                            BackgroundColor="#e5e500"
+                            CornerRadius="5"
+                            HeightRequest="44">
+                            <Label
+                                Margin="0"
+                                Padding="0"
+                                FontAttributes="Bold"
+                                HorizontalTextAlignment="Center"
+                                Text="{Binding Name}"
+                                TextColor="Black"
+                                TextTransform="Uppercase"
+                                VerticalTextAlignment="Center" />
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference Login}, Path=BindingContext.AccountNameClickedCommand}" CommandParameter="{Binding Name}" />
+                            </Frame.GestureRecognizers>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <StackLayout
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="80,0,80,60"
+                VerticalOptions="End">
+                <Button
+                    BackgroundColor="#191919"
+                    Command="{prism:NavigateTo 'CreateWalletPage',
+                                               UseModalNavigation=False,
+                                               Animated=True}"
+                    CornerRadius="5"
+                    HeightRequest="44"
+                    IsEnabled="{Binding IsActive}"
+                    Text="{x:Static resource:AppResources.CreateWallet}"
+                    TextColor="#ffff00" />
+                <Button
+                    BackgroundColor="Transparent"
+                    Command="{prism:NavigateTo 'RestoreWalletPage',
+                                               UseModalNavigation=False,
+                                               Animated=True}"
+                    CornerRadius="5"
+                    HeightRequest="44"
+                    IsEnabled="{Binding IsActive}"
+                    Text="{x:Static resource:AppResources.Restore}"
+                    TextColor="#ffff00" />
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
