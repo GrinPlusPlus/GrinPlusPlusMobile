@@ -11,7 +11,7 @@ using System.Threading;
 
 namespace GrinPlusPlus.Droid
 {
-	[Activity(Theme = "@style/MainTheme.Splash", MainLauncher = true, NoHistory = true)]
+	[Activity(Theme = "@style/MainTheme.Splash", MainLauncher = true, NoHistory = true, ScreenOrientation = ScreenOrientation.Portrait)]
 	public class SplashActivity : AppCompatActivity
 	{
 		private CancellationTokenSource cancellation;

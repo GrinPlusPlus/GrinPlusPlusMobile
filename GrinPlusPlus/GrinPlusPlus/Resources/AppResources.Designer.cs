@@ -97,6 +97,15 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Blocks.
+        /// </summary>
+        internal static string Blocks {
+            get {
+                return ResourceManager.GetString("Blocks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         internal static string Cancel {
@@ -183,6 +192,15 @@ namespace GrinPlusPlus.Resources {
         internal static string ConfirmPassword {
             get {
                 return ResourceManager.GetString("ConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connected Peers.
+        /// </summary>
+        internal static string ConnectedPeers {
+            get {
+                return ResourceManager.GetString("ConnectedPeers", resourceCulture);
             }
         }
         
@@ -295,6 +313,15 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Headers.
+        /// </summary>
+        internal static string Headers {
+            get {
+                return ResourceManager.GetString("Headers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to History.
         /// </summary>
         internal static string History {
@@ -363,6 +390,15 @@ namespace GrinPlusPlus.Resources {
         internal static string Method {
             get {
                 return ResourceManager.GetString("Method", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Network.
+        /// </summary>
+        internal static string Network {
+            get {
+                return ResourceManager.GetString("Network", resourceCulture);
             }
         }
         
@@ -714,6 +750,15 @@ namespace GrinPlusPlus.Resources {
         internal static string Spendable {
             get {
                 return ResourceManager.GetString("Spendable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        internal static string Status {
+            get {
+                return ResourceManager.GetString("Status", resourceCulture);
             }
         }
         

@@ -129,6 +129,9 @@
   <data name="Amount" xml:space="preserve">
     <value>Amount</value>
   </data>
+  <data name="Blocks" xml:space="preserve">
+    <value>Blocks</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
@@ -158,6 +161,9 @@
   </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Confirm Password</value>
+  </data>
+  <data name="ConnectedPeers" xml:space="preserve">
+    <value>Connected Peers</value>
   </data>
   <data name="Continue" xml:space="preserve">
     <value>Continue</value>
@@ -195,6 +201,9 @@
   <data name="FinalizeTransaction" xml:space="preserve">
     <value>Finalize Transaction</value>
   </data>
+  <data name="Headers" xml:space="preserve">
+    <value>Headers</value>
+  </data>
   <data name="History" xml:space="preserve">
     <value>History</value>
   </data>
@@ -218,6 +227,9 @@
   </data>
   <data name="Method" xml:space="preserve">
     <value>Method</value>
+  </data>
+  <data name="Network" xml:space="preserve">
+    <value>Network</value>
   </data>
   <data name="Next" xml:space="preserve">
     <value>Next</value>
@@ -335,6 +347,9 @@
   </data>
   <data name="Spendable" xml:space="preserve">
     <value>SPENDABLE</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
   </data>
   <data name="SwipeUp2Send" xml:space="preserve">
     <value>Swipe Up to Send Grins 😬</value>

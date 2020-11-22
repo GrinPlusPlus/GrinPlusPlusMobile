@@ -24,6 +24,10 @@ namespace GrinPlusPlus.Api
 
         Task<ReceivingResponse> ReceiveTransaction(string token, string slatepack);
 
+        Task<List<Peer>> GetNodeConnectedPeers();
+
+        Task<NodeStatus> GetNodeStatus();
+
         Task<bool> FinalizeTransaction(string token, string slatepack);
 
         Task<bool> CancelTransaction(string token, int transaction);

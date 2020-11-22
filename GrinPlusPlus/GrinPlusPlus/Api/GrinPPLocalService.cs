@@ -175,5 +175,21 @@ namespace GrinPlusPlus.Api
         {
             return await Service.Owner.Instance.RepostTransaction(token, transaction);
         }
+
+        public async Task<List<Peer>> GetNodeConnectedPeers()
+        {
+            var peers = new List<Peer>();
+            foreach(var peer in await Service.Node.Instance.ConnectedPeers())
+            {
+                peers.Add(new Peer(){ Address = peer.Address, Agent = peer.Agent, Direction = peer.Direction});
+            }
+            return peers;
+        }
+
+        public async Task<NodeStatus> GetNodeStatus()
+        {
+            var nodeStatus = await Service.Node.Instance.Status();
+            return new NodeStatus() { SyncStatus = nodeStatus.SyncStatus, Blocks = nodeStatus.Height, Headers = nodeStatus.Chain.Height, Network = nodeStatus.Network.Height };
+        }
     }
 }

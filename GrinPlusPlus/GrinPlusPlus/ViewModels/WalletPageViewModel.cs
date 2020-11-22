@@ -81,7 +81,7 @@ namespace GrinPlusPlus.ViewModels
                 {
                     try
                     {
-                        var balance = await dataProvider.GetWalletBalance(await SecureStorage.GetAsync("token"));
+                        var balance = await DataProvider.GetWalletBalance(await SecureStorage.GetAsync("token"));
                         if (Balance.Total != balance.Total ||
                             Balance.Spendable != balance.Spendable ||
                             Balance.Immature != balance.Immature ||
@@ -106,7 +106,7 @@ namespace GrinPlusPlus.ViewModels
                 {
                     try
                     {
-                        var transactions = await dataProvider.GetTransactions(await SecureStorage.GetAsync("token"),
+                        var transactions = await DataProvider.GetTransactions(await SecureStorage.GetAsync("token"),
                             new string[] { "SENDING_NOT_FINALIZED", "RECEIVING_IN_PROGRESS", "SENDING_FINALIZED" });
                         if (Transactions.Count < transactions.Count)
                         {

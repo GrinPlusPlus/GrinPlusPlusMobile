@@ -52,6 +52,7 @@ namespace GrinPlusPlus
             containerRegistry.RegisterForNavigation<SendGrinsUsingTorPage, SendGrinsUsingTorPageViewModel>();
             containerRegistry.RegisterForNavigation<FinalizeTransactionPage, FinalizeTransactionPageViewModel>();
             containerRegistry.RegisterForNavigation<ReceiveTransactionPage, ReceiveTransactionPageViewModel>();
+            containerRegistry.RegisterForNavigation<StatusPage, StatusPageViewModel>();
 
             containerRegistry.RegisterDialog<AccountPasswordDialogView, AccountPasswordDialogViewModel>();
         }
