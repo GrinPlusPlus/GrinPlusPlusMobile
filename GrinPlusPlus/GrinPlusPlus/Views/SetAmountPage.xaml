@@ -3,11 +3,10 @@
     x:Class="GrinPlusPlus.Views.SetAmountPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:behavior="clr-namespace:GrinPlusPlus.Behaviors"
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
-    Title="{x:Static resource:AppResources.Amount}"
+    Title="{x:Static resource:AppResources.SetAmount}"
     prism:ViewModelLocator.AutowireViewModel="True"
     sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromRight"
     BackgroundColor="{StaticResource BackgroundColor}"
@@ -25,49 +24,58 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout Margin="20" VerticalOptions="FillAndExpand">
-            <Entry
-                FontSize="50"
-                HorizontalTextAlignment="Center"
-                IsReadOnly="True"
-                Keyboard="Numeric"
-                Text="{Binding Amount}"
-                TextColor="Yellow"
-                VerticalTextAlignment="Center">
-                <Entry.Behaviors>
-                    <behavior:AmountValidationBehavior IsValid="{Binding IsValid}" />
-                </Entry.Behaviors>
-            </Entry>
-            <Label
-                FontSize="Medium"
-                HorizontalOptions="Center"
-                Text="{x:Static resource:AppResources.Fee}"
-                TextColor="#2f2f2f"
-                TextTransform="Uppercase" />
-            <StackLayout HorizontalOptions="Center" Orientation="Horizontal">
+        <StackLayout VerticalOptions="FillAndExpand">
+            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                <Label
+                    FontSize="12"
+                    HorizontalOptions="Center"
+                    Text="{Binding SpendableLabel}"
+                    TextColor="Gray"
+                    TextTransform="Uppercase" />
+                <Label
+                    FontSize="40"
+                    HorizontalOptions="FillAndExpand"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding Amount}"
+                    TextColor="Yellow"
+                    VerticalTextAlignment="Center" />
                 <Label
                     FontSize="Medium"
-                    Text="{Binding Fee}"
-                    TextColor="White"
-                    VerticalTextAlignment="End" />
-                <Label
-                    Text="ツ"
-                    TextColor="Yellow"
-                    TextTransform="Uppercase"
-                    VerticalTextAlignment="Center" />
+                    HorizontalOptions="Center"
+                    Text="{x:Static resource:AppResources.Fee}"
+                    TextColor="#2f2f2f"
+                    TextTransform="Uppercase" />
+                <Label HorizontalOptions="Center" TextColor="White">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span FontSize="16" Text="{Binding Fee}" />
+                            <Span FontSize="12" Text=" ツ" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
             </StackLayout>
+            <Button
+                Margin="140,10,140,0"
+                BackgroundColor="#191919"
+                Command="{Binding MaxButtonClickedCommand}"
+                CornerRadius="20"
+                HeightRequest="44"
+                Text="MAX"
+                TextColor="Yellow"
+                TextTransform="Uppercase"
+                WidthRequest="44" />
             <Grid
-                Margin="10,0,10,0"
+                Margin="20,0,20,10"
                 ColumnSpacing="0"
                 HorizontalOptions="Center"
                 RowSpacing="0"
                 VerticalOptions="EndAndExpand">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="80" />
+                    <RowDefinition Height="80" />
                     <RowDefinition Height="44" />
-                    <RowDefinition Height="80" />
-                    <RowDefinition Height="80" />
-                    <RowDefinition Height="80" />
-                    <RowDefinition Height="80" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -77,123 +85,123 @@
                 <Button
                     Grid.Row="0"
                     Grid.Column="0"
-                    Grid.ColumnSpan="3"
-                    BackgroundColor="#191919"
-                    Command="{prism:NavigateTo 'EnterAddressMessagePage'}"
-                    CommandParameter="{Binding Address}"
-                    CornerRadius="5"
-                    HeightRequest="44"
-                    IsEnabled="{Binding IsValid}"
-                    Text="{x:Static resource:AppResources.Continue}"
-                    TextColor="Yellow" />
-                <Button
-                    Grid.Row="1"
-                    Grid.Column="0"
                     BackgroundColor="Transparent"
                     Command="{Binding KeyboardButtonClickedCommand}"
                     CommandParameter="1"
-                    FontSize="30"
+                    FontSize="28"
                     Text="1"
                     TextColor="White" />
                 <Button
-                    Grid.Row="1"
+                    Grid.Row="0"
                     Grid.Column="1"
                     BackgroundColor="Transparent"
                     Command="{Binding KeyboardButtonClickedCommand}"
                     CommandParameter="2"
-                    FontSize="30"
+                    FontSize="28"
                     Text="2"
+                    TextColor="White" />
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    BackgroundColor="Transparent"
+                    Command="{Binding KeyboardButtonClickedCommand}"
+                    CommandParameter="3"
+                    FontSize="28"
+                    Text="3"
+                    TextColor="White" />
+                <Button
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    BackgroundColor="Transparent"
+                    Command="{Binding KeyboardButtonClickedCommand}"
+                    CommandParameter="4"
+                    FontSize="28"
+                    Text="4"
+                    TextColor="White" />
+                <Button
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    BackgroundColor="Transparent"
+                    Command="{Binding KeyboardButtonClickedCommand}"
+                    CommandParameter="5"
+                    FontSize="28"
+                    Text="5"
                     TextColor="White" />
                 <Button
                     Grid.Row="1"
                     Grid.Column="2"
                     BackgroundColor="Transparent"
                     Command="{Binding KeyboardButtonClickedCommand}"
-                    CommandParameter="3"
-                    FontSize="30"
-                    Text="3"
-                    TextColor="White" />
-                <Button
-                    Grid.Row="2"
-                    Grid.Column="0"
-                    BackgroundColor="Transparent"
-                    Command="{Binding KeyboardButtonClickedCommand}"
-                    CommandParameter="4"
-                    FontSize="30"
-                    Text="4"
-                    TextColor="White" />
-                <Button
-                    Grid.Row="2"
-                    Grid.Column="1"
-                    BackgroundColor="Transparent"
-                    Command="{Binding KeyboardButtonClickedCommand}"
-                    CommandParameter="5"
-                    FontSize="30"
-                    Text="5"
-                    TextColor="White" />
-                <Button
-                    Grid.Row="2"
-                    Grid.Column="2"
-                    BackgroundColor="Transparent"
-                    Command="{Binding KeyboardButtonClickedCommand}"
                     CommandParameter="6"
-                    FontSize="30"
+                    FontSize="28"
                     Text="6"
                     TextColor="White" />
                 <Button
-                    Grid.Row="3"
+                    Grid.Row="2"
                     Grid.Column="0"
                     BackgroundColor="Transparent"
                     Command="{Binding KeyboardButtonClickedCommand}"
                     CommandParameter="7"
-                    FontSize="30"
+                    FontSize="28"
                     Text="7"
                     TextColor="White" />
                 <Button
-                    Grid.Row="3"
+                    Grid.Row="2"
                     Grid.Column="1"
                     BackgroundColor="Transparent"
                     Command="{Binding KeyboardButtonClickedCommand}"
                     CommandParameter="8"
-                    FontSize="30"
+                    FontSize="28"
                     Text="8"
                     TextColor="White" />
                 <Button
-                    Grid.Row="3"
+                    Grid.Row="2"
                     Grid.Column="2"
                     BackgroundColor="Transparent"
                     Command="{Binding KeyboardButtonClickedCommand}"
                     CommandParameter="9"
-                    FontSize="30"
+                    FontSize="28"
                     Text="9"
                     TextColor="White" />
                 <Button
-                    Grid.Row="4"
+                    Grid.Row="3"
                     Grid.Column="0"
                     BackgroundColor="Transparent"
                     Command="{Binding KeyboardButtonClickedCommand}"
                     CommandParameter="."
-                    FontSize="30"
+                    FontSize="28"
                     Text="."
                     TextColor="White" />
                 <Button
-                    Grid.Row="4"
+                    Grid.Row="3"
                     Grid.Column="1"
                     BackgroundColor="Transparent"
                     Command="{Binding KeyboardButtonClickedCommand}"
                     CommandParameter="0"
-                    FontSize="30"
+                    FontSize="28"
                     Text="0"
                     TextColor="White" />
                 <Button
-                    Grid.Row="4"
+                    Grid.Row="3"
                     Grid.Column="2"
                     BackgroundColor="Transparent"
                     Command="{Binding KeyboardButtonClickedCommand}"
                     CommandParameter="DEL"
                     FontSize="25"
-                    Text="DEL"
+                    Text="←"
                     TextColor="White" />
+                <Button
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="3"
+                    Margin="20,0,20,0"
+                    BackgroundColor="#191919"
+                    Command="{Binding ContinueButtonClickedCommand}"
+                    CornerRadius="5"
+                    HeightRequest="44"
+                    IsEnabled="{Binding IsValid}"
+                    Text="{x:Static resource:AppResources.Continue}"
+                    TextColor="Yellow" />
             </Grid>
         </StackLayout>
     </ContentPage.Content>

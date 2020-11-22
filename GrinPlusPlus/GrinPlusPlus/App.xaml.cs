@@ -1,16 +1,16 @@
-using Prism;
-using Prism.Ioc;
+using GrinPlusPlus.Api;
+using GrinPlusPlus.Dialogs;
 using GrinPlusPlus.ViewModels;
 using GrinPlusPlus.Views;
-using Xamarin.Essentials.Interfaces;
+using Plugin.SharedTransitions;
+using Prism;
+using Prism.Ioc;
+using System.Globalization;
+using System.Threading;
 using Xamarin.Essentials.Implementation;
+using Xamarin.Essentials.Interfaces;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using System.Threading;
-using System.Globalization;
-using GrinPlusPlus.Services;
-using GrinPlusPlus.Dialogs;
-using Plugin.SharedTransitions;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace GrinPlusPlus
@@ -32,7 +32,7 @@ namespace GrinPlusPlus
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.Register<IDataProvider, MockDataProvider>();
+            containerRegistry.Register<IDataProvider, GrinPPLocalService>();
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
 
             containerRegistry.RegisterForNavigation<SharedTransitionNavigationPage>();
@@ -48,10 +48,12 @@ namespace GrinPlusPlus
             containerRegistry.RegisterForNavigation<TansactionsHistoryPage, TansactionsHistoryPageViewModel>();
             containerRegistry.RegisterForNavigation<SendingGrinsPage, SendingGrinsPageViewModel>();
             containerRegistry.RegisterForNavigation<EnterAddressMessagePage, EnterAddressMessagePageViewModel>();
+            containerRegistry.RegisterForNavigation<QRScannerPage, QRScannerPageViewModel>();
+            containerRegistry.RegisterForNavigation<SendGrinsUsingTorPage, SendGrinsUsingTorPageViewModel>();
+            containerRegistry.RegisterForNavigation<FinalizeTransactionPage, FinalizeTransactionPageViewModel>();
+            containerRegistry.RegisterForNavigation<ReceiveTransactionPage, ReceiveTransactionPageViewModel>();
 
             containerRegistry.RegisterDialog<AccountPasswordDialogView, AccountPasswordDialogViewModel>();
-            containerRegistry.RegisterDialog<ReceiveTransactionDialogView, ReceiveTransactionDialogViewModel>();
-            containerRegistry.RegisterDialog<FinalizeTransactionDialogView, FinalizeTransactionDialogViewModel>();
         }
     }
 }

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="GrinPlusPlus.Views.QRScannerPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behavior="clr-namespace:GrinPlusPlus.Behaviors"
+    xmlns:prism="http://prismlibrary.com"
+    xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
+    xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
+    xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromRight"
+    BackgroundColor="{StaticResource BackgroundColor}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="BackgroundColor">#000000</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid
+            Margin="10,110,10,110"
+            Padding="0"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="CenterAndExpand">
+            <zxing:ZXingScannerView
+                HorizontalOptions="CenterAndExpand"
+                IsAnalyzing="{Binding IsAnalyzing}"
+                IsScanning="{Binding IsScanning}"
+                Result="{Binding Result}"
+                ScanResultCommand="{Binding OnScanResultCommand}"
+                VerticalOptions="CenterAndExpand" />
+            <zxing:ZXingDefaultOverlay TopText="{x:Static resource:AppResources.AlignQRCode}" />
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

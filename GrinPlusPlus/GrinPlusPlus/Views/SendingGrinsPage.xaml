@@ -8,24 +8,126 @@
     xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="Black">
-    <StackLayout
-        HorizontalOptions="Center"
-        Spacing="40"
-        VerticalOptions="Center">
-        <Label
-            FontSize="20"
-            HorizontalTextAlignment="Center"
-            Text="{x:Static resource:AppResources.TransactionSent}"
-            TextColor="White"
-            VerticalTextAlignment="Center" />
-        <Button
-            BackgroundColor="#191919"
-            Command="{prism:NavigateTo '/SharedTransitionNavigationPage/DashboardCarouselPage',
-                                       UseModalNavigation=False,
-                                       Animated=True}"
-            CornerRadius="5"
-            HeightRequest="44"
-            Text="{x:Static resource:AppResources.Close}"
-            TextColor="#ffff00" />
-    </StackLayout>
+    <ContentPage.Content>
+        <StackLayout
+            Margin="0"
+            Padding="0"
+            HorizontalOptions="FillAndExpand"
+            Orientation="Vertical"
+            Spacing="10"
+            VerticalOptions="FillAndExpand">
+            <Label
+                Padding="20,5,20,0"
+                FontSize="22"
+                HorizontalOptions="Start"
+                Text="{x:Static resource:AppResources.PleaseConfirm}"
+                TextColor="White"
+                VerticalOptions="Center" />
+            <BoxView
+                Margin="20,0,20,5"
+                HeightRequest="1"
+                HorizontalOptions="Start"
+                WidthRequest="50"
+                Color="White" />
+            <Label
+                Margin="20,0,20,0"
+                Text="{x:Static resource:AppResources.Address}"
+                TextColor="Gray"
+                TextTransform="Uppercase" />
+            <Label
+                Margin="20,0,20,0"
+                FontSize="18"
+                Text="{Binding Address}"
+                TextColor="White" />
+            <Label
+                Margin="20,0,20,0"
+                Text="{x:Static resource:AppResources.Amount}"
+                TextColor="Gray"
+                TextTransform="Uppercase" />
+            <Label Margin="20,0,20,0">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span
+                            FontSize="18"
+                            Text="{Binding Amount}"
+                            TextColor="White" />
+                        <Span
+                            FontSize="Caption"
+                            Text=" ツ"
+                            TextColor="White" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label
+                Margin="20,0,20,0"
+                Text="{x:Static resource:AppResources.Fee}"
+                TextColor="Gray"
+                TextTransform="Uppercase" />
+            <Label Margin="20,0,20,0">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span
+                            FontSize="18"
+                            Text="{Binding Fee}"
+                            TextColor="White" />
+                        <Span
+                            FontSize="Caption"
+                            Text=" ツ"
+                            TextColor="White" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label
+                Margin="20,0,20,0"
+                Text="{x:Static resource:AppResources.Message}"
+                TextColor="Gray"
+                TextTransform="Uppercase" />
+            <Label
+                Margin="20,0,20,10"
+                FontSize="18"
+                Text="Testing sending grins"
+                TextColor="White" />
+            <Label
+                Margin="20,0,20,0"
+                Text="{x:Static resource:AppResources.PickSendingMethod}"
+                TextColor="Gray"
+                TextTransform="Uppercase" />
+            <Button
+                Margin="50,0,50,0"
+                BackgroundColor="#191919"
+                Command="{Binding UsingTorButtonClickedCommand}"
+                CornerRadius="5"
+                HeightRequest="44"
+                ImageSource="baseline_public_white_18.png"
+                Text="{x:Static resource:AppResources.UsingInteractivity}"
+                TextColor="Yellow" />
+            <Button
+                Margin="50,0,50,0"
+                BackgroundColor="#191919"
+                Command="{Binding UsingSlatepackButtonClickedCommand}"
+                CornerRadius="5"
+                HeightRequest="44"
+                ImageSource="baseline_qr_code_white_18.png"
+                Text="{x:Static resource:AppResources.OfflineTransaction}"
+                TextColor="Yellow" />
+            <Button
+                Margin="50,0,50,0"
+                BackgroundColor="#191919"
+                Command="{Binding UsingNFCButtonClickedCommand}"
+                CornerRadius="5"
+                HeightRequest="44"
+                ImageSource="baseline_nfc_white_18.png"
+                Text="{x:Static resource:AppResources.UsingNFC}"
+                TextColor="Yellow" />
+            <Button
+                Margin="50,0,50,10"
+                BackgroundColor="Transparent"
+                Command="{Binding CancelButtonClickedCommand}"
+                CornerRadius="5"
+                HeightRequest="44"
+                Text="{x:Static resource:AppResources.Cancel}"
+                TextColor="Red"
+                VerticalOptions="EndAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>

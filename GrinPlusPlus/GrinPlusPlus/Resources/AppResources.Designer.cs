@@ -61,11 +61,29 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Account.
+        /// </summary>
+        internal static string Account {
+            get {
+                return ResourceManager.GetString("Account", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Address.
         /// </summary>
         internal static string Address {
             get {
                 return ResourceManager.GetString("Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Align the QR within the frame.
+        /// </summary>
+        internal static string AlignQRCode {
+            get {
+                return ResourceManager.GetString("AlignQRCode", resourceCulture);
             }
         }
         
@@ -93,6 +111,24 @@ namespace GrinPlusPlus.Resources {
         internal static string Cancelled {
             get {
                 return ResourceManager.GetString("Cancelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel Transaction.
+        /// </summary>
+        internal static string CancelTransaction {
+            get {
+                return ResourceManager.GetString("CancelTransaction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to cancel this Transaction?.
+        /// </summary>
+        internal static string CancelTransactionQuestion {
+            get {
+                return ResourceManager.GetString("CancelTransactionQuestion", resourceCulture);
             }
         }
         
@@ -133,6 +169,15 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Confirm.
+        /// </summary>
+        internal static string Confirm {
+            get {
+                return ResourceManager.GetString("Confirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm Password.
         /// </summary>
         internal static string ConfirmPassword {
@@ -151,11 +196,29 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy Slatepack Message.
+        /// </summary>
+        internal static string CopySlatepackMessage {
+            get {
+                return ResourceManager.GetString("CopySlatepackMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create.
         /// </summary>
         internal static string Create {
             get {
                 return ResourceManager.GetString("Create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create a new account or use your wallet seed to restore a previous one.
+        /// </summary>
+        internal static string CreateOneOrRestoreIt {
+            get {
+                return ResourceManager.GetString("CreateOneOrRestoreIt", resourceCulture);
             }
         }
         
@@ -196,6 +259,15 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fast, Private and Secure.
+        /// </summary>
+        internal static string FastPrivateSecure {
+            get {
+                return ResourceManager.GetString("FastPrivateSecure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fee.
         /// </summary>
         internal static string Fee {
@@ -210,6 +282,15 @@ namespace GrinPlusPlus.Resources {
         internal static string Finalize {
             get {
                 return ResourceManager.GetString("Finalize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Finalize Transaction.
+        /// </summary>
+        internal static string FinalizeTransaction {
+            get {
+                return ResourceManager.GetString("FinalizeTransaction", resourceCulture);
             }
         }
         
@@ -250,6 +331,15 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Load from File.
+        /// </summary>
+        internal static string LoadFromFile {
+            get {
+                return ResourceManager.GetString("LoadFromFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Locked.
         /// </summary>
         internal static string Locked {
@@ -264,6 +354,15 @@ namespace GrinPlusPlus.Resources {
         internal static string Message {
             get {
                 return ResourceManager.GetString("Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Method.
+        /// </summary>
+        internal static string Method {
+            get {
+                return ResourceManager.GetString("Method", resourceCulture);
             }
         }
         
@@ -286,6 +385,15 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        internal static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Without Interactivity.
         /// </summary>
         internal static string NonInteractive {
@@ -304,6 +412,24 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No accounts were found.
+        /// </summary>
+        internal static string NoWalletFound {
+            get {
+                return ResourceManager.GetString("NoWalletFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text - QR Code - File .
+        /// </summary>
+        internal static string OfflineTransaction {
+            get {
+                return ResourceManager.GetString("OfflineTransaction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Outputs.
         /// </summary>
         internal static string Outputs {
@@ -318,6 +444,42 @@ namespace GrinPlusPlus.Resources {
         internal static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paste from Clipboard.
+        /// </summary>
+        internal static string PasteFromClipboard {
+            get {
+                return ResourceManager.GetString("PasteFromClipboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Sending Method.
+        /// </summary>
+        internal static string PickSendingMethod {
+            get {
+                return ResourceManager.GetString("PickSendingMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please Confirm.
+        /// </summary>
+        internal static string PleaseConfirm {
+            get {
+                return ResourceManager.GetString("PleaseConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to QR Code.
+        /// </summary>
+        internal static string QRCode {
+            get {
+                return ResourceManager.GetString("QRCode", resourceCulture);
             }
         }
         
@@ -349,6 +511,15 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Receive Transaction.
+        /// </summary>
+        internal static string ReceiveTransaction {
+            get {
+                return ResourceManager.GetString("ReceiveTransaction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Repost.
         /// </summary>
         internal static string Repost {
@@ -367,11 +538,38 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Restore Existing Wallet.
+        /// </summary>
+        internal static string RestoreExistingWallet {
+            get {
+                return ResourceManager.GetString("RestoreExistingWallet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Restore Wallet.
         /// </summary>
         internal static string RestoreWallet {
             get {
                 return ResourceManager.GetString("RestoreWallet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scanning a QR Code.
+        /// </summary>
+        internal static string ScanningQRCode {
+            get {
+                return ResourceManager.GetString("ScanningQRCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ScanQRCode.
+        /// </summary>
+        internal static string ScanQRCode {
+            get {
+                return ResourceManager.GetString("ScanQRCode", resourceCulture);
             }
         }
         
@@ -412,11 +610,47 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Set the amount to send.
+        /// </summary>
+        internal static string SetAmount {
+            get {
+                return ResourceManager.GetString("SetAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Share.
         /// </summary>
         internal static string Share {
             get {
                 return ResourceManager.GetString("Share", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Share Address.
+        /// </summary>
+        internal static string ShareAddress {
+            get {
+                return ResourceManager.GetString("ShareAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Share Slatepack Message.
+        /// </summary>
+        internal static string ShareSlatepackMessage {
+            get {
+                return ResourceManager.GetString("ShareSlatepackMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Share as File.
+        /// </summary>
+        internal static string ShareSlatepackMessageAsFile {
+            get {
+                return ResourceManager.GetString("ShareSlatepackMessageAsFile", resourceCulture);
             }
         }
         
@@ -435,6 +669,42 @@ namespace GrinPlusPlus.Resources {
         internal static string Slatepack {
             get {
                 return ResourceManager.GetString("Slatepack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Slatepack Address.
+        /// </summary>
+        internal static string SlatepackAddress {
+            get {
+                return ResourceManager.GetString("SlatepackAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Slatepack Message.
+        /// </summary>
+        internal static string SlatepackMessage {
+            get {
+                return ResourceManager.GetString("SlatepackMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Slatepack Message File.
+        /// </summary>
+        internal static string SlatepackMessageFile {
+            get {
+                return ResourceManager.GetString("SlatepackMessageFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Slatepack Message Text.
+        /// </summary>
+        internal static string SlatepackMessageText {
+            get {
+                return ResourceManager.GetString("SlatepackMessageText", resourceCulture);
             }
         }
         
@@ -466,6 +736,24 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tor Address.
+        /// </summary>
+        internal static string TorAddress {
+            get {
+                return ResourceManager.GetString("TorAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total.
+        /// </summary>
+        internal static string Total {
+            get {
+                return ResourceManager.GetString("Total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Transaction Sent  〜(ᵐ‿ʷ)〜.
         /// </summary>
         internal static string TransactionSent {
@@ -493,7 +781,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Using Interactivity.
+        ///   Looks up a localized string similar to Interactive Messages.
         /// </summary>
         internal static string UsingInteractivity {
             get {
@@ -502,7 +790,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Through Proximity.
+        ///   Looks up a localized string similar to Using NFC.
         /// </summary>
         internal static string UsingNFC {
             get {
@@ -525,6 +813,15 @@ namespace GrinPlusPlus.Resources {
         internal static string WalletSeed {
             get {
                 return ResourceManager.GetString("WalletSeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        internal static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

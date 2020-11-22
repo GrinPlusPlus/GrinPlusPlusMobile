@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Account" xml:space="preserve">
+    <value>Account</value>
+  </data>
   <data name="Address" xml:space="preserve">
     <value>Address</value>
+  </data>
+  <data name="AlignQRCode" xml:space="preserve">
+    <value>Align the QR within the frame</value>
   </data>
   <data name="Amount" xml:space="preserve">
     <value>Amount</value>
@@ -128,6 +134,12 @@
   </data>
   <data name="Cancelled" xml:space="preserve">
     <value>Canceled</value>
+  </data>
+  <data name="CancelTransaction" xml:space="preserve">
+    <value>Cancel Transaction</value>
+  </data>
+  <data name="CancelTransactionQuestion" xml:space="preserve">
+    <value>Are you sure you want to cancel this Transaction?</value>
   </data>
   <data name="Close" xml:space="preserve">
     <value>Close</value>
@@ -141,14 +153,23 @@
   <data name="Completed" xml:space="preserve">
     <value>Completed</value>
   </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Confirm Password</value>
   </data>
   <data name="Continue" xml:space="preserve">
     <value>Continue</value>
   </data>
+  <data name="CopySlatepackMessage" xml:space="preserve">
+    <value>Copy Slatepack Message</value>
+  </data>
   <data name="Create" xml:space="preserve">
     <value>Create</value>
+  </data>
+  <data name="CreateOneOrRestoreIt" xml:space="preserve">
+    <value>Create a new account or use your wallet seed to restore a previous one</value>
   </data>
   <data name="CreateWallet" xml:space="preserve">
     <value>Create Wallet</value>
@@ -162,11 +183,17 @@
   <data name="EnableProximity" xml:space="preserve">
     <value>Receive using Proximity</value>
   </data>
+  <data name="FastPrivateSecure" xml:space="preserve">
+    <value>Fast, Private and Secure</value>
+  </data>
   <data name="Fee" xml:space="preserve">
     <value>Fee</value>
   </data>
   <data name="Finalize" xml:space="preserve">
     <value>Finalize</value>
+  </data>
+  <data name="FinalizeTransaction" xml:space="preserve">
+    <value>Finalize Transaction</value>
   </data>
   <data name="History" xml:space="preserve">
     <value>History</value>
@@ -180,11 +207,17 @@
   <data name="Kernels" xml:space="preserve">
     <value>Kernerls</value>
   </data>
+  <data name="LoadFromFile" xml:space="preserve">
+    <value>Load from File</value>
+  </data>
   <data name="Locked" xml:space="preserve">
     <value>Locked</value>
   </data>
   <data name="Message" xml:space="preserve">
     <value>Message</value>
+  </data>
+  <data name="Method" xml:space="preserve">
+    <value>Method</value>
   </data>
   <data name="Next" xml:space="preserve">
     <value>Next</value>
@@ -192,17 +225,38 @@
   <data name="NFC" xml:space="preserve">
     <value>NFC</value>
   </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
   <data name="NonInteractive" xml:space="preserve">
     <value>Without Interactivity</value>
   </data>
   <data name="NotReachable" xml:space="preserve">
     <value>Not Reachable</value>
   </data>
+  <data name="NoWalletFound" xml:space="preserve">
+    <value>No accounts were found</value>
+  </data>
+  <data name="OfflineTransaction" xml:space="preserve">
+    <value>Text - QR Code - File </value>
+  </data>
   <data name="Outputs" xml:space="preserve">
     <value>Outputs</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
+  </data>
+  <data name="PasteFromClipboard" xml:space="preserve">
+    <value>Paste from Clipboard</value>
+  </data>
+  <data name="PickSendingMethod" xml:space="preserve">
+    <value>Select Sending Method</value>
+  </data>
+  <data name="PleaseConfirm" xml:space="preserve">
+    <value>Please Confirm</value>
+  </data>
+  <data name="QRCode" xml:space="preserve">
+    <value>QR Code</value>
   </data>
   <data name="Reachable" xml:space="preserve">
     <value>Reachable</value>
@@ -213,14 +267,26 @@
   <data name="Received" xml:space="preserve">
     <value>Received</value>
   </data>
+  <data name="ReceiveTransaction" xml:space="preserve">
+    <value>Receive Transaction</value>
+  </data>
   <data name="Repost" xml:space="preserve">
     <value>Repost</value>
   </data>
   <data name="Restore" xml:space="preserve">
     <value>Restore</value>
   </data>
+  <data name="RestoreExistingWallet" xml:space="preserve">
+    <value>Restore Existing Wallet</value>
+  </data>
   <data name="RestoreWallet" xml:space="preserve">
     <value>Restore Wallet</value>
+  </data>
+  <data name="ScanningQRCode" xml:space="preserve">
+    <value>Scanning a QR Code</value>
+  </data>
+  <data name="ScanQRCode" xml:space="preserve">
+    <value>ScanQRCode</value>
   </data>
   <data name="SeedLength" xml:space="preserve">
     <value>Seed Length</value>
@@ -234,14 +300,38 @@
   <data name="Sent" xml:space="preserve">
     <value>Sent</value>
   </data>
+  <data name="SetAmount" xml:space="preserve">
+    <value>Set the amount to send</value>
+  </data>
   <data name="Share" xml:space="preserve">
     <value>Share</value>
+  </data>
+  <data name="ShareAddress" xml:space="preserve">
+    <value>Share Address</value>
+  </data>
+  <data name="ShareSlatepackMessage" xml:space="preserve">
+    <value>Share Slatepack Message</value>
+  </data>
+  <data name="ShareSlatepackMessageAsFile" xml:space="preserve">
+    <value>Share as File</value>
   </data>
   <data name="Slate" xml:space="preserve">
     <value>Slate</value>
   </data>
   <data name="Slatepack" xml:space="preserve">
     <value>Slatepack</value>
+  </data>
+  <data name="SlatepackAddress" xml:space="preserve">
+    <value>Slatepack Address</value>
+  </data>
+  <data name="SlatepackMessage" xml:space="preserve">
+    <value>Slatepack Message</value>
+  </data>
+  <data name="SlatepackMessageFile" xml:space="preserve">
+    <value>Slatepack Message File</value>
+  </data>
+  <data name="SlatepackMessageText" xml:space="preserve">
+    <value>Slatepack Message Text</value>
   </data>
   <data name="Spendable" xml:space="preserve">
     <value>SPENDABLE</value>
@@ -251,6 +341,12 @@
   </data>
   <data name="TabToCopy" xml:space="preserve">
     <value>Tap the Address to copy</value>
+  </data>
+  <data name="TorAddress" xml:space="preserve">
+    <value>Tor Address</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
   </data>
   <data name="TransactionSent" xml:space="preserve">
     <value>Transaction Sent  〜(ᵐ‿ʷ)〜</value>
@@ -262,15 +358,18 @@
     <value>Username</value>
   </data>
   <data name="UsingInteractivity" xml:space="preserve">
-    <value>Using Interactivity</value>
+    <value>Interactive Messages</value>
   </data>
   <data name="UsingNFC" xml:space="preserve">
-    <value>Through Proximity</value>
+    <value>Using NFC</value>
   </data>
   <data name="Wallet" xml:space="preserve">
     <value>Wallet</value>
   </data>
   <data name="WalletSeed" xml:space="preserve">
     <value>Wallet Seed</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
   </data>
 </root>

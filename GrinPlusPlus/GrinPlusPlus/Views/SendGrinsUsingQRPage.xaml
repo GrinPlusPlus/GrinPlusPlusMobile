@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="GrinPlusPlus.Views.SendGrinsUsingQRPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com"
+    xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
+    xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
+    xmlns:zxcm="clr-namespace:ZXing.Common;assembly=zxing"
+    xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+    prism:ViewModelLocator.AutowireViewModel="True">
+    <ContentPage.Content>
+        <StackLayout
+            HorizontalOptions="FillAndExpand"
+            Orientation="Vertical"
+            Spacing="10"
+            VerticalOptions="FillAndExpand">
+            <Label
+                HorizontalOptions="Center"
+                Text="QR Code"
+                TextColor="#2f2f2f"
+                TextTransform="Uppercase" />
+            <Frame
+                Padding="15"
+                BackgroundColor="#191919"
+                CornerRadius="8"
+                HorizontalOptions="Center">
+                <zxing:ZXingBarcodeImageView
+                    BarcodeFormat="QR_CODE"
+                    BarcodeValue="{Binding SendingResponse.Slatepack}"
+                    HeightRequest="250"
+                    WidthRequest="250">
+                    <zxing:ZXingBarcodeImageView.BarcodeOptions>
+                        <zxcm:EncodingOptions
+                            Width="780"
+                            Height="780"
+                            Margin="0"
+                            PureBarcode="True" />
+                    </zxing:ZXingBarcodeImageView.BarcodeOptions>
+                </zxing:ZXingBarcodeImageView>
+            </Frame>
+            <Label
+                HorizontalOptions="Center"
+                Text="Or"
+                TextColor="#2f2f2f"
+                TextTransform="Uppercase" />
+            <Button
+                Margin="40,0,40,0"
+                BackgroundColor="#191919"
+                Command="{Binding CopySlatepackMessageCommand}"
+                CornerRadius="5"
+                HeightRequest="44"
+                Text="{x:Static resource:AppResources.CopySlatepackMessage}"
+                TextColor="Yellow" />
+            <Button
+                Margin="40,0,40,0"
+                BackgroundColor="#191919"
+                Command="{Binding ShareSlatepackMessageCommand}"
+                CornerRadius="5"
+                HeightRequest="44"
+                Text="{x:Static resource:AppResources.ShareSlatepackMessage}"
+                TextColor="Yellow" />
+            <Button
+                Margin="40,0,40,0"
+                BackgroundColor="#191919"
+                Command="{Binding ShareSlatepackMessageAsFileCommand}"
+                CornerRadius="5"
+                HeightRequest="44"
+                Text="{x:Static resource:AppResources.ShareSlatepackMessageAsFile}"
+                TextColor="Yellow" />
+            <Button
+                Margin="40,0,40,0"
+                BackgroundColor="#0073e5"
+                Command="{Binding FinalizeTransactionCommand}"
+                CornerRadius="5"
+                HeightRequest="44"
+                Text="{x:Static resource:AppResources.FinalizeTransaction}"
+                TextColor="#000000" />
+            <Button
+                Margin="40,0,40,40"
+                BackgroundColor="#191919"
+                Command="{Binding CloseScreenCommand}"
+                CornerRadius="5"
+                HeightRequest="44"
+                Text="{x:Static resource:AppResources.Close}"
+                TextColor="White"
+                VerticalOptions="EndAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

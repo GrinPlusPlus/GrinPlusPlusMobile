@@ -8,12 +8,11 @@
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="{StaticResource BackgroundColor}"
+    BackgroundColor="Black"
     IconImageSource="outline_list_alt_white_24.png">
     <ContentPage.Resources>
         <ResourceDictionary>
             <c:RelativeDateTimeConverter x:Key="RelativeDateTimeConverter" />
-            <Color x:Key="BackgroundColor">#000000</Color>
             <Color x:Key="CellBackgroundColor">#161616</Color>
             <Color x:Key="RepostSwipeItemBackgroundColor">
                 #0073e5
@@ -29,18 +28,54 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <StackLayout Margin="30">
+    <StackLayout Margin="25">
         <Label
-            Grid.Row="0"
             Text="{x:Static resource:AppResources.History}"
-            TextColor="#2f2f2f"
+            TextColor="Gray"
             TextTransform="Uppercase"
             VerticalOptions="End"
             VerticalTextAlignment="End" />
-        <CollectionView ItemsSource="{Binding Transactions}">
+        <CollectionView
+            Margin="0,10,0,0"
+            IsGrouped="true"
+            ItemsSource="{Binding Transactions}"
+            SelectedItem="{Binding SelectedTransaction}"
+            SelectionChangedCommand="{Binding OpenTransactionDetailsCommand}"
+            SelectionMode="Single">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout ItemSpacing="12" Orientation="Vertical" />
             </CollectionView.ItemsLayout>
+            <CollectionView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <Label Text="{Binding Name}" TextColor="Gray" />
+                </DataTemplate>
+            </CollectionView.GroupHeaderTemplate>
+            <CollectionView.GroupFooterTemplate>
+                <DataTemplate>
+                    <Label
+                        Margin="0,0,5,10"
+                        HorizontalOptions="End"
+                        HorizontalTextAlignment="End">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span
+                                    FontSize="Body"
+                                    Text="{x:Static resource:AppResources.Total}"
+                                    TextColor="Gray" />
+                                <Span
+                                    FontSize="Body"
+                                    Text=": "
+                                    TextColor="Gray" />
+                                <Span
+                                    FontAttributes="Bold"
+                                    FontSize="Body"
+                                    Text="{Binding Count}"
+                                    TextColor="Gray" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </DataTemplate>
+            </CollectionView.GroupFooterTemplate>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <SwipeView>
@@ -81,7 +116,12 @@
                                                 <Span
                                                     FontAttributes="Bold"
                                                     FontSize="Default"
-                                                    Text="{Binding Amount, StringFormat='{}{0:N0}.'}"
+                                                    Text="{Binding Amount}"
+                                                    TextColor="White" />
+                                                <Span
+                                                    FontAttributes="Bold"
+                                                    FontSize="Body"
+                                                    Text="."
                                                     TextColor="White" />
                                                 <Span
                                                     FontAttributes="Bold"
@@ -108,7 +148,7 @@
                     HorizontalTextAlignment="Center"
                     Text="The history of Transactions is empty (ᵐ‿ʷ)"
                     TextColor="#2f2f2f"
-                    VerticalTextAlignment="End" />
+                    VerticalTextAlignment="Center" />
             </CollectionView.EmptyView>
         </CollectionView>
     </StackLayout>

@@ -1,9 +1,11 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
+﻿using GrinPlusPlus.Api;
+using Prism.Commands;
 using Prism.Navigation;
+using Prism.Services;
+using Prism.Services.Dialogs;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Diagnostics;
+using Xamarin.Essentials;
 
 namespace GrinPlusPlus.ViewModels
 {
@@ -13,7 +15,7 @@ namespace GrinPlusPlus.ViewModels
         public string Username
         {
             get { return _username; }
-            set { SetProperty(ref _username, value); }
+            set { SetProperty(ref _username, value.Trim()); }
         }
 
         private string _password;
@@ -37,16 +39,62 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _seedLength, value); }
         }
 
+        private bool _isUsernameValid;
+        public bool IsUsernameValid
+        {
+            get { return _isUsernameValid; }
+            set
+            {
+                SetProperty(ref _isUsernameValid, value);
+            }
+        }
+
+        private bool _isPasswordValid;
+        public bool IsPasswordValid
+        {
+            get { return _isPasswordValid; }
+            set
+            {
+                SetProperty(ref _isPasswordValid, value);
+            }
+        }
+
+        private bool _isPasswordConfirmationValid;
+        public bool IsPasswordConfirmationValid
+        {
+            get { return _isPasswordConfirmationValid; }
+            set
+            {
+                SetProperty(ref _isPasswordConfirmationValid, value);
+            }
+        }
+
+        public CreateWalletPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
+            : base(navigationService, dataProvider, dialogService, pageDialogService)
+        {
+        }
+
         public DelegateCommand CreateWalletCommand => new DelegateCommand(CreateWallet);
 
         private async void CreateWallet()
         {
-            await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/DashboardCarouselPage");
-        }
+            try
+            {
+                var wallet = await DataProvider.CreateWallet(Username, Password, int.Parse(SeedLength));
+                if (!string.IsNullOrEmpty(wallet.Token))
+                {
+                    await SecureStorage.SetAsync("token", wallet.Token);
+                    await SecureStorage.SetAsync("username", Username);
+                    await SecureStorage.SetAsync("slatepack_address", wallet.SlatepackAdddress);
+                    await SecureStorage.SetAsync("tor_address", wallet.TorAdddress);
 
-        public CreateWalletPageViewModel(INavigationService navigationService)
-            : base(navigationService)
-        {
+                    await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/DashboardCarouselPage", new NavigationParameters { { "wallet", Username } });
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
         }
     }
 }

@@ -1,16 +1,37 @@
-﻿using Prism.Commands;
+﻿using GrinPlusPlus.Api;
+using Prism.Commands;
 using Prism.Navigation;
+using Prism.Services;
+using Prism.Services.Dialogs;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using Xamarin.Essentials;
 using ZXing.Mobile;
-using static ZXing.Mobile.MobileBarcodeScanningOptions;
 
 namespace GrinPlusPlus.ViewModels
 {
     public class EnterAddressMessagePageViewModel : ViewModelBase
     {
+        private double _amount;
+        public double Amount
+        {
+            get { return _amount; }
+            set { SetProperty(ref _amount, value); }
+        }
+
+        private double _fee;
+        public double Fee
+        {
+            get { return _fee; }
+            set { SetProperty(ref _fee, value); }
+        }
+
+
+        private string[] _inputs;
+        public string[] Inputs
+        {
+            get { return _inputs; }
+            set { SetProperty(ref _inputs, value); }
+        }
+
         private string _address;
         public string Address
         {
@@ -18,32 +39,21 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _address, value); }
         }
 
-        private string _message;
+        private bool _isAddressValid;
+        public bool IsAddressValid
+        {
+            get { return _isAddressValid; }
+            set
+            {
+                SetProperty(ref _isAddressValid, value);
+            }
+        }
+
+        private string _message = "";
         public string Message
         {
             get { return _message; }
             set { SetProperty(ref _message, value); }
-        }
-
-        private ZXing.Result _result;
-        public ZXing.Result Result
-        {
-            get { return _result; }
-            set { SetProperty(ref _result, value); }
-        }
-
-        private bool _isAnalyzing;
-        public bool IsAnalyzing
-        {
-            get { return _isAnalyzing; }
-            set { SetProperty(ref _isAnalyzing, value); }
-        }
-
-        private bool _isScanning;
-        public bool IsScanning
-        {
-            get { return _isScanning; }
-            set { SetProperty(ref _isScanning, value); }
         }
 
         private MobileBarcodeScanningOptions _scannerOptions;
@@ -57,68 +67,57 @@ namespace GrinPlusPlus.ViewModels
 
         async void SendButtonClicked()
         {
-            await NavigationService.NavigateAsync("SendingGrinsPage", 
+            await NavigationService.NavigateAsync("SendingGrinsPage",
                 new NavigationParameters
                 {
-                    { "addres", Address },
-                    { "message", Message }
+                    { "address", Address },
+                    { "message", string.IsNullOrEmpty(Message) ? "" : Message },
+                    { "amount", Amount },
+                    { "fee", Fee },
+                    { "inputs", Inputs }
                 }
             );
         }
 
-        public DelegateCommand<ZXing.Result> OnScanResultCommand => new DelegateCommand<ZXing.Result>(OnScanResult);
-
-        private void OnScanResult(ZXing.Result result)
-        {
-            Address = result.Text;
-        }
-
         public DelegateCommand OnQRButtonClickedCommand => new DelegateCommand(OnQRButtonClicked);
 
-        private void OnQRButtonClicked()
+        private async void OnQRButtonClicked()
         {
-            IsScanning = !IsScanning;
+            await NavigationService.NavigateAsync(name: "QRScannerPage", parameters: null, useModalNavigation: true, animated: true);
         }
 
-        public EnterAddressMessagePageViewModel(INavigationService navigationService)
-            : base(navigationService)
+        public EnterAddressMessagePageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
+            : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
-            Address = "";
-            IsScanning = false;
-            ScannerOptions = new MobileBarcodeScanningOptions() {
-                PossibleFormats = new List<ZXing.BarcodeFormat>() { ZXing.BarcodeFormat.QR_CODE },
-                CameraResolutionSelector = new CameraResolutionSelectorDelegate(SelectLowestResolutionMatchingDisplayAspectRatio),
-            };
         }
 
-        public CameraResolution SelectLowestResolutionMatchingDisplayAspectRatio(List<CameraResolution> availableResolutions)
+        public override void OnNavigatedTo(INavigationParameters parameters)
         {
-            CameraResolution result = null;
+            var navigationMode = parameters.GetNavigationMode();
 
-            //a tolerance of 0.1 should not be recognizable for users
-            double aspectTolerance = 0.1;
-            
-            //calculating our targetRatio
-            var targetRatio = DeviceDisplay.MainDisplayInfo.Height / DeviceDisplay.MainDisplayInfo.Width;
-            var targetHeight = DeviceDisplay.MainDisplayInfo.Height;
-            var minDiff = double.MaxValue;
-            
-            //camera API lists all available resolutions from highest to lowest, perfect for us
-            //making use of this sorting, following code runs some comparisons to select the lowest resolution that matches the screen aspect ratio
-            //selecting the lowest makes QR detection actual faster most of the time
-            foreach (var r in availableResolutions)
+            switch (navigationMode)
             {
-                //if current ratio is bigger than our tolerance, move on
-                //camera resolution is provided landscape ...
-                if (Math.Abs(((double) r.Width / r.Height) - targetRatio) > aspectTolerance)
-                    continue;
-                else
-                    if (Math.Abs(r.Height - targetHeight) < minDiff)
-                    minDiff = Math.Abs(r.Height - targetHeight);
-                    result = r;                
+                case Prism.Navigation.NavigationMode.New:
+                    if (parameters.ContainsKey("amount"))
+                    {
+                        Amount = Double.Parse((string)parameters["amount"]);
+                    }
+                    if (parameters.ContainsKey("fee"))
+                    {
+                        Fee = Double.Parse((string)parameters["fee"]);
+                    }
+                    if (parameters.ContainsKey("inputs"))
+                    {
+                        Inputs = (string[])parameters["inputs"];
+                    }
+                    break;
+                case Prism.Navigation.NavigationMode.Back:
+                    if (parameters.ContainsKey("qr_scanner_result"))
+                    {
+                        Address = (string)parameters["qr_scanner_result"];
+                    }
+                    break;
             }
-            return result;
         }
-
     }
 }

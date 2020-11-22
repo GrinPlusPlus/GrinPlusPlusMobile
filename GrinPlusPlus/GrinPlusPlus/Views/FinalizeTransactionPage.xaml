@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="GrinPlusPlus.Views.FinalizeTransactionPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behavior="clr-namespace:GrinPlusPlus.Behaviors"
+    xmlns:prism="http://prismlibrary.com"
+    xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
+    xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromRight"
+    BackgroundColor="{StaticResource BackgroundColor}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="BackgroundColor">#000000</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout
+            HorizontalOptions="FillAndExpand"
+            Orientation="Vertical"
+            Spacing="10"
+            VerticalOptions="FillAndExpand">
+            <Label
+                Padding="20,10,20,0"
+                FontSize="22"
+                HorizontalOptions="Start"
+                Text="{x:Static resource:AppResources.FinalizeTransaction}"
+                TextColor="White"
+                VerticalOptions="Center" />
+            <BoxView
+                Margin="20,0,20,20"
+                HeightRequest="1"
+                HorizontalOptions="Start"
+                WidthRequest="20"
+                Color="White" />
+            <Label
+                Margin="30,0,30,0"
+                Text="{x:Static resource:AppResources.SlatepackMessage}"
+                TextColor="#2f2f2f"
+                TextTransform="Uppercase" />
+            <Editor
+                Margin="20,0,20,20"
+                AutoSize="Disabled"
+                BackgroundColor="#191919"
+                FontSize="Body"
+                HeightRequest="150"
+                IsSpellCheckEnabled="False"
+                IsTextPredictionEnabled="False"
+                Text="{Binding SlatepackMessage}"
+                TextColor="Yellow" />
+            <Button
+                Margin="30,0,30,0"
+                BackgroundColor="#191919"
+                Command="{Binding PasteFromClipboardCommand}"
+                CornerRadius="5"
+                HeightRequest="44"
+                ImageSource="baseline_content_paste_white_18.png"
+                Text="{x:Static resource:AppResources.PasteFromClipboard}"
+                TextColor="White" />
+            <Button
+                Margin="30,0,30,0"
+                BackgroundColor="#191919"
+                Command="{Binding LoadFromFileCommand}"
+                CornerRadius="5"
+                HeightRequest="44"
+                ImageSource="baseline_note_add_white_18.png"
+                Text="{x:Static resource:AppResources.LoadFromFile}"
+                TextColor="White" />
+            <Button
+                Margin="30,0,30,0"
+                BackgroundColor="#191919"
+                Command="{Binding ScanQRCodeCommand}"
+                CornerRadius="5"
+                HeightRequest="44"
+                ImageSource="baseline_qr_code_white_18.png"
+                Text="{x:Static resource:AppResources.ScanQRCode}"
+                TextColor="White" />
+            <StackLayout Spacing="10" VerticalOptions="EndAndExpand">
+                <Button
+                    Margin="30,0,30,20"
+                    BackgroundColor="#31e28d"
+                    Command="{Binding FinalizeTransactionCommand}"
+                    CornerRadius="5"
+                    HeightRequest="44"
+                    Text="{x:Static resource:AppResources.Finalize}"
+                    TextColor="Black" />
+                <Button
+                    Margin="30,0,30,20"
+                    BackgroundColor="#191919"
+                    Command="{Binding CancelCommand}"
+                    CornerRadius="5"
+                    HeightRequest="44"
+                    Text="{x:Static resource:AppResources.Cancel}"
+                    TextColor="Yellow" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

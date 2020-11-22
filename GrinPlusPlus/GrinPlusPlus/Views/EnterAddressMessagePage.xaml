@@ -3,6 +3,7 @@
     x:Class="GrinPlusPlus.Views.EnterAddressMessagePage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behavior="clr-namespace:GrinPlusPlus.Behaviors"
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
@@ -32,8 +33,11 @@
                     IsSpellCheckEnabled="False"
                     Text="{Binding Address}"
                     TextColor="Yellow"
-                    TextTransform="Uppercase"
-                    VerticalTextAlignment="Center" />
+                    VerticalTextAlignment="Center">
+                    <Entry.Behaviors>
+                        <behavior:AddressValidation IsValid="{Binding IsAddressValid}" />
+                    </Entry.Behaviors>
+                </Entry>
                 <Button
                     Command="{Binding OnQRButtonClickedCommand}"
                     ImageSource="baseline_qr_code_scanner_black_24.png"
@@ -49,21 +53,13 @@
                 Text="{Binding Message}"
                 TextColor="Yellow"
                 VerticalTextAlignment="Center" />
-            <zxing:ZXingScannerView
-                HeightRequest="320"
-                HorizontalOptions="Center"
-                IsScanning="{Binding IsScanning}"
-                IsVisible="{Binding IsScanning}"
-                Options="{Binding ScannerOptions}"
-                ScanResultCommand="{Binding OnScanResultCommand}"
-                VerticalOptions="Center"
-                WidthRequest="240" />
             <Button
                 Margin="50,30,50,30"
                 BackgroundColor="#191919"
                 Command="{Binding SendButtonClickedCommand}"
                 CornerRadius="5"
                 HeightRequest="44"
+                IsEnabled="{Binding IsAddressValid}"
                 Text="{x:Static resource:AppResources.Send}"
                 TextColor="Yellow"
                 VerticalOptions="EndAndExpand" />

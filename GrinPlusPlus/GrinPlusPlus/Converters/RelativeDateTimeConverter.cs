@@ -16,12 +16,20 @@ namespace GrinPlusPlus.Converters
         {
             if (value == null) return string.Empty;
 
-            var current_day = DateTime.Today;
+            return DoConversion(value);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static string DoConversion(object value)
+        {
             var postedData = (DateTime)value;
 
             var ts = new TimeSpan(DateTime.Now.Ticks - postedData.Ticks);
             double delta = Math.Abs(ts.TotalSeconds);
-
             if (delta < 1 * MINUTE)
             {
                 if (ts.Seconds < 0)
@@ -60,7 +68,7 @@ namespace GrinPlusPlus.Converters
             }
 
             if (delta < 48 * HOUR)
-                return $"Yesterday at {postedData.ToString("t")}";
+                return $"Yesterday at {postedData:t}";
 
             if (delta < 30 * DAY)
             {
@@ -81,11 +89,6 @@ namespace GrinPlusPlus.Converters
                 int years = (int)(Math.Floor((double)ts.Days / 365));
                 return years <= 1 ? "one year ago" : years + " years ago";
             }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
         }
     }
 }

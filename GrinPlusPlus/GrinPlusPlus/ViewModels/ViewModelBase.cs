@@ -1,15 +1,17 @@
-﻿using Prism.Commands;
+﻿using GrinPlusPlus.Api;
 using Prism.Mvvm;
 using Prism.Navigation;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Prism.Services;
+using Prism.Services.Dialogs;
 
 namespace GrinPlusPlus.ViewModels
 {
     public class ViewModelBase : BindableBase, IInitialize, INavigationAware, IDestructible
     {
         protected INavigationService NavigationService { get; private set; }
+        protected IDataProvider DataProvider { get; private set; }
+        protected IDialogService DialogService { get; private set; }
+        protected IPageDialogService PageDialogService { get; private set; }
 
         private string _title;
         public string Title
@@ -18,9 +20,12 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
-        public ViewModelBase(INavigationService navigationService)
+        public ViewModelBase(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
         {
             NavigationService = navigationService;
+            DataProvider = dataProvider;
+            DialogService = dialogService;
+            PageDialogService = pageDialogService;
         }
 
         public virtual void Initialize(INavigationParameters parameters)

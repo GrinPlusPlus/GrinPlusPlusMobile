@@ -32,7 +32,7 @@
                 VerticalTextAlignment="Center" />
         </Grid>
     </NavigationPage.TitleView>
-    <views:ReceivePage />
     <views:WalletPage />
+    <views:ReceivePage />
     <views:TansactionsHistoryPage />
 </TabbedPage>

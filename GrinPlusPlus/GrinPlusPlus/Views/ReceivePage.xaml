@@ -10,20 +10,23 @@
     xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="Black"
-    IconImageSource="outline_request_quote_white_24.png">
+    IconImageSource="baseline_self_improvement_white_24.png">
     <ContentPage.Content>
-        <StackLayout
-            Margin="30"
-            Spacing="20"
-            VerticalOptions="FillAndExpand">
+        <StackLayout Spacing="10" VerticalOptions="FillAndExpand">
+            <Label
+                Margin="0,25,0,0"
+                HorizontalOptions="Center"
+                Text="{x:Static resource:AppResources.QRCode}"
+                TextColor="Gray"
+                TextTransform="Uppercase" />
             <Frame
-                Padding="15"
+                Padding="10"
                 BackgroundColor="#191919"
                 CornerRadius="8"
                 HorizontalOptions="Center">
                 <zxing:ZXingBarcodeImageView
                     BarcodeFormat="QR_CODE"
-                    BarcodeValue="{Binding Address}"
+                    BarcodeValue="{Binding SlatepackAddress}"
                     HeightRequest="120"
                     WidthRequest="120">
                     <zxing:ZXingBarcodeImageView.BarcodeOptions>
@@ -36,29 +39,30 @@
                 </zxing:ZXingBarcodeImageView>
             </Frame>
             <Label
-                FontSize="Default"
+                Margin="0,25,0,0"
                 HorizontalOptions="Center"
-                Text="{x:Static resource:AppResources.Address}"
-                TextColor="#2f2f2f"
+                Text="{x:Static resource:AppResources.SlatepackAddress}"
+                TextColor="Gray"
                 TextTransform="Uppercase" />
             <Button
+                Margin="50,0,50,0"
                 BackgroundColor="#191919"
+                Command="{Binding CopyAddressCommand}"
                 CornerRadius="5"
-                Text="{Binding Address}"
+                Text="{Binding SlatepackAddress}"
                 TextColor="White"
                 TextTransform="Uppercase" />
             <Label
-                FontSize="Default"
                 HorizontalOptions="Center"
                 Text="{x:Static resource:AppResources.TabToCopy}"
-                TextColor="White" />
+                TextColor="Gray" />
             <Button
-                Margin="50,30,50,0"
+                Margin="50,0,50,30"
                 BackgroundColor="Transparent"
                 Command="{Binding ShareAddressCommand}"
                 CornerRadius="5"
                 HeightRequest="44"
-                Text="{x:Static resource:AppResources.Share}"
+                Text="{x:Static resource:AppResources.ShareAddress}"
                 TextColor="Yellow"
                 VerticalOptions="EndAndExpand" />
         </StackLayout>

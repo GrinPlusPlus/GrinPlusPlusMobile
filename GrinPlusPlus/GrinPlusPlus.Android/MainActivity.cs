@@ -17,8 +17,6 @@ namespace GrinPlusPlus.Droid
 
             base.OnCreate(savedInstanceState);
 
-            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-
             ZXing.Net.Mobile.Forms.Android.Platform.Init();
 
             CrossFingerprint.SetCurrentActivityResolver(() => this);

@@ -3,6 +3,7 @@
     x:Class="GrinPlusPlus.Views.RestoreWalletPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:behavior="clr-namespace:GrinPlusPlus.Behaviors"
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
@@ -15,61 +16,78 @@
             Spacing="10"
             VerticalOptions="FillAndExpand">
             <Label
-                Padding="20,20,20,0"
-                FontSize="34"
+                Padding="20,5,20,0"
+                FontSize="22"
                 HorizontalOptions="Start"
                 Text="{x:Static resource:AppResources.RestoreWallet}"
                 TextColor="White"
                 VerticalOptions="Center" />
             <BoxView
-                Margin="20,0,20,40"
+                Margin="20,0,20,20"
                 HeightRequest="1"
                 HorizontalOptions="Start"
-                WidthRequest="60"
+                WidthRequest="50"
                 Color="White" />
             <Label
-                Margin="40,0,40,0"
-                Text="{x:Static resource:AppResources.Username}"
-                TextColor="White"
+                Margin="20,0,20,0"
+                Text="{x:Static resource:AppResources.Account}"
+                TextColor="Gray"
                 TextTransform="Uppercase" />
             <Entry
-                Margin="40,0,40,20"
+                Margin="20,0,20,20"
+                BackgroundColor="#191919"
                 IsSpellCheckEnabled="False"
+                IsTextPredictionEnabled="False"
                 Text="{Binding Username}"
                 TextColor="Yellow"
-                VerticalTextAlignment="Center" />
+                VerticalTextAlignment="Center">
+                <Entry.Behaviors>
+                    <behavior:UsernameValidation IsValid="{Binding IsUsernameValid}" />
+                </Entry.Behaviors>
+            </Entry>
             <Label
-                Margin="40,0,40,0"
+                Margin="20,0,20,0"
                 Text="{x:Static resource:AppResources.Password}"
-                TextColor="White"
+                TextColor="Gray"
                 TextTransform="Uppercase" />
             <Entry
-                Margin="40,0,40,20"
+                Margin="20,0,20,20"
+                BackgroundColor="#191919"
+                IsEnabled="{Binding IsUsernameValid}"
                 IsPassword="True"
                 IsSpellCheckEnabled="False"
+                IsTextPredictionEnabled="False"
                 Text="{Binding Password}"
                 TextColor="Yellow"
-                VerticalTextAlignment="Center" />
+                VerticalTextAlignment="Center">
+                <Entry.Behaviors>
+                    <behavior:PasswordValidation IsValid="{Binding IsPasswordValid}" />
+                </Entry.Behaviors>
+            </Entry>
             <Label
-                Margin="40,0,40,0"
+                Margin="20,0,20,0"
                 Text="{x:Static resource:AppResources.WalletSeed}"
-                TextColor="White"
+                TextColor="Gray"
                 TextTransform="Uppercase" />
             <Editor
-                Margin="40,0,40,20"
+                Margin="20,0,20,20"
                 AutoSize="Disabled"
+                BackgroundColor="#191919"
                 FontSize="Body"
                 HeightRequest="150"
+                IsEnabled="{Binding IsPasswordValid}"
                 IsSpellCheckEnabled="False"
+                IsTextPredictionEnabled="False"
                 Text="{Binding WalletSeed}"
                 TextColor="Yellow" />
             <Button
-                Margin="40,10,50,0"
+                Margin="50,10,50,100"
                 BackgroundColor="#191919"
                 Command="{Binding RestoreWalletCommand}"
                 CornerRadius="5"
                 HeightRequest="44"
                 HorizontalOptions="FillAndExpand"
+                IsEnabled="{Binding IsFormValid}"
                 Text="{x:Static resource:AppResources.Restore}"
                 TextColor="Yellow" />
         </StackLayout>

@@ -18,57 +18,51 @@
             HorizontalOptions="Start"
             VerticalOptions="FillAndExpand">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <StackLayout
+            <Image
                 Grid.Row="0"
                 Grid.Column="0"
-                Margin="20">
-                <Label
-                    FontSize="48"
-                    HorizontalOptions="Start"
-                    Text="Hello, friend!"
-                    TextColor="White"
-                    VerticalOptions="Center" />
-                <BoxView
-                    HeightRequest="1"
-                    HorizontalOptions="Start"
-                    WidthRequest="60"
-                    Color="White" />
-            </StackLayout>
+                Margin="0,50,20,50"
+                Aspect="AspectFit"
+                HorizontalOptions="Start"
+                Source="banner.png"
+                VerticalOptions="Center" />
             <CollectionView
                 Grid.Row="1"
                 Grid.Column="0"
-                Margin="80,0,80,0"
+                Margin="50,10,50,0"
+                HorizontalOptions="Center"
                 ItemsSource="{Binding Accounts}"
                 VerticalOptions="Center">
                 <CollectionView.EmptyView>
                     <Label
-                        FontSize="Medium"
-                        HorizontalTextAlignment="Center"
-                        Text="No Wallets were found 🤨"
-                        TextColor="White"
-                        VerticalTextAlignment="Center" />
+                        Padding="0,40,0,0"
+                        FontAttributes="Italic"
+                        FontSize="24"
+                        HorizontalOptions="Center"
+                        Text="{x:Static resource:AppResources.FastPrivateSecure}"
+                        TextColor="White" />
                 </CollectionView.EmptyView>
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout
                         Orientation="Vertical"
                         Span="1"
-                        VerticalItemSpacing="10" />
+                        VerticalItemSpacing="20" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame
                             Margin="0"
                             Padding="0"
-                            BackgroundColor="#e5e500"
+                            BackgroundColor="Yellow"
                             CornerRadius="5"
-                            HeightRequest="44">
+                            HeightRequest="55">
                             <Label
                                 Margin="0"
                                 Padding="0"
@@ -88,7 +82,8 @@
             <StackLayout
                 Grid.Row="2"
                 Grid.Column="0"
-                Margin="80,0,80,60"
+                Margin="50,20,50,100"
+                Spacing="20"
                 VerticalOptions="End">
                 <Button
                     BackgroundColor="#191919"
@@ -99,7 +94,7 @@
                     HeightRequest="44"
                     IsEnabled="{Binding IsActive}"
                     Text="{x:Static resource:AppResources.CreateWallet}"
-                    TextColor="#ffff00" />
+                    TextColor="Yellow" />
                 <Button
                     BackgroundColor="Transparent"
                     Command="{prism:NavigateTo 'RestoreWalletPage',
@@ -108,8 +103,8 @@
                     CornerRadius="5"
                     HeightRequest="44"
                     IsEnabled="{Binding IsActive}"
-                    Text="{x:Static resource:AppResources.Restore}"
-                    TextColor="#ffff00" />
+                    Text="{x:Static resource:AppResources.RestoreExistingWallet}"
+                    TextColor="Yellow" />
             </StackLayout>
         </Grid>
     </ContentPage.Content>

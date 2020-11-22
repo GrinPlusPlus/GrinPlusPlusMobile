@@ -1,78 +1,32 @@
-﻿using GrinPlusPlus.Models;
-using GrinPlusPlus.Services;
+﻿using GrinPlusPlus.Api;
+using GrinPlusPlus.Models;
 using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Navigation;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+using Prism.Services;
+using Prism.Services.Dialogs;
 using Xamarin.Essentials;
-
 
 namespace GrinPlusPlus.ViewModels
 {
     public class TransactionDetailsPageViewModel : ViewModelBase
     {
-        private decimal _amount;
-        public decimal Amount
+        private Transaction _transaction;
+        public Transaction SelectedTransaction
         {
-            get { return Math.Truncate(_amount); }
-            set { SetProperty(ref _amount, value); }
+            get { return _transaction; }
+            set { SetProperty(ref _transaction, value); }
         }
 
-        private double _fee;
-        public double Fee
-        {
-            get { return _fee; }
-            set { SetProperty(ref _fee, value); }
-        }
+        public DelegateCommand<object> CopyTextCommand => new DelegateCommand<object>(CopyText);
 
-        private double _decimals;
-        public double Decimals
+        private async void CopyText(object text)
         {
-            get { return _decimals; }
-            set { SetProperty(ref _decimals, value); }
-        }
-
-        private string _status;
-        public string Status
-        {
-            get { return _status; }
-            set { SetProperty(ref _status, value); }
-        }
-
-        private DateTime _date;
-        public DateTime Date
-        {
-            get { return _date; }
-            set { SetProperty(ref _date, value); }
-        }
-
-        private string _slate;
-        public string Slate
-        {
-            get { return _slate; }
-            set { SetProperty(ref _slate, value); }
-        }
-
-        private List<Output> _outputs;
-        public List<Output> Outputs
-        {
-            get { return _outputs; }
-            set { SetProperty(ref _outputs, value); }
-        }
-
-        private string _message;
-        public string Message
-        {
-            get { return _message; }
-            set { SetProperty(ref _message, value); }
+            await Clipboard.SetTextAsync((string)text);
         }
 
 
-        public TransactionDetailsPageViewModel(INavigationService navigationService)
-            : base(navigationService)
+        public TransactionDetailsPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
+            : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
 
         }
@@ -81,15 +35,7 @@ namespace GrinPlusPlus.ViewModels
         {
             if (parameters.ContainsKey("transaction"))
             {
-                Transaction transaction = (Transaction)parameters["transaction"];
-                Amount = transaction.Amount;
-                Decimals = transaction.Decimals;
-                Status = transaction.Status.ToUpper();
-                Fee = transaction.Fee;
-                Date = transaction.Date;
-                Slate = transaction.Slate;
-                Message = transaction.Message;
-                Outputs = transaction.Outputs;
+                SelectedTransaction = (Transaction)parameters["transaction"];
             }
         }
     }

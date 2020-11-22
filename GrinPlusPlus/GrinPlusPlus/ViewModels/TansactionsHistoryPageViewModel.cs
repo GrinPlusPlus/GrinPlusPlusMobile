@@ -1,31 +1,78 @@
-﻿using GrinPlusPlus.Models;
-using GrinPlusPlus.Services;
+﻿using GrinPlusPlus.Api;
+using GrinPlusPlus.Models;
 using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Navigation;
+using Prism.Services;
+using Prism.Services.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
+using Xamarin.Essentials;
 
 namespace GrinPlusPlus.ViewModels
 {
-    public class TansactionsHistoryPageViewModel :  ViewModelBase
+    public class TansactionsHistoryPageViewModel : ViewModelBase
     {
-        public ObservableCollection<Transaction> Transactions { get; set; }
-
-        public TansactionsHistoryPageViewModel(INavigationService navigationService, IDataProvider dataProvider)
-            : base(navigationService)
+        private ObservableCollection<TransactionGroup> _transactions;
+        public ObservableCollection<TransactionGroup> Transactions
         {
-            string[] inProgress = { "Receiving", "Sending" };
-            Transactions = new ObservableCollection<Transaction>();
-            foreach (var transaction in dataProvider.GetAllData())
+            get { return _transactions; }
+            set { SetProperty(ref _transactions, value); }
+        }
+
+        private Transaction _selectedTransaction;
+        public Transaction SelectedTransaction
+        {
+            get { return _selectedTransaction; }
+            set
             {
-                if (!inProgress.Contains(transaction.Status))
-                {
-                    Transactions.Add(transaction);
-                }
+                SetProperty(ref _selectedTransaction, value);
             }
+        }
+
+        public DelegateCommand OpenTransactionDetailsCommand => new DelegateCommand(OpenTransactionDetails);
+
+        public TansactionsHistoryPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
+            : base(navigationService, dataProvider, dialogService, pageDialogService)
+        {
+            Transactions = new ObservableCollection<TransactionGroup>();
+
+            Xamarin.Forms.Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            {
+                MainThread.BeginInvokeOnMainThread(async () =>
+                {
+                    try
+                    {
+                        var transactionsGroupedByDate = (await DataProvider.GetTransactions(
+                                                               await SecureStorage.GetAsync("token"),
+                                                               new string[] { "COINBASE", "SENT", "RECEIVED", "SENT_CANCELED", "RECEIVED_CANCELED" })
+                                                        ).GroupBy(x => x.Date.ToString("dddd, dd MMMM yyyy"));
+                        foreach (var group in transactionsGroupedByDate)
+                        {
+                            if (!Transactions.Any(t => t.Name.Equals(group.Key)))
+                            {
+                                Transactions.Add(new TransactionGroup(group.Key, 
+                                    transactionsGroupedByDate.First(g => g.Key.Equals(group.Key)).ToList()));
+                                continue;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(ex.Message);
+                    }
+                });
+                return true;
+            });
+        }
+
+        async void OpenTransactionDetails()
+        {
+            if (SelectedTransaction is null) return;
+            await NavigationService.NavigateAsync("TransactionDetailsPage", new NavigationParameters { { "transaction", SelectedTransaction } });
+            SelectedTransaction = null;
         }
     }
 }

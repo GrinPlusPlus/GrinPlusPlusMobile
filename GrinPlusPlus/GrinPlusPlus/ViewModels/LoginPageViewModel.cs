@@ -1,17 +1,13 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
-using Prism.Navigation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Plugin.Fingerprint;
-using System.Threading;
-using Plugin.Fingerprint.Abstractions;
-using System.Collections.ObjectModel;
+﻿using GrinPlusPlus.Api;
 using GrinPlusPlus.Models;
+using Prism.Commands;
+using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
+using System;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using Xamarin.Essentials;
 
 namespace GrinPlusPlus.ViewModels
 {
@@ -19,47 +15,32 @@ namespace GrinPlusPlus.ViewModels
     {
         public ObservableCollection<Account> Accounts { get; set; }
 
-        private CancellationTokenSource _cancel;
-
-        private readonly IDialogService _pageDialogService;
-
         public DelegateCommand<string> AccountNameClickedCommand => new DelegateCommand<string>(AccountNameClicked);
 
-        public LoginPageViewModel(INavigationService navigationService, IDialogService pageDialogService)
-            : base(navigationService)
+        public LoginPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
+            : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
-            _pageDialogService = pageDialogService;
-
             Accounts = new ObservableCollection<Account>();
-            foreach (var account in new string[3] { "donations", "personal", "testing" })
+
+            MainThread.BeginInvokeOnMainThread(async () =>
             {
-                Accounts.Add(new Account() { Name = account});
-            }
+                try
+                {
+                    foreach (var account in await dataProvider.GetAccounts())
+                    {
+                        Accounts.Add(new Account() { Name = account.Name });
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+            });
         }
 
         async void AccountNameClicked(string userName)
         {
-            if (await CrossFingerprint.Current.IsAvailableAsync(true))
-            {
-                _cancel = new CancellationTokenSource();
-                var dialogConfig = new AuthenticationRequestConfiguration("Grin++", $"Authenticate to open {userName.ToUpper()} Wallet")
-                {
-                    CancelTitle = null,
-                    FallbackTitle = null,
-                    AllowAlternativeAuthentication = true
-                };
-
-                var result = await CrossFingerprint.Current.AuthenticateAsync(dialogConfig, _cancel.Token);
-
-                if (result.Authenticated)
-                {
-                    await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/DashboardCarouselPage");
-                }
-            } else
-            {
-                var parameters = new DialogParameters {{ "username", userName }};
-                await _pageDialogService.ShowDialogAsync("AccountPasswordDialogView", parameters);
-            }
+            await DialogService.ShowDialogAsync("AccountPasswordDialogView", new DialogParameters { { "username", userName } });
         }
     }
 }

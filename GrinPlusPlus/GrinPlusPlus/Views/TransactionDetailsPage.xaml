@@ -6,78 +6,136 @@
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
-    Title="{Binding Status}"
+    x:Name="TransactionDetails"
+    Title="{Binding SelectedTransaction.Status}"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="Black">
-    <ScrollView>
-        <StackLayout Padding="40">
-            <Label HorizontalOptions="Center">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span
+    <StackLayout>
+        <Label HorizontalOptions="Center">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span
+                        FontAttributes="Bold"
+                        FontSize="38"
+                        Text="{Binding SelectedTransaction.Amount}"
+                        TextColor="Yellow" />
+                    <Span
+                        FontAttributes="Bold"
+                        FontSize="Medium"
+                        Text="."
+                        TextColor="Yellow" />
+                    <Span
+                        FontAttributes="Bold"
+                        FontSize="Medium"
+                        Text="{Binding SelectedTransaction.Decimals}"
+                        TextColor="Yellow" />
+                    <Span
+                        FontSize="Small"
+                        Text=" ツ"
+                        TextColor="Yellow" />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <Label
+            HorizontalTextAlignment="Center"
+            Text="{x:Static resource:AppResources.Fee}"
+            TextColor="Gray"
+            TextTransform="Uppercase" />
+        <Label HorizontalOptions="Center" TextColor="White">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span FontSize="16" Text="{Binding SelectedTransaction.Fee, StringFormat='{}{0:N9}'}" />
+                    <Span FontSize="12" Text=" ツ" />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        <BoxView
+            HeightRequest="1"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            WidthRequest="50"
+            Color="#5b5d68" />
+        <Label
+            Margin="20,20,20,0"
+            Text="{x:Static resource:AppResources.Date}"
+            TextColor="Gray"
+            TextTransform="Uppercase" />
+        <Label
+            Margin="20,0,20,0"
+            Text="{Binding SelectedTransaction.Date, StringFormat='{}{0:dddd, dd MMMM yyyy hh:mm tt}'}"
+            TextColor="White" />
+        <Label
+            Margin="20,10,20,0"
+            Text="{x:Static resource:AppResources.Address}"
+            TextColor="Gray"
+            TextTransform="Uppercase" />
+        <Button
+            Margin="20,0,20,0"
+            BackgroundColor="#191919"
+            Command="{Binding CopyTextCommand}"
+            CommandParameter="{Binding SelectedTransaction.Address}"
+            Text="{Binding SelectedTransaction.Address}"
+            TextColor="White" />
+        <Label
+            Margin="20,10,20,0"
+            Text="{x:Static resource:AppResources.Message}"
+            TextColor="Gray"
+            TextTransform="Uppercase" />
+        <Label
+            Margin="20,0,20,0"
+            Text="{Binding SelectedTransaction.Message}"
+            TextColor="White" />
+        <Label
+            Margin="20,10,20,0"
+            Text="{x:Static resource:AppResources.Outputs}"
+            TextColor="Gray"
+            TextTransform="Uppercase" />
+        <CollectionView Margin="20,0,20,0" ItemsSource="{Binding SelectedTransaction.Outputs}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid RowSpacing="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Text="{x:Static resource:AppResources.Amount}"
+                            TextColor="#2f2f2f"
+                            TextTransform="Uppercase" />
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="1"
                             FontAttributes="Bold"
-                            FontSize="38"
-                            Text="{Binding Amount, StringFormat='{}{0:N0}'}"
+                            Text="{Binding Amount}"
                             TextColor="White" />
-                        <Span
-                            FontAttributes="Bold"
-                            FontSize="Default"
-                            Text="."
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Text="{x:Static resource:AppResources.Commitment}"
+                            TextColor="#2f2f2f"
+                            TextTransform="Uppercase"
+                            VerticalOptions="Center" />
+                        <Button
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            BackgroundColor="#191919"
+                            Command="{Binding Source={x:Reference TransactionDetails}, Path=BindingContext.CopyTextCommand}"
+                            CommandParameter="{Binding Commitment}"
+                            FontSize="Caption"
+                            Text="{Binding Commitment}"
                             TextColor="White" />
-                        <Span
-                            FontAttributes="Bold"
-                            FontSize="Medium"
-                            Text="{Binding Decimals}"
-                            TextColor="White" />
-                        <Span
-                            FontSize="Small"
-                            Text=" ツ"
-                            TextColor="Yellow" />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-            <Label
-                FontSize="Medium"
-                HorizontalOptions="Fill"
-                HorizontalTextAlignment="Center"
-                Text="{Binding Fee, StringFormat='{}{0:N9} ツ'}"
-                TextColor="White" />
-            <BoxView
-                HeightRequest="1"
-                HorizontalOptions="Center"
-                VerticalOptions="Center"
-                WidthRequest="50"
-                Color="#5b5d68" />
-            <Label
-                Margin="0,20,0,0"
-                HorizontalOptions="Fill"
-                Text="{x:Static resource:AppResources.Date}"
-                TextColor="#2f2f2f"
-                TextTransform="Uppercase" />
-            <Label
-                HorizontalOptions="Fill"
-                Text="{Binding Date, StringFormat='{}{0:MM/dd/yyyy a\\t h:mm tt}'}"
-                TextColor="White" />
-            <Label
-                Margin="0,20,0,0"
-                HorizontalOptions="Fill"
-                Text="{x:Static resource:AppResources.Slate}"
-                TextColor="#2f2f2f"
-                TextTransform="Uppercase" />
-            <Label
-                HorizontalOptions="Fill"
-                Text="{Binding Slate}"
-                TextColor="White" />
-            <Label
-                Margin="0,20,0,0"
-                HorizontalOptions="Fill"
-                Text="{x:Static resource:AppResources.Message}"
-                TextColor="#2f2f2f"
-                TextTransform="Uppercase" />
-            <Label
-                HorizontalOptions="Fill"
-                Text="{Binding Message}"
-                TextColor="White" />
-        </StackLayout>
-    </ScrollView>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+            <CollectionView.EmptyView>
+                <Label Text="-" TextColor="White" />
+            </CollectionView.EmptyView>
+        </CollectionView>
+    </StackLayout>
 </ContentPage>
