@@ -50,8 +50,6 @@ namespace GrinPlusPlus.ViewModels
 
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
-                if (Preferences.Get("loggedIn", false)) return false;
-
                 MainThread.BeginInvokeOnMainThread(async () =>
                 {
                     try
@@ -64,7 +62,8 @@ namespace GrinPlusPlus.ViewModels
                         Debug.WriteLine(ex.Message);
                     }
                 });
-                return true;
+
+                return !Preferences.Get("loggedIn", false);
             });
         }
 

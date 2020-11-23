@@ -7,6 +7,7 @@ using Prism;
 using Prism.Ioc;
 using System.Globalization;
 using System.Threading;
+using Xamarin.Essentials;
 using Xamarin.Essentials.Implementation;
 using Xamarin.Essentials.Interfaces;
 using Xamarin.Forms;
@@ -26,7 +27,9 @@ namespace GrinPlusPlus
             Thread.CurrentThread.CurrentUICulture = CultureInfo.InstalledUICulture;
 
             InitializeComponent();
-            
+
+            Preferences.Set("loggedIn", false);
+
             await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/LoginPage");
         }
 
