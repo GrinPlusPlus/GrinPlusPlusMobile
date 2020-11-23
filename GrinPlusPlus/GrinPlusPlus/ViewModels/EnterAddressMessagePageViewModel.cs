@@ -24,14 +24,6 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _fee, value); }
         }
 
-
-        private string[] _inputs;
-        public string[] Inputs
-        {
-            get { return _inputs; }
-            set { SetProperty(ref _inputs, value); }
-        }
-
         private string _address;
         public string Address
         {
@@ -56,6 +48,13 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _message, value); }
         }
 
+        private bool _sendMax = false;
+        public bool SendMax
+        {
+            get { return _sendMax; }
+            set { SetProperty(ref _sendMax, value); }
+        }
+
         private MobileBarcodeScanningOptions _scannerOptions;
         public MobileBarcodeScanningOptions ScannerOptions
         {
@@ -74,7 +73,7 @@ namespace GrinPlusPlus.ViewModels
                     { "message", string.IsNullOrEmpty(Message) ? "" : Message },
                     { "amount", Amount },
                     { "fee", Fee },
-                    { "inputs", Inputs }
+                    { "max", SendMax }
                 }
             );
         }
@@ -106,9 +105,9 @@ namespace GrinPlusPlus.ViewModels
                     {
                         Fee = Double.Parse((string)parameters["fee"]);
                     }
-                    if (parameters.ContainsKey("inputs"))
+                    if (parameters.ContainsKey("max"))
                     {
-                        Inputs = (string[])parameters["inputs"];
+                        SendMax = (bool)parameters["max"];
                     }
                     break;
                 case Prism.Navigation.NavigationMode.Back:

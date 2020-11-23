@@ -26,7 +26,7 @@ namespace GrinPlusPlus
             Thread.CurrentThread.CurrentUICulture = CultureInfo.InstalledUICulture;
 
             InitializeComponent();
-
+            
             await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/LoginPage");
         }
 
@@ -50,9 +50,11 @@ namespace GrinPlusPlus
             containerRegistry.RegisterForNavigation<EnterAddressMessagePage, EnterAddressMessagePageViewModel>();
             containerRegistry.RegisterForNavigation<QRScannerPage, QRScannerPageViewModel>();
             containerRegistry.RegisterForNavigation<SendGrinsUsingTorPage, SendGrinsUsingTorPageViewModel>();
+            containerRegistry.RegisterForNavigation<SendGrinsUsingQRPage, SendGrinsUsingQRPageViewModel>();
             containerRegistry.RegisterForNavigation<FinalizeTransactionPage, FinalizeTransactionPageViewModel>();
             containerRegistry.RegisterForNavigation<ReceiveTransactionPage, ReceiveTransactionPageViewModel>();
             containerRegistry.RegisterForNavigation<StatusPage, StatusPageViewModel>();
+            containerRegistry.RegisterForNavigation<ShareSlatepackMessagePage, ShareSlatepackMessagePageViewModel>();
 
             containerRegistry.RegisterDialog<AccountPasswordDialogView, AccountPasswordDialogViewModel>();
         }

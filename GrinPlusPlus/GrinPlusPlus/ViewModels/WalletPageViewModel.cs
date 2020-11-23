@@ -144,40 +144,13 @@ namespace GrinPlusPlus.ViewModels
         {
             if (UserCanSend)
             {
-                await NavigationService.NavigateAsync("SetAmountPage", new NavigationParameters { { "spendable", Balance.Spendable } });
+                await NavigationService.NavigateAsync("SetAmountPage", new NavigationParameters { { "spendable", Balance.Spendable/Math.Pow(10,9) } });
             }
         }
 
         async void ReceiveButtonClicked()
         {
-            var method = AppResources.ResourceManager.GetString("Method");
-            var close = AppResources.ResourceManager.GetString("Close");
-            var qr = AppResources.ResourceManager.GetString("ScanningQRCode");
-            var text = AppResources.ResourceManager.GetString("SlatepackMessageText");
-            var file = AppResources.ResourceManager.GetString("SlatepackMessageFile");
-            var nfc = AppResources.ResourceManager.GetString("UsingNFC");
-
-            var selectedMethod = await PageDialogService.DisplayActionSheetAsync(method, close, null, qr, text, file, nfc);
-            if(selectedMethod == null)
-            {
-                return;
-            }
-            if (selectedMethod.Equals(qr))
-            {
-                await NavigationService.NavigateAsync(name:"ReceiveTransactionPage", parameters: null, useModalNavigation: true, animated: true);
-            }
-            else if (selectedMethod.Equals(text))
-            {
-                await NavigationService.NavigateAsync(name: "ReceiveTransactionPage", parameters: null, useModalNavigation: true, animated: true);
-            }
-            else if (selectedMethod.Equals(file))
-            {
-                await NavigationService.NavigateAsync(name: "ReceiveTransactionPage", parameters: null, useModalNavigation: true, animated: true);
-            }
-            else if (selectedMethod.Equals(nfc))
-            {
-                await NavigationService.NavigateAsync(name: "ReceiveTransactionPage", parameters: null, useModalNavigation: true, animated: true);
-            }
+            await NavigationService.NavigateAsync("ReceiveTransactionPage");            
         }
 
 

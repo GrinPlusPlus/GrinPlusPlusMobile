@@ -17,7 +17,7 @@
             Spacing="10"
             VerticalOptions="FillAndExpand">
             <Label
-                Padding="20,5,20,0"
+                Margin="20,10,20,0"
                 FontSize="22"
                 HorizontalOptions="Start"
                 Text="{x:Static resource:AppResources.PleaseConfirm}"
@@ -30,7 +30,7 @@
                 WidthRequest="50"
                 Color="White" />
             <Label
-                Margin="20,0,20,0"
+                Margin="20,10,20,0"
                 Text="{x:Static resource:AppResources.Address}"
                 TextColor="Gray"
                 TextTransform="Uppercase" />
@@ -40,7 +40,7 @@
                 Text="{Binding Address}"
                 TextColor="White" />
             <Label
-                Margin="20,0,20,0"
+                Margin="20,10,20,0"
                 Text="{x:Static resource:AppResources.Amount}"
                 TextColor="Gray"
                 TextTransform="Uppercase" />
@@ -59,7 +59,7 @@
                 </Label.FormattedText>
             </Label>
             <Label
-                Margin="20,0,20,0"
+                Margin="20,10,20,0"
                 Text="{x:Static resource:AppResources.Fee}"
                 TextColor="Gray"
                 TextTransform="Uppercase" />
@@ -78,51 +78,27 @@
                 </Label.FormattedText>
             </Label>
             <Label
-                Margin="20,0,20,0"
+                Margin="20,10,20,0"
                 Text="{x:Static resource:AppResources.Message}"
                 TextColor="Gray"
                 TextTransform="Uppercase" />
             <Label
                 Margin="20,0,20,10"
                 FontSize="18"
-                Text="Testing sending grins"
+                Text="{Binding Message}"
                 TextColor="White" />
-            <Label
-                Margin="20,0,20,0"
-                Text="{x:Static resource:AppResources.PickSendingMethod}"
-                TextColor="Gray"
-                TextTransform="Uppercase" />
             <Button
-                Margin="50,0,50,0"
+                Margin="50,50,50,0"
                 BackgroundColor="#191919"
-                Command="{Binding UsingTorButtonClickedCommand}"
+                Command="{Binding SendUsingTorCommand}"
                 CornerRadius="5"
                 HeightRequest="44"
-                ImageSource="baseline_public_white_18.png"
-                Text="{x:Static resource:AppResources.UsingInteractivity}"
+                Text="{x:Static resource:AppResources.Send}"
                 TextColor="Yellow" />
             <Button
-                Margin="50,0,50,0"
-                BackgroundColor="#191919"
-                Command="{Binding UsingSlatepackButtonClickedCommand}"
-                CornerRadius="5"
-                HeightRequest="44"
-                ImageSource="baseline_qr_code_white_18.png"
-                Text="{x:Static resource:AppResources.OfflineTransaction}"
-                TextColor="Yellow" />
-            <Button
-                Margin="50,0,50,0"
-                BackgroundColor="#191919"
-                Command="{Binding UsingNFCButtonClickedCommand}"
-                CornerRadius="5"
-                HeightRequest="44"
-                ImageSource="baseline_nfc_white_18.png"
-                Text="{x:Static resource:AppResources.UsingNFC}"
-                TextColor="Yellow" />
-            <Button
-                Margin="50,0,50,10"
+                Margin="50,0,50,40"
                 BackgroundColor="Transparent"
-                Command="{Binding CancelButtonClickedCommand}"
+                Command="{Binding CancelCommand}"
                 CornerRadius="5"
                 HeightRequest="44"
                 Text="{x:Static resource:AppResources.Cancel}"

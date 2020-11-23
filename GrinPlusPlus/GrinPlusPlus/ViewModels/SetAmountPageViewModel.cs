@@ -19,8 +19,8 @@ namespace GrinPlusPlus.ViewModels
 
         public DelegateCommand ContinueButtonClickedCommand => new DelegateCommand(ContinueButtonClicked);
 
-        private decimal _spendable;
-        public decimal Spendable
+        private double _spendable;
+        public double Spendable
         {
             get { return _spendable; }
             set { SetProperty(ref _spendable, value); }
@@ -57,6 +57,13 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _fee, value); }
         }
 
+        private bool _sendMax = false;
+        public bool SendMax
+        {
+            get { return _sendMax; }
+            set { SetProperty(ref _sendMax, value); }
+        }
+
         private List<Output> _inputs;
         public List<Output> Inputs
         {
@@ -74,13 +81,14 @@ namespace GrinPlusPlus.ViewModels
         {
             if (parameters.ContainsKey("spendable"))
             {
-                Spendable = (decimal)parameters["spendable"];
-                SpendableLabel = $"Spendable: {Spendable} ツ";
+                Spendable = (double)parameters["spendable"];
+                SpendableLabel = $"MAX: {Spendable} ツ";
             }
         }
 
         void KeyboardButtonClicked(string character)
         {
+            SendMax = false;
             if (character.Equals("DEL") && Amount.Length > 0)
             {
                 Amount = Amount.Remove(Amount.Length - 1, 1).Trim();
@@ -114,8 +122,50 @@ namespace GrinPlusPlus.ViewModels
                 return;
             }
 
+            if(!character.Equals(".") && Amount.Equals($"0{character}"))
+            {
+                Amount = $"{character}";
+            }
+
             IsValid = !Amount.Trim().Equals("0") && !Amount.Trim().Equals("0.");
 
+            if (Double.Parse(Amount) > Spendable)
+            {
+                IsValid = false;
+            }
+
+            if (Double.Parse(Amount) == Spendable)
+            {
+                SendMax = true;
+            }
+
+            TriggerFeeCalculation();
+        }
+
+        
+        void MaxButtonClicked()
+        {
+            Amount = $"{Spendable}";
+            IsValid = !Amount.Trim().Equals("0");
+            Fee = $"0.000000000";
+            if (Double.Parse(Amount) == Spendable)
+            {
+                SendMax = true;
+            }
+        }
+
+        async void ContinueButtonClicked()
+        {
+            if (Double.Parse(Amount) == Spendable)
+            {
+                SendMax = true;
+            }
+            await NavigationService.NavigateAsync("EnterAddressMessagePage",
+                new NavigationParameters { { "amount", Amount }, { "fee", Fee }, { "max", SendMax } });
+        }
+
+        private void TriggerFeeCalculation()
+        {
             MainThread.BeginInvokeOnMainThread(async () =>
             {
                 try
@@ -129,24 +179,6 @@ namespace GrinPlusPlus.ViewModels
                     Debug.WriteLine(ex.Message);
                 }
             });
-        }
-
-        void MaxButtonClicked()
-        {
-            Amount = $"{Spendable}";
-            IsValid = !Amount.Trim().Equals("0");
-        }
-
-        async void ContinueButtonClicked()
-        {
-            List<string> inputs = new List<string>();
-            foreach (Output output in Inputs)
-            {
-                inputs.Add(output.Commitment);
-            }
-
-            await NavigationService.NavigateAsync("EnterAddressMessagePage",
-                new NavigationParameters { { "amount", Amount }, { "fee", Fee }, { "inputs", inputs.ToArray() } });
         }
     }
 }

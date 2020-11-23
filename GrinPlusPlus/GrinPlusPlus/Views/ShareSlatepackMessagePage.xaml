@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="GrinPlusPlus.Views.SendGrinsUsingQRPage"
+    x:Class="GrinPlusPlus.Views.ShareSlatepackMessagePage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="http://prismlibrary.com"
@@ -27,13 +27,13 @@
                 HorizontalOptions="Center">
                 <zxing:ZXingBarcodeImageView
                     BarcodeFormat="QR_CODE"
-                    BarcodeValue="{Binding SendingResponse.Slatepack}"
-                    HeightRequest="250"
-                    WidthRequest="250">
+                    BarcodeValue="{Binding ReceivingResponse.Slatepack}"
+                    HeightRequest="300"
+                    WidthRequest="300">
                     <zxing:ZXingBarcodeImageView.BarcodeOptions>
                         <zxcm:EncodingOptions
-                            Width="780"
-                            Height="780"
+                            Width="750"
+                            Height="750"
                             Margin="0"
                             PureBarcode="True" />
                     </zxing:ZXingBarcodeImageView.BarcodeOptions>
@@ -51,7 +51,7 @@
                 CornerRadius="5"
                 HeightRequest="44"
                 Text="{x:Static resource:AppResources.CopySlatepackMessage}"
-                TextColor="White" />
+                TextColor="Yellow" />
             <Button
                 Margin="50,0,50,0"
                 BackgroundColor="#191919"
@@ -59,7 +59,7 @@
                 CornerRadius="5"
                 HeightRequest="44"
                 Text="{x:Static resource:AppResources.ShareSlatepackMessage}"
-                TextColor="White" />
+                TextColor="Yellow" />
             <Button
                 Margin="50,0,50,0"
                 BackgroundColor="#191919"
@@ -67,15 +67,8 @@
                 CornerRadius="5"
                 HeightRequest="44"
                 Text="{x:Static resource:AppResources.ShareSlatepackMessageAsFile}"
-                TextColor="White" />
-            <Button
-                Margin="50,0,50,0"
-                BackgroundColor="#191919"
-                Command="{Binding FinalizeTransactionCommand}"
-                CornerRadius="5"
-                HeightRequest="44"
-                Text="{x:Static resource:AppResources.FinalizeTransaction}"
                 TextColor="Yellow" />
+
             <Button
                 Margin="50,0,50,20"
                 BackgroundColor="#191919"

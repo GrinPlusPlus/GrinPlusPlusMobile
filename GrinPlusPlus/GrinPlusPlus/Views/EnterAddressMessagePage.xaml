@@ -11,58 +11,55 @@
     Title="{x:Static resource:AppResources.Address}"
     prism:ViewModelLocator.AutowireViewModel="True"
     sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromRight"
-    BackgroundColor="{StaticResource BackgroundColor}">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Color x:Key="BackgroundColor">#000000</Color>
-        </ResourceDictionary>
-    </ContentPage.Resources>
+    BackgroundColor="Black">
     <ContentPage.Content>
-        <StackLayout
-            Margin="20,20,20,0"
-            Spacing="10"
-            VerticalOptions="FillAndExpand">
+        <StackLayout Spacing="10" VerticalOptions="FillAndExpand">
             <Label
-                FontAttributes="Bold"
+                Margin="20,20,20,0"
                 Text="{x:Static resource:AppResources.Address}"
-                TextColor="LightGray"
-                TextTransform="Uppercase" />
-            <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
-                <Entry
-                    HorizontalOptions="FillAndExpand"
-                    IsSpellCheckEnabled="False"
-                    Text="{Binding Address}"
-                    TextColor="Yellow"
-                    VerticalTextAlignment="Center">
-                    <Entry.Behaviors>
-                        <behavior:AddressValidation IsValid="{Binding IsAddressValid}" />
-                    </Entry.Behaviors>
-                </Entry>
-                <Button
-                    Command="{Binding OnQRButtonClickedCommand}"
-                    ImageSource="baseline_qr_code_scanner_black_24.png"
-                    WidthRequest="44" />
-            </StackLayout>
-            <Label
-                FontAttributes="Bold"
-                Text="{x:Static resource:AppResources.Message}"
-                TextColor="LightGray"
+                TextColor="Gray"
                 TextTransform="Uppercase" />
             <Entry
+                Margin="20,0,20,0"
+                BackgroundColor="#191919"
+                HorizontalOptions="FillAndExpand"
                 IsSpellCheckEnabled="False"
-                Text="{Binding Message}"
-                TextColor="Yellow"
-                VerticalTextAlignment="Center" />
+                IsTextPredictionEnabled="False"
+                Text="{Binding Address}"
+                TextColor="White">
+                <Entry.Behaviors>
+                    <behavior:AddressValidation IsValid="{Binding IsAddressValid}" />
+                </Entry.Behaviors>
+            </Entry>
             <Button
-                Margin="50,30,50,30"
+                BackgroundColor="Yellow"
+                Command="{Binding OnQRButtonClickedCommand}"
+                HeightRequest="40"
+                HorizontalOptions="Center"
+                ImageSource="baseline_qr_code_scanner_black_24.png"
+                WidthRequest="44" />
+            <Label
+                Margin="20,20,20,0"
+                Text="{x:Static resource:AppResources.Message}"
+                TextColor="Gray"
+                TextTransform="Uppercase" />
+            <Entry
+                Margin="20,0,20,0"
+                BackgroundColor="#191919"
+                HorizontalOptions="FillAndExpand"
+                IsSpellCheckEnabled="False"
+                IsTextPredictionEnabled="False"
+                Text="{Binding Message}"
+                TextColor="White" />
+            <Button
+                Margin="50,100,50,100"
                 BackgroundColor="#191919"
                 Command="{Binding SendButtonClickedCommand}"
                 CornerRadius="5"
                 HeightRequest="44"
                 IsEnabled="{Binding IsAddressValid}"
                 Text="{x:Static resource:AppResources.Send}"
-                TextColor="Yellow"
-                VerticalOptions="EndAndExpand" />
+                TextColor="Yellow" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

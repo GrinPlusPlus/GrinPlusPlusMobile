@@ -9,12 +9,7 @@
     xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
     prism:ViewModelLocator.AutowireViewModel="True"
     sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromRight"
-    BackgroundColor="{StaticResource BackgroundColor}">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Color x:Key="BackgroundColor">#000000</Color>
-        </ResourceDictionary>
-    </ContentPage.Resources>
+    BackgroundColor="Black">
     <ContentPage.Content>
         <StackLayout
             HorizontalOptions="FillAndExpand"
@@ -22,35 +17,36 @@
             Spacing="10"
             VerticalOptions="FillAndExpand">
             <Label
-                Padding="20,10,20,0"
+                Padding="20,5,20,0"
                 FontSize="22"
                 HorizontalOptions="Start"
                 Text="{x:Static resource:AppResources.ReceiveTransaction}"
                 TextColor="White"
                 VerticalOptions="Center" />
             <BoxView
-                Margin="20,0,20,20"
+                Margin="20,0,20,10"
                 HeightRequest="1"
                 HorizontalOptions="Start"
-                WidthRequest="20"
+                WidthRequest="50"
                 Color="White" />
             <Label
-                Margin="30,0,30,0"
+                Margin="20,0,20,0"
                 Text="{x:Static resource:AppResources.SlatepackMessage}"
-                TextColor="#2f2f2f"
+                TextColor="Gray"
                 TextTransform="Uppercase" />
             <Editor
-                Margin="20,0,20,20"
+                Margin="20,0,20,40"
                 AutoSize="Disabled"
                 BackgroundColor="#191919"
-                FontSize="Body"
+                CharacterSpacing="1"
+                FontSize="14"
                 HeightRequest="150"
                 IsSpellCheckEnabled="False"
                 IsTextPredictionEnabled="False"
                 Text="{Binding SlatepackMessage}"
-                TextColor="Yellow" />
+                TextColor="LightGray" />
             <Button
-                Margin="30,0,30,0"
+                Margin="50,0,50,0"
                 BackgroundColor="#191919"
                 Command="{Binding PasteFromClipboardCommand}"
                 CornerRadius="5"
@@ -59,7 +55,7 @@
                 Text="{x:Static resource:AppResources.PasteFromClipboard}"
                 TextColor="White" />
             <Button
-                Margin="30,0,30,0"
+                Margin="50,0,50,0"
                 BackgroundColor="#191919"
                 Command="{Binding LoadFromFileCommand}"
                 CornerRadius="5"
@@ -68,7 +64,7 @@
                 Text="{x:Static resource:AppResources.LoadFromFile}"
                 TextColor="White" />
             <Button
-                Margin="30,0,30,0"
+                Margin="50,0,50,0"
                 BackgroundColor="#191919"
                 Command="{Binding ScanQRCodeCommand}"
                 CornerRadius="5"
@@ -76,24 +72,15 @@
                 ImageSource="baseline_qr_code_white_18.png"
                 Text="{x:Static resource:AppResources.ScanQRCode}"
                 TextColor="White" />
-            <StackLayout Spacing="10" VerticalOptions="EndAndExpand">
-                <Button
-                    Margin="30,0,30,20"
-                    BackgroundColor="#191919"
-                    Command="{Binding ReceiveCommand}"
-                    CornerRadius="5"
-                    HeightRequest="44"
-                    Text="{x:Static resource:AppResources.Receive}"
-                    TextColor="Yellow" />
-                <Button
-                    Margin="30,0,30,20"
-                    BackgroundColor="#191919"
-                    Command="{Binding CancelCommand}"
-                    CornerRadius="5"
-                    HeightRequest="44"
-                    Text="{x:Static resource:AppResources.Cancel}"
-                    TextColor="Yellow" />
-            </StackLayout>
+            <Button
+                Margin="50,0,50,20"
+                BackgroundColor="#191919"
+                Command="{Binding ReceiveTransactionCommand}"
+                CornerRadius="5"
+                HeightRequest="44"
+                Text="{x:Static resource:AppResources.Receive}"
+                TextColor="Yellow"
+                VerticalOptions="EndAndExpand" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

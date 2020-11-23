@@ -6,8 +6,25 @@
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
-    xmlns:zxcm="clr-namespace:ZXing.Common;assembly=zxing"
-    xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
-    prism:ViewModelLocator.AutowireViewModel="True">
-    <ContentPage.Content />
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="Black">
+    <ContentPage.Content>
+        <StackLayout
+            HorizontalOptions="Center"
+            Spacing="20"
+            VerticalOptions="Center">
+            <Label
+                FontSize="Large"
+                Text="{x:Static resource:AppResources.SendingPleaseWait}"
+                TextColor="White" />
+            <ActivityIndicator
+                IsRunning="true"
+                WidthRequest="50"
+                Color="Yellow" />
+            <Label
+                FontSize="Large"
+                Text="{Binding ExceptionMessage}"
+                TextColor="Red" />
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>

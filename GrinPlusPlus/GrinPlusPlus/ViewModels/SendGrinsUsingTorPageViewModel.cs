@@ -4,6 +4,7 @@ using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
 using System;
+using System.Linq;
 using Xamarin.Essentials;
 
 namespace GrinPlusPlus.ViewModels
@@ -15,13 +16,6 @@ namespace GrinPlusPlus.ViewModels
         {
             get { return _amount; }
             set { SetProperty(ref _amount, value); }
-        }
-
-        private string[] _inputs;
-        public string[] Inputs
-        {
-            get { return _inputs; }
-            set { SetProperty(ref _inputs, value); }
         }
 
         private string _address = "";
@@ -60,6 +54,12 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _exceptionMessage, value); }
         }
 
+        private bool _sendMax = false;
+        public bool SendMax
+        {
+            get { return _sendMax; }
+            set { SetProperty(ref _sendMax, value); }
+        }
 
         public SendGrinsUsingTorPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
@@ -83,19 +83,26 @@ namespace GrinPlusPlus.ViewModels
                 Message = (string)parameters["message"];
             }
 
-            if (parameters.ContainsKey("inputs"))
+            if (parameters.ContainsKey("max"))
             {
-                var inputs = (string)parameters["inputs"];
-                Inputs = inputs.Split(',');
+                SendMax = (bool)parameters["max"];
             }
 
-            if (!string.IsNullOrEmpty(Address) && Inputs.Length > 0 && Amount > 0)
+            if (!string.IsNullOrEmpty(Address) && Amount > 0)
             {
                 MainThread.BeginInvokeOnMainThread(async () =>
                 {
                     try
                     {
-                        //SendingResponse = await DataProvider.SendGrins(await SecureStorage.GetAsync("token"), Address, Amount, Inputs);
+                        string token = await SecureStorage.GetAsync("token");
+                        SendingResponse = await DataProvider.SendGrins(token, Address, Amount, Message, null, "SMALLEST", SendMax);
+                        if(SendingResponse.Status.ToLower().Equals("finalized"))
+                        {
+                            await NavigationService.GoBackToRootAsync();
+                        } else
+                        {
+                            await NavigationService.NavigateAsync("SendGrinsUsingQRPage", new NavigationParameters { { "sending_response", SendingResponse } });
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -104,6 +111,14 @@ namespace GrinPlusPlus.ViewModels
                     IsBusy = false;
                 });
             }
+        }
+
+        public override void OnNavigatedFrom(INavigationParameters parameters)
+        {
+            var formsNav = ((Prism.Common.IPageAware)NavigationService).Page.Navigation;
+            var pageType = PageNavigationRegistry.GetPageType("SendGrinsUsingTorPage");
+            var page = formsNav.NavigationStack.LastOrDefault(p => p.GetType() == pageType) ?? formsNav.ModalStack.LastOrDefault(p => p.GetType() == pageType);
+            formsNav.RemovePage(page);
         }
     }
 }

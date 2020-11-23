@@ -27,6 +27,7 @@
         <StackLayout VerticalOptions="FillAndExpand">
             <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                 <Label
+                    FontAttributes="Bold"
                     FontSize="12"
                     HorizontalOptions="Center"
                     Text="{Binding SpendableLabel}"
@@ -43,7 +44,7 @@
                     FontSize="Medium"
                     HorizontalOptions="Center"
                     Text="{x:Static resource:AppResources.Fee}"
-                    TextColor="#2f2f2f"
+                    TextColor="Gray"
                     TextTransform="Uppercase" />
                 <Label HorizontalOptions="Center" TextColor="White">
                     <Label.FormattedText>

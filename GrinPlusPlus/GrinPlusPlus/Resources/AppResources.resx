@@ -309,11 +309,14 @@
   <data name="Sending" xml:space="preserve">
     <value>Sending</value>
   </data>
+  <data name="SendingPleaseWait" xml:space="preserve">
+    <value>Sending, please wait...</value>
+  </data>
   <data name="Sent" xml:space="preserve">
     <value>Sent</value>
   </data>
   <data name="SetAmount" xml:space="preserve">
-    <value>Set the amount to send</value>
+    <value>Set Amount</value>
   </data>
   <data name="Share" xml:space="preserve">
     <value>Share</value>

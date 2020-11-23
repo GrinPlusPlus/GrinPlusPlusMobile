@@ -149,9 +149,9 @@ namespace GrinPlusPlus.Api
             return new FeeEstimation() { Fee = estimation.Fee, Inputs = estimationInputs };
         }
 
-        public async Task<SendingResponse> SendGrins(string token, string address, double amount, string[] inputs, string message = "", string strategy = "SMALLEST")
+        public async Task<SendingResponse> SendGrins(string token, string address, double amount, string message = "", string[] inputs = null, string strategy = "SMALLEST", bool max = false)
         {
-            var response = await Service.Owner.Instance.SendCoins(token, address, amount, strategy, inputs, message);
+            var response = await Service.Owner.Instance.SendCoins(token, address, amount, message, inputs, strategy, max);
             return new SendingResponse() { Error = response.Error, Slatepack = response.Slatepack, Status = response.Status };
         }
 

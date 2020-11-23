@@ -22,13 +22,6 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _fee, value); }
         }
 
-        private string[] _inputs;
-        public string[] Inputs
-        {
-            get { return _inputs; }
-            set { SetProperty(ref _inputs, value); }
-        }
-
         private string _address = "";
         public string Address
         {
@@ -43,9 +36,16 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _message, value); }
         }
 
-        public DelegateCommand UsingTorButtonClickedCommand => new DelegateCommand(UsingTorButtonClicked);
+        private bool _sendMax = false;
+        public bool SendMax
+        {
+            get { return _sendMax; }
+            set { SetProperty(ref _sendMax, value); }
+        }
 
-        async void UsingTorButtonClicked()
+        public DelegateCommand SendUsingTorCommand => new DelegateCommand(SendUsingTor);
+
+        async void SendUsingTor()
         {
             await NavigationService.NavigateAsync("SendGrinsUsingTorPage",
                 new NavigationParameters
@@ -53,37 +53,7 @@ namespace GrinPlusPlus.ViewModels
                     { "address", Address },
                     { "message", string.IsNullOrEmpty(Message) ? "" : Message },
                     { "amount", Amount },
-                    { "inputs", Inputs }
-                }
-            );
-        }
-
-        public DelegateCommand UsingSlatepackButtonClickedCommand => new DelegateCommand(UsingSlatepackButtonClicked);
-
-        async void UsingSlatepackButtonClicked()
-        {
-            await NavigationService.NavigateAsync("SendGrinsUsingQRPage",
-                new NavigationParameters
-                {
-                    { "address", Address },
-                    { "message", string.IsNullOrEmpty(Message) ? "" : Message },
-                    { "amount", Amount },
-                    { "inputs", Inputs }
-                }
-            );
-        }
-
-        public DelegateCommand UsingNFCButtonClickedCommand => new DelegateCommand(UsingNFCButtonClicked);
-
-        async void UsingNFCButtonClicked()
-        {
-            await NavigationService.NavigateAsync("SendGrinsUsingNFCPage",
-                new NavigationParameters
-                {
-                    { "address", Address },
-                    { "message", string.IsNullOrEmpty(Message) ? "" : Message },
-                    { "amount", Amount },
-                    { "inputs", Inputs }
+                    { "max", SendMax }
                 }
             );
         }
@@ -114,16 +84,16 @@ namespace GrinPlusPlus.ViewModels
             {
                 Message = (string)parameters["message"];
             }
-
-            if (parameters.ContainsKey("inputs"))
+            
+            if (parameters.ContainsKey("max"))
             {
-                Inputs = (string[])parameters["inputs"];
+                SendMax = (bool)parameters["max"];
             }
         }
 
-        public DelegateCommand CancelButtonClickedCommand => new DelegateCommand(CancelButtonClicked);
+        public DelegateCommand CancelCommand => new DelegateCommand(Cancel);
 
-        async void CancelButtonClicked()
+        async void Cancel()
         {
             await NavigationService.GoBackToRootAsync();
         }

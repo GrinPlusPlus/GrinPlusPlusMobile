@@ -74,15 +74,18 @@ namespace GrinPlusPlus.ViewModels
             try
             {
                 var finalized = await DataProvider.FinalizeTransaction(await SecureStorage.GetAsync("token"), SlatepackMessage);
-                if (finalized)
-                {
-                    await NavigationService.GoBackToRootAsync();
-                }
+                await NavigationService.GoBackToRootAsync();
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
             }
+        }
+
+        public DelegateCommand CloseScreenCommand => new DelegateCommand(CloseScreen);
+        private async void CloseScreen()
+        {
+            await NavigationService.GoBackToRootAsync();
         }
 
         public FinalizeTransactionPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)

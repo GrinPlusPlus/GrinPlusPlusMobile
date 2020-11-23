@@ -1,9 +1,11 @@
 ﻿using GrinPlusPlus.Api;
+using GrinPlusPlus.Models;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using Xamarin.Essentials;
@@ -42,6 +44,16 @@ namespace GrinPlusPlus.ViewModels
             {
                 try
                 {
+                    /*var customFileType =
+                        new FilePickerFileType(new Dictionary<DevicePlatform, IEnumerable<string>>
+                        {
+                            { DevicePlatform.Android, new[] { "text/plain" } },
+                        });
+                    var options = new PickOptions
+                    {
+                        PickerTitle = ".slate",
+                        FileTypes = customFileType,
+                    };*/
                     var result = await FilePicker.PickAsync();
                     if (result != null)
                     {
@@ -60,21 +72,14 @@ namespace GrinPlusPlus.ViewModels
             });
         }
 
-        public DelegateCommand CancelCommand => new DelegateCommand(Cancel);
-
-        async void Cancel()
-        {
-            await NavigationService.GoBackToRootAsync();
-        }
-
         public DelegateCommand ReceiveTransactionCommand => new DelegateCommand(ReceiveTransaction);
 
         async void ReceiveTransaction()
         {
             try
             {
-                await DataProvider.ReceiveTransaction(await SecureStorage.GetAsync("token"), SlatepackMessage);
-                await NavigationService.GoBackToRootAsync();
+                ReceivingResponse response = await DataProvider.ReceiveTransaction(await SecureStorage.GetAsync("token"), SlatepackMessage);
+                await NavigationService.NavigateAsync("ShareSlatepackMessagePage", new NavigationParameters { { "receiving_response", response } });
             }
             catch (Exception ex)
             {

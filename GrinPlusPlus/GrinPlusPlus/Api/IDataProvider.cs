@@ -20,7 +20,7 @@ namespace GrinPlusPlus.Api
 
         Task<FeeEstimation> EstimateFee(string token, double amount, string message = "", string strategy = "SMALLEST", string[] inputs = null);
 
-        Task<SendingResponse> SendGrins(string token, string address, double amount, string[] inputs, string message = "", string strategy = "SMALLEST");
+        Task<SendingResponse> SendGrins(string token, string address, double amount, string message = "", string[] inputs = null, string strategy = "SMALLEST", bool max = false);
 
         Task<ReceivingResponse> ReceiveTransaction(string token, string slatepack);
 

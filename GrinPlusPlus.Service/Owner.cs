@@ -293,7 +293,7 @@ namespace GrinPlusPlus.Service
                 {"selection_strategy",
                     new Dictionary<string, object>(){
                         { "strategy", strategy },
-                        { "inputs", strategy == "SMALLEST" && inputs.Length > 0? new string[] { } : inputs },
+                        { "inputs", strategy == "SMALLEST" ? new string[] { } : inputs },
                     }
                 },
                 {"message", message }
@@ -317,7 +317,8 @@ namespace GrinPlusPlus.Service
             throw new Exception(response.Error.Message);
         }
 
-        public async Task<Models.Actions.Coins.Send> SendCoins(string token, string address, double amount, string strategy, string[] inputs, string message)
+        public async Task<Models.Actions.Coins.Send> SendCoins(string token, string address, double amount, string message = "",
+                                                               string[] inputs = null, string strategy = "SMALLEST", bool max = false)
         {
             RpcClient client = new RpcClient(new Uri(RPCUrl));
 
@@ -325,6 +326,7 @@ namespace GrinPlusPlus.Service
                 {"session_token", token},
                 {"amount", amount * Math.Pow(10, 9) },
                 {"fee_base", 1000000 },
+                {"change_outputs ", 1 },
                 {"selection_strategy",
                     new Dictionary<string, object>(){
                         { "strategy", strategy },
@@ -339,6 +341,13 @@ namespace GrinPlusPlus.Service
                 }
             };
 
+            // the user wants to send the max amount
+            if (max)
+            {
+                payload.Remove("amount");
+                payload.Add("change_outputs ", 0);
+            }
+
             RpcRequest request = RpcRequest.WithParameterMap("send", payload,
                 new RpcId(Guid.NewGuid().ToString()));
             RpcResponse response = await client.SendRequestAsync(request);
@@ -346,10 +355,10 @@ namespace GrinPlusPlus.Service
             if (!response.HasError)
             {
                 string content = ((string)response.Result).Trim();
-                if (!string.IsNullOrEmpty(content))
+                return JsonConvert.DeserializeObject<Models.Actions.Coins.Send>(content, new JsonSerializerSettings
                 {
-                    return JsonConvert.DeserializeObject<Models.Actions.Coins.Send>(content);
-                }
+                    MissingMemberHandling = MissingMemberHandling.Ignore
+                });
             }
 
             throw new Exception(response.Error.Message);
@@ -362,23 +371,19 @@ namespace GrinPlusPlus.Service
             var payload = new Dictionary<string, object>(){
                 {"session_token", token},
                 {"slatepack", slatepack },
-                {"post_tx", new Dictionary<string, object>(){
-                        { "method", "STEM" },
-                    }
-                }
             };
 
-            RpcRequest request = RpcRequest.WithParameterMap("send", payload,
+            RpcRequest request = RpcRequest.WithParameterMap("receive", payload,
                 new RpcId(Guid.NewGuid().ToString()));
             RpcResponse response = await client.SendRequestAsync(request);
 
             if (!response.HasError)
             {
                 string content = ((string)response.Result).Trim();
-                if (!string.IsNullOrEmpty(content))
+                return JsonConvert.DeserializeObject<Models.Actions.Coins.Receive>(content, new JsonSerializerSettings
                 {
-                    return JsonConvert.DeserializeObject<Models.Actions.Coins.Receive>(content);
-                }
+                    MissingMemberHandling = MissingMemberHandling.Ignore
+                });
             }
 
             throw new Exception(response.Error.Message);
@@ -397,19 +402,19 @@ namespace GrinPlusPlus.Service
                 }
             };
 
-            RpcRequest request = RpcRequest.WithParameterMap("send", payload,
+            RpcRequest request = RpcRequest.WithParameterMap("finalize", payload,
                 new RpcId(Guid.NewGuid().ToString()));
             RpcResponse response = await client.SendRequestAsync(request);
 
             if (!response.HasError)
             {
                 string content = ((string)response.Result).Trim();
-                if (!string.IsNullOrEmpty(content))
-                {
-                    Models.Actions.Transaction.Finalize finalizeResponse =
-                        JsonConvert.DeserializeObject<Models.Actions.Transaction.Finalize>(content);
-                    return finalizeResponse.Status.Trim().ToLower().Equals("finalized");
-                }
+                Models.Actions.Transaction.Finalize finalizeResponse =
+                    JsonConvert.DeserializeObject<Models.Actions.Transaction.Finalize>(content, new JsonSerializerSettings
+                    {
+                        MissingMemberHandling = MissingMemberHandling.Ignore
+                    });
+                return finalizeResponse.Status.Trim().ToLower().Equals("finalized");
             }
 
             throw new Exception(response.Error.Message);

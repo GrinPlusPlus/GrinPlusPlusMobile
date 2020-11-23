@@ -2,9 +2,9 @@
 
 namespace GrinPlusPlus.Views
 {
-    public partial class SendGrinsUsingNFCPage : ContentPage
+    public partial class ShareSlatepackMessagePage : ContentPage
     {
-        public SendGrinsUsingNFCPage()
+        public ShareSlatepackMessagePage()
         {
             InitializeComponent();
         }

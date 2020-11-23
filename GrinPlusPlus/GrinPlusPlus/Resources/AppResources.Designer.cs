@@ -637,6 +637,15 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sending, please wait....
+        /// </summary>
+        internal static string SendingPleaseWait {
+            get {
+                return ResourceManager.GetString("SendingPleaseWait", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sent.
         /// </summary>
         internal static string Sent {
@@ -646,7 +655,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Set the amount to send.
+        ///   Looks up a localized string similar to Set Amount.
         /// </summary>
         internal static string SetAmount {
             get {

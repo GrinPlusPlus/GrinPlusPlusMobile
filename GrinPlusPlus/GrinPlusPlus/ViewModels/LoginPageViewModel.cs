@@ -21,7 +21,7 @@ namespace GrinPlusPlus.ViewModels
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
             Accounts = new ObservableCollection<Account>();
-
+            Debug.WriteLine(Battery.EnergySaverStatus);
             MainThread.BeginInvokeOnMainThread(async () =>
             {
                 try

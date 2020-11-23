@@ -52,7 +52,7 @@ namespace GrinPlusPlus.Service.Models
                 [JsonProperty("status")]
                 public string Status { get; set; }
 
-                [JsonProperty("error", Required = Required.AllowNull)]
+                [JsonProperty("error")]
                 public string Error { get; set; }
             }
 
@@ -64,7 +64,7 @@ namespace GrinPlusPlus.Service.Models
                 [JsonProperty("status")]
                 public string Status { get; set; }
 
-                [JsonProperty("error", Required = Required.AllowNull)]
+                [JsonProperty("error")]
                 public string Error { get; set; }
             }
         }
