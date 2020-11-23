@@ -430,6 +430,15 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Node.
+        /// </summary>
+        internal static string Node {
+            get {
+                return ResourceManager.GetString("Node", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Without Interactivity.
         /// </summary>
         internal static string NonInteractive {

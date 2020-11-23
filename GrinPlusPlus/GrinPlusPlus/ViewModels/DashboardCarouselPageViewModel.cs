@@ -2,6 +2,7 @@
 using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
+using Xamarin.Essentials;
 
 namespace GrinPlusPlus.ViewModels
 {
@@ -17,6 +18,7 @@ namespace GrinPlusPlus.ViewModels
         public DashboardCarouselPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
+            Preferences.Set("loggedIn", true);
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)

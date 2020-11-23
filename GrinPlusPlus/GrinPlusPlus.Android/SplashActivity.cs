@@ -82,7 +82,6 @@ namespace GrinPlusPlus.Droid
 						library.SetReadable(true);
 						library.SetWritable(true, true);
 						library.SetExecutable(true);
-
 					}
 				}
 			}

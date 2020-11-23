@@ -7,12 +7,23 @@ using Prism.Services.Dialogs;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Threading;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace GrinPlusPlus.ViewModels
 {
     public class LoginPageViewModel : ViewModelBase
     {
+        private CancellationTokenSource _cancellation;
+
+        private string _syncStatus = "";
+        public string SyncStatus
+        {
+            get { return _syncStatus.ToUpper(); }
+            set { SetProperty(ref _syncStatus, value); }
+        }
+
         public ObservableCollection<Account> Accounts { get; set; }
 
         public DelegateCommand<string> AccountNameClickedCommand => new DelegateCommand<string>(AccountNameClicked);
@@ -21,7 +32,7 @@ namespace GrinPlusPlus.ViewModels
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
             Accounts = new ObservableCollection<Account>();
-            Debug.WriteLine(Battery.EnergySaverStatus);
+
             MainThread.BeginInvokeOnMainThread(async () =>
             {
                 try
@@ -35,6 +46,25 @@ namespace GrinPlusPlus.ViewModels
                 {
                     Debug.WriteLine(ex.Message);
                 }
+            });
+
+            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            {
+                if (Preferences.Get("loggedIn", false)) return false;
+
+                MainThread.BeginInvokeOnMainThread(async () =>
+                {
+                    try
+                    {
+                        SyncStatus = (await DataProvider.GetNodeStatus()).SyncStatus;
+                        Debug.WriteLine(SyncStatus);
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(ex.Message);
+                    }
+                });
+                return true;
             });
         }
 

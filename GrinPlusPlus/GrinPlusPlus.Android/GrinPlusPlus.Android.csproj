@@ -353,9 +353,6 @@
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\torrc.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="lib\arm64\" />
   </ItemGroup>
   <ItemGroup>

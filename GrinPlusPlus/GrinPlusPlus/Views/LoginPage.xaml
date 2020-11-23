@@ -105,6 +105,12 @@
                     IsEnabled="{Binding IsActive}"
                     Text="{x:Static resource:AppResources.RestoreExistingWallet}"
                     TextColor="Yellow" />
+                <StackLayout HorizontalOptions="End" Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Bold"
+                        Text="{Binding SyncStatus}"
+                        TextColor="White" />
+                </StackLayout>
             </StackLayout>
         </Grid>
     </ContentPage.Content>
