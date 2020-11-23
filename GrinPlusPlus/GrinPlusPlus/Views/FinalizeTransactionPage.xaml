@@ -57,15 +57,6 @@
             <Button
                 Margin="50,0,50,0"
                 BackgroundColor="#191919"
-                Command="{Binding LoadFromFileCommand}"
-                CornerRadius="5"
-                HeightRequest="44"
-                ImageSource="baseline_note_add_white_18.png"
-                Text="{x:Static resource:AppResources.LoadFromFile}"
-                TextColor="White" />
-            <Button
-                Margin="50,0,50,0"
-                BackgroundColor="#191919"
                 Command="{Binding ScanQRCodeCommand}"
                 CornerRadius="5"
                 HeightRequest="44"

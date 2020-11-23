@@ -63,14 +63,6 @@
             <Button
                 Margin="50,0,50,0"
                 BackgroundColor="#191919"
-                Command="{Binding ShareSlatepackMessageAsFileCommand}"
-                CornerRadius="5"
-                HeightRequest="44"
-                Text="{x:Static resource:AppResources.ShareSlatepackMessageAsFile}"
-                TextColor="White" />
-            <Button
-                Margin="50,0,50,0"
-                BackgroundColor="#191919"
                 Command="{Binding FinalizeTransactionCommand}"
                 CornerRadius="5"
                 HeightRequest="44"

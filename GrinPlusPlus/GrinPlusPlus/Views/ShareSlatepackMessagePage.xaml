@@ -61,15 +61,6 @@
                 Text="{x:Static resource:AppResources.ShareSlatepackMessage}"
                 TextColor="Yellow" />
             <Button
-                Margin="50,0,50,0"
-                BackgroundColor="#191919"
-                Command="{Binding ShareSlatepackMessageAsFileCommand}"
-                CornerRadius="5"
-                HeightRequest="44"
-                Text="{x:Static resource:AppResources.ShareSlatepackMessageAsFile}"
-                TextColor="Yellow" />
-
-            <Button
                 Margin="50,0,50,20"
                 BackgroundColor="#191919"
                 Command="{Binding CloseScreenCommand}"

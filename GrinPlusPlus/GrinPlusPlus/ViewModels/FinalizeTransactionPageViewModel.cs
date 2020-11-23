@@ -34,32 +34,6 @@ namespace GrinPlusPlus.ViewModels
             SlatepackMessage = await Clipboard.GetTextAsync();
         }
 
-        public DelegateCommand LoadFromFileCommand => new DelegateCommand(LoadFromFile);
-
-        private void LoadFromFile()
-        {
-            MainThread.BeginInvokeOnMainThread(async () =>
-            {
-                try
-                {
-                    var result = await FilePicker.PickAsync();
-                    if (result != null)
-                    {
-                        if (result.FileName.EndsWith("slate", StringComparison.OrdinalIgnoreCase))
-                        {
-                            var stream = await result.OpenReadAsync();
-                            StreamReader reader = new StreamReader(stream);
-                            SlatepackMessage = reader.ReadToEnd();
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex.Message);
-                }
-            });
-        }
-
         public DelegateCommand CancelCommand => new DelegateCommand(Cancel);
 
         async void Cancel()

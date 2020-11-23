@@ -36,20 +36,6 @@ namespace GrinPlusPlus.ViewModels
             });
         }
 
-        public DelegateCommand ShareSlatepackMessageAsFileCommand => new DelegateCommand(ShareSlatepackMessageAsFile);
-
-        private async void ShareSlatepackMessageAsFile()
-        {
-            var file = Path.Combine(FileSystem.CacheDirectory, "message.slate");
-            File.WriteAllText(file, ReceivingResponse.Slatepack);
-
-            await Share.RequestAsync(new ShareFileRequest
-            {
-                Title = "$grin",
-                File = new ShareFile(file)
-            });
-        }
-
         public DelegateCommand CloseScreenCommand => new DelegateCommand(CloseScreen);
 
         private async void CloseScreen()
