@@ -31,7 +31,7 @@ namespace GrinPlusPlus.Droid
 
 			FixPermissions(librariesPath);
 
-			//RunBackend();
+			RunBackend();
 		}
 
 		protected override void OnResume()
@@ -91,22 +91,6 @@ namespace GrinPlusPlus.Droid
 		protected void RunBackend()
 		{
 			Java.Lang.Runtime.GetRuntime().Exec(Path.Combine(librariesPath, "libgrin.so"));
-
-			string torrc;
-			AssetManager assets = this.Assets;
-			using (StreamReader sr = new StreamReader(assets.Open("torrc.txt")))
-			{
-				torrc = sr.ReadToEnd();
-			}
-
-			string internalStorage = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-			string torrcPath = Path.Combine(internalStorage, ".torrc");
-
-			// Write torrc to the internal storage
-			using (var streamWriter = new StreamWriter(torrcPath))
-			{
-				streamWriter.WriteLine(torrc);
-			}
 
 			Java.Lang.Runtime.GetRuntime().Exec(new string[] {
 				Path.Combine(librariesPath, "libtor.so"),
