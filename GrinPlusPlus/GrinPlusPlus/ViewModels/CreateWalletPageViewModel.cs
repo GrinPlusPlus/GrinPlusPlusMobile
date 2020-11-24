@@ -11,21 +11,28 @@ namespace GrinPlusPlus.ViewModels
 {
     public class CreateWalletPageViewModel : ViewModelBase
     {
-        private string _username;
+        private string _exceptionMessage = "";
+        public string ExceptionMessage
+        {
+            get { return _exceptionMessage; }
+            set { SetProperty(ref _exceptionMessage, value.Trim()); }
+        }
+
+        private string _username = "";
         public string Username
         {
-            get { return _username; }
+            get { return _username.Trim(); }
             set { SetProperty(ref _username, value.Trim()); }
         }
 
-        private string _password;
+        private string _password = "";
         public string Password
         {
             get { return _password; }
             set { SetProperty(ref _password, value); }
         }
 
-        private string _passwordConfirmation;
+        private string _passwordConfirmation = "";
         public string PasswordConfirmation
         {
             get { return _passwordConfirmation; }
@@ -93,7 +100,7 @@ namespace GrinPlusPlus.ViewModels
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
+                ExceptionMessage = ex.Message;
             }
         }
     }

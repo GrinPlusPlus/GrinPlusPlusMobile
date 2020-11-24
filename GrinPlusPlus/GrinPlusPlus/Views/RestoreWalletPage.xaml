@@ -13,7 +13,7 @@
         <StackLayout
             HorizontalOptions="FillAndExpand"
             Orientation="Vertical"
-            Spacing="10"
+            Spacing="8"
             VerticalOptions="FillAndExpand">
             <Label
                 Padding="20,5,20,0"
@@ -39,7 +39,7 @@
                 IsSpellCheckEnabled="False"
                 IsTextPredictionEnabled="False"
                 Text="{Binding Username}"
-                TextColor="Yellow"
+                TextColor="White"
                 VerticalTextAlignment="Center">
                 <Entry.Behaviors>
                     <behavior:UsernameValidation IsValid="{Binding IsUsernameValid}" />
@@ -58,10 +58,29 @@
                 IsSpellCheckEnabled="False"
                 IsTextPredictionEnabled="False"
                 Text="{Binding Password}"
-                TextColor="Yellow"
+                TextColor="White"
                 VerticalTextAlignment="Center">
                 <Entry.Behaviors>
                     <behavior:PasswordValidation IsValid="{Binding IsPasswordValid}" />
+                </Entry.Behaviors>
+            </Entry>
+            <Label
+                Margin="20,0,20,0"
+                Text="{x:Static resource:AppResources.ConfirmPassword}"
+                TextColor="Gray"
+                TextTransform="Uppercase" />
+            <Entry
+                Margin="20,0,20,20"
+                BackgroundColor="#191919"
+                IsEnabled="{Binding IsPasswordValid}"
+                IsPassword="True"
+                IsSpellCheckEnabled="False"
+                IsTextPredictionEnabled="False"
+                Text="{Binding PasswordConfirmation}"
+                TextColor="White"
+                VerticalTextAlignment="Center">
+                <Entry.Behaviors>
+                    <behavior:PasswordConfirmationValidation CompareWith="{Binding Password}" IsValid="{Binding IsPasswordConfirmationValid}" />
                 </Entry.Behaviors>
             </Entry>
             <Label
@@ -70,18 +89,23 @@
                 TextColor="Gray"
                 TextTransform="Uppercase" />
             <Editor
-                Margin="20,0,20,20"
+                Margin="20,0,20,0"
                 AutoSize="Disabled"
                 BackgroundColor="#191919"
                 FontSize="Body"
-                HeightRequest="150"
-                IsEnabled="{Binding IsPasswordValid}"
+                HeightRequest="100"
+                IsEnabled="{Binding IsPasswordConfirmationValid}"
                 IsSpellCheckEnabled="False"
                 IsTextPredictionEnabled="False"
                 Text="{Binding WalletSeed}"
-                TextColor="Yellow" />
+                TextColor="White" />
+            <Label
+                Margin="20,0,20,0"
+                Text="{Binding ExceptionMessage}"
+                TextColor="Red"
+                TextTransform="Uppercase" />
             <Button
-                Margin="50,10,50,100"
+                Margin="50,10,50,20"
                 BackgroundColor="#191919"
                 Command="{Binding RestoreWalletCommand}"
                 CornerRadius="5"

@@ -13,7 +13,7 @@
         <StackLayout
             HorizontalOptions="FillAndExpand"
             Orientation="Vertical"
-            Spacing="10"
+            Spacing="8"
             VerticalOptions="FillAndExpand">
             <Label
                 Padding="20,5,20,0"
@@ -83,8 +83,13 @@
                     <behavior:PasswordConfirmationValidation CompareWith="{Binding Password}" IsValid="{Binding IsPasswordConfirmationValid}" />
                 </Entry.Behaviors>
             </Entry>
+            <Label
+                Margin="20,0,20,0"
+                Text="{Binding ExceptionMessage}"
+                TextColor="Red"
+                TextTransform="Uppercase" />
             <Button
-                Margin="50,10,50,100"
+                Margin="50,10,50,80"
                 BackgroundColor="#191919"
                 Command="{Binding CreateWalletCommand}"
                 CornerRadius="5"

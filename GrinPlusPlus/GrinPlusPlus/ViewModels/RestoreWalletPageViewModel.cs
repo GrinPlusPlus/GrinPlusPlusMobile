@@ -3,33 +3,48 @@ using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
+using System;
 using Xamarin.Essentials;
 
 namespace GrinPlusPlus.ViewModels
 {
     public class RestoreWalletPageViewModel : ViewModelBase
     {
-        private string _username;
+        private string _exceptionMessage = "";
+        public string ExceptionMessage
+        {
+            get { return _exceptionMessage; }
+            set { SetProperty(ref _exceptionMessage, value.Trim()); }
+        }
+
+        private string _username = "";
         public string Username
         {
-            get { return _username; }
+            get { return _username.Trim(); }
             set { SetProperty(ref _username, value.Trim()); }
         }
 
-        private string _password;
+        private string _password = "";
         public string Password
         {
             get { return _password; }
             set { SetProperty(ref _password, value); }
         }
 
-        private string _walletSeed;
+        private string _passwordConfirmation = "";
+        public string PasswordConfirmation
+        {
+            get { return _passwordConfirmation; }
+            set { SetProperty(ref _passwordConfirmation, value); }
+        }
+
+        private string _walletSeed = "";
         public string WalletSeed
         {
             get { return _walletSeed; }
             set { 
                 SetProperty(ref _walletSeed, value.Trim()); 
-                IsFormValid = IsUsernameValid && IsPasswordValid && value.Trim().Length > 0;
+                IsFormValid = IsUsernameValid && IsPasswordConfirmationValid && IsPasswordValid && value.Trim().Split(' ').Length >= 12;
             }
         }
 
@@ -53,6 +68,16 @@ namespace GrinPlusPlus.ViewModels
             }
         }
 
+        private bool _isPasswordConfirmationValid;
+        public bool IsPasswordConfirmationValid
+        {
+            get { return _isPasswordConfirmationValid; }
+            set
+            {
+                SetProperty(ref _isPasswordConfirmationValid, value);
+            }
+        }
+
         private bool _isFormValid;
         public bool IsFormValid
         {
@@ -72,15 +97,19 @@ namespace GrinPlusPlus.ViewModels
 
         private async void RestoreWallet()
         {
-            var login = await DataProvider.RestoreWallet(Username, Password, WalletSeed);
-            if (!string.IsNullOrEmpty(login.Token))
+            try
             {
+                ExceptionMessage = string.Empty;
+                var login = await DataProvider.RestoreWallet(Username, Password, WalletSeed);
                 await SecureStorage.SetAsync("token", login.Token);
                 await SecureStorage.SetAsync("username", Username);
                 await SecureStorage.SetAsync("slatepack_address", login.SlatepackAdddress);
                 await SecureStorage.SetAsync("tor_address", login.TorAdddress);
 
                 await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/DashboardCarouselPage", new NavigationParameters { { "wallet", Username } });
+            } catch (Exception ex)
+            {
+                ExceptionMessage = ex.Message;
             }
         }
     }
