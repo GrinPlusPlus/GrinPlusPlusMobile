@@ -277,7 +277,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Fast, Private and Secure.
+        ///   Looks up a localized string similar to Fast. Private. Secure.
         /// </summary>
         internal static string FastPrivateSecure {
             get {
@@ -471,6 +471,24 @@ namespace GrinPlusPlus.Resources {
         internal static string OfflineTransaction {
             get {
                 return ResourceManager.GetString("OfflineTransaction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open.
+        /// </summary>
+        internal static string Open {
+            get {
+                return ResourceManager.GetString("Open", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open Wallet.
+        /// </summary>
+        internal static string OpenWallet {
+            get {
+                return ResourceManager.GetString("OpenWallet", resourceCulture);
             }
         }
         

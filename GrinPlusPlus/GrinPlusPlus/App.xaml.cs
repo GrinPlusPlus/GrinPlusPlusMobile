@@ -1,5 +1,4 @@
 using GrinPlusPlus.Api;
-using GrinPlusPlus.Dialogs;
 using GrinPlusPlus.ViewModels;
 using GrinPlusPlus.Views;
 using Plugin.SharedTransitions;
@@ -58,8 +57,7 @@ namespace GrinPlusPlus
             containerRegistry.RegisterForNavigation<ReceiveTransactionPage, ReceiveTransactionPageViewModel>();
             containerRegistry.RegisterForNavigation<StatusPage, StatusPageViewModel>();
             containerRegistry.RegisterForNavigation<ShareSlatepackMessagePage, ShareSlatepackMessagePageViewModel>();
-
-            containerRegistry.RegisterDialog<AccountPasswordDialogView, AccountPasswordDialogViewModel>();
+            containerRegistry.RegisterForNavigation<WalletLoginPage, WalletLoginPageViewModel>();
         }
     }
 }

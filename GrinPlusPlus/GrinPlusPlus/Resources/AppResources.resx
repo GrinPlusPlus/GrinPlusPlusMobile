@@ -190,7 +190,7 @@
     <value>Receive using Proximity</value>
   </data>
   <data name="FastPrivateSecure" xml:space="preserve">
-    <value>Fast, Private and Secure</value>
+    <value>Fast. Private. Secure</value>
   </data>
   <data name="Fee" xml:space="preserve">
     <value>Fee</value>
@@ -254,6 +254,12 @@
   </data>
   <data name="OfflineTransaction" xml:space="preserve">
     <value>Text - QR Code - File </value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="OpenWallet" xml:space="preserve">
+    <value>Open Wallet</value>
   </data>
   <data name="Outputs" xml:space="preserve">
     <value>Outputs</value>

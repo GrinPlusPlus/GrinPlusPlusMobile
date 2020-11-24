@@ -67,9 +67,9 @@ namespace GrinPlusPlus.ViewModels
             });
         }
 
-        async void AccountNameClicked(string userName)
+        async void AccountNameClicked(string username)
         {
-            await DialogService.ShowDialogAsync("AccountPasswordDialogView", new DialogParameters { { "username", userName } });
+            await NavigationService.NavigateAsync("WalletLoginPage", new NavigationParameters { { "username", username } });
         }
     }
 }

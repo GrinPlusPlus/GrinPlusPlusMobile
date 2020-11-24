@@ -25,9 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Dialogs\AccountPasswordDialog.xaml.cs">
-      <DependentUpon>AccountPasswordDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Resources\AppResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -42,9 +39,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Dialogs\AccountPasswordDialog.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Resources\AppResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
@@ -98,6 +92,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\TransactionDetailsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\WalletLoginPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\WalletPage.xaml">

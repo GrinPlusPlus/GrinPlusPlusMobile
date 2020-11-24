@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="GrinPlusPlus.Views.WalletLoginPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com"
+    xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
+    xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="Black">
+    <ContentPage.Content>
+        <StackLayout
+            HorizontalOptions="FillAndExpand"
+            Orientation="Vertical"
+            Spacing="8"
+            VerticalOptions="StartAndExpand">
+            <Label
+                Padding="20,5,20,0"
+                FontSize="22"
+                HorizontalOptions="Start"
+                Text="{x:Static resource:AppResources.OpenWallet}"
+                TextColor="White"
+                VerticalOptions="Center" />
+            <BoxView
+                Margin="20,0,20,20"
+                HeightRequest="1"
+                HorizontalOptions="Start"
+                WidthRequest="50"
+                Color="White" />
+            <StackLayout Margin="0,40,0,0" VerticalOptions="Center">
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="28"
+                    HorizontalOptions="Center"
+                    Text="{Binding Username}"
+                    TextColor="Yellow"
+                    TextTransform="Uppercase"
+                    VerticalOptions="Center" />
+                <Label
+                    Margin="20,20,20,0"
+                    Text="{x:Static resource:AppResources.Password}"
+                    TextColor="Gray"
+                    TextTransform="Uppercase" />
+                <Entry
+                    Margin="20,0,20,20"
+                    BackgroundColor="#191919"
+                    IsPassword="True"
+                    IsSpellCheckEnabled="False"
+                    IsTextPredictionEnabled="False"
+                    Text="{Binding Password}"
+                    TextColor="White"
+                    VerticalTextAlignment="Center" />
+                <Label
+                    Margin="20,0,20,0"
+                    Text="{Binding ExceptionMessage}"
+                    TextColor="Red"
+                    TextTransform="Uppercase" />
+            </StackLayout>
+            <Button
+                Margin="50,10,50,80"
+                BackgroundColor="#191919"
+                Command="{Binding OpenWalletCommand}"
+                CornerRadius="5"
+                HeightRequest="44"
+                Text="{x:Static resource:AppResources.Open}"
+                TextColor="Yellow"
+                VerticalOptions="EndAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
