@@ -25,14 +25,21 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Image
+            <StackLayout
                 Grid.Row="0"
                 Grid.Column="0"
-                Margin="0,50,20,50"
-                Aspect="AspectFit"
-                HorizontalOptions="Start"
-                Source="banner.png"
-                VerticalOptions="Center" />
+                Margin="0,50,20,50">
+                <Image
+                    Aspect="AspectFit"
+                    HorizontalOptions="Start"
+                    Source="banner.png" />
+                <Label
+                    FontAttributes="Italic"
+                    FontSize="24"
+                    HorizontalOptions="Center"
+                    Text="{x:Static resource:AppResources.FastPrivateSecure}"
+                    TextColor="White" />
+            </StackLayout>
             <CollectionView
                 Grid.Row="1"
                 Grid.Column="0"
@@ -40,15 +47,6 @@
                 HorizontalOptions="Center"
                 ItemsSource="{Binding Accounts}"
                 VerticalOptions="Center">
-                <CollectionView.EmptyView>
-                    <Label
-                        Padding="0,40,0,0"
-                        FontAttributes="Italic"
-                        FontSize="24"
-                        HorizontalOptions="Center"
-                        Text="{x:Static resource:AppResources.FastPrivateSecure}"
-                        TextColor="White" />
-                </CollectionView.EmptyView>
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout
                         Orientation="Vertical"
@@ -62,11 +60,12 @@
                             Padding="0"
                             BackgroundColor="Yellow"
                             CornerRadius="5"
-                            HeightRequest="55">
+                            HeightRequest="50">
                             <Label
                                 Margin="0"
                                 Padding="0"
                                 FontAttributes="Bold"
+                                FontSize="16"
                                 HorizontalTextAlignment="Center"
                                 Text="{Binding Name}"
                                 TextColor="Black"
@@ -82,7 +81,7 @@
             <StackLayout
                 Grid.Row="2"
                 Grid.Column="0"
-                Margin="50,20,50,100"
+                Margin="50,20,50,20"
                 Spacing="20"
                 VerticalOptions="End">
                 <Button
@@ -105,12 +104,6 @@
                     IsEnabled="{Binding IsActive}"
                     Text="{x:Static resource:AppResources.RestoreExistingWallet}"
                     TextColor="Yellow" />
-                <StackLayout HorizontalOptions="End" Orientation="Horizontal">
-                    <Label
-                        FontAttributes="Bold"
-                        Text="{Binding SyncStatus}"
-                        TextColor="White" />
-                </StackLayout>
             </StackLayout>
         </Grid>
     </ContentPage.Content>

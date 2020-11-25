@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage
-    x:Class="GrinPlusPlus.Views.ReceivePage"
+    x:Class="GrinPlusPlus.Views.ProfilePage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="http://prismlibrary.com"
@@ -50,7 +50,7 @@
                 Command="{Binding CopyAddressCommand}"
                 CornerRadius="5"
                 Text="{Binding SlatepackAddress}"
-                TextColor="White"
+                TextColor="{Binding AddressColor}"
                 TextTransform="Uppercase" />
             <Label
                 HorizontalOptions="Center"

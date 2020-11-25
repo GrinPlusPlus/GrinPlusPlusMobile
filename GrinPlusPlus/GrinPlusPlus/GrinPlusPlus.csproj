@@ -11,6 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="HttpToSocks5Proxy" Version="1.4.0" />
     <PackageReference Include="Plugin.Fingerprint" Version="2.1.2" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.1709-pre4" />
     <PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.6.0-pre4" />
@@ -29,6 +30,9 @@
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ProfilePage.xaml.cs">
+      <DependentUpon>ProfilePage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\SetAmountPage.xaml.cs">
       <DependentUpon>SetAmountPage.xaml</DependentUpon>
@@ -61,7 +65,7 @@
     <EmbeddedResource Update="Views\QRScannerPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\ReceivePage.xaml">
+    <EmbeddedResource Update="Views\ProfilePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ReceiveTransactionPage.xaml">

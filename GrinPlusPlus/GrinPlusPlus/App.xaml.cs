@@ -45,7 +45,7 @@ namespace GrinPlusPlus
             containerRegistry.RegisterForNavigation<RestoreWalletPage, RestoreWalletPageViewModel>();
             containerRegistry.RegisterForNavigation<WalletPage, WalletPageViewModel>();
             containerRegistry.RegisterForNavigation<TransactionDetailsPage, TransactionDetailsPageViewModel>();
-            containerRegistry.RegisterForNavigation<ReceivePage, ReceivePageViewModel>();
+            containerRegistry.RegisterForNavigation<ProfilePage, ProfilePageViewModel>();
             containerRegistry.RegisterForNavigation<SetAmountPage, SetAmountPageViewModel>();
             containerRegistry.RegisterForNavigation<TansactionsHistoryPage, TansactionsHistoryPageViewModel>();
             containerRegistry.RegisterForNavigation<SendingGrinsPage, SendingGrinsPageViewModel>();

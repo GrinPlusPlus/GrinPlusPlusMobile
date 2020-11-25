@@ -34,7 +34,7 @@
         </Grid>
     </NavigationPage.TitleView>
     <views:WalletPage />
-    <views:ReceivePage />
+    <views:ProfilePage />
     <views:TansactionsHistoryPage />
     <views:StatusPage />
 </TabbedPage>

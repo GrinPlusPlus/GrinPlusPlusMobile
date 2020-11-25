@@ -5,9 +5,8 @@ using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
 using System;
+using System.Linq;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Threading;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -15,8 +14,6 @@ namespace GrinPlusPlus.ViewModels
 {
     public class LoginPageViewModel : ViewModelBase
     {
-        private CancellationTokenSource _cancellation;
-
         private string _syncStatus = "";
         public string SyncStatus
         {
@@ -33,33 +30,22 @@ namespace GrinPlusPlus.ViewModels
         {
             Accounts = new ObservableCollection<Account>();
 
-            MainThread.BeginInvokeOnMainThread(async () =>
-            {
-                try
-                {
-                    foreach (var account in await dataProvider.GetAccounts())
-                    {
-                        Accounts.Add(new Account() { Name = account.Name });
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex.Message);
-                }
-            });
-
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
                 MainThread.BeginInvokeOnMainThread(async () =>
                 {
                     try
                     {
-                        SyncStatus = (await DataProvider.GetNodeStatus()).SyncStatus;
-                        Debug.WriteLine(SyncStatus);
+                        foreach (var account in await DataProvider.GetAccounts())
+                        {
+                            if (!Accounts.Any(a => a.Name.Equals(account.Name))) {
+                                Accounts.Add(new Account() { Name = account.Name });
+                            }
+                        }
                     }
                     catch (Exception ex)
                     {
-                        Debug.WriteLine(ex.Message);
+                        Console.WriteLine(ex.Message);
                     }
                 });
 

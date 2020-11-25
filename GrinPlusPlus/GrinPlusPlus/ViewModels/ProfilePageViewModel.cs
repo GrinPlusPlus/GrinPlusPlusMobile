@@ -5,25 +5,40 @@ using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
 using System;
-using System.Diagnostics;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace GrinPlusPlus.ViewModels
 {
-    public class ReceivePageViewModel : ViewModelBase
+    public class ProfilePageViewModel : ViewModelBase
     {
-        private string _slatepackAddress;
+        private bool _reachable;
+        public bool Reachable
+        {
+            get { return _reachable; }
+            set { SetProperty(ref _reachable, value); }
+        }
+
+        private string _slatepackAddress = "";
         public string SlatepackAddress
         {
             get { return _slatepackAddress; }
             set { SetProperty(ref _slatepackAddress, value); }
         }
 
-        private string _torAddress;
+        private string _torAddress = "";
         public string TorAddress
         {
             get { return _torAddress; }
             set { SetProperty(ref _torAddress, value); }
+        }
+
+        private string _addressColor = "White";
+        public string AddressColor
+        {
+            get { return _addressColor; }
+            set { SetProperty(ref _addressColor, value); }
         }
 
         public DelegateCommand CopyAddressCommand => new DelegateCommand(CopyAddress);
@@ -41,13 +56,13 @@ namespace GrinPlusPlus.ViewModels
             var close = AppResources.ResourceManager.GetString("Close");
             var slatepack = AppResources.ResourceManager.GetString("SlatepackAddress");
             var tor = AppResources.ResourceManager.GetString("TorAddress");
-            
+
             var selectedMethod = await PageDialogService.DisplayActionSheetAsync(share, close, null, slatepack, tor);
             if (selectedMethod == null)
             {
                 return;
             }
-            
+
             if (selectedMethod.Equals(slatepack))
             {
                 await Share.RequestAsync(new ShareTextRequest
@@ -66,21 +81,46 @@ namespace GrinPlusPlus.ViewModels
             }
         }
 
-        public ReceivePageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
+        public ProfilePageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
             MainThread.BeginInvokeOnMainThread(async () =>
             {
-                try
-                {
-                    SlatepackAddress = await SecureStorage.GetAsync("slatepack_address");
-                    TorAddress = await SecureStorage.GetAsync("tor_address");
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex.Message);
-                }
+                SlatepackAddress = await SecureStorage.GetAsync("slatepack_address");
+                TorAddress = await SecureStorage.GetAsync("tor_address");
+                await UpdateAvailability();
             });
+
+            
+
+            Device.StartTimer(TimeSpan.FromSeconds(10), () =>
+            {
+                MainThread.BeginInvokeOnMainThread(async () =>
+                {
+                    await UpdateAvailability();
+                });
+                
+                return Preferences.Get("loggedIn", false);
+            });
+        }
+
+        async Task UpdateAvailability()
+        {
+            if (string.IsNullOrEmpty(TorAddress))
+            {
+                Reachable = false;
+                AddressColor = "Orange";
+                return;
+            }
+            try
+            {
+                Reachable = await DataProvider.CheckAddressAvailability(TorAddress);
+                AddressColor = Reachable ? "Green" : "Orange";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }

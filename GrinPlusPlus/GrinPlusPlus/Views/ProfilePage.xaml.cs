@@ -2,9 +2,9 @@
 
 namespace GrinPlusPlus.Views
 {
-    public partial class ReceivePage : ContentPage
+    public partial class ProfilePage : ContentPage
     {
-        public ReceivePage()
+        public ProfilePage()
         {
             InitializeComponent();
         }

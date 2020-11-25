@@ -10,82 +10,93 @@
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="Black"
     IconImageSource="baseline_settings_applications_white_24.png">
-    <StackLayout>
-        <Label
-            Padding="20,25,20,0"
-            FontSize="22"
-            HorizontalOptions="Start"
-            Text="{Binding Status.SyncStatus}"
-            TextColor="White"
-            VerticalOptions="Center" />
-        <BoxView
-            Margin="20,0,20,20"
-            HeightRequest="1"
-            HorizontalOptions="Start"
-            WidthRequest="50"
-            Color="White" />
-        <Grid
-            Margin="20,10,20,0"
-            ColumnSpacing="10"
-            HeightRequest="80"
-            RowSpacing="10">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*" />
-                <ColumnDefinition Width="3*" />
-                <ColumnDefinition Width="3*" />
-            </Grid.ColumnDefinitions>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Command="{prism:NavigateTo '/SharedTransitionNavigationPage/LoginPage',
+                                       UseModalNavigation=False,
+                                       Animated=True}"
+            Order="Primary"
+            Priority="0"
+            Text="{x:Static resource:AppResources.Close}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
             <Label
-                Grid.Row="0"
-                Grid.Column="0"
-                Text="{x:Static resource:AppResources.Headers}"
+                Padding="20,25,20,0"
+                FontSize="22"
+                HorizontalOptions="Start"
+                Text="{Binding Status.SyncStatus}"
+                TextColor="White"
+                VerticalOptions="Center" />
+            <BoxView
+                Margin="20,0,20,20"
+                HeightRequest="1"
+                HorizontalOptions="Start"
+                WidthRequest="50"
+                Color="White" />
+            <Grid
+                Margin="20,10,20,0"
+                ColumnSpacing="10"
+                HeightRequest="80"
+                RowSpacing="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Text="{x:Static resource:AppResources.Headers}"
+                    TextColor="Gray"
+                    TextTransform="Uppercase" />
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Text="{Binding Status.Headers}"
+                    TextColor="White" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Text="{x:Static resource:AppResources.Blocks}"
+                    TextColor="Gray"
+                    TextTransform="Uppercase" />
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Text="{Binding Status.Blocks}"
+                    TextColor="White" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Text="{x:Static resource:AppResources.Network}"
+                    TextColor="Gray"
+                    TextTransform="Uppercase" />
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Text="{Binding Status.Network}"
+                    TextColor="White" />
+            </Grid>
+            <Label
+                Margin="20,10,20,0"
+                Text="{x:Static resource:AppResources.ConnectedPeers}"
                 TextColor="Gray"
                 TextTransform="Uppercase" />
-            <Label
-                Grid.Row="1"
-                Grid.Column="0"
-                Text="{Binding Status.Headers}"
-                TextColor="White" />
-            <Label
-                Grid.Row="0"
-                Grid.Column="1"
-                Text="{x:Static resource:AppResources.Blocks}"
-                TextColor="Gray"
-                TextTransform="Uppercase" />
-            <Label
-                Grid.Row="1"
-                Grid.Column="1"
-                Text="{Binding Status.Blocks}"
-                TextColor="White" />
-            <Label
-                Grid.Row="0"
-                Grid.Column="2"
-                Text="{x:Static resource:AppResources.Network}"
-                TextColor="Gray"
-                TextTransform="Uppercase" />
-            <Label
-                Grid.Row="1"
-                Grid.Column="2"
-                Text="{Binding Status.Network}"
-                TextColor="White" />
-        </Grid>
-        <Label
-            Margin="20,10,20,0"
-            Text="{x:Static resource:AppResources.ConnectedPeers}"
-            TextColor="Gray"
-            TextTransform="Uppercase" />
-        <CollectionView Margin="20,0,20,0" ItemsSource="{Binding ConnectedPeers}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Label Text="{Binding Address}" TextColor="White" />
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-            <CollectionView.EmptyView>
-                <Label Text="-" TextColor="White" />
-            </CollectionView.EmptyView>
-        </CollectionView>
-    </StackLayout>
+            <CollectionView Margin="20,0,20,0" ItemsSource="{Binding ConnectedPeers}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Label Text="{Binding Address}" TextColor="White" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.EmptyView>
+                    <Label Text="-" TextColor="White" />
+                </CollectionView.EmptyView>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>

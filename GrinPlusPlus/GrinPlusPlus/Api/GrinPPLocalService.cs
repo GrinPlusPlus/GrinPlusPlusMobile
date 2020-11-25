@@ -1,8 +1,10 @@
 ﻿using GrinPlusPlus.Models;
+using MihaZupan;
 using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
-
 
 namespace GrinPlusPlus.Api
 {
@@ -57,7 +59,8 @@ namespace GrinPlusPlus.Api
                 {
                     foreach (var kernel in transaction.Kernels)
                     {
-                        kernels.Add(new Kernel() {
+                        kernels.Add(new Kernel()
+                        {
                             Commitment = kernel.Commitment
                         });
                     }
@@ -68,9 +71,10 @@ namespace GrinPlusPlus.Api
                 {
                     foreach (var output in transaction.Outputs)
                     {
-                        outputs.Add(new Output() { 
+                        outputs.Add(new Output()
+                        {
                             Commitment = output.Commitment,
-                            Amount =  output.Amount,
+                            Amount = output.Amount,
                             BlockHeight = output.BlockHeight,
                             KeychainPath = output.KeychainPath,
                             Label = output.Label,
@@ -179,9 +183,9 @@ namespace GrinPlusPlus.Api
         public async Task<List<Peer>> GetNodeConnectedPeers()
         {
             var peers = new List<Peer>();
-            foreach(var peer in await Service.Node.Instance.ConnectedPeers())
+            foreach (var peer in await Service.Node.Instance.ConnectedPeers())
             {
-                peers.Add(new Peer(){ Address = peer.Address, Agent = peer.Agent, Direction = peer.Direction});
+                peers.Add(new Peer() { Address = peer.Address, Agent = peer.Agent, Direction = peer.Direction });
             }
             return peers;
         }
@@ -190,6 +194,25 @@ namespace GrinPlusPlus.Api
         {
             var nodeStatus = await Service.Node.Instance.Status();
             return new NodeStatus() { SyncStatus = nodeStatus.SyncStatus, Blocks = nodeStatus.Height, Headers = nodeStatus.Chain.Height, Network = nodeStatus.Network.Height };
+        }
+
+        public async Task<bool> CheckAddressAvailability(string address)
+        {
+            var proxy = new HttpToSocks5Proxy("127.0.0.1", 3422);
+            var handler = new HttpClientHandler { Proxy = proxy };
+
+            var url = "http://grinchck.ahcbagldgzdpa74g2mh74fvk5zjzpfjbvgqin6g3mfuu66tynv2gkiid.onion/check/";
+            var parameters = new Dictionary<string, string> { { "wallet", address } };
+            var encodedContent = new FormUrlEncodedContent(parameters);
+
+            var httpclient = new HttpClient(handler, true);
+            
+            var response = await httpclient.PostAsync(url, encodedContent).ConfigureAwait(false);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                return (await response.Content.ReadAsStringAsync()).Trim().ToLower().Equals("reachable");
+            }
+            return false;
         }
     }
 }

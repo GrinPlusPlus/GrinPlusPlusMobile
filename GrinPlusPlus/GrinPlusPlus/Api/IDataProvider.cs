@@ -33,5 +33,7 @@ namespace GrinPlusPlus.Api
         Task<bool> CancelTransaction(string token, int transaction);
 
         Task<bool> RepostTransaction(string token, int transaction);
+
+        Task<bool> CheckAddressAvailability(string address);
     }
 }
