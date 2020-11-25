@@ -49,7 +49,7 @@ namespace GrinPlusPlus.ViewModels
                     }
                 });
 
-                return !Preferences.Get("loggedIn", false);
+                return !Settings.IsLoggedIn;
             });
         }
 

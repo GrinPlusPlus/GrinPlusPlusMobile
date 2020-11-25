@@ -1,8 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com"
-             prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="GrinPlusPlus.Views.InitPage">
-  
+<ContentPage
+    x:Class="GrinPlusPlus.Views.InitPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com"
+    xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
+    xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
+    x:Name="Login"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromRight"
+    BackgroundColor="Black">
+    <ContentPage.Content>
+        <StackLayout Margin="50,100,50,0">
+            <Image
+                Aspect="AspectFit"
+                HorizontalOptions="Center"
+                Source="banner.png" />
+            <Label
+                FontAttributes="Italic"
+                FontSize="24"
+                HorizontalOptions="Center"
+                Text="{x:Static resource:AppResources.FastPrivateSecure}"
+                TextColor="White" />
+            <ActivityIndicator
+                Margin="0,100,0,0"
+                HorizontalOptions="Center"
+                IsRunning="true"
+                WidthRequest="100"
+                Color="Yellow" />
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>

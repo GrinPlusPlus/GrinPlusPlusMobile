@@ -27,6 +27,11 @@ namespace GrinPlusPlus
 
             InitializeComponent();
 
+            if (Settings.FirstRun)
+            {
+                await NavigationService.NavigateAsync("InitPage");
+            }
+
             await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/LoginPage");
         }
 

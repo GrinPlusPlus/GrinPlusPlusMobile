@@ -97,7 +97,7 @@ namespace GrinPlusPlus.ViewModels
                         Console.WriteLine(ex.Message);
                     }
                 });
-                return Preferences.Get("loggedIn", false);
+                return Settings.IsLoggedIn;
             });
 
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
@@ -136,7 +136,7 @@ namespace GrinPlusPlus.ViewModels
                         Console.WriteLine(ex.Message);
                     }
                 });
-                return Preferences.Get("loggedIn", false);
+                return Settings.IsLoggedIn;
             });
         }
 

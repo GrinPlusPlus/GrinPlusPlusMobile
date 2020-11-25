@@ -157,7 +157,7 @@ namespace GrinPlusPlus.Service
             RpcClient client = new RpcClient(new Uri(RPCUrl));
 
             var payload = new Dictionary<string, object>(){
-                {"username", token},
+                {"session_token", token},
             };
 
             RpcRequest request = RpcRequest.WithParameterMap("logout", payload, new RpcId(Guid.NewGuid().ToString()));

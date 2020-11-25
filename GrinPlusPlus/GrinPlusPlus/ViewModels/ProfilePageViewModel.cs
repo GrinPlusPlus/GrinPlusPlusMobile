@@ -100,7 +100,7 @@ namespace GrinPlusPlus.ViewModels
                     await UpdateAvailability();
                 });
                 
-                return Preferences.Get("loggedIn", false);
+                return Settings.IsLoggedIn;
             });
         }
 

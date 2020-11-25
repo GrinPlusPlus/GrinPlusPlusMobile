@@ -32,7 +32,7 @@ namespace GrinPlusPlus.ViewModels
         async void Logout()
         {
             await DataProvider.DoLogout(await SecureStorage.GetAsync("token"));
-            Preferences.Set("loggedIn", false);
+            Settings.IsLoggedIn = false;
             await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/LoginPage");
         }
 
@@ -64,7 +64,7 @@ namespace GrinPlusPlus.ViewModels
                         Console.WriteLine(ex.Message);
                     }
                 });
-                return Preferences.Get("loggedIn", false);
+                return Settings.IsLoggedIn;
             });
 
             Device.StartTimer(TimeSpan.FromSeconds(5), () =>
@@ -103,7 +103,7 @@ namespace GrinPlusPlus.ViewModels
                         Console.WriteLine(ex.Message);
                     }
                 });
-                return Preferences.Get("loggedIn", false);
+                return Settings.IsLoggedIn;
             });
         }
     }

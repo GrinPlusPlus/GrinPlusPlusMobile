@@ -277,7 +277,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Fast. Private. Secure.
+        ///   Looks up a localized string similar to Fast. Private. Secure..
         /// </summary>
         internal static string FastPrivateSecure {
             get {
