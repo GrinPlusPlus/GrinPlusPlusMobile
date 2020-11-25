@@ -60,12 +60,11 @@
                             Padding="0"
                             BackgroundColor="Yellow"
                             CornerRadius="5"
-                            HeightRequest="50">
+                            HeightRequest="48">
                             <Label
                                 Margin="0"
                                 Padding="0"
                                 FontAttributes="Bold"
-                                FontSize="16"
                                 HorizontalTextAlignment="Center"
                                 Text="{Binding Name}"
                                 TextColor="Black"

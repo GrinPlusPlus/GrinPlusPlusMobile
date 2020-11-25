@@ -214,5 +214,10 @@ namespace GrinPlusPlus.Api
             }
             return false;
         }
+
+        public async Task DoLogout(string token)
+        {
+            await Service.Owner.Instance.CloseWallet(token);
+        }
     }
 }

@@ -28,14 +28,7 @@ namespace GrinPlusPlus.Models
         {
             get
             {
-                var amount = Math.Abs(AmountCredited - AmountDebited);
-                amount /= Math.Pow(10, 9);
-                string d = amount.ToString();
-                if (d.IndexOf(".") > -1)
-                {
-                    d = d.Substring(0, d.IndexOf("."));
-                }
-                return d.Replace(".", "");
+                return Helpers.GetInteger(Math.Abs(AmountCredited - AmountDebited));
             }
         }
 
@@ -43,15 +36,7 @@ namespace GrinPlusPlus.Models
         {
             get
             {
-                var amount = (double)Math.Abs(AmountCredited - AmountDebited);
-                amount /= (double)Math.Pow(10, 9);
-                string d = amount.ToString();
-                if (d.IndexOf(".") > -1)
-                {
-                    d = d.Substring(d.IndexOf("."));
-                    return d.PadRight(9, '0').Replace(".", "");
-                }
-                return ".".PadRight(10, '0').Replace(".", "");
+                return Helpers.GetDecimals(Math.Abs(AmountCredited - AmountDebited));
             }
         }
 

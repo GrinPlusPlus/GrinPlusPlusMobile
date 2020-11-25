@@ -1,11 +1,11 @@
 ﻿using GrinPlusPlus.Api;
 using GrinPlusPlus.Models;
+using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
 using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -26,6 +26,14 @@ namespace GrinPlusPlus.ViewModels
         {
             get { return _connectedPeers; }
             set { SetProperty(ref _connectedPeers, value); }
+        }
+        public DelegateCommand LogoutCommand => new DelegateCommand(Logout);
+
+        async void Logout()
+        {
+            await DataProvider.DoLogout(await SecureStorage.GetAsync("token"));
+            Preferences.Set("loggedIn", false);
+            await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/LoginPage");
         }
 
         public StatusPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
@@ -53,10 +61,10 @@ namespace GrinPlusPlus.ViewModels
                     }
                     catch (Exception ex)
                     {
-                        Debug.WriteLine(ex.Message);
+                        Console.WriteLine(ex.Message);
                     }
                 });
-                return true;
+                return Preferences.Get("loggedIn", false);
             });
 
             Device.StartTimer(TimeSpan.FromSeconds(5), () =>
@@ -92,10 +100,10 @@ namespace GrinPlusPlus.ViewModels
                     }
                     catch (Exception ex)
                     {
-                        Debug.WriteLine(ex.Message);
+                        Console.WriteLine(ex.Message);
                     }
                 });
-                return true;
+                return Preferences.Get("loggedIn", false);
             });
         }
     }

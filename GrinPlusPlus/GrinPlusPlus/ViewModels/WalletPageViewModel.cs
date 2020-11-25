@@ -94,10 +94,10 @@ namespace GrinPlusPlus.ViewModels
                     }
                     catch (Exception ex)
                     {
-                        Debug.WriteLine(ex.Message);
+                        Console.WriteLine(ex.Message);
                     }
                 });
-                return true;
+                return Preferences.Get("loggedIn", false);
             });
 
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
@@ -133,10 +133,10 @@ namespace GrinPlusPlus.ViewModels
                     }
                     catch (Exception ex)
                     {
-                        Debug.WriteLine(ex.Message);
+                        Console.WriteLine(ex.Message);
                     }
                 });
-                return true;
+                return Preferences.Get("loggedIn", false);
             });
         }
 

@@ -5,9 +5,7 @@ using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.Linq;
 using Xamarin.Essentials;
 
@@ -53,7 +51,7 @@ namespace GrinPlusPlus.ViewModels
                         {
                             if (!Transactions.Any(t => t.Name.Equals(group.Key)))
                             {
-                                Transactions.Add(new TransactionGroup(group.Key, 
+                                Transactions.Add(new TransactionGroup(group.Key,
                                     transactionsGroupedByDate.First(g => g.Key.Equals(group.Key)).ToList()));
                                 continue;
                             }
@@ -61,10 +59,10 @@ namespace GrinPlusPlus.ViewModels
                     }
                     catch (Exception ex)
                     {
-                        Debug.WriteLine(ex.Message);
+                        Console.WriteLine(ex.Message);
                     }
                 });
-                return true;
+                return Preferences.Get("loggedIn", false);
             });
         }
 

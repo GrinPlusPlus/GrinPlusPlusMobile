@@ -27,8 +27,6 @@ namespace GrinPlusPlus
 
             InitializeComponent();
 
-            Preferences.Set("loggedIn", false);
-
             await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/LoginPage");
         }
 
@@ -58,6 +56,7 @@ namespace GrinPlusPlus
             containerRegistry.RegisterForNavigation<StatusPage, StatusPageViewModel>();
             containerRegistry.RegisterForNavigation<ShareSlatepackMessagePage, ShareSlatepackMessagePageViewModel>();
             containerRegistry.RegisterForNavigation<WalletLoginPage, WalletLoginPageViewModel>();
+            containerRegistry.RegisterForNavigation<InitPage, InitPageViewModel>();
         }
     }
 }

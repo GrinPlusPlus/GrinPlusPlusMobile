@@ -1,22 +1,28 @@
-﻿using GrinPlusPlus.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
+﻿using System;
 
 namespace GrinPlusPlus
 {
     public static class Helpers
     {
-        public static string[] GetTransactionsListGroups(List<Transaction> transactions)
+        public static string GetInteger(double number)
         {
-            var groups = new List<string>() { };
-            foreach(Transaction transaction in transactions)
+            string d = (number / Math.Pow(10, 9)).ToString();
+            if (d.IndexOf(".") > -1)
             {
-                string date = transaction.Date.ToString();
-                groups.Add(date);
+                d = d.Substring(0, d.IndexOf("."));
             }
-            return groups.Distinct().ToArray();
+            return d.Replace(".", "");
+        }
+
+        public static string GetDecimals(double number)
+        {
+            string d = (number / Math.Pow(10, 9)).ToString();
+            if (d.IndexOf(".") > -1)
+            {
+                d = d.Substring(d.IndexOf("."));
+                return d.PadRight(9, '0').Replace(".", "");
+            }
+            return ".".PadRight(10, '0').Replace(".", "");
         }
     }
 }

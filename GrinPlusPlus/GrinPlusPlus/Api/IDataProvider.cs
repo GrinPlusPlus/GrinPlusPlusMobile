@@ -24,6 +24,8 @@ namespace GrinPlusPlus.Api
 
         Task<ReceivingResponse> ReceiveTransaction(string token, string slatepack);
 
+        Task DoLogout(string token);
+
         Task<List<Peer>> GetNodeConnectedPeers();
 
         Task<NodeStatus> GetNodeStatus();

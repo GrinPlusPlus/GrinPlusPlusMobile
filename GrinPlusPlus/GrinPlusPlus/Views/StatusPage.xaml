@@ -12,9 +12,7 @@
     IconImageSource="baseline_settings_applications_white_24.png">
     <ContentPage.ToolbarItems>
         <ToolbarItem
-            Command="{prism:NavigateTo '/SharedTransitionNavigationPage/LoginPage',
-                                       UseModalNavigation=False,
-                                       Animated=True}"
+            Command="{Binding LogoutCommand}"
             Order="Primary"
             Priority="0"
             Text="{x:Static resource:AppResources.Close}" />

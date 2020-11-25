@@ -18,12 +18,7 @@ namespace GrinPlusPlus.Models
         {
             get
             {
-                string d = (Spendable / Math.Pow(10, 9)).ToString();
-                if (d.IndexOf(".") > -1)
-                {
-                    d = d.Substring(0, d.IndexOf("."));
-                }
-                return d.Replace(".", "");
+                return Helpers.GetInteger(Spendable);
             }
         }
 
@@ -31,13 +26,7 @@ namespace GrinPlusPlus.Models
         {
             get
             {
-                string d = (Spendable / Math.Pow(10, 9)).ToString();
-                if (d.IndexOf(".") > -1)
-                {
-                    d = d.Substring(d.IndexOf("."));
-                    return d.PadRight(9, '0').Replace(".", "");
-                }
-                return ".".PadRight(10, '0').Replace(".", "");
+                return Helpers.GetDecimals(Spendable);
             }
         }
 
@@ -45,12 +34,7 @@ namespace GrinPlusPlus.Models
         {
             get
             {
-                string d = (Immature / Math.Pow(10, 9)).ToString();
-                if (d.IndexOf(".") > -1)
-                {
-                    d = d.Substring(0, d.IndexOf("."));
-                }
-                return d.Replace(".", "");
+                return Helpers.GetInteger(Immature);
             }
         }
 
@@ -58,13 +42,7 @@ namespace GrinPlusPlus.Models
         {
             get
             {
-                string d = (Immature / Math.Pow(10, 9)).ToString();
-                if (d.IndexOf(".") > -1)
-                {
-                    d = d.Substring(d.IndexOf("."));
-                    return d.PadRight(9, '0').Replace(".", "");
-                }
-                return ".".PadRight(10, '0').Replace(".", "");
+                return Helpers.GetDecimals(Immature);
             }
         }
 
@@ -72,25 +50,14 @@ namespace GrinPlusPlus.Models
         {
             get
             {
-                string d = (Unconfirmed / Math.Pow(10, 9)).ToString();
-                if (d.IndexOf(".") > -1)
-                {
-                    d = d.Substring(0, d.IndexOf("."));
-                }
-                return d.Replace(".", "");
+                return Helpers.GetInteger(Unconfirmed);
             }
         }
         public string UnconfirmedDecimals
         {
             get
             {
-                string d = (Unconfirmed / Math.Pow(10, 9)).ToString();
-                if (d.IndexOf(".") > -1)
-                {
-                    d = d.Substring(d.IndexOf("."));
-                    return d.PadRight(9, '0').Replace(".", "");
-                }
-                return ".".PadRight(10, '0').Replace(".", "");
+                return Helpers.GetDecimals(Unconfirmed);
             }
         }
 
@@ -98,25 +65,14 @@ namespace GrinPlusPlus.Models
         {
             get
             {
-                string d = (Locked / Math.Pow(10, 9)).ToString();
-                if (d.IndexOf(".") > -1)
-                {
-                    d = d.Substring(0, d.IndexOf("."));
-                }
-                return d.Replace(".", "");
+                return Helpers.GetInteger(Locked);
             }
         }
         public string LockedDecimals
         {
             get
             {
-                string d = (Locked / Math.Pow(10, 9)).ToString();
-                if (d.IndexOf(".") > -1)
-                {
-                    d = d.Substring(d.IndexOf("."));
-                    return d.PadRight(9, '0').Replace(".", "");
-                }
-                return ".".PadRight(10, '0').Replace(".", "");
+                return Helpers.GetDecimals(Locked);
             }
         }
     }
