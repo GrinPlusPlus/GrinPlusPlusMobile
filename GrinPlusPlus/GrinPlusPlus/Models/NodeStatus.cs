@@ -2,16 +2,54 @@
 
 namespace GrinPlusPlus.Models
 {
+    public class Chain
+    {
+        public string Hash { get; set; }
+
+        public int Height { get; set; }
+
+        public string PreviousHash { get; set; }
+
+        public ulong Difficulty { get; set; }
+    }
+
+    public class Network
+    {
+        public int Height { get; set; }
+
+        public int Inbound { get; set; }
+
+        public int Outbound { get; set; }
+
+        public ulong Difficulty { get; set; }
+    }
+
+    public class State
+    {
+        public int DownloadSize { get; set; }
+
+        public int Downloaded { get; set; }
+
+        public int ProcessingStatus { get; set; }
+    }
+
     public class NodeStatus
     {
-        public int Headers { get; set; }
-        public int Blocks { get; set; }
-        public int Network { get; set; }
+        public Chain Chain { get; set; }
+
+        public int HeaderHeight { get; set; }
+
+        public Network Network { get; set; }
+
+        public int ProtocolVersion { get; set; }
+
+        public State State { get; set; }
 
         private string _syncStatus;
         public string SyncStatus
         {
-            get {
+            get
+            {
                 switch (_syncStatus)
                 {
                     case "FULLY_SYNCED":
@@ -33,22 +71,52 @@ namespace GrinPlusPlus.Models
             set { _syncStatus = value; }
         }
 
-        public int GetProgressPercentage
+        public string Agent { get; set; }
+        public double ProgressPercentage
         {
             get
             {
-                if (Headers == 0 || Network == 0)
-                {
-                    return 0;
-                }
-                if (Network <= Network)
-                {
-                    return 0;
-                }
-                var result = (int)Math.Round((double)(100 * (Headers/Network)));
+                int numerator;
+                int denominator;
 
-                return result < 100 ? result : 99;
+                if (_syncStatus.Equals("SYNCING_HEADERS"))
+                {
+                    numerator = HeaderHeight;
+                    denominator = Network.Height;
+                }
+                else if (_syncStatus.Equals("DOWNLOADING_TXHASHSET"))
+                {
+                    numerator = State.Downloaded;
+                    denominator = State.DownloadSize;
+                }
+                else if (_syncStatus.Equals("SYNCING_BLOCKS"))
+                {
+                    numerator = Chain.Height;
+                    denominator = HeaderHeight;
+                }
+                
+                else if (_syncStatus.Equals("PROCESSING_TXHASHSET"))
+                {
+                    return State.ProcessingStatus;
+                }
+                else
+                {
+                    return 0;
+                }
+
+
+                if (numerator == 0 || denominator == 0)
+                {
+                    return 0;
+                }
+                if (denominator <= 0)
+                {
+                    return 0;
+                }
+
+                return (double)(((float)numerator / (float)denominator));
             }
         }
+
     }
 }

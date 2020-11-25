@@ -53,7 +53,7 @@ namespace GrinPlusPlus.ViewModels
                             Status = status;
                             return;
                         }
-                        if (!status.Blocks.Equals(Status.Blocks) || !status.Headers.Equals(Status.Headers) || !status.Network.Equals(Status.Network))
+                        if (!status.Chain.Height.Equals(Status.Chain.Height) || !status.HeaderHeight.Equals(Status.HeaderHeight) || !status.Network.Height.Equals(Status.Network.Height))
                         {
                             Status = status;
                             return;

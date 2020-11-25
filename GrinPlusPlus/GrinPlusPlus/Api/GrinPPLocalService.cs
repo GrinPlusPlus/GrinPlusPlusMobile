@@ -193,7 +193,30 @@ namespace GrinPlusPlus.Api
         public async Task<NodeStatus> GetNodeStatus()
         {
             var nodeStatus = await Service.Node.Instance.Status();
-            return new NodeStatus() { SyncStatus = nodeStatus.SyncStatus, Blocks = nodeStatus.Height, Headers = nodeStatus.Chain.Height, Network = nodeStatus.Network.Height };
+            return new NodeStatus() { 
+                Chain = new Chain { 
+                    Hash = nodeStatus.Chain.Hash,
+                    Height = nodeStatus.Chain.Height,
+                    PreviousHash = nodeStatus.Chain.PreviousHash,
+                    Difficulty = nodeStatus.Chain.Difficulty,
+                },
+                HeaderHeight = nodeStatus.HeaderHeight,
+                Network = new Network { 
+                    Height = nodeStatus.Network.Height,
+                    Inbound = nodeStatus.Network.Inbound,
+                    Outbound = nodeStatus.Network.Outbound,
+                    Difficulty = nodeStatus.Network.Difficulty,
+                },
+                ProtocolVersion = nodeStatus.ProtocolVersion,
+                State = new State()
+                {
+                    DownloadSize = nodeStatus.State.DownloadSize,
+                    Downloaded = nodeStatus.State.Downloaded,
+                    ProcessingStatus = nodeStatus.State.ProcessingStatus,
+                },
+                SyncStatus = nodeStatus.SyncStatus,
+                Agent = nodeStatus.Agent
+            };
         }
 
         public async Task<bool> CheckAddressAvailability(string address)

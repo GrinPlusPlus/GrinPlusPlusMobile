@@ -53,7 +53,7 @@ namespace GrinPlusPlus.Service.Models
             public Chain Chain { get; set; }
 
             [JsonProperty("header_height")]
-            public int Height { get; set; }
+            public int HeaderHeight { get; set; }
 
             [JsonProperty("network")]
             public Network Network { get; set; }

@@ -276,6 +276,9 @@
   <data name="PleaseConfirm" xml:space="preserve">
     <value>Please Confirm</value>
   </data>
+  <data name="PowerSaverMessage" xml:space="preserve">
+    <value>Make sure the POWER SAVER is DISABLED for this Application</value>
+  </data>
   <data name="QRCode" xml:space="preserve">
     <value>QR Code</value>
   </data>
@@ -389,6 +392,9 @@
   </data>
   <data name="UsingNFC" xml:space="preserve">
     <value>Using NFC</value>
+  </data>
+  <data name="WaitingSync" xml:space="preserve">
+    <value>Waiting for the Node to be synced</value>
   </data>
   <data name="Wallet" xml:space="preserve">
     <value>Wallet</value>

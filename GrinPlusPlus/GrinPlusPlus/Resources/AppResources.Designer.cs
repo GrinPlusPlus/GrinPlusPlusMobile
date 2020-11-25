@@ -538,6 +538,15 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Make sure the POWER SAVER is DISABLED for this Application.
+        /// </summary>
+        internal static string PowerSaverMessage {
+            get {
+                return ResourceManager.GetString("PowerSaverMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to QR Code.
         /// </summary>
         internal static string QRCode {
@@ -876,6 +885,15 @@ namespace GrinPlusPlus.Resources {
         internal static string UsingNFC {
             get {
                 return ResourceManager.GetString("UsingNFC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting for the Node to be synced.
+        /// </summary>
+        internal static string WaitingSync {
+            get {
+                return ResourceManager.GetString("WaitingSync", resourceCulture);
             }
         }
         

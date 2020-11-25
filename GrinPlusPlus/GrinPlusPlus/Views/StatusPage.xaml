@@ -55,7 +55,7 @@
                 <Label
                     Grid.Row="1"
                     Grid.Column="0"
-                    Text="{Binding Status.Headers}"
+                    Text="{Binding Status.HeaderHeight}"
                     TextColor="White" />
                 <Label
                     Grid.Row="0"
@@ -66,7 +66,7 @@
                 <Label
                     Grid.Row="1"
                     Grid.Column="1"
-                    Text="{Binding Status.Blocks}"
+                    Text="{Binding Status.Chain.Height}"
                     TextColor="White" />
                 <Label
                     Grid.Row="0"
@@ -77,7 +77,7 @@
                 <Label
                     Grid.Row="1"
                     Grid.Column="2"
-                    Text="{Binding Status.Network}"
+                    Text="{Binding Status.Network.Height}"
                     TextColor="White" />
             </Grid>
             <Label
