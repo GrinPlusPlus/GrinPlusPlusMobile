@@ -12,11 +12,18 @@ namespace GrinPlusPlus.ViewModels
 {
     public class InitPageViewModel : ViewModelBase
     {
-        private NodeStatus status;
-        public NodeStatus Status
+        private string status = "Offline";
+        public string Status
         {
             get { return status; }
             set { SetProperty(ref status, value); }
+        }
+
+        private double _progressBar = 0;
+        public double ProgressBarr
+        {
+            get { return _progressBar; }
+            set { SetProperty(ref _progressBar, value); }
         }
 
         private int _progressPercentage = 0 ;
@@ -37,9 +44,11 @@ namespace GrinPlusPlus.ViewModels
                 {
                     try
                     {
-                        Status = await DataProvider.GetNodeStatus();
-                        ProgressPercentage = (int)Math.Round(Status.ProgressPercentage*100.0);
-                        if (Status.SyncStatus.Equals("Running"))
+                        var status = await DataProvider.GetNodeStatus();
+                        Status = status.SyncStatus;
+                        ProgressBarr = status.ProgressPercentage;
+                        ProgressPercentage = (int)Math.Round(ProgressBarr * 100.0);
+                        if (Status.Equals("Running"))
                         {
                             await Task.Delay(TimeSpan.FromSeconds(1));
                             await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/LoginPage");
@@ -50,9 +59,8 @@ namespace GrinPlusPlus.ViewModels
                         Console.WriteLine(ex.Message);
                     }
                 });
-
-                var status = Status == null ? "offline" : Status.SyncStatus;
-                return status.Equals("Running");
+               
+                return !Status.Equals("Running");
             });
         }
 

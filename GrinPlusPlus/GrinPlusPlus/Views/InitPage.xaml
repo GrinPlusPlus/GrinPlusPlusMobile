@@ -51,9 +51,9 @@
                 FontAttributes="Bold"
                 HorizontalOptions="Center"
                 HorizontalTextAlignment="Center"
-                Text="{Binding Status.SyncStatus}"
+                Text="{Binding Status}"
                 TextColor="White" />
-            <ProgressBar Progress="{Binding Status.ProgressPercentage}" ProgressColor="Yellow" />
+            <ProgressBar Progress="{Binding ProgressBarr}" ProgressColor="Yellow" />
 
             <StackLayout Margin="0,0,0,60" VerticalOptions="EndAndExpand">
                 <Label
