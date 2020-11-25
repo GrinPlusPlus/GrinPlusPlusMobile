@@ -39,7 +39,7 @@ namespace GrinPlusPlus.ViewModels
                     {
                         Status = await DataProvider.GetNodeStatus();
                         ProgressPercentage = (int)Math.Round(Status.ProgressPercentage*100.0);
-                        if (ProgressPercentage >= 100)
+                        if (Status.SyncStatus.Equals("Running"))
                         {
                             await Task.Delay(TimeSpan.FromSeconds(1));
                             await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/LoginPage");
@@ -51,7 +51,8 @@ namespace GrinPlusPlus.ViewModels
                     }
                 });
 
-                return ProgressPercentage < 100;
+                var status = Status == null ? "offline" : Status.SyncStatus;
+                return status.Equals("Running");
             });
         }
 
