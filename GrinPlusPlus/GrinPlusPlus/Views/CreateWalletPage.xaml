@@ -95,6 +95,7 @@
             <Label
                 Margin="20,0,20,0"
                 HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
                 Text="{Binding ExceptionMessage}"
                 TextColor="Red"
                 TextTransform="Uppercase" />
