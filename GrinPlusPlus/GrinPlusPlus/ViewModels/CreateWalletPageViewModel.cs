@@ -76,6 +76,20 @@ namespace GrinPlusPlus.ViewModels
             }
         }
 
+        private bool _isBusy = false;
+        public bool IsBusy
+        {
+            get => _isBusy;
+            set => SetProperty(ref _isBusy, value);
+        }
+
+        private bool _isIdle = true;
+        public bool IsIdle
+        {
+            get => _isIdle;
+            set => SetProperty(ref _isIdle, value);
+        }
+
         public CreateWalletPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
@@ -87,6 +101,11 @@ namespace GrinPlusPlus.ViewModels
         {
             try
             {
+                ExceptionMessage = string.Empty;
+
+                IsBusy = true;
+                IsIdle = false;
+
                 var wallet = await DataProvider.CreateWallet(Username, Password, int.Parse(SeedLength));
                 if (!string.IsNullOrEmpty(wallet.Token))
                 {
@@ -101,6 +120,10 @@ namespace GrinPlusPlus.ViewModels
             catch (Exception ex)
             {
                 ExceptionMessage = ex.Message;
+            } finally
+            {
+                IsBusy = false;
+                IsIdle = true;
             }
         }
     }

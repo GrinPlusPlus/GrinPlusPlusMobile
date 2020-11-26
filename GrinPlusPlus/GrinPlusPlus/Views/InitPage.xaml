@@ -54,7 +54,6 @@
                 Text="{Binding Status}"
                 TextColor="White" />
             <ProgressBar Progress="{Binding ProgressBarr}" ProgressColor="Yellow" />
-
             <StackLayout Margin="0,0,0,60" VerticalOptions="EndAndExpand">
                 <Label
                     FontSize="Caption"

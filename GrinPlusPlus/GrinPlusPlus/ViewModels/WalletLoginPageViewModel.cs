@@ -22,17 +22,31 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _exceptionMessage, value.Trim()); }
         }
 
-        private string _username;
+        private string _username = "";
         public string Username
         {
-            get => _username;
+            get => _username.Trim();
             set => SetProperty(ref _username, value);
         }
 
-        private string _password;
+        private bool _isBusy = false;
+        public bool IsBusy
+        {
+            get => _isBusy;
+            set => SetProperty(ref _isBusy, value);
+        }
+
+        private bool _isIdle = true;
+        public bool IsIdle
+        {
+            get => _isIdle;
+            set => SetProperty(ref _isIdle, value);
+        }
+
+        private string _password = "";
         public string Password
         {
-            get => _password;
+            get => _password.Trim();
             set => SetProperty(ref _password, value);
         }
 
@@ -56,6 +70,15 @@ namespace GrinPlusPlus.ViewModels
         {
             try
             {
+                ExceptionMessage = string.Empty;
+
+                IsBusy = true;
+                IsIdle = false;
+
+                if (string.IsNullOrEmpty(Password))
+                {
+                    throw new Exception("Password can not be empty.");
+                }
                 var wallet = await DataProvider.DoLogin(Username, Password);
                 if (!string.IsNullOrEmpty(wallet.Token))
                 {
@@ -98,6 +121,11 @@ namespace GrinPlusPlus.ViewModels
             catch (Exception ex)
             {
                 ExceptionMessage = ex.Message;
+            }
+            finally
+            {
+                IsBusy = false;
+                IsIdle = true;
             }
         }
     }

@@ -91,8 +91,8 @@ namespace GrinPlusPlus.Models
                 }
                 else if (_syncStatus.Equals("SYNCING_BLOCKS"))
                 {
-                    numerator = Chain.Height;
-                    denominator = HeaderHeight;
+                    numerator = Network.Height - Chain.Height;
+                    denominator = 10080;
                 }
                 
                 else if (_syncStatus.Equals("PROCESSING_TXHASHSET"))

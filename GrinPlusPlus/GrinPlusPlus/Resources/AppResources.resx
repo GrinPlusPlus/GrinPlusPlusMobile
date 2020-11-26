@@ -186,6 +186,9 @@
   <data name="Date" xml:space="preserve">
     <value>Date</value>
   </data>
+  <data name="DeleteWallet" xml:space="preserve">
+    <value>Delete Wallet</value>
+  </data>
   <data name="EnableProximity" xml:space="preserve">
     <value>Receive using Proximity</value>
   </data>

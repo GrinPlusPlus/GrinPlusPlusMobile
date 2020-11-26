@@ -93,27 +93,32 @@
                 AutoSize="Disabled"
                 BackgroundColor="#191919"
                 FontSize="Body"
-                HeightRequest="100"
+                HeightRequest="80"
                 IsEnabled="{Binding IsPasswordConfirmationValid}"
                 IsSpellCheckEnabled="False"
                 IsTextPredictionEnabled="False"
                 Text="{Binding WalletSeed}"
                 TextColor="White" />
-            <Label
-                Margin="20,0,20,0"
-                Text="{Binding ExceptionMessage}"
-                TextColor="Red"
-                TextTransform="Uppercase" />
             <Button
-                Margin="50,10,50,20"
+                Margin="50,20,50,20"
                 BackgroundColor="#191919"
                 Command="{Binding RestoreWalletCommand}"
                 CornerRadius="5"
                 HeightRequest="44"
                 HorizontalOptions="FillAndExpand"
-                IsEnabled="{Binding IsFormValid}"
+                IsEnabled="{Binding IsIdle}"
                 Text="{x:Static resource:AppResources.Restore}"
                 TextColor="Yellow" />
+            <Label
+                Margin="20,0,20,0"
+                HorizontalOptions="Center"
+                Text="{Binding ExceptionMessage}"
+                TextColor="Red"
+                TextTransform="Uppercase" />
+            <ActivityIndicator
+                HeightRequest="40"
+                IsRunning="{Binding IsBusy}"
+                Color="Yellow" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

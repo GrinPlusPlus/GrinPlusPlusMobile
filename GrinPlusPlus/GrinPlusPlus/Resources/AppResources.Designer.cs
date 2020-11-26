@@ -268,6 +268,15 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete Wallet.
+        /// </summary>
+        internal static string DeleteWallet {
+            get {
+                return ResourceManager.GetString("DeleteWallet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Receive using Proximity.
         /// </summary>
         internal static string EnableProximity {

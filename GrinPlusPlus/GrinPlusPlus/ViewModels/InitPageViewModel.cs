@@ -1,5 +1,4 @@
 ﻿using GrinPlusPlus.Api;
-using GrinPlusPlus.Models;
 using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
@@ -26,7 +25,7 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _progressBar, value); }
         }
 
-        private int _progressPercentage = 0 ;
+        private int _progressPercentage = 0;
         public int ProgressPercentage
         {
             get { return _progressPercentage; }
@@ -46,12 +45,18 @@ namespace GrinPlusPlus.ViewModels
                     {
                         var status = await DataProvider.GetNodeStatus();
                         Status = status.SyncStatus;
-                        ProgressBarr = status.ProgressPercentage;
-                        ProgressPercentage = (int)Math.Round(ProgressBarr * 100.0);
+
                         if (Status.Equals("Running"))
                         {
+                            ProgressBarr = 1;
+                            ProgressPercentage = 100;
                             await Task.Delay(TimeSpan.FromSeconds(1));
                             await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/LoginPage");
+                        }
+                        else
+                        {
+                            ProgressBarr = status.ProgressPercentage;
+                            ProgressPercentage = (int)Math.Round(ProgressBarr * 100.0);
                         }
                     }
                     catch (Exception ex)
@@ -59,7 +64,7 @@ namespace GrinPlusPlus.ViewModels
                         Console.WriteLine(ex.Message);
                     }
                 });
-               
+
                 return !Status.Equals("Running");
             });
         }

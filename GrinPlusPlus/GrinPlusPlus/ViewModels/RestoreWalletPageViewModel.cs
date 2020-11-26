@@ -42,8 +42,9 @@ namespace GrinPlusPlus.ViewModels
         public string WalletSeed
         {
             get { return _walletSeed; }
-            set { 
-                SetProperty(ref _walletSeed, value.Trim()); 
+            set
+            {
+                SetProperty(ref _walletSeed, value.Trim());
                 IsFormValid = IsUsernameValid && IsPasswordConfirmationValid && IsPasswordValid && value.Trim().Split(' ').Length >= 12;
             }
         }
@@ -88,6 +89,20 @@ namespace GrinPlusPlus.ViewModels
             }
         }
 
+        private bool _isBusy = false;
+        public bool IsBusy
+        {
+            get => _isBusy;
+            set => SetProperty(ref _isBusy, value);
+        }
+
+        private bool _isIdle = true;
+        public bool IsIdle
+        {
+            get => _isIdle;
+            set => SetProperty(ref _isIdle, value);
+        }
+
         public RestoreWalletPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
@@ -100,6 +115,10 @@ namespace GrinPlusPlus.ViewModels
             try
             {
                 ExceptionMessage = string.Empty;
+
+                IsBusy = true;
+                IsIdle = false;
+
                 var login = await DataProvider.RestoreWallet(Username, Password, WalletSeed);
                 await SecureStorage.SetAsync("token", login.Token);
                 await SecureStorage.SetAsync("username", Username);
@@ -107,9 +126,15 @@ namespace GrinPlusPlus.ViewModels
                 await SecureStorage.SetAsync("tor_address", login.TorAdddress);
 
                 await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/DashboardCarouselPage", new NavigationParameters { { "wallet", Username } });
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 ExceptionMessage = ex.Message;
+            }
+            finally
+            {
+                IsBusy = false;
+                IsIdle = true;
             }
         }
     }

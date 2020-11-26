@@ -14,22 +14,18 @@ namespace GrinPlusPlus.ViewModels
 {
     public class LoginPageViewModel : ViewModelBase
     {
-        private string _syncStatus = "";
-        public string SyncStatus
+        private ObservableCollection<Account> _accounts = new ObservableCollection<Account>();
+        public ObservableCollection<Account> Accounts
         {
-            get { return _syncStatus.ToUpper(); }
-            set { SetProperty(ref _syncStatus, value); }
+            get { return _accounts; }
+            set { SetProperty(ref _accounts, value); }
         }
-
-        public ObservableCollection<Account> Accounts { get; set; }
 
         public DelegateCommand<string> AccountNameClickedCommand => new DelegateCommand<string>(AccountNameClicked);
 
         public LoginPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
-            Accounts = new ObservableCollection<Account>();
-
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
                 MainThread.BeginInvokeOnMainThread(async () =>
