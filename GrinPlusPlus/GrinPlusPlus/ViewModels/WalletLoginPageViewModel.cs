@@ -85,12 +85,13 @@ namespace GrinPlusPlus.ViewModels
                     await SecureStorage.SetAsync("token", wallet.Token);
                     await SecureStorage.SetAsync("username", Username);
                     await SecureStorage.SetAsync("slatepack_address", wallet.SlatepackAdddress);
-                    await SecureStorage.SetAsync("tor_address", wallet.TorAdddress);
+                    await SecureStorage.SetAsync("tor_address", wallet.TorAdddress ?? "");
 
                     if (await CrossFingerprint.Current.IsAvailableAsync(true))
                     {
                         _cancel = new CancellationTokenSource();
-                        var dialogConfig = new AuthenticationRequestConfiguration("Grin++", $"Opening {Username.ToUpper()} Wallet")
+
+                        var dialogConfig = new AuthenticationRequestConfiguration("Grin++", Username.ToUpper())
                         {
                             CancelTitle = null,
                             FallbackTitle = null,
@@ -105,17 +106,7 @@ namespace GrinPlusPlus.ViewModels
                         }
                     }
 
-                    var balance = await DataProvider.GetWalletBalance(await SecureStorage.GetAsync("token"));
-                    if (balance != null)
-                    {
-                        Preferences.Set("balance_spendable", balance.Spendable.ToString());
-                        Preferences.Set("balance_locked", balance.Locked.ToString());
-                        Preferences.Set("balance_immature", balance.Immature.ToString());
-                        Preferences.Set("balance_unconfirmed", balance.Unconfirmed.ToString());
-                        Preferences.Set("balance_total", balance.Total.ToString());
-                    }
-
-                    await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/DashboardCarouselPage", new NavigationParameters { { "wallet", Username } });
+                    await NavigationService.NavigateAsync("OpeningWalletPage");
                 }
             }
             catch (Exception ex)

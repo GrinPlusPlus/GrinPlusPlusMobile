@@ -32,10 +32,14 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _progressPercentage, value); }
         }
 
-
         public InitPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
+            Preferences.Set("balance_spendable", 0);
+            Preferences.Set("balance_locked", 0);
+            Preferences.Set("balance_immature", 0);
+            Preferences.Set("balance_unconfirmed", 0);
+            Preferences.Set("balance_total", 0);
 
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {

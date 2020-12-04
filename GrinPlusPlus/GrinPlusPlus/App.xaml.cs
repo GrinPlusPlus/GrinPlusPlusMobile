@@ -57,6 +57,7 @@ namespace GrinPlusPlus
             containerRegistry.RegisterForNavigation<ShareSlatepackMessagePage, ShareSlatepackMessagePageViewModel>();
             containerRegistry.RegisterForNavigation<WalletLoginPage, WalletLoginPageViewModel>();
             containerRegistry.RegisterForNavigation<InitPage, InitPageViewModel>();
+            containerRegistry.RegisterForNavigation<OpeningWalletPage, OpeningWalletPageViewModel>();
         }
     }
 }

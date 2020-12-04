@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace GrinPlusPlus.Models
+﻿namespace GrinPlusPlus.Models
 {
     public class Chain
     {
@@ -83,38 +81,29 @@ namespace GrinPlusPlus.Models
                 {
                     numerator = HeaderHeight;
                     denominator = Network.Height;
+
+                    return (double)(((float)numerator / (float)denominator));
                 }
                 else if (_syncStatus.Equals("DOWNLOADING_TXHASHSET"))
                 {
                     numerator = State.Downloaded;
                     denominator = State.DownloadSize;
+
+                    return (float)numerator / (float)denominator;
                 }
                 else if (_syncStatus.Equals("SYNCING_BLOCKS"))
                 {
                     numerator = Network.Height - Chain.Height;
                     denominator = 10080;
+                    return ((double)(((float)numerator / (float)denominator))) / 100;
                 }
-                
+
                 else if (_syncStatus.Equals("PROCESSING_TXHASHSET"))
                 {
-                    return State.ProcessingStatus;
-                }
-                else
-                {
-                    return 0;
+                    return State.ProcessingStatus / 100;
                 }
 
-
-                if (numerator == 0 || denominator == 0)
-                {
-                    return 0;
-                }
-                if (denominator <= 0)
-                {
-                    return 0;
-                }
-
-                return (double)(((float)numerator / (float)denominator));
+                return 0;
             }
         }
 

@@ -33,6 +33,11 @@ namespace GrinPlusPlus.ViewModels
         {
             await DataProvider.DoLogout(await SecureStorage.GetAsync("token"));
             Settings.IsLoggedIn = false;
+            Preferences.Set("balance_spendable", 0);
+            Preferences.Set("balance_locked", 0);
+            Preferences.Set("balance_immature", 0);
+            Preferences.Set("balance_unconfirmed", 0);
+            Preferences.Set("balance_total", 0);
             await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/LoginPage");
         }
 

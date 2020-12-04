@@ -193,15 +193,18 @@ namespace GrinPlusPlus.Api
         public async Task<NodeStatus> GetNodeStatus()
         {
             var nodeStatus = await Service.Node.Instance.Status();
-            return new NodeStatus() { 
-                Chain = new Chain { 
+            return new NodeStatus()
+            {
+                Chain = new Chain
+                {
                     Hash = nodeStatus.Chain.Hash,
                     Height = nodeStatus.Chain.Height,
                     PreviousHash = nodeStatus.Chain.PreviousHash,
                     Difficulty = nodeStatus.Chain.Difficulty,
                 },
                 HeaderHeight = nodeStatus.HeaderHeight,
-                Network = new Network { 
+                Network = new Network
+                {
                     Height = nodeStatus.Network.Height,
                     Inbound = nodeStatus.Network.Inbound,
                     Outbound = nodeStatus.Network.Outbound,
@@ -229,7 +232,7 @@ namespace GrinPlusPlus.Api
             var encodedContent = new FormUrlEncodedContent(parameters);
 
             var httpclient = new HttpClient(handler, true);
-            
+
             var response = await httpclient.PostAsync(url, encodedContent).ConfigureAwait(false);
             if (response.StatusCode == HttpStatusCode.OK)
             {

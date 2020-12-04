@@ -28,12 +28,12 @@
                 <zxing:ZXingBarcodeImageView
                     BarcodeFormat="QR_CODE"
                     BarcodeValue="{Binding ReceivingResponse.Slatepack}"
-                    HeightRequest="300"
-                    WidthRequest="300">
+                    HeightRequest="250"
+                    WidthRequest="250">
                     <zxing:ZXingBarcodeImageView.BarcodeOptions>
                         <zxcm:EncodingOptions
-                            Width="750"
-                            Height="750"
+                            Width="780"
+                            Height="780"
                             Margin="0"
                             PureBarcode="True" />
                     </zxing:ZXingBarcodeImageView.BarcodeOptions>

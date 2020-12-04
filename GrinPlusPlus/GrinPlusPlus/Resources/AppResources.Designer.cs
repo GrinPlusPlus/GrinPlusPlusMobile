@@ -493,6 +493,15 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Openning Wallet, please wait....
+        /// </summary>
+        internal static string OpeningPleaseWait {
+            get {
+                return ResourceManager.GetString("OpeningPleaseWait", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Open Wallet.
         /// </summary>
         internal static string OpenWallet {
@@ -682,7 +691,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sending, please wait....
+        ///   Looks up a localized string similar to Sending Grins, please wait....
         /// </summary>
         internal static string SendingPleaseWait {
             get {

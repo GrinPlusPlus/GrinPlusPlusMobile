@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="GrinPlusPlus.Views.OpeningWalletPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com"
+    xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
+    xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="Black">
+    <ContentPage.Content>
+        <StackLayout
+            HorizontalOptions="Center"
+            Spacing="20"
+            VerticalOptions="Center">
+            <Label
+                FontSize="Large"
+                Text="{x:Static resource:AppResources.OpeningPleaseWait}"
+                TextColor="White" />
+            <ActivityIndicator
+                IsRunning="true"
+                WidthRequest="50"
+                Color="Yellow" />
+            <Label
+                FontSize="Large"
+                Text="{Binding ExceptionMessage}"
+                TextColor="Red" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

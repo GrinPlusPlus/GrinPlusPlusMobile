@@ -63,12 +63,13 @@ namespace GrinPlusPlus.ViewModels
         {
             Balance = new Balance
             {
-                Spendable = Double.Parse(Preferences.Get("balance_spendable", "0.000000000")),
-                Locked = Double.Parse(Preferences.Get("balance_locked", "0.000000000")),
-                Immature = Double.Parse(Preferences.Get("balance_immature", "0.000000000")),
-                Unconfirmed = Double.Parse(Preferences.Get("balance_unconfirmed", "0.000000000")),
-                Total = Double.Parse(Preferences.Get("balance_total", "0.000000000"))
+                Spendable = Preferences.Get("balance_spendable", 0.0),
+                Locked = Preferences.Get("balance_locked", 0.0),
+                Immature = Preferences.Get("balance_immature", 0.0),
+                Unconfirmed = Preferences.Get("balance_unconfirmed", 0.0),
+                Total = Preferences.Get("balance_total", 0.0)
             };
+
             UserCanSend = Balance.Spendable > 0;
 
             Transactions = new ObservableCollection<Transaction>();
@@ -144,13 +145,13 @@ namespace GrinPlusPlus.ViewModels
         {
             if (UserCanSend)
             {
-                await NavigationService.NavigateAsync("SetAmountPage", new NavigationParameters { { "spendable", Balance.Spendable/Math.Pow(10,9) } });
+                await NavigationService.NavigateAsync("SetAmountPage", new NavigationParameters { { "spendable", Balance.Spendable / Math.Pow(10, 9) } });
             }
         }
 
         async void ReceiveButtonClicked()
         {
-            await NavigationService.NavigateAsync("ReceiveTransactionPage");            
+            await NavigationService.NavigateAsync("ReceiveTransactionPage");
         }
 
 

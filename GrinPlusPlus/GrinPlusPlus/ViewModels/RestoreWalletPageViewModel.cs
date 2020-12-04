@@ -20,7 +20,7 @@ namespace GrinPlusPlus.ViewModels
         private string _username = "";
         public string Username
         {
-            get { return _username.Trim(); }
+            get { return _username.Trim().Replace(" ", ""); }
             set { SetProperty(ref _username, value.Trim()); }
         }
 
@@ -123,9 +123,9 @@ namespace GrinPlusPlus.ViewModels
                 await SecureStorage.SetAsync("token", login.Token);
                 await SecureStorage.SetAsync("username", Username);
                 await SecureStorage.SetAsync("slatepack_address", login.SlatepackAdddress);
-                await SecureStorage.SetAsync("tor_address", login.TorAdddress);
+                await SecureStorage.SetAsync("tor_address", "");
 
-                await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/DashboardCarouselPage", new NavigationParameters { { "wallet", Username } });
+                await NavigationService.NavigateAsync("OpeningWalletPage");
             }
             catch (Exception ex)
             {

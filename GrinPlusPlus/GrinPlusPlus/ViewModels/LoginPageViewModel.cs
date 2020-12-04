@@ -5,8 +5,8 @@ using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
 using System;
-using System.Linq;
 using System.Collections.ObjectModel;
+using System.Linq;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -32,11 +32,19 @@ namespace GrinPlusPlus.ViewModels
                 {
                     try
                     {
-                        foreach (var account in await DataProvider.GetAccounts())
+                        var update = false;
+                        var accounts = await DataProvider.GetAccounts();
+                        foreach (var account in accounts)
                         {
-                            if (!Accounts.Any(a => a.Name.Equals(account.Name))) {
-                                Accounts.Add(new Account() { Name = account.Name });
+                            if (!Accounts.Any(a => a.Name.Equals(account.Name)))
+                            {
+                                update = true;
+                                break;
                             }
+                        }
+                        if(update)
+                        {
+                            Accounts = new ObservableCollection<Account>(accounts.ToArray()); 
                         }
                     }
                     catch (Exception ex)

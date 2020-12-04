@@ -20,7 +20,7 @@ namespace GrinPlusPlus.Service
             public const string Shutdown = "shutdown";
         }
 
-        Node(string host = "localhost", int port = 3413) : base()
+        Node(string host = "127.0.0.1", int port = 3413) : base()
         {
             Host = host;
             Port = port;
@@ -36,7 +36,7 @@ namespace GrinPlusPlus.Service
                 {
                     if (instance == null)
                     {
-                        instance = new Node("localhost", 3413);
+                        instance = new Node("127.0.0.1", 3413);
                     }
                 }
                 return instance;
@@ -46,40 +46,30 @@ namespace GrinPlusPlus.Service
         public async Task<Models.Node.Status> Status()
         {
             Models.Node.Status status = new Models.Node.Status();
-            try
+
+            string url = $"http://{Host}:{Port}/{Version}/{Endpoints.Status}";
+            HttpResponseMessage response = await new HttpClient().GetAsync(url);
+            if (response.IsSuccessStatusCode)
             {
-                string url = $"http://{Host}:{Port}/{Version}/{Endpoints.Status}";
-                HttpResponseMessage response = await new HttpClient().GetAsync(url);
-                if (response.IsSuccessStatusCode)
-                {
-                    string content = await response.Content.ReadAsStringAsync();
-                    status = JsonConvert.DeserializeObject<Models.Node.Status>(content);
-                }
+                string content = await response.Content.ReadAsStringAsync();
+                status = JsonConvert.DeserializeObject<Models.Node.Status>(content);
             }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+
             return status;
         }
 
         public async Task<Models.Node.Peer[]> ConnectedPeers()
         {
             Models.Node.Peer[] peers = new Models.Node.Peer[] { };
-            try
+            
+            string url = $"http://{Host}:{Port}/{Version}/{Endpoints.ConnectedPeers}";
+            HttpResponseMessage response = await new HttpClient().GetAsync(url);
+            if (response.IsSuccessStatusCode)
             {
-                string url = $"http://{Host}:{Port}/{Version}/{Endpoints.ConnectedPeers}";
-                HttpResponseMessage response = await new HttpClient().GetAsync(url);
-                if (response.IsSuccessStatusCode)
-                {
-                    string content = await response.Content.ReadAsStringAsync();
-                    peers = JsonConvert.DeserializeObject<Models.Node.Peer[]>(content);
-                }
+                string content = await response.Content.ReadAsStringAsync();
+                peers = JsonConvert.DeserializeObject<Models.Node.Peer[]>(content);
             }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
+            
             return peers;
         }
 
