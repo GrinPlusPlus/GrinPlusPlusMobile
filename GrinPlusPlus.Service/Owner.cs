@@ -201,7 +201,7 @@ namespace GrinPlusPlus.Service
                 payload.Add("change_outputs ", 0);
             }
 
-            return await GrinOwnerRPC.Request<Models.Actions.Coins.Send>("estimate_fee", payload);
+            return await GrinOwnerRPC.Request<Models.Actions.Coins.Send>("send", payload);
         }
 
         public async Task<Models.Actions.Coins.Receive> ReceiveCoins(string token, string slatepack)

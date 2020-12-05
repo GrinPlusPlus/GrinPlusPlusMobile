@@ -11,10 +11,10 @@
     <ContentPage.Content>
         <StackLayout
             HorizontalOptions="Center"
-            Spacing="20"
+            Spacing="30"
             VerticalOptions="Center">
             <Label
-                FontSize="Large"
+                FontSize="Medium"
                 Text="{x:Static resource:AppResources.SendingPleaseWait}"
                 TextColor="White" />
             <ActivityIndicator
@@ -22,7 +22,7 @@
                 WidthRequest="50"
                 Color="Yellow" />
             <Label
-                FontSize="Large"
+                HorizontalOptions="Center"
                 Text="{Binding ExceptionMessage}"
                 TextColor="Red" />
         </StackLayout>

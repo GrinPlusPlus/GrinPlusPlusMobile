@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -29,7 +30,7 @@ namespace GrinPlusPlus.Service
                     }
                     
                 }
-                
+                httpClient.Timeout = TimeSpan.FromMinutes(5);
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 string url = "http://127.0.0.1:3420/v1/wallet/owner/" + endpoint;
                 response = await (await httpClient.GetAsync(url)).Content.ReadAsStringAsync();

@@ -64,6 +64,7 @@ namespace GrinPlusPlus.Service
 
             using (HttpClient httpClient = new HttpClient())
             {
+                httpClient.Timeout = TimeSpan.FromMinutes(5);
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 var result = await httpClient.PostAsync("http://127.0.0.1:3421/v2", new StringContent(payload));
                 response = await result.Content.ReadAsStringAsync();
