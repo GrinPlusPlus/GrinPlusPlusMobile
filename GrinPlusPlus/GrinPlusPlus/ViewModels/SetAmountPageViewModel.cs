@@ -176,7 +176,8 @@ namespace GrinPlusPlus.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine(ex.Message);
+                    await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
+                    IsValid = false;
                 }
             });
         }

@@ -4,7 +4,7 @@
     {
         public string Hash { get; set; }
 
-        public int Height { get; set; }
+        public ulong Height { get; set; }
 
         public string PreviousHash { get; set; }
 
@@ -13,7 +13,7 @@
 
     public class Network
     {
-        public int Height { get; set; }
+        public ulong Height { get; set; }
 
         public int Inbound { get; set; }
 
@@ -24,9 +24,9 @@
 
     public class State
     {
-        public int DownloadSize { get; set; }
+        public ulong DownloadSize { get; set; }
 
-        public int Downloaded { get; set; }
+        public ulong Downloaded { get; set; }
 
         public int ProcessingStatus { get; set; }
     }
@@ -35,7 +35,7 @@
     {
         public Chain Chain { get; set; }
 
-        public int HeaderHeight { get; set; }
+        public ulong HeaderHeight { get; set; }
 
         public Network Network { get; set; }
 
@@ -74,36 +74,23 @@
         {
             get
             {
-                int numerator;
-                int denominator;
-
-                if (_syncStatus.Equals("SYNCING_HEADERS"))
+                switch(_syncStatus)
                 {
-                    numerator = HeaderHeight;
-                    denominator = Network.Height;
-
-                    return (double)(((float)numerator / (float)denominator));
+                    case "SYNCING_HEADERS":
+                        return Helpers.GetPercentage(HeaderHeight, Network.Height);
+                    case "DOWNLOADING_TXHASHSET":
+                        return Helpers.GetPercentage(State.Downloaded, State.DownloadSize);
+                    case "SYNCING_BLOCKS":
+                        if(HeaderHeight < 10080)
+                        {
+                            return Helpers.GetPercentage(Chain.Height, HeaderHeight);
+                        }
+                        return Helpers.GetPercentage(HeaderHeight- Chain.Height, 10080);
+                    case "PROCESSING_TXHASHSET":
+                        return Helpers.GetPercentage((ulong)State.ProcessingStatus, 100);
+                    default:
+                        return 0;
                 }
-                else if (_syncStatus.Equals("DOWNLOADING_TXHASHSET"))
-                {
-                    numerator = State.Downloaded;
-                    denominator = State.DownloadSize;
-
-                    return (float)numerator / (float)denominator;
-                }
-                else if (_syncStatus.Equals("SYNCING_BLOCKS"))
-                {
-                    numerator = Network.Height - Chain.Height;
-                    denominator = 10080;
-                    return ((double)(((float)numerator / (float)denominator))) / 100;
-                }
-
-                else if (_syncStatus.Equals("PROCESSING_TXHASHSET"))
-                {
-                    return State.ProcessingStatus / 100;
-                }
-
-                return 0;
             }
         }
 

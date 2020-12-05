@@ -24,5 +24,15 @@ namespace GrinPlusPlus
             }
             return ".".PadRight(10, '0').Replace(".", "");
         }
+
+        public static double GetPercentage(ulong numerator, ulong denominator)
+        {
+            if (numerator == 0 || denominator == 0) return 0;
+            if (denominator <= 0)
+            {
+                return 0;
+            }
+            return Math.Round(100 * ((float)numerator / (float)denominator));
+        }
     }
 }

@@ -44,7 +44,7 @@ namespace GrinPlusPlus.Droid
         {
             Log.Debug(TAG, "GrinNode started");
 
-            RunBackend();
+            //RunBackend();
 
             if (!channelInitialized)
             {

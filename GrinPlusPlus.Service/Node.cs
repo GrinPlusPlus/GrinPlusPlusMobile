@@ -1,17 +1,9 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Diagnostics;
-using System.Net.Http;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace GrinPlusPlus.Service
 {
     public class Node
     {
-        public string Host { get; set; }
-        public int Port { get; set; }
-        public string Version { get; set; }
-
         private static class Endpoints
         {
             public const string Status = "status";
@@ -20,12 +12,7 @@ namespace GrinPlusPlus.Service
             public const string Shutdown = "shutdown";
         }
 
-        Node(string host = "127.0.0.1", int port = 3413) : base()
-        {
-            Host = host;
-            Port = port;
-            Version = "v1";
-        }
+        Node() { }
 
         private static Node instance = null;
         public static Node Instance
@@ -36,7 +23,7 @@ namespace GrinPlusPlus.Service
                 {
                     if (instance == null)
                     {
-                        instance = new Node("127.0.0.1", 3413);
+                        instance = new Node();
                     }
                 }
                 return instance;
@@ -45,44 +32,22 @@ namespace GrinPlusPlus.Service
 
         public async Task<Models.Node.Status> Status()
         {
-            Models.Node.Status status = new Models.Node.Status();
-
-            string url = $"http://{Host}:{Port}/{Version}/{Endpoints.Status}";
-            HttpResponseMessage response = await new HttpClient().GetAsync(url);
-            if (response.IsSuccessStatusCode)
-            {
-                string content = await response.Content.ReadAsStringAsync();
-                status = JsonConvert.DeserializeObject<Models.Node.Status>(content);
-            }
-
-            return status;
+            return await GrinAPI.Request<Models.Node.Status>(Endpoints.Status);
         }
 
         public async Task<Models.Node.Peer[]> ConnectedPeers()
         {
-            Models.Node.Peer[] peers = new Models.Node.Peer[] { };
-            
-            string url = $"http://{Host}:{Port}/{Version}/{Endpoints.ConnectedPeers}";
-            HttpResponseMessage response = await new HttpClient().GetAsync(url);
-            if (response.IsSuccessStatusCode)
-            {
-                string content = await response.Content.ReadAsStringAsync();
-                peers = JsonConvert.DeserializeObject<Models.Node.Peer[]>(content);
-            }
-            
-            return peers;
+            return await GrinAPI.Request<Models.Node.Peer[]>(Endpoints.ConnectedPeers);
         }
 
         public async Task Resync()
         {
-            string url = $"http://{Host}:{Port}/{Version}/{Endpoints.Resync}";
-            await (new HttpClient()).PostAsync(url, null);
+            await GrinAPI.Request(Endpoints.Resync);
         }
 
         public async Task Shutdown()
         {
-            string url = $"http://{Host}:{Port}/{Version}/{Endpoints.Shutdown}";
-            await (new HttpClient()).PostAsync(url, null);
+            await GrinAPI.Request(Endpoints.Shutdown);
         }
     }
 }

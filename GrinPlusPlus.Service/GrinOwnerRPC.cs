@@ -1,14 +1,13 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace GrinPlusPlus.Service
 {
-    class GrinRPC
+    class GrinOwnerRPC
     {
         static string BuildPayload(string method, Dictionary<string, object> keyValuePairs)
         {
@@ -23,9 +22,10 @@ namespace GrinPlusPlus.Service
             return JsonConvert.SerializeObject(payload, Formatting.None);
         }
 
-        public static async Task<T> Request<T>(string method, Dictionary<string, object> keyValuePairs)
+        public static async Task<T> Request<T>(string method, Dictionary<string, object> keyValuePairs,
+            Dictionary<string, string> headers = null)
         {
-            string response = await MakeRequestAsync(BuildPayload(method, keyValuePairs));
+            string response = await GrinOwnerRPC.MakeRequestAsync(BuildPayload(method, keyValuePairs), headers);
 
             try
             {
@@ -46,9 +46,9 @@ namespace GrinPlusPlus.Service
             }
         }
 
-        public static async Task Request(string method, Dictionary<string, object> keyValuePairs)
+        public static async Task Request(string method, Dictionary<string, object> keyValuePairs, Dictionary<string, string> headers = null)
         {
-            string response = await MakeRequestAsync(BuildPayload(method, keyValuePairs));
+            string response = await GrinOwnerRPC.MakeRequestAsync(BuildPayload(method, keyValuePairs), headers);
 
             var deserializeObject = JsonConvert.DeserializeObject<Models.RPC.ErrorResponse>(response);
 
@@ -58,7 +58,7 @@ namespace GrinPlusPlus.Service
             }
         }
 
-        private static async Task<string> MakeRequestAsync(string payload)
+        private static async Task<string> MakeRequestAsync(string payload, Dictionary<string, string> headers = null)
         {
             string response = string.Empty;
 

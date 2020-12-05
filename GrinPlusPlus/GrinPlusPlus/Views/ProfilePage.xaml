@@ -27,12 +27,12 @@
                 <zxing:ZXingBarcodeImageView
                     BarcodeFormat="QR_CODE"
                     BarcodeValue="{Binding SlatepackAddress}"
-                    HeightRequest="120"
-                    WidthRequest="120">
+                    HeightRequest="190"
+                    WidthRequest="190">
                     <zxing:ZXingBarcodeImageView.BarcodeOptions>
                         <zxcm:EncodingOptions
-                            Width="190"
-                            Height="190"
+                            Width="260"
+                            Height="260"
                             Margin="0"
                             PureBarcode="True" />
                     </zxing:ZXingBarcodeImageView.BarcodeOptions>

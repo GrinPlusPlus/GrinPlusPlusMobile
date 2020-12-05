@@ -198,14 +198,14 @@ namespace GrinPlusPlus.Api
                 Chain = new Chain
                 {
                     Hash = nodeStatus.Chain.Hash,
-                    Height = nodeStatus.Chain.Height,
+                    Height = (ulong)nodeStatus.Chain.Height,
                     PreviousHash = nodeStatus.Chain.PreviousHash,
                     Difficulty = nodeStatus.Chain.Difficulty,
                 },
-                HeaderHeight = nodeStatus.HeaderHeight,
+                HeaderHeight = (ulong)nodeStatus.HeaderHeight,
                 Network = new Network
                 {
-                    Height = nodeStatus.Network.Height,
+                    Height = (ulong)nodeStatus.Network.Height,
                     Inbound = nodeStatus.Network.Inbound,
                     Outbound = nodeStatus.Network.Outbound,
                     Difficulty = nodeStatus.Network.Difficulty,
@@ -213,8 +213,8 @@ namespace GrinPlusPlus.Api
                 ProtocolVersion = nodeStatus.ProtocolVersion,
                 State = new State()
                 {
-                    DownloadSize = nodeStatus.State.DownloadSize,
-                    Downloaded = nodeStatus.State.Downloaded,
+                    DownloadSize = (ulong)nodeStatus.State.DownloadSize,
+                    Downloaded = (ulong)nodeStatus.State.Downloaded,
                     ProcessingStatus = nodeStatus.State.ProcessingStatus,
                 },
                 SyncStatus = nodeStatus.SyncStatus,
