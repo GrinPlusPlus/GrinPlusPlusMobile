@@ -55,6 +55,15 @@
                     HeightRequest="44"
                     Text="{x:Static resource:AppResources.CreateWallet}"
                     TextColor="Yellow" />
+                <Button
+                    BackgroundColor="Transparent"
+                    Command="{prism:NavigateTo 'RestoreWalletPage',
+                                               UseModalNavigation=False,
+                                               Animated=True}"
+                    CornerRadius="5"
+                    HeightRequest="44"
+                    Text="{x:Static resource:AppResources.RestoreExistingWallet}"
+                    TextColor="Yellow" />
                 <BoxView
                     HeightRequest="1"
                     HorizontalOptions="Center"
