@@ -1,4 +1,5 @@
 ﻿using GrinPlusPlus.Api;
+using GrinPlusPlus.Resources;
 using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
@@ -11,7 +12,7 @@ namespace GrinPlusPlus.ViewModels
 {
     public class InitPageViewModel : ViewModelBase
     {
-        private string status = "Offline";
+        private string status = "";
         public string Status
         {
             get { return status; }
@@ -35,6 +36,8 @@ namespace GrinPlusPlus.ViewModels
         public InitPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
+            Status = AppResources.ResourceManager.GetString("InitializingNode");
+
             Preferences.Set("balance_spendable", 0);
             Preferences.Set("balance_locked", 0);
             Preferences.Set("balance_immature", 0);

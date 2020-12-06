@@ -3,6 +3,7 @@ using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
 using System;
+using System.Threading;
 using Xamarin.Essentials;
 
 namespace GrinPlusPlus.ViewModels
@@ -42,6 +43,8 @@ namespace GrinPlusPlus.ViewModels
                 catch (Exception ex)
                 {
                     ExceptionMessage = ex.Message;
+                    Thread.Sleep(3000);
+                    await NavigationService.GoBackToRootAsync();
                 }
             });
         }

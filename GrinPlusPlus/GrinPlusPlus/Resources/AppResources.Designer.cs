@@ -376,6 +376,15 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Initializing node.
+        /// </summary>
+        internal static string InitializingNode {
+            get {
+                return ResourceManager.GetString("InitializingNode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to In Progress.
         /// </summary>
         internal static string InProgress {

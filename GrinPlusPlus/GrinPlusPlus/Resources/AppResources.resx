@@ -222,6 +222,9 @@
   <data name="Immature" xml:space="preserve">
     <value>Immature</value>
   </data>
+  <data name="InitializingNode" xml:space="preserve">
+    <value>Initializing node</value>
+  </data>
   <data name="InProgress" xml:space="preserve">
     <value>In Progress</value>
   </data>
