@@ -67,6 +67,15 @@ namespace GrinPlusPlus.ViewModels
 
                 foreach (var group in transactionsGroupedByDate)
                 {
+                    var date = Transactions.First(t => t.Name.Equals(group.Key));
+                    if(date!=null)
+                    {
+                        if(group.Count() != date.Count())
+                        {
+                            update = true;
+                            break;
+                        }
+                    }
                     if (!Transactions.Any(t => t.Name.Equals(group.Key)))
                     {
                         update = true;
@@ -76,6 +85,8 @@ namespace GrinPlusPlus.ViewModels
 
                 if (update)
                 {
+                    Transactions = new ObservableCollection<TransactionGroup>();
+
                     foreach (var group in transactionsGroupedByDate)
                     {
                         Transactions.Add(new TransactionGroup(group.Key,
