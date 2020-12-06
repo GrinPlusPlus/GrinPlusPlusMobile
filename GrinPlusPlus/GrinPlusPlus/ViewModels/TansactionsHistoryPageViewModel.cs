@@ -7,6 +7,7 @@ using Prism.Services.Dialogs;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 
 namespace GrinPlusPlus.ViewModels
@@ -37,33 +38,55 @@ namespace GrinPlusPlus.ViewModels
         {
             Transactions = new ObservableCollection<TransactionGroup>();
 
-            Xamarin.Forms.Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            Xamarin.Forms.Device.StartTimer(TimeSpan.FromSeconds(8), () =>
             {
+                if (Settings.IsLoggedIn == false)
+                {
+                    return false;
+                }
+
                 MainThread.BeginInvokeOnMainThread(async () =>
                 {
-                    try
-                    {
-                        var transactionsGroupedByDate = (await DataProvider.GetTransactions(
-                                                               await SecureStorage.GetAsync("token"),
-                                                               new string[] { "COINBASE", "SENT", "RECEIVED", "SENT_CANCELED", "RECEIVED_CANCELED" })
-                                                        ).GroupBy(x => x.Date.ToString("dddd, dd MMMM yyyy"));
-                        foreach (var group in transactionsGroupedByDate)
-                        {
-                            if (!Transactions.Any(t => t.Name.Equals(group.Key)))
-                            {
-                                Transactions.Add(new TransactionGroup(group.Key,
-                                    transactionsGroupedByDate.First(g => g.Key.Equals(group.Key)).ToList()));
-                                continue;
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                    }
+
+                    await LoadWalletHistory();
                 });
-                return Settings.IsLoggedIn;
+
+                return true;
             });
+        }
+
+        private async Task LoadWalletHistory()
+        {
+            try
+            {
+                var transactionsGroupedByDate = (await DataProvider.GetTransactions(
+                                                       await SecureStorage.GetAsync("token"),
+                                                       new string[] { "COINBASE", "SENT", "RECEIVED", "SENT_CANCELED", "RECEIVED_CANCELED" })
+                                                ).GroupBy(x => x.Date.ToString("dddd, dd MMMM yyyy"));
+                var update = false;
+
+                foreach (var group in transactionsGroupedByDate)
+                {
+                    if (!Transactions.Any(t => t.Name.Equals(group.Key)))
+                    {
+                        update = true;
+                        break;
+                    }
+                }
+
+                if (update)
+                {
+                    foreach (var group in transactionsGroupedByDate)
+                    {
+                        Transactions.Add(new TransactionGroup(group.Key,
+                                transactionsGroupedByDate.First(g => g.Key.Equals(group.Key)).ToList()));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         async void OpenTransactionDetails()

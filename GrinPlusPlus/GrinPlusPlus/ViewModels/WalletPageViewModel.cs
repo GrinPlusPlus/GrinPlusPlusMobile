@@ -9,6 +9,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -79,69 +80,106 @@ namespace GrinPlusPlus.ViewModels
 
             CancelTransactionClickedCommand = new DelegateCommand<object>(CancelTransactionClicked);
 
-            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
             {
+                if (Settings.IsLoggedIn == false)
+                {
+                    return false;
+                }
+
                 MainThread.BeginInvokeOnMainThread(async () =>
                 {
-                    try
-                    {
-                        var balance = await DataProvider.GetWalletBalance(await SecureStorage.GetAsync("token"));
-                        if (Balance.Total != balance.Total ||
-                            Balance.Spendable != balance.Spendable ||
-                            Balance.Immature != balance.Immature ||
-                            Balance.Unconfirmed != balance.Unconfirmed ||
-                            Balance.Locked != balance.Locked)
-                        {
-                            Balance = balance;
-                            UserCanSend = Balance.Spendable > 0;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                    }
+                    await GetWalletBalance();
                 });
-                return Settings.IsLoggedIn;
+
+                return true;
             });
 
-            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(3), () =>
             {
+                if (Settings.IsLoggedIn == false)
+                {
+                    return false;
+                }
+
                 MainThread.BeginInvokeOnMainThread(async () =>
                 {
-                    try
-                    {
-                        var transactions = await DataProvider.GetTransactions(await SecureStorage.GetAsync("token"),
-                            new string[] { "SENDING_NOT_FINALIZED", "RECEIVING_IN_PROGRESS", "SENDING_FINALIZED" });
-                        if (Transactions.Count < transactions.Count)
-                        {
-                            foreach (Transaction transaction in transactions)
-                            {
-                                if (Transactions.Any(t => t.Id == transaction.Id))
-                                {
-                                    continue;
-                                }
-                                Transactions.Add(transaction);
-                            }
-                        }
-                        else if (Transactions.Count > transactions.Count)
-                        {
-                            foreach (Transaction transaction in Transactions)
-                            {
-                                if (transactions.Any(t => t.Id == transaction.Id))
-                                {
-                                    continue;
-                                }
-                                Transactions.Remove(transaction);
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                    }
+                    await LoadTransactions();
                 });
-                return Settings.IsLoggedIn;
+
+                return true;
             });
+        }
+
+        private async Task GetWalletBalance()
+        {
+            try
+            {
+                var balance = await DataProvider.GetWalletBalance(await SecureStorage.GetAsync("token"));
+                if (Balance.Total != balance.Total ||
+                    Balance.Spendable != balance.Spendable ||
+                    Balance.Immature != balance.Immature ||
+                    Balance.Unconfirmed != balance.Unconfirmed ||
+                    Balance.Locked != balance.Locked)
+                {
+                    Balance = balance;
+                    UserCanSend = Balance.Spendable > 0;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+
+        private async Task LoadTransactions()
+        {
+            try
+            {
+                var transactions = await DataProvider.GetTransactions(await SecureStorage.GetAsync("token"),
+                    new string[] { "SENDING_NOT_FINALIZED", "RECEIVING_IN_PROGRESS", "SENDING_FINALIZED" });
+
+                if (transactions.Count == 0)
+                {
+                    return;
+                }
+
+                if (Transactions.Count == 0)
+                {
+                    Transactions = new ObservableCollection<Transaction>(transactions.ToArray());
+                    return;
+                }
+
+                var update = false;
+
+                foreach (Transaction transaction in Transactions)
+                {
+                    if (transactions.Any(t => t.Id == transaction.Id))
+                    {
+                        continue; 
+                    }
+                    update = true;
+                    break;
+                }
+
+                foreach (Transaction transaction in transactions)
+                {
+                    if (Transactions.Any(t => t.Id == transaction.Id))
+                    {
+                        update = true;
+                        break;
+                    }
+                }
+
+                if (update)
+                {
+                    Transactions = new ObservableCollection<Transaction>(transactions.ToArray());
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         async void SendButtonClicked()
@@ -208,7 +246,7 @@ namespace GrinPlusPlus.ViewModels
             }
 
             Settings.IsLoggedIn = false;
-            
+
             Preferences.Clear();
             SecureStorage.RemoveAll();
 
