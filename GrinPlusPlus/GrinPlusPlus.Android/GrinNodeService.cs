@@ -53,14 +53,14 @@ namespace GrinPlusPlus.Droid
             }
 
             // Work has finished, now dispatch anotification to let the user know.
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(AndroidApp.Context, channelId)
+            /*NotificationCompat.Builder builder = new NotificationCompat.Builder(AndroidApp.Context, channelId)
                 .SetContentTitle("Grin Node")
                 .SetContentText("A full Grin node is Running.")
                 .SetSmallIcon(Resource.Drawable.logo)
                 .SetDefaults((int)NotificationDefaults.Sound | (int)NotificationDefaults.Vibrate);
 
             var notification = builder.Build();
-            manager.Notify(NOTIFICATION_ID, notification);
+            manager.Notify(NOTIFICATION_ID, notification);*/
 
             return StartCommandResult.Sticky;
         }
