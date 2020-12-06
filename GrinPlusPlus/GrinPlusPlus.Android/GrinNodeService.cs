@@ -5,6 +5,7 @@ using Android.OS;
 using Android.Util;
 using AndroidX.Core.App;
 using System.IO;
+using System.Threading.Tasks;
 using AndroidApp = Android.App.Application;
 
 namespace GrinPlusPlus.Droid
@@ -96,6 +97,18 @@ namespace GrinPlusPlus.Droid
                 "--ignore-missing-torrc",
                 "--quiet"
             });
+        }
+
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+            StopBackend();   
+        }
+
+        private void StopBackend()
+        {
+            Task task = Task.Factory.StartNew(async () => { await Service.Node.Instance.Shutdown(); });
+            task.Wait();
         }
     }
 }
