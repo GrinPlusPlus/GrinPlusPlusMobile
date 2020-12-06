@@ -38,7 +38,7 @@ namespace GrinPlusPlus.ViewModels
         {
             Transactions = new ObservableCollection<TransactionGroup>();
 
-            Xamarin.Forms.Device.StartTimer(TimeSpan.FromSeconds(8), () =>
+            Xamarin.Forms.Device.StartTimer(TimeSpan.FromSeconds(4), () =>
             {
                 if (Settings.IsLoggedIn == false)
                 {
@@ -54,7 +54,7 @@ namespace GrinPlusPlus.ViewModels
                 return true;
             });
         }
-
+ 
         private async Task LoadWalletHistory()
         {
             try
@@ -63,36 +63,48 @@ namespace GrinPlusPlus.ViewModels
                                                        await SecureStorage.GetAsync("token"),
                                                        new string[] { "COINBASE", "SENT", "RECEIVED", "SENT_CANCELED", "RECEIVED_CANCELED" })
                                                 ).GroupBy(x => x.Date.ToString("dddd, dd MMMM yyyy"));
-                var update = false;
-
-                foreach (var group in transactionsGroupedByDate)
+                if (Transactions.Count == 0)
                 {
-                    var date = Transactions.First(t => t.Name.Equals(group.Key));
-                    if(date!=null)
-                    {
-                        if(group.Count() != date.Count())
-                        {
-                            update = true;
-                            break;
-                        }
-                    }
-                    if (!Transactions.Any(t => t.Name.Equals(group.Key)))
-                    {
-                        update = true;
-                        break;
-                    }
-                }
-
-                if (update)
-                {
-                    Transactions = new ObservableCollection<TransactionGroup>();
-
                     foreach (var group in transactionsGroupedByDate)
                     {
                         Transactions.Add(new TransactionGroup(group.Key,
                                 transactionsGroupedByDate.First(g => g.Key.Equals(group.Key)).ToList()));
                     }
                 }
+                else
+                {
+                    var update = false;
+
+                    foreach (var group in transactionsGroupedByDate)
+                    {
+                        var date = Transactions.First(t => t.Name.Equals(group.Key));
+                        if (date != null)
+                        {
+                            if (group.Count() != date.Count())
+                            {
+                                update = true;
+                                break;
+                            }
+                        }
+                        if (!Transactions.Any(t => t.Name.Equals(group.Key)))
+                        {
+                            update = true;
+                            break;
+                        }
+                    }
+
+                    if (update)
+                    {
+                        Transactions = new ObservableCollection<TransactionGroup>();
+
+                        foreach (var group in transactionsGroupedByDate)
+                        {
+                            Transactions.Add(new TransactionGroup(group.Key,
+                                    transactionsGroupedByDate.First(g => g.Key.Equals(group.Key)).ToList()));
+                        }
+                    }
+                }
+
             }
             catch (Exception ex)
             {

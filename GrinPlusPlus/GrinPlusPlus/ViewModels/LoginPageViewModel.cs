@@ -26,7 +26,7 @@ namespace GrinPlusPlus.ViewModels
         public LoginPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
-            Device.StartTimer(TimeSpan.FromSeconds(2), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
                 if (Settings.IsLoggedIn == true)
                 {

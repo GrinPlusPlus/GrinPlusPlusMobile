@@ -72,7 +72,7 @@
                 HeightRequest="44"
                 Text="{x:Static resource:AppResources.BackupWallet}"
                 TextColor="Yellow"
-                VerticalOptions="End" />
+                VerticalOptions="EndAndExpand" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
