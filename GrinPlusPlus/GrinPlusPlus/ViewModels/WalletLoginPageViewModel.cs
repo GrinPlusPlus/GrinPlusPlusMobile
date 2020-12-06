@@ -52,6 +52,8 @@ namespace GrinPlusPlus.ViewModels
 
         public DelegateCommand OpenWalletCommand => new DelegateCommand(OpenWallet);
 
+        public DelegateCommand DeleteWalletCommand => new DelegateCommand(DeleteWalletC);
+
         public WalletLoginPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
@@ -119,5 +121,34 @@ namespace GrinPlusPlus.ViewModels
                 IsIdle = true;
             }
         }
+
+        private async void DeleteWalletC()
+        {
+            try
+            {
+                ExceptionMessage = string.Empty;
+
+                IsBusy = true;
+                IsIdle = false;
+
+                if (string.IsNullOrEmpty(Password))
+                {
+                    throw new Exception("Password can not be empty.");
+                }
+                var wallet = await DataProvider.DeleteWallet(Username, Password);
+
+                await NavigationService.GoBackToRootAsync();
+            }
+            catch (Exception ex)
+            {
+                ExceptionMessage = ex.Message;
+            }
+            finally
+            {
+                IsBusy = false;
+                IsIdle = true;
+            }
+        }
+
     }
 }

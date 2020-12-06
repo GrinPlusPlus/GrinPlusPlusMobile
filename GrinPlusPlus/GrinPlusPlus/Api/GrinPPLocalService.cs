@@ -21,6 +21,11 @@ namespace GrinPlusPlus.Api
             };
         }
 
+        public async Task<bool> DeleteWallet(string username, string password)
+        {
+            return await Service.Owner.Instance.DeleteWallet(username, password);
+        }
+
         public async Task<Login> DoLogin(string username, string password)
         {
             var login = await Service.Owner.Instance.OpenWallet(username, password);

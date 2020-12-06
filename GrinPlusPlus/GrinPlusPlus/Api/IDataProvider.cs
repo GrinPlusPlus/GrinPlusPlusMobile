@@ -8,6 +8,8 @@ namespace GrinPlusPlus.Api
     {
         Task<Login> CreateWallet(string username, string password, int seedLength);
 
+        Task<bool> DeleteWallet(string username, string password);
+
         Task<Login> DoLogin(string username, string password);
 
         Task<List<Account>> GetAccounts();

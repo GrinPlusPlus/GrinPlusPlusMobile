@@ -9,7 +9,7 @@
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="Black">
     <ContentPage.Content>
-        <StackLayout Spacing="8">
+        <StackLayout Spacing="8" VerticalOptions="StartAndExpand">
             <Label
                 Padding="20,5,20,0"
                 FontSize="22"
@@ -65,6 +65,15 @@
                 HeightRequest="40"
                 IsRunning="{Binding IsBusy}"
                 Color="Yellow" />
+            <Button
+                Margin="50,0,50,40"
+                BackgroundColor="Transparent"
+                Command="{Binding DeleteWalletCommand}"
+                CornerRadius="5"
+                HeightRequest="44"
+                Text="{x:Static resource:AppResources.DeleteWallet}"
+                TextColor="Red"
+                VerticalOptions="EndAndExpand" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

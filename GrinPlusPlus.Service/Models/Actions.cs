@@ -39,6 +39,15 @@ namespace GrinPlusPlus.Service.Models
                 [JsonProperty("slatepack_address")]
                 public string SlatepackAdddress { get; set; }
             }
+
+            public class Delete
+            {
+                [JsonProperty("error")]
+                public string Error { get; set; }
+
+                [JsonProperty("status")]
+                public string Status { get; set; }
+            }
         }
 
 
