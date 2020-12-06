@@ -59,8 +59,8 @@ namespace GrinPlusPlus.ViewModels
                         }
                         else
                         {
-                            ProgressBarr = status.ProgressPercentage;
-                            ProgressPercentage = (int)Math.Round(ProgressBarr * 100.0);
+                            ProgressBarr = status.ProgressPercentage / 100;
+                            ProgressPercentage = (int)Math.Round(ProgressBarr);
                         }
                     }
                     catch (Exception ex)
