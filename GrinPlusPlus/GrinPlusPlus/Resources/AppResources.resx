@@ -282,6 +282,9 @@
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="PasswordCanNotBeEmpty" xml:space="preserve">
+    <value>Password can't be empty</value>
+  </data>
   <data name="PasteFromClipboard" xml:space="preserve">
     <value>Paste from Clipboard</value>
   </data>

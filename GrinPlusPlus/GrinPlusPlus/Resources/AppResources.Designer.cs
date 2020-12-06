@@ -556,6 +556,15 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Password can&apos;t be empty.
+        /// </summary>
+        internal static string PasswordCanNotBeEmpty {
+            get {
+                return ResourceManager.GetString("PasswordCanNotBeEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Paste from Clipboard.
         /// </summary>
         internal static string PasteFromClipboard {
