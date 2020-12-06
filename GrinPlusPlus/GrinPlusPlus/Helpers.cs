@@ -1,4 +1,7 @@
 ﻿using System;
+using System.IO;
+using System.Net.Sockets;
+using System.Threading.Tasks;
 
 namespace GrinPlusPlus
 {
@@ -33,6 +36,35 @@ namespace GrinPlusPlus
                 return 0;
             }
             return Math.Round(100 * ((float)numerator / (float)denominator));
+        }
+
+        public static async Task<string> MakeTcpRequestAsync(string message, TcpClient client, bool readToEnd = true)
+        {
+            client.ReceiveTimeout = 20000;
+            client.SendTimeout = 20000;
+            string proxyResponse = string.Empty;
+
+            try
+            {
+                // Send message
+                using (StreamWriter streamWriter = new StreamWriter(client.GetStream()))
+                {
+                    streamWriter.Write(message);
+                    streamWriter.Flush();
+                }
+
+                // Read response
+                using (StreamReader streamReader = new StreamReader(client.GetStream()))
+                {
+                    proxyResponse = readToEnd ? await streamReader.ReadToEndAsync() : await streamReader.ReadLineAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return proxyResponse;
         }
     }
 }

@@ -1,9 +1,12 @@
 ﻿using GrinPlusPlus.Models;
+using Knapcode.TorSharp.Tools.Tor;
 using MihaZupan;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Net.Sockets;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace GrinPlusPlus.Api
@@ -254,6 +257,19 @@ namespace GrinPlusPlus.Api
         public async Task DoLogout(string token)
         {
             await Service.Owner.Instance.CloseWallet(token);
+        }
+
+        public async Task DeleteONION(string torAddress)
+        {
+            TorControlClient tc = new TorControlClient();
+            await tc.ConnectAsync("127.0.0.1", 3422);
+            await tc.AuthenticateAsync("MyPassword"); 
+            await tc.SignalAsync($"DEL_ONION {torAddress}");
+        }
+
+        public Task AddONION()
+        {
+            throw new NotImplementedException();
         }
     }
 }

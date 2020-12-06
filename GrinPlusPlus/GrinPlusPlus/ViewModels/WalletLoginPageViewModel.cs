@@ -80,7 +80,7 @@ namespace GrinPlusPlus.ViewModels
 
                 if (string.IsNullOrEmpty(Password))
                 {
-                    throw new Exception("Password can not be empty.");
+                    throw new Exception(AppResources.ResourceManager.GetString("PasswordCanNotBeEmpty"));
                 }
                 var wallet = await DataProvider.DoLogin(Username, Password);
                 if (!string.IsNullOrEmpty(wallet.Token))

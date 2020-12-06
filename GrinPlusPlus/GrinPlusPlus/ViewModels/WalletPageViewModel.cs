@@ -12,6 +12,7 @@ using System.Linq;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
+
 namespace GrinPlusPlus.ViewModels
 {
     public class WalletPageViewModel : ViewModelBase
@@ -192,6 +193,19 @@ namespace GrinPlusPlus.ViewModels
         async void Logout()
         {
             await DataProvider.DoLogout(await SecureStorage.GetAsync("token"));
+            var torAddress = await SecureStorage.GetAsync("tor_address");
+            if (!string.IsNullOrEmpty(torAddress))
+            {
+                try
+                {
+                    await DataProvider.DeleteONION(torAddress);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+
+            }
             Settings.IsLoggedIn = false;
             Preferences.Set("balance_spendable", 0);
             Preferences.Set("balance_locked", 0);
