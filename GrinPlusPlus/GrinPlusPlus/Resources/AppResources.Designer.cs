@@ -520,7 +520,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Openning Wallet, please wait....
+        ///   Looks up a localized string similar to Opening wallet, please wait....
         /// </summary>
         internal static string OpeningPleaseWait {
             get {

@@ -271,7 +271,7 @@
     <value>Open</value>
   </data>
   <data name="OpeningPleaseWait" xml:space="preserve">
-    <value>Openning Wallet, please wait...</value>
+    <value>Opening wallet, please wait...</value>
   </data>
   <data name="OpenWallet" xml:space="preserve">
     <value>Open Wallet</value>
