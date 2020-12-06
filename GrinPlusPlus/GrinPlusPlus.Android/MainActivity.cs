@@ -30,6 +30,17 @@ namespace GrinPlusPlus.Droid
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+
+        protected override void OnSaveInstanceState(Bundle outState)
+        {
+            // always call the base implementation!
+            base.OnSaveInstanceState(outState);
+        }
+        
+        protected override void OnRestoreInstanceState(Bundle savedInstanceState)
+        {
+            base.OnRestoreInstanceState(savedInstanceState);
+        }
     }
 
     public class AndroidInitializer : IPlatformInitializer
