@@ -58,6 +58,7 @@ namespace GrinPlusPlus
             containerRegistry.RegisterForNavigation<WalletLoginPage, WalletLoginPageViewModel>();
             containerRegistry.RegisterForNavigation<InitPage, InitPageViewModel>();
             containerRegistry.RegisterForNavigation<OpeningWalletPage, OpeningWalletPageViewModel>();
+            containerRegistry.RegisterForNavigation<BackupWalletPage, BackupWalletPageViewModel>();
         }
     }
 }

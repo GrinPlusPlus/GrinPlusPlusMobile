@@ -1,4 +1,5 @@
 ﻿using GrinPlusPlus.Api;
+using GrinPlusPlus.Resources;
 using Plugin.Fingerprint;
 using Plugin.Fingerprint.Abstractions;
 using Prism.Commands;
@@ -133,7 +134,7 @@ namespace GrinPlusPlus.ViewModels
 
                 if (string.IsNullOrEmpty(Password))
                 {
-                    throw new Exception("Password can not be empty.");
+                    throw new Exception(AppResources.ResourceManager.GetString("PasswordCanNotBeEmpty"));
                 }
                 var wallet = await DataProvider.DeleteWallet(Username, Password);
 

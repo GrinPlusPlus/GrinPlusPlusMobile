@@ -141,15 +141,6 @@
                     </SwipeView>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
-            <CollectionView.EmptyView>
-                <Label
-                    FontSize="Default"
-                    HorizontalOptions="Fill"
-                    HorizontalTextAlignment="Center"
-                    Text="The history of Transactions is empty (ᵐ‿ʷ)"
-                    TextColor="#2f2f2f"
-                    VerticalTextAlignment="Center" />
-            </CollectionView.EmptyView>
         </CollectionView>
     </StackLayout>
 </ContentPage>

@@ -12,7 +12,7 @@
     BackgroundColor="Black"
     IconImageSource="baseline_self_improvement_white_24.png">
     <ContentPage.Content>
-        <StackLayout Spacing="10" VerticalOptions="FillAndExpand">
+        <StackLayout Spacing="10" VerticalOptions="StartAndExpand">
             <Label
                 Margin="0,25,0,0"
                 HorizontalOptions="Center"
@@ -57,14 +57,22 @@
                 Text="{x:Static resource:AppResources.TabToCopy}"
                 TextColor="Gray" />
             <Button
-                Margin="50,0,50,30"
+                Margin="50,10,50,0"
                 BackgroundColor="Transparent"
                 Command="{Binding ShareAddressCommand}"
                 CornerRadius="5"
                 HeightRequest="44"
                 Text="{x:Static resource:AppResources.ShareAddress}"
+                TextColor="White" />
+            <Button
+                Margin="50,0,50,30"
+                BackgroundColor="Transparent"
+                Command="{Binding OpenBackupWalletPageCommand}"
+                CornerRadius="5"
+                HeightRequest="44"
+                Text="{x:Static resource:AppResources.BackupWallet}"
                 TextColor="Yellow"
-                VerticalOptions="EndAndExpand" />
+                VerticalOptions="End" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -81,6 +81,13 @@ namespace GrinPlusPlus.ViewModels
             }
         }
 
+        public DelegateCommand OpenBackupWalletPageCommand => new DelegateCommand(OpenBackupWalletPage);
+
+        private async void OpenBackupWalletPage()
+        {
+            await NavigationService.NavigateAsync("BackupWalletPage", new NavigationParameters { { "username", await SecureStorage.GetAsync("username") } });
+        }
+
         public ProfilePageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
@@ -90,7 +97,6 @@ namespace GrinPlusPlus.ViewModels
                 TorAddress = await SecureStorage.GetAsync("tor_address");
                 await UpdateAvailability();
             });
-
             
 
             Device.StartTimer(TimeSpan.FromSeconds(10), () =>

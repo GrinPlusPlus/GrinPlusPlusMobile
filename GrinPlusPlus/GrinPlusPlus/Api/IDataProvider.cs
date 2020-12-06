@@ -7,9 +7,11 @@ namespace GrinPlusPlus.Api
     public interface IDataProvider
     {
         Task<Login> CreateWallet(string username, string password, int seedLength);
+        
+        Task<string> BackupWallet(string username, string password);
 
         Task<bool> DeleteWallet(string username, string password);
-
+        
         Task<Login> DoLogin(string username, string password);
 
         Task<List<Account>> GetAccounts();

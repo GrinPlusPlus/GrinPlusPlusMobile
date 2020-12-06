@@ -97,6 +97,15 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Backup Wallet.
+        /// </summary>
+        internal static string BackupWallet {
+            get {
+                return ResourceManager.GetString("BackupWallet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Blocks.
         /// </summary>
         internal static string Blocks {
@@ -223,6 +232,15 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy to Clipboard.
+        /// </summary>
+        internal static string CopyToClipboard {
+            get {
+                return ResourceManager.GetString("CopyToClipboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create.
         /// </summary>
         internal static string Create {
@@ -318,6 +336,15 @@ namespace GrinPlusPlus.Resources {
         internal static string FinalizeTransaction {
             get {
                 return ResourceManager.GetString("FinalizeTransaction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Get Wallet Seed.
+        /// </summary>
+        internal static string GetWalletSeed {
+            get {
+                return ResourceManager.GetString("GetWalletSeed", resourceCulture);
             }
         }
         

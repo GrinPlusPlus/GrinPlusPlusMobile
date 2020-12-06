@@ -129,6 +129,9 @@
   <data name="Amount" xml:space="preserve">
     <value>Amount</value>
   </data>
+  <data name="BackupWallet" xml:space="preserve">
+    <value>Backup Wallet</value>
+  </data>
   <data name="Blocks" xml:space="preserve">
     <value>Blocks</value>
   </data>
@@ -171,6 +174,9 @@
   <data name="CopySlatepackMessage" xml:space="preserve">
     <value>Copy Slatepack Message</value>
   </data>
+  <data name="CopyToClipboard" xml:space="preserve">
+    <value>Copy to Clipboard</value>
+  </data>
   <data name="Create" xml:space="preserve">
     <value>Create</value>
   </data>
@@ -203,6 +209,9 @@
   </data>
   <data name="FinalizeTransaction" xml:space="preserve">
     <value>Finalize Transaction</value>
+  </data>
+  <data name="GetWalletSeed" xml:space="preserve">
+    <value>Get Wallet Seed</value>
   </data>
   <data name="Headers" xml:space="preserve">
     <value>Headers</value>

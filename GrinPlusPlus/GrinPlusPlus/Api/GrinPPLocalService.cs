@@ -10,6 +10,11 @@ namespace GrinPlusPlus.Api
 {
     class GrinPPLocalService : IDataProvider
     {
+        public async Task<string> BackupWallet(string username, string password)
+        {
+            return await Service.Owner.Instance.GetWalletSeed(username, password);
+        }
+
         public async Task<Login> CreateWallet(string username, string password, int seedLength)
         {
             var wallet = await Service.Owner.Instance.CreateWallet(username, password, seedLength);

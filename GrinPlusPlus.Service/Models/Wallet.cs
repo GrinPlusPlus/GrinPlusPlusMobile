@@ -38,5 +38,11 @@ namespace GrinPlusPlus.Service.Models
             [JsonProperty("txs")]
             public Transaction[] List { get; set; }
         }
+
+        public class Seed
+        {
+            [JsonProperty("wallet_seed")]
+            public string MnemonicPhrase { get; set; }
+        }
     }
 }

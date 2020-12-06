@@ -101,7 +101,9 @@ namespace GrinPlusPlus.Service
                 {"password", password},
             };
 
-            return await GrinOwnerRPC.Request<string>("get_wallet_seed", payload);
+            var seed = await GrinOwnerRPC.Request<Models.Wallet.Seed>("get_wallet_seed", payload);
+
+            return seed.MnemonicPhrase;
         }
 
         public async Task<bool> DeleteWallet(string username, string password)
