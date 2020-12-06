@@ -26,34 +26,69 @@ namespace GrinPlusPlus.ViewModels
         public LoginPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
-            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(3), () =>
             {
-                MainThread.BeginInvokeOnMainThread(async () =>
+                if (Settings.IsLoggedIn)
                 {
-                    try
+                    return false;
+                }
+                ListWallets();
+
+                return true;
+            });
+        }
+
+        private void ListWallets()
+        {
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                try
+                {
+
+                    var accounts = await DataProvider.GetAccounts();
+                    if (accounts.Count == 0)
                     {
-                        var update = false;
-                        var accounts = await DataProvider.GetAccounts();
-                        foreach (var account in accounts)
+                        return;
+                    }
+                    else
+                    {
+                        if (Accounts.Count == 0)
                         {
-                            if (!Accounts.Any(a => a.Name.Equals(account.Name)))
+                            Accounts = new ObservableCollection<Account>(accounts.ToArray());
+                        }
+                        else
+                        {
+                            var update = false;
+
+                            foreach (var account in Accounts)
                             {
+                                if (accounts.Any(a => a.Name.Equals(account.Name)))
+                                {
+                                    continue;
+                                }
                                 update = true;
-                                break;
+                            }
+
+                            foreach (var account in accounts)
+                            {
+                                if (!Accounts.Any(a => a.Name.Equals(account.Name)))
+                                {
+                                    update = true;
+                                }
+                            }
+
+                            if (update)
+                            {
+                                Accounts = new ObservableCollection<Account>(accounts.ToArray());
                             }
                         }
-                        if(update)
-                        {
-                            Accounts = new ObservableCollection<Account>(accounts.ToArray()); 
-                        }
                     }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                    }
-                });
 
-                return !Settings.IsLoggedIn;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             });
         }
 
