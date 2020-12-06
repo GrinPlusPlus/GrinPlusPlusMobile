@@ -26,8 +26,8 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _progressBar, value); }
         }
 
-        private int _progressPercentage = 0;
-        public int ProgressPercentage
+        private string _progressPercentage = "0";
+        public string ProgressPercentage
         {
             get { return _progressPercentage; }
             set { SetProperty(ref _progressPercentage, value); }
@@ -38,14 +38,16 @@ namespace GrinPlusPlus.ViewModels
         {
             Status = AppResources.ResourceManager.GetString("InitializingNode");
 
-            Preferences.Set("balance_spendable", 0);
-            Preferences.Set("balance_locked", 0);
-            Preferences.Set("balance_immature", 0);
-            Preferences.Set("balance_unconfirmed", 0);
-            Preferences.Set("balance_total", 0);
+            Preferences.Clear();
+            SecureStorage.RemoveAll();
 
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
+                if (Status.Equals("Running"))
+                {
+                    return false;
+                }
+
                 MainThread.BeginInvokeOnMainThread(async () =>
                 {
                     try
@@ -53,21 +55,17 @@ namespace GrinPlusPlus.ViewModels
                         var status = await DataProvider.GetNodeStatus();
                         Status = status.SyncStatus;
 
-                        if (Status.Equals("Running"))
+                        if (!Status.Equals("Running"))
                         {
-                            ProgressBarr = 1;
-                            ProgressPercentage = 100;
-
-                            Preferences.Clear();
-                            SecureStorage.RemoveAll();
-
-                            await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/LoginPage");
+                            ProgressBarr = status.ProgressPercentage;
+                            ProgressPercentage = (ProgressBarr * 100).ToString("F");
+                            return;
                         }
-                        else
-                        {
-                            ProgressBarr = status.ProgressPercentage / 100;
-                            ProgressPercentage = (int)Math.Round(ProgressBarr);
-                        }
+
+                        ProgressBarr = 1;
+                        ProgressPercentage = "100";
+
+                        await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/LoginPage");
                     }
                     catch (Exception ex)
                     {
@@ -75,7 +73,7 @@ namespace GrinPlusPlus.ViewModels
                     }
                 });
 
-                return !Status.Equals("Running");
+                return true;
             });
         }
 

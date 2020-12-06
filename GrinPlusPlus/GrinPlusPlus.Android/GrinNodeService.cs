@@ -42,7 +42,7 @@ namespace GrinPlusPlus.Droid
             libgrin = new Java.IO.File(Path.Combine(librariesPath, "libgrin.so"));
 
             var startTimeSpan = TimeSpan.Zero;
-            var periodTimeSpan = TimeSpan.FromSeconds(10);
+            var periodTimeSpan = TimeSpan.FromSeconds(1);
 
             var timer = new System.Threading.Timer(async (e) =>
             {

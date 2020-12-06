@@ -79,17 +79,17 @@ namespace GrinPlusPlus.Models
                 switch(_syncStatus)
                 {
                     case "SYNCING_HEADERS":
-                        return Helpers.GetPercentage(HeaderHeight, Network.Height);
+                        return Helpers.GetFraction(HeaderHeight, Network.Height);
                     case "DOWNLOADING_TXHASHSET":
-                        return Helpers.GetPercentage(State.Downloaded, State.DownloadSize);
+                        return Helpers.GetFraction(State.Downloaded, State.DownloadSize);
                     case "SYNCING_BLOCKS":
                         if(HeaderHeight < 10080)
                         {
-                            return Helpers.GetPercentage(Chain.Height, HeaderHeight);
+                            return Helpers.GetFraction(Chain.Height, HeaderHeight);
                         }
-                        return Helpers.GetPercentage(10080 - Math.Min(10080, HeaderHeight - Chain.Height), 10080);
+                        return Helpers.GetFraction(10080 - Math.Min(10080, HeaderHeight - Chain.Height), 10080);
                     case "PROCESSING_TXHASHSET":
-                        return Helpers.GetPercentage((ulong)State.ProcessingStatus, 100);
+                        return Helpers.GetFraction((ulong)State.ProcessingStatus, 100);
                     default:
                         return 0;
                 }
