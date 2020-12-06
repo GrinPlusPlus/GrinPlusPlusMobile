@@ -1,4 +1,6 @@
-﻿namespace GrinPlusPlus.Models
+﻿using System;
+
+namespace GrinPlusPlus.Models
 {
     public class Chain
     {
@@ -85,7 +87,7 @@
                         {
                             return Helpers.GetPercentage(Chain.Height, HeaderHeight);
                         }
-                        return Helpers.GetPercentage(HeaderHeight- Chain.Height, 10080);
+                        return Helpers.GetPercentage(10080 - Math.Min(10080, HeaderHeight - Chain.Height), 10080);
                     case "PROCESSING_TXHASHSET":
                         return Helpers.GetPercentage((ulong)State.ProcessingStatus, 100);
                     default:
