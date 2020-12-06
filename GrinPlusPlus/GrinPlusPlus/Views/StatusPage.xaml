@@ -10,13 +10,6 @@
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="Black"
     IconImageSource="baseline_settings_applications_white_24.png">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem
-            Command="{Binding LogoutCommand}"
-            Order="Primary"
-            Priority="0"
-            Text="{x:Static resource:AppResources.Close}" />
-    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <Label

@@ -47,6 +47,8 @@ namespace GrinPlusPlus.ViewModels
             }
         }
 
+        public DelegateCommand LogoutCommand => new DelegateCommand(Logout);
+
         public DelegateCommand OpenTransactionDetailsCommand => new DelegateCommand(OpenTransactionDetails);
 
         public DelegateCommand<object> CancelTransactionClickedCommand { get; private set; }
@@ -185,6 +187,18 @@ namespace GrinPlusPlus.ViewModels
             if (SelectedTransaction is null) return;
             await NavigationService.NavigateAsync("TransactionDetailsPage", new NavigationParameters { { "transaction", SelectedTransaction } });
             SelectedTransaction = null;
+        }
+
+        async void Logout()
+        {
+            await DataProvider.DoLogout(await SecureStorage.GetAsync("token"));
+            Settings.IsLoggedIn = false;
+            Preferences.Set("balance_spendable", 0);
+            Preferences.Set("balance_locked", 0);
+            Preferences.Set("balance_immature", 0);
+            Preferences.Set("balance_unconfirmed", 0);
+            Preferences.Set("balance_total", 0);
+            await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/LoginPage");
         }
     }
 }
