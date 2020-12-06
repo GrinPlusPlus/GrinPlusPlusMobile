@@ -73,6 +73,20 @@ namespace GrinPlusPlus.ViewModels
         {
             try
             {
+                var torAddress = await SecureStorage.GetAsync("tor_address");
+                if (!string.IsNullOrEmpty(torAddress))
+                {
+                    try
+                    {
+                        await DataProvider.DeleteONION(torAddress);
+                        SecureStorage.Remove("tor_address");
+                    }
+                    catch (Exception ex)
+                    {
+                        ExceptionMessage = ex.Message;
+                    }
+                }
+
                 ExceptionMessage = string.Empty;
 
                 IsBusy = true;
@@ -85,6 +99,9 @@ namespace GrinPlusPlus.ViewModels
                 var wallet = await DataProvider.DoLogin(Username, Password);
                 if (!string.IsNullOrEmpty(wallet.Token))
                 {
+                    Preferences.Clear();
+                    SecureStorage.RemoveAll();
+
                     await SecureStorage.SetAsync("token", wallet.Token);
                     await SecureStorage.SetAsync("username", Username);
                     await SecureStorage.SetAsync("slatepack_address", wallet.SlatepackAdddress);

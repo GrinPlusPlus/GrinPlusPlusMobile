@@ -192,26 +192,26 @@ namespace GrinPlusPlus.ViewModels
 
         async void Logout()
         {
-            await DataProvider.DoLogout(await SecureStorage.GetAsync("token"));
-            var torAddress = await SecureStorage.GetAsync("tor_address");
-            if (!string.IsNullOrEmpty(torAddress))
+            try
             {
-                try
+                await DataProvider.DoLogout(await SecureStorage.GetAsync("token"));
+                var torAddress = await SecureStorage.GetAsync("tor_address");
+                if (!string.IsNullOrEmpty(torAddress))
                 {
                     await DataProvider.DeleteONION(torAddress);
+                    SecureStorage.Remove("tor_address");
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
             Settings.IsLoggedIn = false;
-            Preferences.Set("balance_spendable", 0);
-            Preferences.Set("balance_locked", 0);
-            Preferences.Set("balance_immature", 0);
-            Preferences.Set("balance_unconfirmed", 0);
-            Preferences.Set("balance_total", 0);
+            
+            Preferences.Clear();
+            SecureStorage.RemoveAll();
+
             await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/LoginPage");
         }
     }

@@ -84,8 +84,6 @@ namespace GrinPlusPlus.Droid
 
         void RunBackend()
         {
-            Java.Lang.Runtime.GetRuntime().Exec(libgrin.AbsolutePath);
-
             Java.Lang.Runtime.GetRuntime().Exec(new string[] {
                 libtor.AbsolutePath,
                 "--ControlPort",
@@ -97,6 +95,8 @@ namespace GrinPlusPlus.Droid
                 "--ignore-missing-torrc",
                 "--quiet"
             });
+
+            Java.Lang.Runtime.GetRuntime().Exec(libgrin.AbsolutePath);
         }
 
         public override void OnDestroy()
