@@ -57,7 +57,10 @@ namespace GrinPlusPlus.ViewModels
                         {
                             ProgressBarr = 1;
                             ProgressPercentage = 100;
-                            await Task.Delay(TimeSpan.FromSeconds(1));
+
+                            Preferences.Clear();
+                            SecureStorage.RemoveAll();
+
                             await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/LoginPage");
                         }
                         else

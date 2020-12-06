@@ -4,6 +4,7 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Util;
 using AndroidX.Core.App;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 using AndroidApp = Android.App.Application;
@@ -39,30 +40,75 @@ namespace GrinPlusPlus.Droid
 
             libtor = new Java.IO.File(Path.Combine(librariesPath, "libtor.so"));
             libgrin = new Java.IO.File(Path.Combine(librariesPath, "libgrin.so"));
+
+            var startTimeSpan = TimeSpan.Zero;
+            var periodTimeSpan = TimeSpan.FromSeconds(10);
+
+            var timer = new System.Threading.Timer(async (e) =>
+            {
+                try
+                {
+                    var nodeStatus = await Service.Node.Instance.Status();
+                    RegisterForegroundService(GetStatusLabel(nodeStatus.SyncStatus));
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(TAG, ex.Message);
+                    RegisterForegroundService($"Error: {ex.Message}");
+                }
+
+            }, null, startTimeSpan, periodTimeSpan);
         }
 
-        public override StartCommandResult OnStartCommand(Android.Content.Intent intent, StartCommandFlags flags, int startId)
+        public override StartCommandResult OnStartCommand(Intent intent, StartCommandFlags flags, int startId)
         {
             Log.Debug(TAG, "GrinNode started");
 
             RunBackend();
 
+            RegisterForegroundService("Initializing...");
+
+            return StartCommandResult.Sticky;
+        }
+
+        private void RegisterForegroundService(string status)
+        {
             if (!channelInitialized)
             {
                 CreateNotificationChannel();
             }
 
             // Work has finished, now dispatch anotification to let the user know.
-            /*NotificationCompat.Builder builder = new NotificationCompat.Builder(AndroidApp.Context, channelId)
-                .SetContentTitle("Grin Node")
-                .SetContentText("A full Grin node is Running.")
+            var notification = new NotificationCompat.Builder(AndroidApp.Context, channelId)
+                .SetContentTitle("Grin Node Status")
+                .SetContentText(status)
                 .SetSmallIcon(Resource.Drawable.logo)
-                .SetDefaults((int)NotificationDefaults.Sound | (int)NotificationDefaults.Vibrate);
+                .SetOngoing(true)
+                .SetDefaults((int)NotificationDefaults.Sound | (int)NotificationDefaults.Vibrate)
+                .Build();
 
-            var notification = builder.Build();
-            manager.Notify(NOTIFICATION_ID, notification);*/
+            StartForeground(NOTIFICATION_ID, notification);
+        }
 
-            return StartCommandResult.Sticky;
+        private string GetStatusLabel(string status)
+        {
+            switch (status)
+            {
+                case "FULLY_SYNCED":
+                    return "Running";
+                case "SYNCING_HEADERS":
+                    return "1/4 Syncing Headers";
+                case "DOWNLOADING_TXHASHSET":
+                    return "2/4 Downloading State";
+                case "PROCESSING_TXHASHSET":
+                    return "3/4 Validating State";
+                case "SYNCING_BLOCKS":
+                    return "4/4 Syncing Blocks";
+                case "NOT_CONNECTED":
+                    return "Waiting for Peers";
+                default:
+                    return "Not Connected";
+            }
         }
 
         void CreateNotificationChannel()
@@ -102,7 +148,7 @@ namespace GrinPlusPlus.Droid
         public override void OnDestroy()
         {
             base.OnDestroy();
-            StopBackend();   
+            StopBackend();
         }
 
         private void StopBackend()

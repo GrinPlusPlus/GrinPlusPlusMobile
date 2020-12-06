@@ -15,7 +15,7 @@ namespace GrinPlusPlus.Droid
             SetContentView(Resource.Layout.Splash);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
-            StartService(new Intent(this, typeof(GrinNodeService)));
+            StartForegroundService(new Intent(this, typeof(GrinNodeService)));
         }
 
         protected override void OnResume()

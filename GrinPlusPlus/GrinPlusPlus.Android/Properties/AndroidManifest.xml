@@ -7,7 +7,8 @@
 	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
   <uses-permission android:name="android.permission.BATTERY_STATS" />
-	<application android:label="Grin++"
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+  <application android:label="Grin++"
                android:allowBackup="false" 
                android:debuggable="false"
                android:largeHeap="true"
