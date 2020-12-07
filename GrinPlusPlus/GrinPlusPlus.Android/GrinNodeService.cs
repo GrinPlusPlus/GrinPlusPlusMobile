@@ -27,6 +27,10 @@ namespace GrinPlusPlus.Droid
         private Java.IO.File libtor;
         private Java.IO.File libgrin;
 
+        private Java.Lang.Process pNode;
+        private Java.Lang.Process pTor;
+
+
         public override IBinder OnBind(Intent intent)
         {
             return null;
@@ -40,6 +44,13 @@ namespace GrinPlusPlus.Droid
 
             libtor = new Java.IO.File(Path.Combine(librariesPath, "libtor.so"));
             libgrin = new Java.IO.File(Path.Combine(librariesPath, "libgrin.so"));
+
+            RunBackend();
+        }
+
+        public override StartCommandResult OnStartCommand(Intent intent, StartCommandFlags flags, int startId)
+        {
+            Log.Debug(TAG, "GrinNode started");
 
             var startTimeSpan = TimeSpan.Zero;
             var periodTimeSpan = TimeSpan.FromSeconds(1);
@@ -58,13 +69,6 @@ namespace GrinPlusPlus.Droid
                 }
 
             }, null, startTimeSpan, periodTimeSpan);
-        }
-
-        public override StartCommandResult OnStartCommand(Intent intent, StartCommandFlags flags, int startId)
-        {
-            Log.Debug(TAG, "GrinNode started");
-
-            RunBackend();
 
             RegisterForegroundService("Initializing...");
 
@@ -130,19 +134,44 @@ namespace GrinPlusPlus.Droid
 
         void RunBackend()
         {
-            Java.Lang.Runtime.GetRuntime().Exec(new string[] {
-                libtor.AbsolutePath,
-                "--ControlPort",
-                "3423",
-                "--SocksPort",
-                "3422",
-                "--HashedControlPassword",
-                "16:906248AB51F939ED605CE9937D3B1FDE65DEB4098A889B2A07AC221D8F",
-                "--ignore-missing-torrc",
-                "--quiet"
-            });
+            RunTor();
+            RunGrinNode();
+        }
 
-            Java.Lang.Runtime.GetRuntime().Exec(libgrin.AbsolutePath);
+        private void RunGrinNode()
+        {
+            try
+            {
+                pTor = Java.Lang.Runtime.GetRuntime().Exec(libgrin.AbsolutePath);
+            }
+            catch (Exception ex)
+            {
+                RegisterForegroundService(ex.Message);
+                RunGrinNode();
+            }
+        }
+
+        private void RunTor()
+        {
+            try
+            {
+                pNode = Java.Lang.Runtime.GetRuntime().Exec(new string[] {
+                    libtor.AbsolutePath,
+                    "--ControlPort",
+                    "3423",
+                    "--SocksPort",
+                    "3422",
+                    "--HashedControlPassword",
+                    "16:906248AB51F939ED605CE9937D3B1FDE65DEB4098A889B2A07AC221D8F",
+                    "--ignore-missing-torrc",
+                    "--quiet"
+                });
+            }
+            catch (Exception ex)
+            {
+                RegisterForegroundService(ex.Message);
+                RunTor();
+            }
         }
 
         public override void OnDestroy()
@@ -155,6 +184,8 @@ namespace GrinPlusPlus.Droid
         {
             Task task = Task.Factory.StartNew(async () => { await Service.Node.Instance.Shutdown(); });
             task.Wait();
+            pNode.Destroy();
+            pTor.Destroy();
         }
     }
 }

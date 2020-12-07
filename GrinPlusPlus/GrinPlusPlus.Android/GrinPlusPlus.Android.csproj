@@ -98,8 +98,11 @@
     <PackageReference Include="Plugin.Fingerprint">
       <Version>2.1.2</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.Biometric">
+      <Version>1.0.1.6</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.1709-pre4" />
-    <PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.6.0-pre4" />
+    <PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.6.0-pre5" />
     <PackageReference Include="Prism.DryIoc.Forms" Version="8.0.0.1909" />
     <PackageReference Include="Xamarin.Plugin.SharedTransitions">
       <Version>2.4.0</Version>

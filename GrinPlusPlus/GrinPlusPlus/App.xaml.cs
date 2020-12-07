@@ -1,12 +1,14 @@
 using GrinPlusPlus.Api;
 using GrinPlusPlus.ViewModels;
 using GrinPlusPlus.Views;
+using Plugin.Fingerprint.Abstractions;
 using Plugin.SharedTransitions;
 using Prism;
+using Prism.Common;
 using Prism.Ioc;
+using System;
 using System.Globalization;
 using System.Threading;
-using Xamarin.Essentials;
 using Xamarin.Essentials.Implementation;
 using Xamarin.Essentials.Interfaces;
 using Xamarin.Forms;
@@ -17,6 +19,8 @@ namespace GrinPlusPlus
 {
     public partial class App
     {
+        string CurrentPage;
+
         public App() : this(null) { }
 
         public App(IPlatformInitializer initializer) : base(initializer) { }
@@ -33,6 +37,7 @@ namespace GrinPlusPlus
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.Register<IDataProvider, GrinPPLocalService>();
+
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
 
             containerRegistry.RegisterForNavigation<SharedTransitionNavigationPage>();
@@ -59,6 +64,22 @@ namespace GrinPlusPlus
             containerRegistry.RegisterForNavigation<InitPage, InitPageViewModel>();
             containerRegistry.RegisterForNavigation<OpeningWalletPage, OpeningWalletPageViewModel>();
             containerRegistry.RegisterForNavigation<BackupWalletPage, BackupWalletPageViewModel>();
+        }
+
+        protected override void OnSleep()
+        {
+            base.OnSleep();
+            CurrentPage = PageUtilities.GetCurrentPage(Application.Current.MainPage).ToString().Split('.')[2];
+        }
+
+        protected override async void OnResume()
+        {
+            base.OnResume();
+            if (!string.IsNullOrEmpty(CurrentPage))
+            {
+               
+            }
+            Console.WriteLine("RESUMED");
         }
     }
 }

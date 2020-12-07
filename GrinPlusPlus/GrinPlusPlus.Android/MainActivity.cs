@@ -1,4 +1,5 @@
 ﻿using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Plugin.Fingerprint;
@@ -12,14 +13,18 @@ namespace GrinPlusPlus.Droid
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            CrossFingerprint.SetCurrentActivityResolver(() => this);
+
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
 
+            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             ZXing.Net.Mobile.Forms.Android.Platform.Init();
 
-            CrossFingerprint.SetCurrentActivityResolver(() => this);
+            StartForegroundService(new Intent(this, typeof(GrinNodeService)));
 
             LoadApplication(new App(new AndroidInitializer()));
         }

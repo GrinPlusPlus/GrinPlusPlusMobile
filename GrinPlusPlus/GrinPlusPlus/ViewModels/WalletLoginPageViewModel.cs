@@ -96,8 +96,10 @@ namespace GrinPlusPlus.ViewModels
                 {
                     throw new Exception(AppResources.ResourceManager.GetString("PasswordCanNotBeEmpty"));
                 }
+
                 var wallet = await DataProvider.DoLogin(Username, Password);
-                if (!string.IsNullOrEmpty(wallet.Token))
+
+                MainThread.BeginInvokeOnMainThread(async () =>
                 {
                     Preferences.Clear();
                     SecureStorage.RemoveAll();
@@ -127,7 +129,7 @@ namespace GrinPlusPlus.ViewModels
                     }
 
                     await NavigationService.NavigateAsync("OpeningWalletPage");
-                }
+                });
             }
             catch (Exception ex)
             {
