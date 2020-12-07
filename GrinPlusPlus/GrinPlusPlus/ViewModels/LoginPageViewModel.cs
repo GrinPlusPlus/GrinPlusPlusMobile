@@ -28,7 +28,7 @@ namespace GrinPlusPlus.ViewModels
         {
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
-                if (Settings.IsLoggedIn == true)
+                if (Settings.IsLoggedIn == true || Settings.Node.Status.Equals("Not Connected"))
                 {
                     return false;
                 }
@@ -85,7 +85,7 @@ namespace GrinPlusPlus.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    Console.WriteLine($"Error Getting accounts: {ex.Message}");
                 }
             });
         }

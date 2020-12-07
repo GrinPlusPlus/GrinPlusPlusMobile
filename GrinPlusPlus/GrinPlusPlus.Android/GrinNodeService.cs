@@ -69,7 +69,9 @@ namespace GrinPlusPlus.Droid
             {
                 if (intent.Action.Equals(Constants.ACTION_STOP_SERVICE))
                 {
-                    Log.Info(TAG, "Stopping Grin Node.");
+                    Log.Info(TAG, "Stopping Grin Node...");
+                    StopBackend();
+                    Log.Info(TAG, "Grin Node stopped.");
                     if (timer != null)
                     {
                         timer.Stop();
@@ -122,7 +124,7 @@ namespace GrinPlusPlus.Droid
 
             // Work has finished, now dispatch anotification to let the user know.
             var notification = new Notification.Builder(AndroidApp.Context, channelId)
-                .SetContentTitle("Grin Node Status")
+                .SetContentTitle("Grin Full Node")
                 .SetContentText(status)
                 .SetSmallIcon(Resource.Drawable.logo)
                 .SetContentIntent(BuildIntentToShowMainActivity())
@@ -232,8 +234,15 @@ namespace GrinPlusPlus.Droid
             {
                 if (pNode.IsAlive)
                 {
-                    Task task = Task.Factory.StartNew(async () => { await Service.Node.Instance.Shutdown(); });
-                    task.Wait();
+                    try
+                    {
+                        Task task = Task.Factory.StartNew(async () => { await Service.Node.Instance.Shutdown(); });
+                        task.Wait();
+                    } catch(Exception ex)
+                    {
+                        Log.Error(TAG, $"Error Stopping Grin Node: {ex.Message}");
+                    }
+                    
                     if (pNode.IsAlive)
                     {
                         pNode.DestroyForcibly();

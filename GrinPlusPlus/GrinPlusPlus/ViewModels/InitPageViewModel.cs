@@ -64,16 +64,11 @@ namespace GrinPlusPlus.ViewModels
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine(ex.Message);
+                        Console.WriteLine($"Error on Init: {ex.Message}");
                     }
                 });
 
-                if (Status.Equals("Running"))
-                {
-                    return false;
-                }
-
-                return true;
+                return !Status.Equals("Running");
             });
         }
 
