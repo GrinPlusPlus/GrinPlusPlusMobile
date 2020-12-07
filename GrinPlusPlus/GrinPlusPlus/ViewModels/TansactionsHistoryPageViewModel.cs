@@ -54,7 +54,7 @@ namespace GrinPlusPlus.ViewModels
                 return true;
             });
         }
- 
+
         private async Task LoadWalletHistory()
         {
             try

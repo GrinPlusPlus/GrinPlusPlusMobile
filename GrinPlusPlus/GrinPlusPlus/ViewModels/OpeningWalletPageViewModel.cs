@@ -38,7 +38,7 @@ namespace GrinPlusPlus.ViewModels
                     Preferences.Set("balance_unconfirmed", balance.Unconfirmed);
                     Preferences.Set("balance_total", balance.Total);
 
-                    await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/DashboardCarouselPage", new NavigationParameters { { "wallet", await SecureStorage.GetAsync("username") } });
+                    await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/DashboardCarouselPage");
                 }
                 catch (Exception ex)
                 {

@@ -2,6 +2,7 @@
 using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
+using Xamarin.Essentials;
 
 namespace GrinPlusPlus.ViewModels
 {
@@ -20,12 +21,9 @@ namespace GrinPlusPlus.ViewModels
             Settings.IsLoggedIn = true;
         }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
+        public override async void OnNavigatedTo(INavigationParameters parameters)
         {
-            if (parameters.ContainsKey("wallet"))
-            {
-                Wallet = (string)parameters["wallet"];
-            }
+            Wallet = await SecureStorage.GetAsync("username");
         }
     }
 }

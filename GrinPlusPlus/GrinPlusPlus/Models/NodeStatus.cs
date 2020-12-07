@@ -76,14 +76,14 @@ namespace GrinPlusPlus.Models
         {
             get
             {
-                switch(_syncStatus)
+                switch (_syncStatus)
                 {
                     case "SYNCING_HEADERS":
                         return Helpers.GetFraction(HeaderHeight, Network.Height);
                     case "DOWNLOADING_TXHASHSET":
                         return Helpers.GetFraction(State.Downloaded, State.DownloadSize);
                     case "SYNCING_BLOCKS":
-                        if(HeaderHeight < 10080)
+                        if (HeaderHeight < 10080)
                         {
                             return Helpers.GetFraction(Chain.Height, HeaderHeight);
                         }

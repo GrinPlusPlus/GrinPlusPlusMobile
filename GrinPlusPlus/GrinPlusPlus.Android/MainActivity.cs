@@ -24,8 +24,6 @@ namespace GrinPlusPlus.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             ZXing.Net.Mobile.Forms.Android.Platform.Init();
 
-            StartForegroundService(new Intent(this, typeof(GrinNodeService)));
-
             LoadApplication(new App(new AndroidInitializer()));
         }
 

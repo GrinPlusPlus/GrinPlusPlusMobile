@@ -16,7 +16,7 @@
                 Padding="20,25,20,0"
                 FontSize="22"
                 HorizontalOptions="Start"
-                Text="{Binding Status.SyncStatus}"
+                Text="{Binding Status}"
                 TextColor="White"
                 VerticalOptions="Center" />
             <BoxView
@@ -48,7 +48,7 @@
                 <Label
                     Grid.Row="1"
                     Grid.Column="0"
-                    Text="{Binding Status.HeaderHeight}"
+                    Text="{Binding HeaderHeight}"
                     TextColor="White" />
                 <Label
                     Grid.Row="0"
@@ -59,7 +59,7 @@
                 <Label
                     Grid.Row="1"
                     Grid.Column="1"
-                    Text="{Binding Status.Chain.Height}"
+                    Text="{Binding Blocks}"
                     TextColor="White" />
                 <Label
                     Grid.Row="0"
@@ -70,7 +70,7 @@
                 <Label
                     Grid.Row="1"
                     Grid.Column="2"
-                    Text="{Binding Status.Network.Height}"
+                    Text="{Binding NetworkHeight}"
                     TextColor="White" />
             </Grid>
             <Label

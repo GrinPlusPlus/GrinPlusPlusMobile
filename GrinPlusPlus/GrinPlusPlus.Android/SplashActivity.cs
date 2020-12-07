@@ -13,6 +13,8 @@ namespace GrinPlusPlus.Droid
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Splash);
+
+            StartForegroundService(new Intent(this, typeof(GrinNodeService)));
         }
 
         protected override void OnResume()

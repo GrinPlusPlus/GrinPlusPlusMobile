@@ -1,6 +1,5 @@
 ﻿using GrinPlusPlus.Api;
 using GrinPlusPlus.Models;
-using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
@@ -14,11 +13,32 @@ namespace GrinPlusPlus.ViewModels
 {
     public class StatusPageViewModel : ViewModelBase
     {
-        private NodeStatus status;
-        public NodeStatus Status
+        private string status = Settings.Node.Status;
+        public string Status
         {
             get { return status; }
             set { SetProperty(ref status, value); }
+        }
+
+        private int headerHeight = Settings.Node.HeaderHeight;
+        public int HeaderHeight
+        {
+            get { return headerHeight; }
+            set { SetProperty(ref headerHeight, value); }
+        }
+
+        private int blocks = Settings.Node.Blocks;
+        public int Blocks
+        {
+            get { return blocks; }
+            set { SetProperty(ref blocks, value); }
+        }
+
+        private int networkHeight = Settings.Node.NetworkHeight;
+        public int NetworkHeight
+        {
+            get { return networkHeight; }
+            set { SetProperty(ref networkHeight, value); }
         }
 
         private ObservableCollection<Peer> _connectedPeers;
@@ -27,88 +47,82 @@ namespace GrinPlusPlus.ViewModels
             get { return _connectedPeers; }
             set { SetProperty(ref _connectedPeers, value); }
         }
-        public DelegateCommand LogoutCommand => new DelegateCommand(Logout);
 
-        async void Logout()
-        {
-            await DataProvider.DoLogout(await SecureStorage.GetAsync("token"));
-            Settings.IsLoggedIn = false;
-            Preferences.Set("balance_spendable", 0);
-            Preferences.Set("balance_locked", 0);
-            Preferences.Set("balance_immature", 0);
-            Preferences.Set("balance_unconfirmed", 0);
-            Preferences.Set("balance_total", 0);
-            await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/LoginPage");
-        }
 
         public StatusPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
             ConnectedPeers = new ObservableCollection<Peer>();
 
-            Device.StartTimer(TimeSpan.FromSeconds(3), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
-                MainThread.BeginInvokeOnMainThread(async () =>
+                if (Settings.IsLoggedIn == false)
                 {
-                    try
-                    {
-                        var status = await DataProvider.GetNodeStatus();
-                        if (Status == null)
-                        {
-                            Status = status;
-                            return;
-                        }
-                        if (!status.Chain.Height.Equals(Status.Chain.Height) || !status.HeaderHeight.Equals(Status.HeaderHeight) || !status.Network.Height.Equals(Status.Network.Height))
-                        {
-                            Status = status;
-                            return;
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Console.WriteLine(ex.Message);
-                    }
-                });
-                return Settings.IsLoggedIn;
+                    return false;
+                }
+
+                if (!Status.Equals(Settings.Node.Status))
+                {
+                    Status = Settings.Node.Status;
+                }
+                if (!HeaderHeight.Equals(Settings.Node.HeaderHeight))
+                {
+                    HeaderHeight = Settings.Node.HeaderHeight;
+                }
+                if (!Blocks.Equals(Settings.Node.Blocks))
+                {
+                    Blocks = Settings.Node.Blocks;
+                }
+                if (!NetworkHeight.Equals(Settings.Node.NetworkHeight))
+                {
+                    NetworkHeight = Settings.Node.NetworkHeight;
+                }
+                return true;
             });
 
             Device.StartTimer(TimeSpan.FromSeconds(5), () =>
             {
-                MainThread.BeginInvokeOnMainThread(async () =>
+                if (Settings.IsLoggedIn == false)
                 {
-                    try
-                    {
-                        var connectedPeers = await DataProvider.GetNodeConnectedPeers();
-                        
-                        if(connectedPeers.Count>0)
-                        {
-                            if (ConnectedPeers.Count > 0)
-                            {
-                                foreach (Peer peer in ConnectedPeers)
-                                {
-                                    if (!connectedPeers.Any(p => p.Address.Equals(peer.Address)))
-                                    {
-                                        ConnectedPeers.Remove(peer);
-                                    }
-                                }
-                            }
+                    return false;
+                }
 
-                            foreach (Peer peer in connectedPeers)
+                ListConnectedPeers();
+
+                return true;
+            });
+        }
+
+        private void ListConnectedPeers()
+        {
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                try
+                {
+                    var connectedPeers = await DataProvider.GetNodeConnectedPeers();
+                    if (ConnectedPeers.Count > 0)
+                    {
+                        foreach (Peer peer in ConnectedPeers)
+                        {
+                            if (!connectedPeers.Any(p => p.Address.Equals(peer.Address)))
                             {
-                                if (!ConnectedPeers.Any(p => p.Address.Equals(peer.Address)))
-                                {
-                                    ConnectedPeers.Add(peer);
-                                }
+                                ConnectedPeers.Remove(peer);
                             }
                         }
-                        
                     }
-                    catch (Exception ex)
+
+                    foreach (Peer peer in connectedPeers)
                     {
-                        Console.WriteLine(ex.Message);
+                        if (!ConnectedPeers.Any(p => p.Address.Equals(peer.Address)))
+                        {
+                            ConnectedPeers.Add(peer);
+                        }
                     }
-                });
-                return Settings.IsLoggedIn;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
             });
         }
     }

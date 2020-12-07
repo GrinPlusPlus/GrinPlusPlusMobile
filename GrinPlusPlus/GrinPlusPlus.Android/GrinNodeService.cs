@@ -4,9 +4,11 @@ using Android.Content.PM;
 using Android.OS;
 using Android.Util;
 using AndroidX.Core.App;
+
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using AndroidApp = Android.App.Application;
 
 namespace GrinPlusPlus.Droid
@@ -30,7 +32,6 @@ namespace GrinPlusPlus.Droid
         private Java.Lang.Process pNode;
         private Java.Lang.Process pTor;
 
-
         public override IBinder OnBind(Intent intent)
         {
             return null;
@@ -45,29 +46,36 @@ namespace GrinPlusPlus.Droid
             libtor = new Java.IO.File(Path.Combine(librariesPath, "libtor.so"));
             libgrin = new Java.IO.File(Path.Combine(librariesPath, "libgrin.so"));
 
+            Preferences.Set("Status", GetStatusLabel(string.Empty));
+
             RunBackend();
         }
 
         public override StartCommandResult OnStartCommand(Intent intent, StartCommandFlags flags, int startId)
         {
-            Log.Debug(TAG, "GrinNode started");
-
             var startTimeSpan = TimeSpan.Zero;
             var periodTimeSpan = TimeSpan.FromSeconds(1);
 
             var timer = new System.Threading.Timer(async (e) =>
             {
+                var label = string.Empty;
                 try
                 {
                     var nodeStatus = await Service.Node.Instance.Status();
-                    RegisterForegroundService(GetStatusLabel(nodeStatus.SyncStatus));
+                    
+                    label = GetStatusLabel(nodeStatus.SyncStatus);
+
+                    Preferences.Set("HeaderHeight", nodeStatus.HeaderHeight);
+                    Preferences.Set("Blocks", nodeStatus.Chain.Height);
+                    Preferences.Set("NetworkHeight", nodeStatus.Network.Height);
                 }
                 catch (Exception ex)
                 {
                     Log.Error(TAG, ex.Message);
-                    RegisterForegroundService($"Error: {ex.Message}");
+                    label = GetStatusLabel(string.Empty);
                 }
-
+                Preferences.Set("Status", label);
+                RegisterForegroundService(label);
             }, null, startTimeSpan, periodTimeSpan);
 
             RegisterForegroundService("Initializing...");
@@ -101,13 +109,13 @@ namespace GrinPlusPlus.Droid
                 case "FULLY_SYNCED":
                     return "Running";
                 case "SYNCING_HEADERS":
-                    return "1/4 Syncing Headers";
+                    return "Syncing Headers";
                 case "DOWNLOADING_TXHASHSET":
-                    return "2/4 Downloading State";
+                    return "Downloading State";
                 case "PROCESSING_TXHASHSET":
-                    return "3/4 Validating State";
+                    return "Validating State";
                 case "SYNCING_BLOCKS":
-                    return "4/4 Syncing Blocks";
+                    return "Syncing Blocks";
                 case "NOT_CONNECTED":
                     return "Waiting for Peers";
                 default:
@@ -177,15 +185,29 @@ namespace GrinPlusPlus.Droid
         public override void OnDestroy()
         {
             base.OnDestroy();
+            Preferences.Set("Status", GetStatusLabel(string.Empty));
             StopBackend();
         }
 
         private void StopBackend()
         {
-            Task task = Task.Factory.StartNew(async () => { await Service.Node.Instance.Shutdown(); });
-            task.Wait();
-            pNode.Destroy();
-            pTor.Destroy();
+            if (pNode != null)
+            {
+                if (pNode.IsAlive)
+                {
+                    Task task = Task.Factory.StartNew(async () => { await Service.Node.Instance.Shutdown(); });
+                    task.Wait();
+                    if (pNode.IsAlive)
+                    {
+                        pNode.DestroyForcibly();
+                    }
+                }
+
+            }
+            if (pTor.IsAlive)
+            {
+                pTor.DestroyForcibly();
+            }
         }
     }
 }

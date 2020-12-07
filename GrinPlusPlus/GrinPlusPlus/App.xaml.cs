@@ -1,12 +1,10 @@
 using GrinPlusPlus.Api;
 using GrinPlusPlus.ViewModels;
 using GrinPlusPlus.Views;
-using Plugin.Fingerprint.Abstractions;
 using Plugin.SharedTransitions;
 using Prism;
 using Prism.Common;
 using Prism.Ioc;
-using System;
 using System.Globalization;
 using System.Threading;
 using Xamarin.Essentials.Implementation;
@@ -19,8 +17,6 @@ namespace GrinPlusPlus
 {
     public partial class App
     {
-        string CurrentPage;
-
         public App() : this(null) { }
 
         public App(IPlatformInitializer initializer) : base(initializer) { }
@@ -31,7 +27,21 @@ namespace GrinPlusPlus
 
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("InitPage");
+            string destination = "InitPage";
+
+            if (!Settings.Node.Status.Equals("Not Connected"))
+            {
+                if (Settings.IsLoggedIn)
+                {
+                    destination = "/SharedTransitionNavigationPage/DashboardCarouselPage";
+                }
+                else
+                {
+                    destination = "/SharedTransitionNavigationPage/LoginPage";
+                }
+            }
+
+            await NavigationService.NavigateAsync(destination);
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -69,17 +79,12 @@ namespace GrinPlusPlus
         protected override void OnSleep()
         {
             base.OnSleep();
-            CurrentPage = PageUtilities.GetCurrentPage(Application.Current.MainPage).ToString().Split('.')[2];
+            Settings.CurrentPage = PageUtilities.GetCurrentPage(Application.Current.MainPage).ToString().Split('.')[2];
         }
 
-        protected override async void OnResume()
+        protected override void OnResume()
         {
             base.OnResume();
-            if (!string.IsNullOrEmpty(CurrentPage))
-            {
-               
-            }
-            Console.WriteLine("RESUMED");
         }
     }
 }
