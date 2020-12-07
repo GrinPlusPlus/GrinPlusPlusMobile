@@ -164,7 +164,7 @@ namespace GrinPlusPlus.ViewModels
 
                 foreach (Transaction transaction in transactions)
                 {
-                    if (Transactions.Any(t => t.Id == transaction.Id))
+                    if (!Transactions.Any(t => t.Id == transaction.Id))
                     {
                         update = true;
                         break;
