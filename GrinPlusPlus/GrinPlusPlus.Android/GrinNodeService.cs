@@ -3,13 +3,13 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Util;
-using AndroidX.Core.App;
 
 using System;
 using System.IO;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using AndroidApp = Android.App.Application;
+
 
 namespace GrinPlusPlus.Droid
 {
@@ -18,11 +18,12 @@ namespace GrinPlusPlus.Droid
     {
         static readonly string TAG = typeof(GrinNodeService).FullName;
 
+        private System.Timers.Timer timer;
+
         const string channelId = "default";
         const string channelName = "Default";
         const string channelDescription = "The default channel for notifications.";
 
-        const int NOTIFICATION_ID = 733100;
         NotificationManager manager;
         bool channelInitialized = false;
 
@@ -47,40 +48,69 @@ namespace GrinPlusPlus.Droid
             libgrin = new Java.IO.File(Path.Combine(librariesPath, "libgrin.so"));
 
             Preferences.Set("Status", GetStatusLabel(string.Empty));
-
+            
+            Log.Info(TAG, "Starting Grin Node.");
             RunBackend();
         }
 
         public override StartCommandResult OnStartCommand(Intent intent, StartCommandFlags flags, int startId)
         {
-            var startTimeSpan = TimeSpan.Zero;
-            var periodTimeSpan = TimeSpan.FromSeconds(1);
-
-            var timer = new System.Threading.Timer(async (e) =>
+            if (intent.Action == null)
             {
-                var label = string.Empty;
-                try
+                
+                var startTimeSpan = TimeSpan.Zero;
+                var periodTimeSpan = TimeSpan.FromSeconds(1).Milliseconds;
+
+                timer = new System.Timers.Timer(1000);
+                timer.Elapsed += OnTimedEvent;
+                timer.Start();
+            }
+            else
+            {
+                if (intent.Action.Equals(Constants.ACTION_STOP_SERVICE))
                 {
-                    var nodeStatus = await Service.Node.Instance.Status();
-                    
-                    label = GetStatusLabel(nodeStatus.SyncStatus);
-
-                    Preferences.Set("HeaderHeight", nodeStatus.HeaderHeight);
-                    Preferences.Set("Blocks", nodeStatus.Chain.Height);
-                    Preferences.Set("NetworkHeight", nodeStatus.Network.Height);
+                    Log.Info(TAG, "Stopping Grin Node.");
+                    if (timer != null)
+                    {
+                        timer.Stop();
+                        timer.Enabled = false;
+                    }
+                    Preferences.Set("Status", GetStatusLabel(string.Empty));
+                    StopForeground(true);
+                    StopSelf();
                 }
-                catch (Exception ex)
+                else if (intent.Action.Equals(Constants.ACTION_RESTART_NODE))
                 {
-                    Log.Error(TAG, ex.Message);
-                    label = GetStatusLabel(string.Empty);
+                    Log.Info(TAG, "Restarting Grin Node.");
+                    StopBackend();
+                    RunBackend();
                 }
-                Preferences.Set("Status", label);
-                RegisterForegroundService(label);
-            }, null, startTimeSpan, periodTimeSpan);
+            }
 
-            RegisterForegroundService("Initializing...");
-
+            // This tells Android not to restart the service if it is killed to reclaim resources.
             return StartCommandResult.Sticky;
+        }
+
+        private async void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
+        {
+            var label = string.Empty;
+            try
+            {
+                var nodeStatus = await Service.Node.Instance.Status();
+
+                label = GetStatusLabel(nodeStatus.SyncStatus);
+
+                Preferences.Set("HeaderHeight", nodeStatus.HeaderHeight);
+                Preferences.Set("Blocks", nodeStatus.Chain.Height);
+                Preferences.Set("NetworkHeight", nodeStatus.Network.Height);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(TAG, $"Error {ex.Message}");
+                label = GetStatusLabel(string.Empty);
+            }
+            Preferences.Set("Status", label);
+            RegisterForegroundService(label);
         }
 
         private void RegisterForegroundService(string status)
@@ -91,18 +121,21 @@ namespace GrinPlusPlus.Droid
             }
 
             // Work has finished, now dispatch anotification to let the user know.
-            var notification = new NotificationCompat.Builder(AndroidApp.Context, channelId)
+            var notification = new Notification.Builder(AndroidApp.Context, channelId)
                 .SetContentTitle("Grin Node Status")
                 .SetContentText(status)
                 .SetSmallIcon(Resource.Drawable.logo)
+                .SetContentIntent(BuildIntentToShowMainActivity())
                 .SetOngoing(true)
-                .SetDefaults((int)NotificationDefaults.Sound | (int)NotificationDefaults.Vibrate)
+                .AddAction(BuildRestartNodeAction())
+                .AddAction(BuildStopServiceAction())
                 .Build();
 
-            StartForeground(NOTIFICATION_ID, notification);
+            // Enlist this instance of the service as a foreground service
+            StartForeground(Constants.SERVICE_RUNNING_NOTIFICATION_ID, notification);
         }
 
-        private string GetStatusLabel(string status)
+        private static string GetStatusLabel(string status)
         {
             switch (status)
             {
@@ -187,6 +220,10 @@ namespace GrinPlusPlus.Droid
             base.OnDestroy();
             Preferences.Set("Status", GetStatusLabel(string.Empty));
             StopBackend();
+            if (timer != null)
+            {
+                timer.Stop();
+            }
         }
 
         private void StopBackend()
@@ -202,12 +239,63 @@ namespace GrinPlusPlus.Droid
                         pNode.DestroyForcibly();
                     }
                 }
-
             }
-            if (pTor.IsAlive)
+            if (pNode != null)
             {
-                pTor.DestroyForcibly();
+                if (pTor.IsAlive)
+                {
+                    pTor.DestroyForcibly();
+                }
             }
+        }
+
+        /// <summary>
+        /// Builds a PendingIntent that will display the main activity of the app. This is used when the 
+        /// user taps on the notification; it will take them to the main activity of the app.
+        /// </summary>
+        /// <returns>The content intent.</returns>
+        PendingIntent BuildIntentToShowMainActivity()
+        {
+            var notificationIntent = new Intent(this, typeof(MainActivity));
+            notificationIntent.SetAction(Constants.ACTION_MAIN_ACTIVITY);
+            notificationIntent.SetFlags(ActivityFlags.SingleTop | ActivityFlags.ClearTask);
+
+            var pendingIntent = PendingIntent.GetActivity(this, 0, notificationIntent, PendingIntentFlags.UpdateCurrent);
+            return pendingIntent;
+        }
+
+        /// <summary>
+		/// Builds a Notification.Action that will instruct the service to restart the node.
+		/// </summary>
+		/// <returns>The restart node action.</returns>
+		Notification.Action BuildRestartNodeAction()
+        {
+            var restartTimerIntent = new Intent(this, GetType());
+            restartTimerIntent.SetAction(Constants.ACTION_RESTART_NODE);
+            var restartTimerPendingIntent = PendingIntent.GetService(this, 0, restartTimerIntent, 0);
+
+            var builder = new Notification.Action.Builder(null,
+                                              "RESTART",
+                                              restartTimerPendingIntent);
+
+            return builder.Build();
+        }
+
+        /// <summary>
+		/// Builds the Notification.Action that will allow the user to stop the service via the
+		/// notification in the status bar
+		/// </summary>
+		/// <returns>The stop service action.</returns>
+		Notification.Action BuildStopServiceAction()
+        {
+            var stopServiceIntent = new Intent(this, GetType());
+            stopServiceIntent.SetAction(Constants.ACTION_STOP_SERVICE);
+            var stopServicePendingIntent = PendingIntent.GetService(this, 0, stopServiceIntent, 0);
+
+            var builder = new Notification.Action.Builder(null,
+                                                          "STOP",
+                                                          stopServicePendingIntent);
+            return builder.Build();
         }
     }
 }

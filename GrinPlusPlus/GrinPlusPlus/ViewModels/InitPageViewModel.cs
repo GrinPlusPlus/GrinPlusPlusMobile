@@ -43,11 +43,6 @@ namespace GrinPlusPlus.ViewModels
 
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
-                if (Status.Equals("Running"))
-                {
-                    return false;
-                }
-
                 MainThread.BeginInvokeOnMainThread(async () =>
                 {
                     try
@@ -72,6 +67,11 @@ namespace GrinPlusPlus.ViewModels
                         Console.WriteLine(ex.Message);
                     }
                 });
+
+                if (Status.Equals("Running"))
+                {
+                    return false;
+                }
 
                 return true;
             });
