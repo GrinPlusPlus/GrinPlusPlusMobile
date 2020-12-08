@@ -97,9 +97,6 @@ namespace GrinPlusPlus.ViewModels
 
                 MainThread.BeginInvokeOnMainThread(async () =>
                 {
-                    Preferences.Clear();
-                    SecureStorage.RemoveAll();
-
                     await SecureStorage.SetAsync("token", wallet.Token);
                     await SecureStorage.SetAsync("username", Username);
                     await SecureStorage.SetAsync("slatepack_address", wallet.SlatepackAdddress);

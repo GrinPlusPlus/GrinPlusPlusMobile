@@ -1,5 +1,4 @@
 ﻿using GrinPlusPlus.Api;
-using GrinPlusPlus.Resources;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
@@ -52,33 +51,11 @@ namespace GrinPlusPlus.ViewModels
 
         private async void ShareAddress()
         {
-            var share = AppResources.ResourceManager.GetString("ShareAddress");
-            var close = AppResources.ResourceManager.GetString("Close");
-            var slatepack = AppResources.ResourceManager.GetString("SlatepackAddress");
-            var tor = AppResources.ResourceManager.GetString("TorAddress");
-
-            var selectedMethod = await PageDialogService.DisplayActionSheetAsync(share, close, null, slatepack, tor);
-            if (selectedMethod == null)
+            await Share.RequestAsync(new ShareTextRequest
             {
-                return;
-            }
-
-            if (selectedMethod.Equals(slatepack))
-            {
-                await Share.RequestAsync(new ShareTextRequest
-                {
-                    Text = SlatepackAddress,
-                    Title = "grin"
-                });
-            }
-            else if (selectedMethod.Equals(tor))
-            {
-                await Share.RequestAsync(new ShareTextRequest
-                {
-                    Text = TorAddress,
-                    Title = "grin"
-                });
-            }
+                Text = SlatepackAddress,
+                Title = "grin"
+            });
         }
 
         public DelegateCommand OpenBackupWalletPageCommand => new DelegateCommand(OpenBackupWalletPage);
@@ -95,18 +72,22 @@ namespace GrinPlusPlus.ViewModels
             {
                 SlatepackAddress = await SecureStorage.GetAsync("slatepack_address");
                 TorAddress = await SecureStorage.GetAsync("tor_address");
-                await UpdateAvailability();
             });
-            
+
 
             Device.StartTimer(TimeSpan.FromSeconds(10), () =>
             {
+                if(Settings.IsLoggedIn == false)
+                {
+                    return false;
+                }
+
                 MainThread.BeginInvokeOnMainThread(async () =>
                 {
                     await UpdateAvailability();
                 });
-                
-                return Settings.IsLoggedIn;
+
+                return true;
             });
         }
 

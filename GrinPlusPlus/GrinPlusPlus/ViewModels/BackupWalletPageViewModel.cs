@@ -1,16 +1,21 @@
 ﻿using GrinPlusPlus.Api;
 using GrinPlusPlus.Resources;
+using Plugin.Fingerprint;
+using Plugin.Fingerprint.Abstractions;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
 using System;
+using System.Threading;
 using Xamarin.Essentials;
 
 namespace GrinPlusPlus.ViewModels
 {
     public class BackupWalletPageViewModel : ViewModelBase
     {
+        private CancellationTokenSource _cancel;
+
         private string _exceptionMessage = "";
         public string ExceptionMessage
         {
@@ -75,7 +80,32 @@ namespace GrinPlusPlus.ViewModels
                 {
                     throw new Exception(AppResources.ResourceManager.GetString("PasswordCanNotBeEmpty"));
                 }
-                WalletSeed = await DataProvider.BackupWallet(Username, Password);
+
+                var seed = await DataProvider.BackupWallet(Username, Password);
+
+                if (await CrossFingerprint.Current.IsAvailableAsync(true))
+                {
+                    _cancel = new CancellationTokenSource();
+
+                    var wallet = Username.ToUpper();
+                    var message = AppResources.ResourceManager.GetString("ConfirmIdentity");
+
+                    var dialogConfig = new AuthenticationRequestConfiguration(wallet, message)
+                    {
+                        CancelTitle = null,
+                        FallbackTitle = null,
+                        AllowAlternativeAuthentication = true
+                    };
+
+                    var result = await CrossFingerprint.Current.AuthenticateAsync(dialogConfig, _cancel.Token);
+
+                    if (!result.Authenticated)
+                    {
+                        return;
+                    }
+                }
+
+                WalletSeed = seed;
             }
             catch (Exception ex)
             {

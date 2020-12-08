@@ -1,13 +1,20 @@
 ﻿using GrinPlusPlus.Api;
+using GrinPlusPlus.Resources;
+using Plugin.Fingerprint;
+using Plugin.Fingerprint.Abstractions;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
+using System.Threading;
+using Xamarin.Essentials;
 
 namespace GrinPlusPlus.ViewModels
 {
     public class SendingGrinsPageViewModel : ViewModelBase
     {
+        private CancellationTokenSource _cancel;
+
         private double _amount = 0;
         public double Amount
         {
@@ -47,6 +54,28 @@ namespace GrinPlusPlus.ViewModels
 
         async void SendUsingTor()
         {
+            if (await CrossFingerprint.Current.IsAvailableAsync(true))
+            {
+                _cancel = new CancellationTokenSource();
+
+                var wallet = (await SecureStorage.GetAsync("username")).ToUpper();
+                var message = AppResources.ResourceManager.GetString("ConfirmIdentity");
+
+                var dialogConfig = new AuthenticationRequestConfiguration(wallet, message)
+                {
+                    CancelTitle = null,
+                    FallbackTitle = null,
+                    AllowAlternativeAuthentication = true
+                };
+
+                var result = await CrossFingerprint.Current.AuthenticateAsync(dialogConfig, _cancel.Token);
+
+                if (!result.Authenticated)
+                {
+                    return;
+                }
+            }
+
             await NavigationService.NavigateAsync("SendGrinsUsingTorPage",
                 new NavigationParameters
                 {
