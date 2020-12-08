@@ -6,7 +6,7 @@ using Prism.Services;
 using Prism.Services.Dialogs;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Globalization;
 using Xamarin.Essentials;
 
 namespace GrinPlusPlus.ViewModels
@@ -71,10 +71,12 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _inputs, value); }
         }
 
+        public CultureInfo Culture { get; private set; }
+
         public SetAmountPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
-
+            Culture = new CultureInfo("en-US");
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
@@ -122,33 +124,42 @@ namespace GrinPlusPlus.ViewModels
                 return;
             }
 
-            if(!character.Equals(".") && Amount.Equals($"0{character}"))
+            if (!character.Equals(".") && Amount.Equals($"0{character}"))
             {
                 Amount = $"{character}";
             }
 
             IsValid = !Amount.Trim().Equals("0") && !Amount.Trim().Equals("0.");
 
-            if (Double.Parse(Amount) > Spendable)
+            if ((Amount[Amount.Length - 1]).Equals("."))
+            {
+                IsValid = false;
+                SendMax = false;
+            }
+
+            if (Double.Parse(Amount.Replace(",",""), Culture) > Spendable)
             {
                 IsValid = false;
             }
 
-            if (Double.Parse(Amount) == Spendable)
+            if (Double.Parse(Amount.Replace(",", ""), Culture) == Spendable)
             {
                 SendMax = true;
             }
 
-            TriggerFeeCalculation();
+            if (IsValid)
+            {
+                TriggerFeeCalculation();
+            }
         }
 
-        
+
         void MaxButtonClicked()
         {
             Amount = $"{Spendable}";
             IsValid = !Amount.Trim().Equals("0");
             Fee = $"0.000000000";
-            if (Double.Parse(Amount) == Spendable)
+            if (Double.Parse(Amount.Replace(",", ""), Culture) == Spendable)
             {
                 SendMax = true;
             }
@@ -156,12 +167,21 @@ namespace GrinPlusPlus.ViewModels
 
         async void ContinueButtonClicked()
         {
-            if (Double.Parse(Amount) == Spendable)
+            try
             {
-                SendMax = true;
+                if (Double.Parse(Amount, Culture) == Spendable)
+                {
+                    SendMax = true;
+                }
+                var amount = Amount.Replace(",", "");
+                var fee = Fee.Replace(",", ".");
+
+                await NavigationService.NavigateAsync("EnterAddressMessagePage", new NavigationParameters { { "amount", amount }, { "fee", fee }, { "max", SendMax } });
             }
-            await NavigationService.NavigateAsync("EnterAddressMessagePage",
-                new NavigationParameters { { "amount", Amount }, { "fee", Fee }, { "max", SendMax } });
+            catch (Exception ex)
+            {
+                await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
+            }
         }
 
         private void TriggerFeeCalculation()
@@ -170,7 +190,7 @@ namespace GrinPlusPlus.ViewModels
             {
                 try
                 {
-                    FeeEstimation estimation = await DataProvider.EstimateFee(await SecureStorage.GetAsync("token"), Double.Parse(Amount));
+                    FeeEstimation estimation = await DataProvider.EstimateFee(await SecureStorage.GetAsync("token"), Double.Parse(Amount.Replace(",", ""), Culture));
                     Fee = (estimation.Fee / Math.Pow(10, 9)).ToString("F9");
                     Inputs = estimation.Inputs;
                 }

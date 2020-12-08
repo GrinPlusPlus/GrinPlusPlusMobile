@@ -101,7 +101,7 @@ namespace GrinPlusPlus.ViewModels
 
             if (parameters.ContainsKey("fee"))
             {
-                Fee = (double)parameters["fee"];
+                Fee = (double)parameters["fee"]; ;
             }
 
             if (parameters.ContainsKey("address"))
@@ -113,7 +113,7 @@ namespace GrinPlusPlus.ViewModels
             {
                 Message = (string)parameters["message"];
             }
-            
+
             if (parameters.ContainsKey("max"))
             {
                 SendMax = (bool)parameters["max"];

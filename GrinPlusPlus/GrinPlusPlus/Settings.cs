@@ -1,4 +1,5 @@
-﻿using Xamarin.Essentials;
+﻿using System.Globalization;
+using Xamarin.Essentials;
 
 namespace GrinPlusPlus
 {
@@ -28,6 +29,12 @@ namespace GrinPlusPlus
             set => Preferences.Set(nameof(CurrentPage), value);
         }
 
+        public static string CurrentCultureInfo
+        {
+            get => Preferences.Get(nameof(CurrentCultureInfo), new CultureInfo("en-US").Name);
+            set => Preferences.Set(nameof(CurrentCultureInfo), value);
+        }
+
         public static class Node
         {
             public static string Status
@@ -52,6 +59,12 @@ namespace GrinPlusPlus
             {
                 get => Preferences.Get(nameof(NetworkHeight), 0);
                 set => Preferences.Set(nameof(NetworkHeight), value);
+            }
+
+            public static double ProgressPercentage
+            {
+                get => Preferences.Get(nameof(ProgressPercentage), (double)0);
+                set => Preferences.Set(nameof(ProgressPercentage), value);
             }
         }
     }

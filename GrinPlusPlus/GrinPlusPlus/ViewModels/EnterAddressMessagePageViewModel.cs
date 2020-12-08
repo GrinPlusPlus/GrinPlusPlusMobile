@@ -3,7 +3,6 @@ using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
-using System;
 using ZXing.Mobile;
 
 namespace GrinPlusPlus.ViewModels
@@ -99,11 +98,11 @@ namespace GrinPlusPlus.ViewModels
                 case Prism.Navigation.NavigationMode.New:
                     if (parameters.ContainsKey("amount"))
                     {
-                        Amount = Double.Parse((string)parameters["amount"]);
+                        Amount = (double)parameters["amount"];
                     }
                     if (parameters.ContainsKey("fee"))
                     {
-                        Fee = Double.Parse((string)parameters["fee"]);
+                        Fee = (double)parameters["fee"];
                     }
                     if (parameters.ContainsKey("max"))
                     {

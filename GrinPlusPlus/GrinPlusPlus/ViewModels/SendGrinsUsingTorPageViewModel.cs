@@ -96,10 +96,11 @@ namespace GrinPlusPlus.ViewModels
                     {
                         string token = await SecureStorage.GetAsync("token");
                         SendingResponse = await DataProvider.SendGrins(token, Address, Amount, Message, null, "SMALLEST", SendMax);
-                        if(SendingResponse.Status.ToLower().Equals("finalized"))
+                        if (SendingResponse.Status.ToLower().Equals("finalized"))
                         {
                             await NavigationService.GoBackToRootAsync();
-                        } else
+                        }
+                        else
                         {
                             await NavigationService.NavigateAsync("SendGrinsUsingQRPage", new NavigationParameters { { "sending_response", SendingResponse } });
                         }

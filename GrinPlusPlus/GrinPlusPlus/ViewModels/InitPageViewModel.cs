@@ -40,18 +40,22 @@ namespace GrinPlusPlus.ViewModels
             Preferences.Clear();
             SecureStorage.RemoveAll();
 
-            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(2), () =>
             {
+                if (Settings.Node.Status.Equals("Running"))
+                {
+                    return false;
+                }
+
                 MainThread.BeginInvokeOnMainThread(async () =>
                 {
                     try
                     {
-                        var status = await DataProvider.GetNodeStatus();
-                        Status = status.SyncStatus;
+                        Status = Settings.Node.Status;
 
                         if (!Status.Equals("Running"))
                         {
-                            ProgressBarr = status.ProgressPercentage;
+                            ProgressBarr = Settings.Node.ProgressPercentage;
                             ProgressPercentage = (ProgressBarr * 100).ToString("F");
                             return;
                         }
@@ -63,11 +67,12 @@ namespace GrinPlusPlus.ViewModels
                     }
                     catch (Exception ex)
                     {
+                        
                         Console.WriteLine($"Error on Init: {ex.Message}");
                     }
                 });
 
-                return !Status.Equals("Running");
+                return true;
             });
         }
     }

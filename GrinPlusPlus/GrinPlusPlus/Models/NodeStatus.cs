@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GrinPlusPlus.Service;
+using System;
 
 namespace GrinPlusPlus.Models
 {
@@ -72,29 +73,5 @@ namespace GrinPlusPlus.Models
         }
 
         public string Agent { get; set; }
-        public double ProgressPercentage
-        {
-            get
-            {
-                switch (_syncStatus)
-                {
-                    case "SYNCING_HEADERS":
-                        return Helpers.GetFraction(HeaderHeight, Network.Height);
-                    case "DOWNLOADING_TXHASHSET":
-                        return Helpers.GetFraction(State.Downloaded, State.DownloadSize);
-                    case "SYNCING_BLOCKS":
-                        if (HeaderHeight < 10080)
-                        {
-                            return Helpers.GetFraction(Chain.Height, HeaderHeight);
-                        }
-                        return Helpers.GetFraction(10080 - Math.Min(10080, HeaderHeight - Chain.Height), 10080);
-                    case "PROCESSING_TXHASHSET":
-                        return Helpers.GetFraction((ulong)State.ProcessingStatus, 100);
-                    default:
-                        return 0;
-                }
-            }
-        }
-
     }
 }

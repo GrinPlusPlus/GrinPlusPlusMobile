@@ -33,6 +33,8 @@ namespace GrinPlusPlus.Droid
         private Java.Lang.Process pNode;
         private Java.Lang.Process pTor;
 
+        public Java.IO.File dataFolder { get; private set; }
+
         public override IBinder OnBind(Intent intent)
         {
             return null;
@@ -44,19 +46,21 @@ namespace GrinPlusPlus.Droid
 
             var librariesPath = PackageManager.GetApplicationInfo(ApplicationInfo.PackageName, PackageInfoFlags.SharedLibraryFiles).NativeLibraryDir;
 
-            libtor = new Java.IO.File(Path.Combine(librariesPath, "libtor.so"));
-            libgrin = new Java.IO.File(Path.Combine(librariesPath, "libgrin.so"));
+            libtor = new Java.IO.File(System.IO.Path.Combine(librariesPath, "libtor.so"));
+            libgrin = new Java.IO.File(System.IO.Path.Combine(librariesPath, "libgrin.so"));
 
-            Preferences.Set("Status", GetStatusLabel(string.Empty));
+            Preferences.Set("Status", Service.SyncHelpers.GetStatusLabel(string.Empty));
+            Preferences.Set("ProgressPercentage", (double)0);
 
             SetTimer();
+
+            dataFolder = new Java.IO.File(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), ".GrinPP/MAINNET/NODE"));
         }
 
         public override StartCommandResult OnStartCommand(Intent intent, StartCommandFlags flags, int startId)
         {
             if (intent.Action == null)
             {
-                Log.Info(TAG, "Starting Grin Node.");
                 RegisterForegroundService("Initializing node");
                 RunBackend();
             }
@@ -64,23 +68,29 @@ namespace GrinPlusPlus.Droid
             {
                 if (intent.Action.Equals(Constants.ACTION_STOP_SERVICE))
                 {
-                    Log.Info(TAG, "Stopping Grin Node...");
+                    Log.Info(TAG, "Stop Service called.");
                     StopBackend();
-                    Log.Info(TAG, "Grin Node stopped.");
+
                     if (timer != null)
                     {
                         timer.Stop();
                         timer.Enabled = false;
                     }
-                    Preferences.Set("Status", GetStatusLabel(string.Empty));
+
                     StopForeground(true);
                     StopSelf();
                 }
                 else if (intent.Action.Equals(Constants.ACTION_RESTART_NODE))
                 {
-                    Log.Info(TAG, "Restarting Grin Node...");
+                    Log.Info(TAG, "Restart Grin Node called.");
                     StopBackend();
-                    RunBackend();
+                    RunTor();
+                    Task.Run(async()=>
+                    {
+                        Log.Info(TAG, "Waiting 5 seconds to start the Grin Node again...");
+                        await Task.Delay(5000);
+                        RunGrinNode();
+                    });
                 }
                 else if (intent.Action.Equals(Constants.ACTION_RESYNC_NODE))
                 {
@@ -95,9 +105,9 @@ namespace GrinPlusPlus.Droid
 
         private void SetTimer()
         {
-            timer = new System.Timers.Timer(1000);
+            timer = new System.Timers.Timer(2000);
             timer.Elapsed += OnTimedEvent;
-            Task.Delay(10000).ContinueWith(t => timer.Start());
+            timer.Start();
         }
 
         private async void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
@@ -107,7 +117,9 @@ namespace GrinPlusPlus.Droid
             {
                 var nodeStatus = await Service.Node.Instance.Status();
 
-                label = GetStatusLabel(nodeStatus.SyncStatus);
+                Preferences.Set("ProgressPercentage", Service.SyncHelpers.GetProgressPercentage(nodeStatus));
+
+                label = Service.SyncHelpers.GetStatusLabel(nodeStatus.SyncStatus);
 
                 Preferences.Set("HeaderHeight", nodeStatus.HeaderHeight);
                 Preferences.Set("Blocks", nodeStatus.Chain.Height);
@@ -116,7 +128,7 @@ namespace GrinPlusPlus.Droid
             catch (Exception ex)
             {
                 Log.Error(TAG, $"Error Communication: {ex.Message}");
-                label = GetStatusLabel(string.Empty);
+                label = Service.SyncHelpers.GetStatusLabel(string.Empty);
             }
             Preferences.Set("Status", label);
             RegisterForegroundService(label);
@@ -145,27 +157,6 @@ namespace GrinPlusPlus.Droid
             StartForeground(Constants.SERVICE_RUNNING_NOTIFICATION_ID, notification);
         }
 
-        private static string GetStatusLabel(string status)
-        {
-            switch (status)
-            {
-                case "FULLY_SYNCED":
-                    return "Running";
-                case "SYNCING_HEADERS":
-                    return "Syncing Headers";
-                case "DOWNLOADING_TXHASHSET":
-                    return "Downloading State";
-                case "PROCESSING_TXHASHSET":
-                    return "Validating State";
-                case "SYNCING_BLOCKS":
-                    return "Syncing Blocks";
-                case "NOT_CONNECTED":
-                    return "Waiting for Peers";
-                default:
-                    return "Not Connected";
-            }
-        }
-
         void CreateNotificationChannel()
         {
             manager = (NotificationManager)AndroidApp.Context.GetSystemService(AndroidApp.NotificationService);
@@ -192,31 +183,18 @@ namespace GrinPlusPlus.Droid
 
         private void RunGrinNode()
         {
-            Task.Run(async () =>
+            Log.Info(TAG, "Starting Grin Node...");
+            pNode = Java.Lang.Runtime.GetRuntime().Exec(libgrin.AbsolutePath);
+            try
             {
-                try
-                {
-                    await Service.Node.Instance.Shutdown();
-                }
-                catch (Exception)
-                {
-                    Log.Info(TAG, "No Grin Node process running.");
-                }
-                finally
-                {
-                    try
-                    {
-                        pNode = Java.Lang.Runtime.GetRuntime().Exec(libgrin.AbsolutePath);
-                        Log.Info(TAG, "Grin Node Started.");
-                    }
-                    catch (Exception ex)
-                    {
-                        RegisterForegroundService(ex.Message);
-                        Log.Error(TAG, $"Error Running Grin Node: {ex.Message}");
-                        RunGrinNode();
-                    }
-                }
-            });
+                var e = pNode.ExitValue();
+                Log.Error(TAG, "ERROR: Grin Node Can't be Started.");
+                RunGrinNode();
+            }
+            catch (Exception)
+            {
+                Log.Info(TAG, "Grin Node Started.");
+            }
         }
 
         private void RunTor()
@@ -238,15 +216,17 @@ namespace GrinPlusPlus.Droid
             catch (Exception ex)
             {
                 RegisterForegroundService(ex.Message);
-                RunTor();
             }
         }
 
         public override void OnDestroy()
         {
             base.OnDestroy();
-            Preferences.Set("Status", GetStatusLabel(string.Empty));
+
+            Preferences.Set("Status", Service.SyncHelpers.GetStatusLabel(string.Empty));
+
             StopBackend();
+
             if (timer != null)
             {
                 timer.Stop();
@@ -255,6 +235,38 @@ namespace GrinPlusPlus.Droid
 
         private void StopBackend()
         {
+            StopTor();
+            StopGrinNode();
+            Preferences.Set("Status", Service.SyncHelpers.GetStatusLabel(string.Empty));
+        }
+
+        private void StopGrinNode()
+        {
+            Log.Info(TAG, "Stopping Grin Node...");
+            try
+            {
+                Service.AsyncHelpers.RunSync(Service.Node.Instance.Shutdown);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(TAG, $"Error Stopping Grin Node: {ex.Message}");
+            }
+            finally
+            {
+                if (pNode != null)
+                {
+                    if (pNode.IsAlive)
+                    {
+                        pNode.DestroyForcibly();
+                    }
+                }
+                Log.Info(TAG, "Grin Node Stopped.");
+            }
+        }
+
+        private void StopTor()
+        {
+            Log.Info(TAG, "Stopping Tor...");
             if (pTor != null)
             {
                 if (pTor.IsAlive)
@@ -262,53 +274,23 @@ namespace GrinPlusPlus.Droid
                     pTor.DestroyForcibly();
                 }
             }
-            if (pNode != null)
-            {
-                if (pNode.IsAlive)
-                {
-                    Task.Run(async () =>
-                    {
-                        try
-                        {
-                            await Service.Node.Instance.Shutdown();
-                        }
-                        catch (Exception ex)
-                        {
-                            Log.Error(TAG, $"Error Stopping Grin Node: {ex.Message}");
-                        }
-                        finally
-                        {
-                            if (pNode.IsAlive)
-                            {
-                                pNode.DestroyForcibly();
-                            }
-                        }
-
-                    });
-                }
-            }
+            Log.Info(TAG, "Tor Stopped.");
         }
 
         private void ResyncNode()
         {
-            if (pNode != null)
+            StopBackend();
+            try
             {
-                if (pNode.IsAlive)
-                {
-
-                    Task.Run(async () =>
-                    {
-                        try
-                        {
-                            await Service.Node.Instance.Resync();
-                            Log.Info(TAG, "Resync signal sent to Grin Node.");
-                        }
-                        catch (Exception ex)
-                        {
-                            Log.Error(TAG, $"Error Trying to Resync Grin Node: {ex.Message}");
-                        }
-                    });
-                }
+                Directory.Delete(dataFolder.AbsolutePath, true);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(TAG, ex.Message);
+            }
+            finally
+            {
+                RunBackend();
             }
         }
 
@@ -333,12 +315,18 @@ namespace GrinPlusPlus.Droid
 		/// <returns>The restart node action.</returns>
 		Notification.Action BuildRestartNodeAction()
         {
+            var action = "Start";
+            var status = Preferences.Get("Status", string.Empty);
+            if (!status.Equals("Not Connected"))
+            {
+                action = "Restart";
+            }
             var restartIntent = new Intent(this, GetType());
             restartIntent.SetAction(Constants.ACTION_RESTART_NODE);
             var restartTimerPendingIntent = PendingIntent.GetService(this, 0, restartIntent, 0);
 
             var builder = new Notification.Action.Builder(null,
-                                              "Restart",
+                                              action,
                                               restartTimerPendingIntent);
 
             return builder.Build();
