@@ -45,6 +45,8 @@ namespace GrinPlusPlus.ViewModels
                     Preferences.Set("balance_unconfirmed", balance.Unconfirmed);
                     Preferences.Set("balance_total", balance.Total);
 
+                    Settings.IsLoggedIn = true;
+
                     if (await CrossFingerprint.Current.IsAvailableAsync(true))
                     {
                         _cancel = new CancellationTokenSource();
@@ -67,7 +69,13 @@ namespace GrinPlusPlus.ViewModels
                         }
                     }
 
-                    await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/DashboardCarouselPage");
+                    if(Settings.IsLoggedIn)
+                    {
+                        await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/DashboardCarouselPage");
+                    } else
+                    {
+                        await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/LoginPage");
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -95,12 +103,10 @@ namespace GrinPlusPlus.ViewModels
                 Console.WriteLine(ex.Message);
             }
 
-            Settings.IsLoggedIn = false;
-
             Preferences.Clear();
             SecureStorage.RemoveAll();
 
-            await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/LoginPage");
+            Settings.IsLoggedIn = false;
         }
     }
 }

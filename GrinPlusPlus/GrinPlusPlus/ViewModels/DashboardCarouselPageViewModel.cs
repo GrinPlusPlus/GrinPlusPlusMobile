@@ -18,7 +18,7 @@ namespace GrinPlusPlus.ViewModels
         public DashboardCarouselPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
-            Settings.IsLoggedIn = true;
+            
         }
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
