@@ -29,7 +29,7 @@ namespace GrinPlusPlus
 
             string destination = "InitPage";
 
-            if (!Settings.Node.Status.Equals("Not Connected"))
+            if (Settings.Node.Status.Equals("Running"))
             {
                 if (Settings.IsLoggedIn)
                 {
