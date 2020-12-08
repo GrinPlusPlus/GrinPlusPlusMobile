@@ -18,7 +18,7 @@ namespace GrinPlusPlus.ViewModels
 {
     public class WalletPageViewModel : ViewModelBase
     {
-        private ObservableCollection<Transaction> _transactions;
+        private ObservableCollection<Transaction> _transactions = new ObservableCollection<Transaction>();
         public ObservableCollection<Transaction> Transactions
         {
             get { return _transactions; }
@@ -75,8 +75,6 @@ namespace GrinPlusPlus.ViewModels
             };
 
             UserCanSend = Balance.Spendable > 0;
-
-            Transactions = new ObservableCollection<Transaction>();
 
             CancelTransactionClickedCommand = new DelegateCommand<object>(CancelTransactionClicked);
 
@@ -139,39 +137,7 @@ namespace GrinPlusPlus.ViewModels
                 var transactions = await DataProvider.GetTransactions(await SecureStorage.GetAsync("token"),
                     new string[] { "SENDING_NOT_FINALIZED", "RECEIVING_IN_PROGRESS", "SENDING_FINALIZED" });
 
-                if (transactions.Count == 0)
-                {
-                    return;
-                }
-
-                if (Transactions.Count == 0)
-                {
-                    Transactions = new ObservableCollection<Transaction>(transactions.ToArray());
-                    return;
-                }
-
-                var update = false;
-
-                foreach (Transaction transaction in Transactions)
-                {
-                    if (transactions.Any(t => t.Id == transaction.Id))
-                    {
-                        continue; 
-                    }
-                    update = true;
-                    break;
-                }
-
-                foreach (Transaction transaction in transactions)
-                {
-                    if (!Transactions.Any(t => t.Id == transaction.Id))
-                    {
-                        update = true;
-                        break;
-                    }
-                }
-
-                if (update)
+                if (Transactions.ToList().Count != transactions.Count)
                 {
                     Transactions = new ObservableCollection<Transaction>(transactions.ToArray());
                 }
