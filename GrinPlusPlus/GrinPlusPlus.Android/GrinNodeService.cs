@@ -212,7 +212,8 @@ namespace GrinPlusPlus.Droid
                     catch (Exception ex)
                     {
                         RegisterForegroundService(ex.Message);
-                        Log.Error(TAG, $"Error Stopping Grin Node: {ex.Message}");
+                        Log.Error(TAG, $"Error Running Grin Node: {ex.Message}");
+                        RunGrinNode();
                     }
                 }
             });
@@ -254,6 +255,13 @@ namespace GrinPlusPlus.Droid
 
         private void StopBackend()
         {
+            if (pTor != null)
+            {
+                if (pTor.IsAlive)
+                {
+                    pTor.DestroyForcibly();
+                }
+            }
             if (pNode != null)
             {
                 if (pNode.IsAlive)
@@ -277,13 +285,6 @@ namespace GrinPlusPlus.Droid
                         }
 
                     });
-                }
-            }
-            if (pTor != null)
-            {
-                if (pTor.IsAlive)
-                {
-                    pTor.DestroyForcibly();
                 }
             }
         }
