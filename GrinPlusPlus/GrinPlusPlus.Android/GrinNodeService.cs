@@ -48,7 +48,7 @@ namespace GrinPlusPlus.Droid
             libgrin = new Java.IO.File(Path.Combine(librariesPath, "libgrin.so"));
 
             Preferences.Set("Status", GetStatusLabel(string.Empty));
-            
+
             Log.Info(TAG, "Starting Grin Node.");
             RunBackend();
         }
@@ -57,7 +57,7 @@ namespace GrinPlusPlus.Droid
         {
             if (intent.Action == null)
             {
-                
+
                 var startTimeSpan = TimeSpan.Zero;
                 var periodTimeSpan = TimeSpan.FromSeconds(1).Milliseconds;
 
@@ -83,9 +83,15 @@ namespace GrinPlusPlus.Droid
                 }
                 else if (intent.Action.Equals(Constants.ACTION_RESTART_NODE))
                 {
-                    Log.Info(TAG, "Restarting Grin Node.");
+                    Log.Info(TAG, "Restarting Grin Node...");
                     StopBackend();
                     RunBackend();
+                    Log.Info(TAG, "Grin Node restarted.");
+                }
+                else if (intent.Action.Equals(Constants.ACTION_RESYNC_NODE))
+                {
+                    Log.Info(TAG, "Resync Grin Node called.");
+                    ResyncNode();
                 }
             }
 
@@ -130,9 +136,10 @@ namespace GrinPlusPlus.Droid
                 .SetContentIntent(BuildIntentToShowMainActivity())
                 .SetOngoing(true)
                 .AddAction(BuildRestartNodeAction())
+                .AddAction(BuildResyncNodeAction())
                 .AddAction(BuildStopServiceAction())
                 .Build();
-            
+
             // Enlist this instance of the service as a foreground service
             StartForeground(Constants.SERVICE_RUNNING_NOTIFICATION_ID, notification);
         }
@@ -239,11 +246,12 @@ namespace GrinPlusPlus.Droid
                     {
                         Task task = Task.Factory.StartNew(async () => { await Service.Node.Instance.Shutdown(); });
                         task.Wait();
-                    } catch(Exception ex)
+                    }
+                    catch (Exception ex)
                     {
                         Log.Error(TAG, $"Error Stopping Grin Node: {ex.Message}");
                     }
-                    
+
                     if (pNode.IsAlive)
                     {
                         pNode.DestroyForcibly();
@@ -255,6 +263,40 @@ namespace GrinPlusPlus.Droid
                 if (pTor.IsAlive)
                 {
                     pTor.DestroyForcibly();
+                }
+            }
+        }
+
+        private void ResyncNode()
+        {
+            if (pNode != null)
+            {
+                if (pNode.IsAlive)
+                {
+                    try
+                    {
+                        Task.Run(async () =>
+                        {
+                            try
+                            {
+                                await Service.Node.Instance.Resync();
+                                Log.Info(TAG, "Resync signal sent to Grin Node.");
+                            }
+                            catch (Exception ex) 
+                            { 
+                                Log.Error(TAG, $"Error Trying to Resync Grin Node: {ex.Message}");
+                            }
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Error(TAG, $"Error Stopping Grin Node: {ex.Message}");
+                    }
+
+                    if (pNode.IsAlive)
+                    {
+                        pNode.DestroyForcibly();
+                    }
                 }
             }
         }
@@ -280,12 +322,29 @@ namespace GrinPlusPlus.Droid
 		/// <returns>The restart node action.</returns>
 		Notification.Action BuildRestartNodeAction()
         {
-            var restartTimerIntent = new Intent(this, GetType());
-            restartTimerIntent.SetAction(Constants.ACTION_RESTART_NODE);
-            var restartTimerPendingIntent = PendingIntent.GetService(this, 0, restartTimerIntent, 0);
+            var restartIntent = new Intent(this, GetType());
+            restartIntent.SetAction(Constants.ACTION_RESTART_NODE);
+            var restartTimerPendingIntent = PendingIntent.GetService(this, 0, restartIntent, 0);
 
             var builder = new Notification.Action.Builder(null,
-                                              "RESTART",
+                                              "Restart",
+                                              restartTimerPendingIntent);
+
+            return builder.Build();
+        }
+
+        /// <summary>
+		/// Builds a Notification.Action that will instruct the service to resync the node.
+		/// </summary>
+		/// <returns>The resync node action.</returns>
+		Notification.Action BuildResyncNodeAction()
+        {
+            var resyncNodeIntent = new Intent(this, GetType());
+            resyncNodeIntent.SetAction(Constants.ACTION_RESYNC_NODE);
+            var restartTimerPendingIntent = PendingIntent.GetService(this, 0, resyncNodeIntent, 0);
+
+            var builder = new Notification.Action.Builder(null,
+                                              "(RE)Synchronize",
                                               restartTimerPendingIntent);
 
             return builder.Build();
