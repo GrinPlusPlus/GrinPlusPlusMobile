@@ -1,21 +1,17 @@
 ﻿using GrinPlusPlus.Api;
 using GrinPlusPlus.Resources;
-using Plugin.Fingerprint;
-using Plugin.Fingerprint.Abstractions;
+
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
 using System;
-using System.Threading;
 using Xamarin.Essentials;
 
 namespace GrinPlusPlus.ViewModels
 {
     public class WalletLoginPageViewModel : ViewModelBase
     {
-        private CancellationTokenSource _cancel;
-
         private string _exceptionMessage = "";
         public string ExceptionMessage
         {
@@ -108,25 +104,6 @@ namespace GrinPlusPlus.ViewModels
                     await SecureStorage.SetAsync("username", Username);
                     await SecureStorage.SetAsync("slatepack_address", wallet.SlatepackAdddress);
                     await SecureStorage.SetAsync("tor_address", wallet.TorAdddress ?? "");
-
-                    if (await CrossFingerprint.Current.IsAvailableAsync(true))
-                    {
-                        _cancel = new CancellationTokenSource();
-
-                        var dialogConfig = new AuthenticationRequestConfiguration("Grin++", Username.ToUpper())
-                        {
-                            CancelTitle = null,
-                            FallbackTitle = null,
-                            AllowAlternativeAuthentication = true
-                        };
-
-                        var result = await CrossFingerprint.Current.AuthenticateAsync(dialogConfig, _cancel.Token);
-
-                        if (!result.Authenticated)
-                        {
-                            return;
-                        }
-                    }
 
                     await NavigationService.NavigateAsync("OpeningWalletPage");
                 });

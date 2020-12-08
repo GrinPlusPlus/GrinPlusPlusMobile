@@ -196,6 +196,15 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please confirm your identity to continue.
+        /// </summary>
+        internal static string ConfirmIdentity {
+            get {
+                return ResourceManager.GetString("ConfirmIdentity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm Password.
         /// </summary>
         internal static string ConfirmPassword {

@@ -33,7 +33,7 @@ namespace GrinPlusPlus
             {
                 if (Settings.IsLoggedIn)
                 {
-                    destination = "/SharedTransitionNavigationPage/DashboardCarouselPage";
+                    destination = "OpeningWalletPage";
                 }
                 else
                 {

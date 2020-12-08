@@ -4,7 +4,6 @@ using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
 using System;
-using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -71,6 +70,5 @@ namespace GrinPlusPlus.ViewModels
                 return !Status.Equals("Running");
             });
         }
-
     }
 }
