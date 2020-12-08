@@ -132,7 +132,7 @@ namespace GrinPlusPlus.Droid
                 .AddAction(BuildRestartNodeAction())
                 .AddAction(BuildStopServiceAction())
                 .Build();
-
+            
             // Enlist this instance of the service as a foreground service
             StartForeground(Constants.SERVICE_RUNNING_NOTIFICATION_ID, notification);
         }
@@ -161,14 +161,15 @@ namespace GrinPlusPlus.Droid
         void CreateNotificationChannel()
         {
             manager = (NotificationManager)AndroidApp.Context.GetSystemService(AndroidApp.NotificationService);
-
             if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
             {
                 var channelNameJava = new Java.Lang.String(channelName);
-                var channel = new NotificationChannel(channelId, channelNameJava, NotificationImportance.Default)
+                var channel = new NotificationChannel(channelId, channelNameJava, NotificationImportance.None)
                 {
-                    Description = channelDescription
+                    Description = channelDescription,
                 };
+                channel.EnableVibration(false);
+                channel.EnableLights(false);
                 manager.CreateNotificationChannel(channel);
             }
 
