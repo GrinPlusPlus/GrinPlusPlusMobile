@@ -72,10 +72,11 @@ namespace GrinPlusPlus.ViewModels
             {
                 SlatepackAddress = await SecureStorage.GetAsync("slatepack_address");
                 TorAddress = await SecureStorage.GetAsync("tor_address");
+                await UpdateAvailability();
             });
 
 
-            Device.StartTimer(TimeSpan.FromSeconds(10), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(20), () =>
             {
                 if(Settings.IsLoggedIn == false)
                 {
@@ -106,6 +107,8 @@ namespace GrinPlusPlus.ViewModels
             }
             catch (Exception ex)
             {
+                Reachable = false;
+                AddressColor = "Orange";
                 Console.WriteLine(ex.Message);
             }
         }

@@ -243,8 +243,10 @@ namespace GrinPlusPlus.Api
             var url = "http://grinchck.ahcbagldgzdpa74g2mh74fvk5zjzpfjbvgqin6g3mfuu66tynv2gkiid.onion/check/";
             var parameters = new Dictionary<string, string> { { "wallet", address } };
             var encodedContent = new FormUrlEncodedContent(parameters);
-
+            
             var httpclient = new HttpClient(handler, true);
+
+            httpclient.Timeout = TimeSpan.FromSeconds(20);
 
             var response = await httpclient.PostAsync(url, encodedContent).ConfigureAwait(false);
             if (response.StatusCode == HttpStatusCode.OK)
