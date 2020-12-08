@@ -14,6 +14,8 @@ namespace GrinPlusPlus.ViewModels
 {
     public class LoginPageViewModel : ViewModelBase
     {
+        int failCounter = 0;
+
         private ObservableCollection<Account> _accounts = new ObservableCollection<Account>();
         public ObservableCollection<Account> Accounts
         {
@@ -28,7 +30,7 @@ namespace GrinPlusPlus.ViewModels
         {
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
-                if (Settings.IsLoggedIn == true || Settings.Node.Status.Equals("Not Connected"))
+                if (Settings.IsLoggedIn == true || failCounter.Equals(100))
                 {
                     return false;
                 }
@@ -46,46 +48,17 @@ namespace GrinPlusPlus.ViewModels
                 try
                 {
                     var accounts = await DataProvider.GetAccounts();
-                    if (accounts.Count == 0)
+                    if(Accounts.ToList().Count != accounts.Count)
                     {
-                        return;
+                       Accounts = new ObservableCollection<Account>(accounts.ToArray());
                     }
 
-                    if (Accounts.Count == 0)
-                    {
-                        Accounts = new ObservableCollection<Account>(accounts.ToArray());
-                        return;
-                    }
-
-                    var update = false;
-
-                    foreach (var account in Accounts)
-                    {
-                        if (accounts.Any(a => a.Name.Equals(account.Name)))
-                        {
-                            continue;
-                        }
-                        update = true;
-                        break;
-                    }
-
-                    foreach (var account in accounts)
-                    {
-                        if (!Accounts.Any(a => a.Name.Equals(account.Name)))
-                        {
-                            update = true;
-                            break;
-                        }
-                    }
-
-                    if (update)
-                    {
-                        Accounts = new ObservableCollection<Account>(accounts.ToArray());
-                    }
+                    failCounter = 0;
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Error Getting accounts: {ex.Message}");
+                    failCounter += 1;
                 }
             });
         }
