@@ -44,6 +44,8 @@ namespace GrinPlusPlus.Droid
         {
             base.OnCreate();
 
+            StopTor(); // Let's make sure we are killing the tor process.
+
             var librariesPath = PackageManager.GetApplicationInfo(ApplicationInfo.PackageName, PackageInfoFlags.SharedLibraryFiles).NativeLibraryDir;
 
             libtor = new Java.IO.File(System.IO.Path.Combine(librariesPath, "libtor.so"));
@@ -85,7 +87,7 @@ namespace GrinPlusPlus.Droid
                     Log.Info(TAG, "Restart Grin Node called.");
                     StopBackend();
                     RunTor();
-                    Task.Run(async()=>
+                    Task.Run(async () =>
                     {
                         Log.Info(TAG, "Waiting 5 seconds to start the Grin Node again...");
                         await Task.Delay(5000);
@@ -274,6 +276,11 @@ namespace GrinPlusPlus.Droid
                     pTor.DestroyForcibly();
                 }
             }
+            Java.Lang.Runtime.GetRuntime().Exec(new string[] {
+                    "kill",
+                    "-9",
+                    "libtor.so"
+                });
             Log.Info(TAG, "Tor Stopped.");
         }
 
