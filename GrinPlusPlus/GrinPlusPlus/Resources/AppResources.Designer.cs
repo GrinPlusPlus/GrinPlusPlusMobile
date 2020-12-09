@@ -727,7 +727,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ScanQRCode.
+        ///   Looks up a localized string similar to Scan QRCode.
         /// </summary>
         internal static string ScanQRCode {
             get {
@@ -822,6 +822,24 @@ namespace GrinPlusPlus.Resources {
         internal static string ShareSlatepackMessageAsFile {
             get {
                 return ResourceManager.GetString("ShareSlatepackMessageAsFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Receiver&apos;s Wallet was not reachable. The Receiver should introduce this Slatepack Message into their Wallet in order to receive the transaction..
+        /// </summary>
+        internal static string ShareSlatePackMessageQuote {
+            get {
+                return ResourceManager.GetString("ShareSlatePackMessageQuote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send this Slatepack Message to the Sender to in order to Finalize the transaction..
+        /// </summary>
+        internal static string ShareSlatePackMessageQuoteToFinalize {
+            get {
+                return ResourceManager.GetString("ShareSlatePackMessageQuoteToFinalize", resourceCulture);
             }
         }
         

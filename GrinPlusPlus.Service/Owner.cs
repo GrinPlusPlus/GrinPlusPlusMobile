@@ -225,7 +225,7 @@ namespace GrinPlusPlus.Service
                 {"slatepack", slatepack },
             };
 
-            return await GrinOwnerRPC.Request<Models.Actions.Coins.Receive>("receive", payload);
+            return await GrinOwnerRPC.Request<Models.Actions.Coins.Receive>("receive_tx", payload);
         }
 
         public async Task<bool> FinalizeTransaction(string token, string slatepack)
@@ -240,7 +240,7 @@ namespace GrinPlusPlus.Service
                 }
             };
 
-            var response = await GrinOwnerRPC.Request<Models.Actions.Transaction.Finalize>("finalize", payload);
+            var response = await GrinOwnerRPC.Request<Models.Actions.Transaction.Finalize>("finalize_tx", payload);
 
             return response.Status.Trim().ToLower().Equals("finalized");
         }
@@ -253,7 +253,7 @@ namespace GrinPlusPlus.Service
                 {"tx_id", transactionId}
             };
 
-            var response = await GrinOwnerRPC.Request<Models.Actions.Transaction.Cancel>("cancel", payload);
+            var response = await GrinOwnerRPC.Request<Models.Actions.Transaction.Cancel>("cancel_tx", payload);
 
             return response.Status.Trim().ToLower().Equals("success");
         }

@@ -63,7 +63,10 @@
                 ImageSource="baseline_qr_code_white_18.png"
                 Text="{x:Static resource:AppResources.ScanQRCode}"
                 TextColor="White" />
-            <StackLayout Margin="50,0,50,20" VerticalOptions="EndAndExpand">
+            <StackLayout
+                Margin="50,0,50,20"
+                Spacing="10"
+                VerticalOptions="EndAndExpand">
                 <Button
                     BackgroundColor="#191919"
                     Command="{Binding FinalizeTransactionCommand}"

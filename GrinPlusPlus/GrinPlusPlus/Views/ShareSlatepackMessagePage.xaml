@@ -16,34 +16,26 @@
             Spacing="10"
             VerticalOptions="FillAndExpand">
             <Label
-                HorizontalOptions="Center"
-                Text="QR Code"
-                TextColor="#2f2f2f"
-                TextTransform="Uppercase" />
-            <Frame
-                Padding="15"
-                BackgroundColor="#191919"
-                CornerRadius="8"
-                HorizontalOptions="Center">
-                <zxing:ZXingBarcodeImageView
-                    BarcodeFormat="QR_CODE"
-                    BarcodeValue="{Binding ReceivingResponse.Slatepack}"
-                    HeightRequest="250"
-                    WidthRequest="250">
-                    <zxing:ZXingBarcodeImageView.BarcodeOptions>
-                        <zxcm:EncodingOptions
-                            Width="780"
-                            Height="780"
-                            Margin="0"
-                            PureBarcode="True" />
-                    </zxing:ZXingBarcodeImageView.BarcodeOptions>
-                </zxing:ZXingBarcodeImageView>
-            </Frame>
+                Margin="30,10,30,10"
+                Text="{x:Static resource:AppResources.ShareSlatePackMessageQuoteToFinalize}"
+                TextColor="White" />
             <Label
-                HorizontalOptions="Center"
-                Text="Or"
+                Margin="30,0,30,0"
+                Text="Slatepack Message"
                 TextColor="#2f2f2f"
                 TextTransform="Uppercase" />
+            <Editor
+                Margin="30,0,30,10"
+                AutoSize="Disabled"
+                BackgroundColor="#191919"
+                CharacterSpacing="1"
+                FontSize="14"
+                HeightRequest="150"
+                IsReadOnly="True"
+                IsSpellCheckEnabled="False"
+                IsTextPredictionEnabled="False"
+                Text="{Binding ReceivingResponse.Slatepack}"
+                TextColor="LightGray" />
             <Button
                 Margin="50,0,50,0"
                 BackgroundColor="#191919"
@@ -51,7 +43,7 @@
                 CornerRadius="5"
                 HeightRequest="44"
                 Text="{x:Static resource:AppResources.CopySlatepackMessage}"
-                TextColor="Yellow" />
+                TextColor="White" />
             <Button
                 Margin="50,0,50,0"
                 BackgroundColor="#191919"
@@ -59,7 +51,7 @@
                 CornerRadius="5"
                 HeightRequest="44"
                 Text="{x:Static resource:AppResources.ShareSlatepackMessage}"
-                TextColor="Yellow" />
+                TextColor="White" />
             <Button
                 Margin="50,0,50,20"
                 BackgroundColor="#191919"

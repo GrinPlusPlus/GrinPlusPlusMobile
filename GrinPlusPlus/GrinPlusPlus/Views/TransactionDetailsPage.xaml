@@ -78,15 +78,6 @@
             TextColor="White" />
         <Label
             Margin="20,10,20,0"
-            Text="{x:Static resource:AppResources.Message}"
-            TextColor="Gray"
-            TextTransform="Uppercase" />
-        <Label
-            Margin="20,0,20,0"
-            Text="{Binding SelectedTransaction.Message}"
-            TextColor="White" />
-        <Label
-            Margin="20,10,20,0"
             Text="{x:Static resource:AppResources.Outputs}"
             TextColor="Gray"
             TextTransform="Uppercase" />
