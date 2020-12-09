@@ -241,7 +241,10 @@ namespace GrinPlusPlus.Api
             var handler = new HttpClientHandler { Proxy = proxy };
 
             var url = "http://grinchck.ahcbagldgzdpa74g2mh74fvk5zjzpfjbvgqin6g3mfuu66tynv2gkiid.onion/check/";
-            var parameters = new Dictionary<string, string> { { "wallet", address } };
+
+            var destination = $"http://{address}.onion";
+
+            var parameters = new Dictionary<string, string> { { "wallet", destination } };
             var encodedContent = new FormUrlEncodedContent(parameters);
             
             var httpclient = new HttpClient(handler, true);
@@ -249,11 +252,14 @@ namespace GrinPlusPlus.Api
             httpclient.Timeout = TimeSpan.FromSeconds(20);
 
             var response = await httpclient.PostAsync(url, encodedContent).ConfigureAwait(false);
+            
+            var content = string.Empty;
+            
             if (response.StatusCode == HttpStatusCode.OK)
             {
-                return (await response.Content.ReadAsStringAsync()).Trim().ToLower().Equals("reachable");
+                content =  (await response.Content.ReadAsStringAsync()).Trim().ToLower();
             }
-            return false;
+            return content.Equals("reachable");
         }
 
         public async Task DoLogout(string token)
