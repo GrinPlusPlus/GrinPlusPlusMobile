@@ -44,33 +44,19 @@ namespace GrinPlusPlus.ViewModels
             {
                 if (Settings.Node.Status.Equals("Running"))
                 {
+                    ProgressBarr = 1;
+                    ProgressPercentage = "100";
+                    MainThread.BeginInvokeOnMainThread(async () =>
+                    {
+                        await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/LoginPage");
+                    });
                     return false;
                 }
 
-                MainThread.BeginInvokeOnMainThread(async () =>
-                {
-                    try
-                    {
-                        Status = Settings.Node.Status;
+                Status = Settings.Node.Status;
 
-                        if (!Status.Equals("Running"))
-                        {
-                            ProgressBarr = Settings.Node.ProgressPercentage;
-                            ProgressPercentage = (ProgressBarr * 100).ToString("F");
-                            return;
-                        }
-
-                        ProgressBarr = 1;
-                        ProgressPercentage = "100";
-
-                        await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/LoginPage");
-                    }
-                    catch (Exception ex)
-                    {
-                        
-                        Console.WriteLine($"Error on Init: {ex.Message}");
-                    }
-                });
+                ProgressBarr = Settings.Node.ProgressPercentage;
+                ProgressPercentage = (ProgressBarr * 100).ToString("F");
 
                 return true;
             });
