@@ -1,4 +1,5 @@
 ﻿using GrinPlusPlus.Api;
+using GrinPlusPlus.Models;
 using GrinPlusPlus.Resources;
 using Plugin.Fingerprint;
 using Plugin.Fingerprint.Abstractions;
@@ -6,6 +7,7 @@ using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
+using System;
 using System.Threading;
 using Xamarin.Essentials;
 
@@ -22,21 +24,21 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _amount, value); }
         }
 
-        private double _fee = 0;
-        public double Fee
+        private string _fee = "----------";
+        public string Fee
         {
             get { return _fee; }
             set { SetProperty(ref _fee, value); }
         }
 
-        private string _address = "";
+        private string _address = string.Empty;
         public string Address
         {
-            get { return _address; }
+            get { return _address.Trim(); }
             set { SetProperty(ref _address, value); }
         }
 
-        private string _message = "";
+        private string _message = string.Empty;
         public string Message
         {
             get { return _message; }
@@ -54,6 +56,24 @@ namespace GrinPlusPlus.ViewModels
 
         async void SendUsingTor()
         {
+            if (Amount <= 0 || string.IsNullOrEmpty(Address))
+            {
+                MainThread.BeginInvokeOnMainThread(async () =>
+                {
+                    var message = string.Empty;
+                    if (Amount <= 0)
+                    {
+                        message = AppResources.ResourceManager.GetString("AmountCantBeNull");
+                    }
+                    else if (string.IsNullOrEmpty(Address))
+                    {
+                        message = AppResources.ResourceManager.GetString("AddressCantBeNull");
+                    }
+                    await PageDialogService.DisplayAlertAsync("Error", message, "OK");
+                });
+                return;
+            }
+
             if (await CrossFingerprint.Current.IsAvailableAsync(true))
             {
                 _cancel = new CancellationTokenSource();
@@ -80,7 +100,7 @@ namespace GrinPlusPlus.ViewModels
                 new NavigationParameters
                 {
                     { "address", Address },
-                    { "message", string.IsNullOrEmpty(Message) ? "" : Message },
+                    { "message", Message },
                     { "amount", Amount },
                     { "max", SendMax }
                 }
@@ -94,14 +114,14 @@ namespace GrinPlusPlus.ViewModels
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
+            if (parameters.ContainsKey("max"))
+            {
+                SendMax = (bool)parameters["max"];
+            }
+
             if (parameters.ContainsKey("amount"))
             {
                 Amount = (double)parameters["amount"];
-            }
-
-            if (parameters.ContainsKey("fee"))
-            {
-                Fee = (double)parameters["fee"]; ;
             }
 
             if (parameters.ContainsKey("address"))
@@ -114,9 +134,20 @@ namespace GrinPlusPlus.ViewModels
                 Message = (string)parameters["message"];
             }
 
-            if (parameters.ContainsKey("max"))
+            if (!SendMax)
             {
-                SendMax = (bool)parameters["max"];
+                MainThread.BeginInvokeOnMainThread(async () =>
+                {
+                    try
+                    {
+                        FeeEstimation estimation = await DataProvider.EstimateFee(await SecureStorage.GetAsync("token"), Amount);
+                        Fee = (estimation.Fee / Math.Pow(10, 9)).ToString("F9");
+                    }
+                    catch (Exception ex)
+                    {
+                        await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
+                    }
+                });
             }
         }
 

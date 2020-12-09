@@ -11,21 +11,21 @@ namespace GrinPlusPlus.ViewModels
 {
     public class SendGrinsUsingTorPageViewModel : ViewModelBase
     {
-        private double _amount = 0;
+        private double _amount = -1;
         public double Amount
         {
             get { return _amount; }
             set { SetProperty(ref _amount, value); }
         }
 
-        private string _address = "";
+        private string _address = string.Empty;
         public string Address
         {
             get { return _address; }
             set { SetProperty(ref _address, value); }
         }
 
-        private string _message = "-";
+        private string _message = string.Empty;
         public string Message
         {
             get { return _message; }
@@ -88,30 +88,27 @@ namespace GrinPlusPlus.ViewModels
                 SendMax = (bool)parameters["max"];
             }
 
-            if (!string.IsNullOrEmpty(Address) && Amount > 0)
+            MainThread.BeginInvokeOnMainThread(async () =>
             {
-                MainThread.BeginInvokeOnMainThread(async () =>
+                try
                 {
-                    try
+                    string token = await SecureStorage.GetAsync("token");
+                    SendingResponse = await DataProvider.SendGrins(token, Address, Amount, Message, null, "SMALLEST", SendMax);
+                    if (SendingResponse.Status.ToLower().Equals("finalized"))
                     {
-                        string token = await SecureStorage.GetAsync("token");
-                        SendingResponse = await DataProvider.SendGrins(token, Address, Amount, Message, null, "SMALLEST", SendMax);
-                        if (SendingResponse.Status.ToLower().Equals("finalized"))
-                        {
-                            await NavigationService.GoBackToRootAsync();
-                        }
-                        else
-                        {
-                            await NavigationService.NavigateAsync("SendGrinsUsingQRPage", new NavigationParameters { { "sending_response", SendingResponse } });
-                        }
+                        await NavigationService.GoBackToRootAsync();
                     }
-                    catch (Exception ex)
+                    else
                     {
-                        ExceptionMessage = ex.Message;
+                        await NavigationService.NavigateAsync("SendGrinsUsingQRPage", new NavigationParameters { { "sending_response", SendingResponse } });
                     }
-                    IsBusy = false;
-                });
-            }
+                }
+                catch (Exception ex)
+                {
+                    ExceptionMessage = ex.Message;
+                }
+                IsBusy = false;
+            });
         }
 
         public override void OnNavigatedFrom(INavigationParameters parameters)

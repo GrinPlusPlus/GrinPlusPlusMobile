@@ -123,11 +123,17 @@
   <data name="Address" xml:space="preserve">
     <value>Address</value>
   </data>
+  <data name="AddressCantBeNull" xml:space="preserve">
+    <value>Make sure to set the adresss of the receiver</value>
+  </data>
   <data name="AlignQRCode" xml:space="preserve">
     <value>Align the QR within the frame</value>
   </data>
   <data name="Amount" xml:space="preserve">
     <value>Amount</value>
+  </data>
+  <data name="AmountCantBeNull" xml:space="preserve">
+    <value>Amount should be more than 0</value>
   </data>
   <data name="BackupWallet" xml:space="preserve">
     <value>Backup Wallet</value>

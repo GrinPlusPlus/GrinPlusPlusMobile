@@ -16,13 +16,6 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _amount, value); }
         }
 
-        private double _fee;
-        public double Fee
-        {
-            get { return _fee; }
-            set { SetProperty(ref _fee, value); }
-        }
-
         private string _address;
         public string Address
         {
@@ -40,7 +33,7 @@ namespace GrinPlusPlus.ViewModels
             }
         }
 
-        private string _message = "";
+        private string _message = string.Empty;
         public string Message
         {
             get { return _message; }
@@ -69,9 +62,8 @@ namespace GrinPlusPlus.ViewModels
                 new NavigationParameters
                 {
                     { "address", Address },
-                    { "message", string.IsNullOrEmpty(Message) ? "" : Message },
+                    { "message", Message },
                     { "amount", Amount },
-                    { "fee", Fee },
                     { "max", SendMax }
                 }
             );
@@ -99,10 +91,6 @@ namespace GrinPlusPlus.ViewModels
                     if (parameters.ContainsKey("amount"))
                     {
                         Amount = (double)parameters["amount"];
-                    }
-                    if (parameters.ContainsKey("fee"))
-                    {
-                        Fee = (double)parameters["fee"];
                     }
                     if (parameters.ContainsKey("max"))
                     {

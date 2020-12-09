@@ -79,6 +79,15 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Make sure to set the adresss of the receiver.
+        /// </summary>
+        internal static string AddressCantBeNull {
+            get {
+                return ResourceManager.GetString("AddressCantBeNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Align the QR within the frame.
         /// </summary>
         internal static string AlignQRCode {
@@ -93,6 +102,15 @@ namespace GrinPlusPlus.Resources {
         internal static string Amount {
             get {
                 return ResourceManager.GetString("Amount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Amount should be more than 0.
+        /// </summary>
+        internal static string AmountCantBeNull {
+            get {
+                return ResourceManager.GetString("AmountCantBeNull", resourceCulture);
             }
         }
         

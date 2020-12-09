@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.IO;
 using System.Net.Sockets;
 using System.Threading.Tasks;
@@ -65,6 +66,23 @@ namespace GrinPlusPlus
             }
 
             return proxyResponse;
+        }
+
+        public static double TextCurrencyToDouble(string text)
+        {
+            var t = text;
+            var dot_pos = t.LastIndexOf(".");
+            var comma_pos = t.LastIndexOf(",");
+            if (comma_pos > dot_pos)
+            {
+                t = t.Replace(".", "");
+                t = t.Replace(",", ".");
+            }
+            else
+            {
+                t = t.Replace(",", "");
+            }
+            return Double.Parse(t, new CultureInfo("en-US"));
         }
     }
 }
