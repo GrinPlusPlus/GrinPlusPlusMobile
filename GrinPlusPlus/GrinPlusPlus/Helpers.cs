@@ -10,7 +10,7 @@ namespace GrinPlusPlus
     {
         public static string GetInteger(double number)
         {
-            string d = (number / Math.Pow(10, 9)).ToString();
+            string d = (number / Math.Pow(10, 9)).ToString(new CultureInfo("en-US"));
             if (d.IndexOf(".") > -1)
             {
                 d = d.Substring(0, d.IndexOf("."));
@@ -20,7 +20,7 @@ namespace GrinPlusPlus
 
         public static string GetDecimals(double number)
         {
-            string d = (number / Math.Pow(10, 9)).ToString();
+            string d = (number / Math.Pow(10, 9)).ToString(new CultureInfo("en-US"));
             if (d.IndexOf(".") > -1)
             {
                 d = d.Substring(d.IndexOf("."));
