@@ -76,7 +76,7 @@ namespace GrinPlusPlus.ViewModels
             });
 
 
-            Device.StartTimer(TimeSpan.FromSeconds(20), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(30), () =>
             {
                 if(Settings.IsLoggedIn == false)
                 {

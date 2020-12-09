@@ -249,7 +249,7 @@ namespace GrinPlusPlus.Api
             
             var httpclient = new HttpClient(handler, true);
 
-            httpclient.Timeout = TimeSpan.FromSeconds(20);
+            httpclient.Timeout = TimeSpan.FromSeconds(30);
 
             var response = await httpclient.PostAsync(url, encodedContent).ConfigureAwait(false);
             
