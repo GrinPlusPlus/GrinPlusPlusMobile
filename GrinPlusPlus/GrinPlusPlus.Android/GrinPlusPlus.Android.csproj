@@ -74,11 +74,15 @@
     <AndroidPackageFormat>apk</AndroidPackageFormat>
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
     <AndroidLinkMode>SdkOnly</AndroidLinkMode>
-    <AndroidKeyStore>true</AndroidKeyStore>
-    <AndroidSigningKeyStore>C:\Users\admin\release.android.keystore</AndroidSigningKeyStore>
-    <AndroidSigningStorePass>QAYwsx1234567890!</AndroidSigningStorePass>
-    <AndroidSigningKeyAlias>grinppandroid</AndroidSigningKeyAlias>
-    <AndroidSigningKeyPass>QAYwsx1234567890!</AndroidSigningKeyPass>
+    <AndroidKeyStore>false</AndroidKeyStore>
+    <AndroidSigningKeyStore>
+    </AndroidSigningKeyStore>
+    <AndroidSigningStorePass>
+    </AndroidSigningStorePass>
+    <AndroidSigningKeyAlias>
+    </AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass>
+    </AndroidSigningKeyPass>
     <MandroidI18n />
     <AndroidSupportedAbis>arm64-v8a</AndroidSupportedAbis>
     <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
