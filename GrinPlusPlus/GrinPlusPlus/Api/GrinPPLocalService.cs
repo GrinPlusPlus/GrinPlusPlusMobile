@@ -97,6 +97,10 @@ namespace GrinPlusPlus.Api
                     }
                 }
 
+                // Unix timestamp is seconds past epoch
+                System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+                dtDateTime = dtDateTime.AddSeconds(transaction.CreationDate).ToLocalTime();
+
                 transactions.Add(new Transaction()
                 {
                     Id = transaction.Id,
@@ -104,7 +108,7 @@ namespace GrinPlusPlus.Api
                     AmountCredited = transaction.AmountCredited,
                     AmountDebited = transaction.AmountDebited,
                     Fee = transaction.Fee,
-                    Date = DateTimeOffset.FromUnixTimeSeconds(transaction.CreationDate).UtcDateTime,
+                    Date = dtDateTime,
                     Slate = transaction.Slate,
                     Address = transaction.Address,
                     Message = transaction.Message,
