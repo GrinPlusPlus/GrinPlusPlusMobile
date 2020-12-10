@@ -55,16 +55,6 @@
                     </Label.FormattedText>
                 </Label>
             </StackLayout>
-            <Button
-                Margin="140,10,140,0"
-                BackgroundColor="#191919"
-                Command="{Binding MaxButtonClickedCommand}"
-                CornerRadius="20"
-                HeightRequest="44"
-                Text="MAX"
-                TextColor="Yellow"
-                TextTransform="Uppercase"
-                WidthRequest="44" />
             <Grid
                 Margin="20,0,20,10"
                 ColumnSpacing="0"

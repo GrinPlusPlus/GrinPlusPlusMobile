@@ -55,10 +55,10 @@ namespace GrinPlusPlus.Service.Models
             public double Fee { get; set; }
 
             [JsonProperty("confirmation_date_time")]
-            public int ConfirmationDate { get; set; }
+            public long ConfirmationDate { get; set; }
 
             [JsonProperty("creation_date_time")]
-            public int CreationDate { get; set; }
+            public long CreationDate { get; set; }
 
             [JsonProperty("address")]
             public string Address { get; set; }
