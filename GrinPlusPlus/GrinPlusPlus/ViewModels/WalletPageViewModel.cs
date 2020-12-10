@@ -141,6 +141,21 @@ namespace GrinPlusPlus.ViewModels
                 {
                     Transactions = new ObservableCollection<Transaction>(transactions.ToArray());
                 }
+                else
+                {
+                    foreach (var transaction in transactions)
+                    {
+                        var current = Transactions.First<Transaction>(t => t.Id.Equals(transaction.Id));
+                        if (current != null)
+                        {
+                            if (!current.Status.Equals(transaction.Status))
+                            {
+                                Transactions.Remove(current);
+                                Transactions.Add(transaction);
+                            }
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
