@@ -28,7 +28,7 @@ Grin++ is an easy to use Grin Wallet. With Grin++ you can create multiple accoun
 ## Building APK
 
 - Clone this repository.
-- Open the project using Visual Studio or Xamarin Studio.
+- Open the Solution using Visual Studio or Xamarin Studio.
 - Build
 
 ## Building Node
