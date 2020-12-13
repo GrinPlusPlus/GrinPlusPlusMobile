@@ -24,7 +24,6 @@ Grin++ is an easy to use Grin Wallet. With Grin++ you can create multiple accoun
 * Minimum RAM recommended: **4GB**.
 * Programming Language: **C#**.
 * Framework: **Xamarin.Forms**.
-* Source Code: https://github.com/GrinPlusPlus/GrinPlusPlusMobile
 
 ## Building APK
 
