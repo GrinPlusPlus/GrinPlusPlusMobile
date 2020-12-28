@@ -54,15 +54,6 @@
                 ImageSource="baseline_content_paste_white_18.png"
                 Text="{x:Static resource:AppResources.PasteFromClipboard}"
                 TextColor="White" />
-            <Button
-                Margin="50,0,50,0"
-                BackgroundColor="#191919"
-                Command="{Binding ScanQRCodeCommand}"
-                CornerRadius="5"
-                HeightRequest="44"
-                ImageSource="baseline_qr_code_white_18.png"
-                Text="{x:Static resource:AppResources.ScanQRCode}"
-                TextColor="White" />
             <StackLayout
                 Margin="50,0,50,20"
                 Spacing="10"
