@@ -4,6 +4,12 @@ namespace GrinPlusPlus.Service.Models
 {
     public class Basics
     {
+        public class Accounts
+        {
+            [JsonProperty("wallets")]
+            public string[] Wallets { get; set; }
+        }
+
         public class Output
         {
             [JsonProperty("amount")]

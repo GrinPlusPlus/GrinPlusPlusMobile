@@ -54,7 +54,7 @@ namespace GrinPlusPlus.Api
         public async Task<List<Account>> GetAccounts()
         {
             List<Account> accounts = new List<Account>();
-            foreach (var account in await Service.Owner.Instance.ListAccounts())
+            foreach (var account in (await Service.Owner.Instance.ListAccounts()).Wallets)
             {
                 accounts.Add(new Account() { Name = account });
             }

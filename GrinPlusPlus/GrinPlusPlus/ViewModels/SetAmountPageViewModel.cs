@@ -128,6 +128,10 @@ namespace GrinPlusPlus.ViewModels
             try
             {
                 var amount = Helpers.TextCurrencyToDouble(Amount);
+                if (Convert.ToDouble(Amount)==Spendable)
+                {
+                    amount = 0;
+                }
 
                 await NavigationService.NavigateAsync("EnterAddressMessagePage", new NavigationParameters { { "amount", amount }, { "max", (Helpers.TextCurrencyToDouble(Amount) == Spendable) } });
             }

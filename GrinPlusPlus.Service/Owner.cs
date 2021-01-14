@@ -43,9 +43,11 @@ namespace GrinPlusPlus.Service
             }
         }
 
-        public async Task<string[]> ListAccounts()
+        public async Task<Models.Basics.Accounts> ListAccounts()
         {
-            return await GrinOwnerAPI.Request<string[]>(Endpoints.Accounts);
+            var payload = new Dictionary<string, object>(){};
+
+            return await GrinOwnerRPC.Request<Models.Basics.Accounts>("list_wallets", payload);
         }
 
         public async Task<Models.Basics.Output[]> ListOutputs()
