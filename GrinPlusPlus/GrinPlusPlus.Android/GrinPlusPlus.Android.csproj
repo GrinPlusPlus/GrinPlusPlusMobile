@@ -105,7 +105,7 @@
     <PackageReference Include="Xamarin.AndroidX.Biometric">
       <Version>1.0.1.7</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.1874" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.1905" />
     <PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.6.1-preview1" />
     <PackageReference Include="Prism.DryIoc.Forms" Version="8.0.0.1909" />
     <PackageReference Include="Xamarin.Plugin.SharedTransitions">
@@ -506,7 +506,7 @@
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties XamarinHotReloadDebuggerTimeoutExceptionGrinPlusPlusAndroidHideInfoBar="True" TriggeredFromHotReload="False" />
+      <UserProperties TriggeredFromHotReload="False" XamarinHotReloadDebuggerTimeoutExceptionGrinPlusPlusAndroidHideInfoBar="True" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
