@@ -48,7 +48,18 @@ namespace GrinPlusPlus.ViewModels
                     ProgressPercentage = "100";
                     MainThread.BeginInvokeOnMainThread(async () =>
                     {
-                        await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/LoginPage");
+                        string destination = "InitPage";
+                        
+                        if (Settings.IsLoggedIn)
+                        {
+                            destination = "OpeningWalletPage";
+                        }
+                        else
+                        {
+                            destination = "/SharedTransitionNavigationPage/LoginPage";
+                        }
+
+                        await NavigationService.NavigateAsync(destination);
                     });
                     return false;
                 }

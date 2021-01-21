@@ -16,14 +16,14 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _amount, value); }
         }
 
-        private string _address;
+        private string _address = string.Empty;
         public string Address
         {
             get { return _address; }
             set { SetProperty(ref _address, value); }
         }
 
-        private bool _isAddressValid;
+        private bool _isAddressValid = false;
         public bool IsAddressValid
         {
             get { return _isAddressValid; }

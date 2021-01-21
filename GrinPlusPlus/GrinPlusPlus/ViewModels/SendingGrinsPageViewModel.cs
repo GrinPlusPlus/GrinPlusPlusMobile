@@ -24,7 +24,7 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _amount, value); }
         }
 
-        private string _fee = "----------";
+        private string _fee = string.Empty;
         public string Fee
         {
             get { return _fee; }
@@ -56,19 +56,11 @@ namespace GrinPlusPlus.ViewModels
 
         async void SendUsingTor()
         {
-            if (Amount <= 0 || string.IsNullOrEmpty(Address))
+            if (Amount <= 0)
             {
                 MainThread.BeginInvokeOnMainThread(async () =>
                 {
-                    var message = string.Empty;
-                    if (Amount <= 0)
-                    {
-                        message = AppResources.ResourceManager.GetString("AmountCantBeNull");
-                    }
-                    else if (string.IsNullOrEmpty(Address))
-                    {
-                        message = AppResources.ResourceManager.GetString("AddressCantBeNull");
-                    }
+                    var message = AppResources.ResourceManager.GetString("AmountCantBeNull");
                     await PageDialogService.DisplayAlertAsync("Error", message, "OK");
                 });
                 return;

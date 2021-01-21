@@ -28,7 +28,6 @@
                 FontSize="22"
                 Text="{Binding Wallet}"
                 TextColor="White"
-                TextTransform="Uppercase"
                 VerticalOptions="Center"
                 VerticalTextAlignment="Center" />
         </Grid>
