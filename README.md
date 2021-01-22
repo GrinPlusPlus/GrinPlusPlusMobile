@@ -1,5 +1,5 @@
-<a href="https://play.google.com/store/apps/details?id=com.grinplusplus.mobile"><img height="75" src="https://ironbelly.app/assets/playstore.png"/></a>&nbsp;&nbsp;&nbsp;
-<a href="https://keybase.pub/dtavarez/grin%2B%2B/apk/"><img height="75" src="https://ironbelly.app/assets/apk.png"/></a>
+<a href="https://play.google.com/store/apps/details?id=com.grinplusplus.mobile"><img height="75" src="https://raw.githubusercontent.com/GrinPlusPlus/GrinPlusPlusMobile/master/google-play-badge.png"/></a>&nbsp;&nbsp;&nbsp;
+<a href="https://keybase.pub/dtavarez/grin%2B%2B/apk/"><img height="75" src="https://level01.io/wp-content/uploads/2020/10/direct-download-apk-300x116.png"/></a>
 
 # Grin++ (Android)
 
