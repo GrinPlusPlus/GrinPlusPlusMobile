@@ -52,14 +52,18 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _sendMax, value); }
         }
 
+        private bool _isAddressLabelVisible = false;
         public bool IsAddressLabelVisible
         {
-            get { return ! string.IsNullOrEmpty(Address); }
+            get { return _isAddressLabelVisible; }
+            set { SetProperty(ref _isAddressLabelVisible, value); }
         }
 
+        private bool _isMessageLabelVisible = false;
         public bool IsMessageLabelVisible
         {
-            get { return ! string.IsNullOrEmpty(Message); }
+            get { return _isMessageLabelVisible; }
+            set { SetProperty(ref _isMessageLabelVisible, value); }
         }
 
         public DelegateCommand SendUsingTorCommand => new DelegateCommand(SendUsingTor);
@@ -129,11 +133,19 @@ namespace GrinPlusPlus.ViewModels
             if (parameters.ContainsKey("address"))
             {
                 Address = (string)parameters["address"];
+                if(!string.IsNullOrEmpty(Address))
+                {
+                    IsAddressLabelVisible = true;
+                }
             }
 
             if (parameters.ContainsKey("message"))
             {
                 Message = (string)parameters["message"];
+                if (!string.IsNullOrEmpty(Message))
+                {
+                    IsMessageLabelVisible = true;
+                }
             }
 
             if (!SendMax)
