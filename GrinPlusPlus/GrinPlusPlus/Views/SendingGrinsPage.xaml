@@ -31,12 +31,14 @@
                 Color="White" />
             <Label
                 Margin="20,10,20,0"
+                IsVisible="{Binding IsAddressLabelVisible}"
                 Text="{x:Static resource:AppResources.Address}"
                 TextColor="Gray"
                 TextTransform="Uppercase" />
             <Label
                 Margin="20,0,20,0"
                 FontSize="18"
+                IsVisible="{Binding IsAddressLabelVisible}"
                 Text="{Binding Address}"
                 TextColor="White" />
             <Label
@@ -79,12 +81,14 @@
             </Label>
             <Label
                 Margin="20,10,20,0"
+                IsVisible="{Binding IsMessageLabelVisible}"
                 Text="{x:Static resource:AppResources.Message}"
                 TextColor="Gray"
                 TextTransform="Uppercase" />
             <Label
                 Margin="20,0,20,10"
                 FontSize="18"
+                IsVisible="{Binding IsMessageLabelVisible}"
                 Text="{Binding Message}"
                 TextColor="White" />
             <Button

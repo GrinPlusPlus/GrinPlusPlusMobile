@@ -373,7 +373,7 @@
     <value>Share as File</value>
   </data>
   <data name="ShareSlatePackMessageQuote" xml:space="preserve">
-    <value>The Receiver's Wallet was not reachable. The Receiver should introduce this Slatepack Message into their Wallet in order to receive the transaction.</value>
+    <value>The Receiver should introduce this Slatepack Message into their Wallet in order to receive the transaction.</value>
   </data>
   <data name="ShareSlatePackMessageQuoteToFinalize" xml:space="preserve">
     <value>Send this Slatepack Message to the Sender to in order to Finalize the transaction.</value>

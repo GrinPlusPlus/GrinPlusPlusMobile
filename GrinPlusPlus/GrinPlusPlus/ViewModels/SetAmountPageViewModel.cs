@@ -50,12 +50,12 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _amount, value); }
         }
 
-        private double _dAmount
+        private double __amount
         {
-            get { return Helpers.TextCurrencyToDouble(_amount); }
+            get { return Helpers.TextCurrencyToDouble(Amount); }
         }
 
-        private string _fee = "-";
+        private string _fee = string.Empty;
         public string Fee
         {
             get { return _fee; }
@@ -119,7 +119,7 @@ namespace GrinPlusPlus.ViewModels
         void MaxButtonClicked()
         {
             Amount = $"{Spendable}";
-            Fee = "-";
+            Fee = "0";
             IsValid = true;
         }
 
@@ -127,13 +127,7 @@ namespace GrinPlusPlus.ViewModels
         {
             try
             {
-                var amount = Helpers.TextCurrencyToDouble(Amount);
-                if (Convert.ToDouble(Amount)==Spendable)
-                {
-                    amount = 0;
-                }
-
-                await NavigationService.NavigateAsync("EnterAddressMessagePage", new NavigationParameters { { "amount", amount }, { "max", (Helpers.TextCurrencyToDouble(Amount) == Spendable) } });
+                await NavigationService.NavigateAsync("EnterAddressMessagePage", new NavigationParameters { { "amount", __amount }, { "max", false } });
             }
             catch (Exception ex)
             {
@@ -143,36 +137,41 @@ namespace GrinPlusPlus.ViewModels
 
         private void TriggerFeeCalculation()
         {
-            if (Amount.LastIndexOf(".").Equals(Amount.Length - 1))
+            MainThread.BeginInvokeOnMainThread(async () =>
             {
-                IsValid = false;
-                Fee = "-";
-                return;
-            }
-            else if (_dAmount.Equals(0))
-            {
-                IsValid = false;
-                Fee = "-";
-                return;
-            }
-            else
-            {
-                MainThread.BeginInvokeOnMainThread(async () =>
+                if (Amount.LastIndexOf(".").Equals(Amount.Length - 1))
+                {
+                    IsValid = false;
+                    Fee = "0";
+                    return;
+                }
+                else if (__amount.Equals(0))
+                {
+                    IsValid = false;
+                    Fee = "0";
+                    return;
+                }
+                else if (__amount > Spendable - Helpers.TextCurrencyToDouble(Fee))
+                {
+                    IsValid = false;
+                    return;
+                }
+                else
                 {
                     try
                     {
-                        FeeEstimation estimation = await DataProvider.EstimateFee(await SecureStorage.GetAsync("token"), _dAmount);
+                        FeeEstimation estimation = await DataProvider.EstimateFee(await SecureStorage.GetAsync("token"), __amount);
                         Fee = (estimation.Fee / Math.Pow(10, 9)).ToString("F9");
                         IsValid = true;
                     }
                     catch (Exception ex)
                     {
                         IsValid = false;
-                        Fee = "-";
+                        Fee = "0";
                         await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
                     }
-                });
-            }
+                }
+            });
         }
     }
 }

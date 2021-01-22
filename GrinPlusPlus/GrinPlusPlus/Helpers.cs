@@ -82,7 +82,12 @@ namespace GrinPlusPlus
             {
                 t = t.Replace(",", "");
             }
-            return Double.Parse(t, new CultureInfo("en-US"));
+            if (string.IsNullOrEmpty(t))
+            {
+                t = "0";
+            }
+            
+            return double.Parse(t, NumberStyles.Any, CultureInfo.InvariantCulture);
         }
     }
 }

@@ -826,7 +826,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Receiver&apos;s Wallet was not reachable. The Receiver should introduce this Slatepack Message into their Wallet in order to receive the transaction..
+        ///   Looks up a localized string similar to The Receiver should introduce this Slatepack Message into their Wallet in order to receive the transaction..
         /// </summary>
         internal static string ShareSlatePackMessageQuote {
             get {

@@ -52,6 +52,16 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _sendMax, value); }
         }
 
+        public bool IsAddressLabelVisible
+        {
+            get { return ! string.IsNullOrEmpty(Address); }
+        }
+
+        public bool IsMessageLabelVisible
+        {
+            get { return ! string.IsNullOrEmpty(Message); }
+        }
+
         public DelegateCommand SendUsingTorCommand => new DelegateCommand(SendUsingTor);
 
         async void SendUsingTor()
