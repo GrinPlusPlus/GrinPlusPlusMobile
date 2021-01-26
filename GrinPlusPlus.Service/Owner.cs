@@ -6,21 +6,23 @@ namespace GrinPlusPlus.Service
 {
     public class Owner
     {
-        public string Host { get; set; }
-        public int Port { get; set; }
-        public string Version { get; set; }
-
         private static class Endpoints
         {
-            public const string Accounts = "accounts";
+            public const string Accounts = "list_wallets";
             public const string RetrieveOutputs = "retrieve_outputs";
-        }
-
-        private static string Token { get; set; }
-
-        public void SeToken(string token)
-        {
-            Token = token;
+            public const string Login = "login";
+            public const string CreateWallet = "create_wallet";
+            public const string RestoreWallet = "restore_wallet";
+            public const string GetWalletSeed = "get_wallet_seed";
+            public const string DeleteWallet = "delete_wallet";
+            public const string TransactionsList = "list_txs";
+            public const string GetWalletBalance = "get_balance";
+            public const string EstimateFee = "estimate_fee";
+            public const string RepostTransaction = "repost_tx";
+            public const string CancelTransaction = "cancel_tx";
+            public const string FinalizeTransaction = "finalize";
+            public const string ReceiveTransaction = "receive";
+            public const string SendTransaction = "send";
         }
 
         Owner()
@@ -45,24 +47,24 @@ namespace GrinPlusPlus.Service
 
         public async Task<Models.Basics.Accounts> ListAccounts()
         {
-            var payload = new Dictionary<string, object>(){};
+            var payload = new Dictionary<string, object>() { };
 
-            return await GrinOwnerRPC.Request<Models.Basics.Accounts>("list_wallets", payload);
+            return await GrinOwnerRPC.Request<Models.Basics.Accounts>(Endpoints.Accounts, payload);
         }
 
-        public async Task<Models.Basics.Output[]> ListOutputs()
+        public async Task<Models.Basics.Output[]> ListOutputs(string token)
         {
-            return await GrinOwnerAPI.Request<Models.Basics.Output[]>(Endpoints.RetrieveOutputs, new Dictionary<string, string>() { { "session_token", Token } });
+            return await GrinOwnerAPI.Request<Models.Basics.Output[]>(Endpoints.RetrieveOutputs, new Dictionary<string, string>() { { "session_token", token } });
         }
 
-        public async Task<Models.Actions.Wallet.Open> OpenWallet(string username, string password, int seedLenght = 24)
+        public async Task<Models.Actions.Wallet.Open> OpenWallet(string username, string password)
         {
             var payload = new Dictionary<string, object>(){
                 {"username", username},
                 {"password", password},
             };
 
-            return await GrinOwnerRPC.Request<Models.Actions.Wallet.Open>("login", payload);
+            return await GrinOwnerRPC.Request<Models.Actions.Wallet.Open>(Endpoints.Login, payload);
         }
 
         public async Task<Models.Actions.Wallet.Create> CreateWallet(string username, string password, int seedLenght = 24)
@@ -73,7 +75,7 @@ namespace GrinPlusPlus.Service
                 {"num_seed_words", seedLenght}
             };
 
-            return await GrinOwnerRPC.Request<Models.Actions.Wallet.Create>("create_wallet", payload);
+            return await GrinOwnerRPC.Request<Models.Actions.Wallet.Create>(Endpoints.CreateWallet, payload);
         }
 
         public async Task<Models.Actions.Wallet.Open> RestoreWallet(string username, string password, string seed)
@@ -84,7 +86,7 @@ namespace GrinPlusPlus.Service
                 {"wallet_seed", seed}
             };
 
-            return await GrinOwnerRPC.Request<Models.Actions.Wallet.Open>("restore_wallet", payload);
+            return await GrinOwnerRPC.Request<Models.Actions.Wallet.Open>(Endpoints.RestoreWallet, payload);
         }
 
         public async Task CloseWallet(string token)
@@ -103,7 +105,7 @@ namespace GrinPlusPlus.Service
                 {"password", password},
             };
 
-            var seed = await GrinOwnerRPC.Request<Models.Wallet.Seed>("get_wallet_seed", payload);
+            var seed = await GrinOwnerRPC.Request<Models.Wallet.Seed>(Endpoints.GetWalletSeed, payload);
 
             return seed.MnemonicPhrase;
         }
@@ -115,7 +117,7 @@ namespace GrinPlusPlus.Service
                 {"password", password},
             };
 
-            var response = await GrinOwnerRPC.Request<Models.Actions.Wallet.Delete>("delete_wallet", payload);
+            var response = await GrinOwnerRPC.Request<Models.Actions.Wallet.Delete>(Endpoints.DeleteWallet, payload);
             return response.Status.Trim().ToLower().Equals("success");
         }
 
@@ -132,7 +134,7 @@ namespace GrinPlusPlus.Service
                 { "statuses", statuses }
             };
 
-            var transactions = await GrinOwnerRPC.Request<Models.Wallet.Transactions>("list_txs", payload);
+            var transactions = await GrinOwnerRPC.Request<Models.Wallet.Transactions>(Endpoints.TransactionsList, payload);
 
             if (transactions.List == null)
             {
@@ -152,19 +154,11 @@ namespace GrinPlusPlus.Service
                 {"session_token", token},
             };
 
-            return await GrinOwnerRPC.Request<Models.Wallet.Balance>("get_balance", payload);
+            return await GrinOwnerRPC.Request<Models.Wallet.Balance>(Endpoints.GetWalletBalance, payload);
         }
 
-        public async Task<Models.Wallet.Address> GetWalletTorAddress(string token)
-        {
-            var payload = new Dictionary<string, object>(){
-                {"session_token", token},
-            };
-
-            return await GrinOwnerRPC.Request<Models.Wallet.Address>("retry_tor", payload);
-        }
-
-        public async Task<Models.Actions.Transaction.EstimatedFee> EstimateTransactionFee(string token, double amount, string message = "", string strategy = "SMALLEST", string[] inputs = null)
+        public async Task<Models.Actions.Transaction.EstimatedFee> EstimateTransactionFee(string token, double amount, string message = "",
+            string strategy = "SMALLEST", string[] inputs = null)
         {
             if (inputs == null)
             {
@@ -184,7 +178,7 @@ namespace GrinPlusPlus.Service
                 {"message", message }
             };
 
-            return await GrinOwnerRPC.Request<Models.Actions.Transaction.EstimatedFee>("estimate_fee", payload);
+            return await GrinOwnerRPC.Request<Models.Actions.Transaction.EstimatedFee>(Endpoints.EstimateFee, payload);
         }
 
         public async Task<Models.Actions.Coins.Send> SendCoins(string token, string address, double amount, string message = "",
@@ -216,7 +210,7 @@ namespace GrinPlusPlus.Service
                 payload.Add("change_outputs ", 0);
             }
 
-            return await GrinOwnerRPC.Request<Models.Actions.Coins.Send>("send", payload);
+            return await GrinOwnerRPC.Request<Models.Actions.Coins.Send>(Endpoints.SendTransaction, payload);
         }
 
         public async Task<Models.Actions.Coins.Receive> ReceiveCoins(string token, string slatepack)
@@ -227,7 +221,7 @@ namespace GrinPlusPlus.Service
                 {"slatepack", slatepack },
             };
 
-            return await GrinOwnerRPC.Request<Models.Actions.Coins.Receive>("receive", payload);
+            return await GrinOwnerRPC.Request<Models.Actions.Coins.Receive>(Endpoints.ReceiveTransaction, payload);
         }
 
         public async Task<bool> FinalizeTransaction(string token, string slatepack)
@@ -242,7 +236,7 @@ namespace GrinPlusPlus.Service
                 }
             };
 
-            var response = await GrinOwnerRPC.Request<Models.Actions.Transaction.Finalize>("finalize", payload);
+            var response = await GrinOwnerRPC.Request<Models.Actions.Transaction.Finalize>(Endpoints.FinalizeTransaction, payload);
 
             return response.Status.Trim().ToLower().Equals("finalized");
         }
@@ -255,7 +249,7 @@ namespace GrinPlusPlus.Service
                 {"tx_id", transactionId}
             };
 
-            var response = await GrinOwnerRPC.Request<Models.Actions.Transaction.Cancel>("cancel_tx", payload);
+            var response = await GrinOwnerRPC.Request<Models.Actions.Transaction.Cancel>(Endpoints.CancelTransaction, payload);
 
             return response.Status.Trim().ToLower().Equals("success");
         }
@@ -268,7 +262,7 @@ namespace GrinPlusPlus.Service
                 {"method", "FLUFF"} // FLUFF just for now
             };
 
-            var response = await GrinOwnerRPC.Request<Models.Actions.Transaction.Repost>("repost_tx", payload);
+            var response = await GrinOwnerRPC.Request<Models.Actions.Transaction.Repost>(Endpoints.RepostTransaction, payload);
 
             return response.Status.Trim().ToLower().Equals("success");
         }
