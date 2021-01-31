@@ -5,11 +5,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
-    xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
     x:Name="TransactionDetails"
     Title="{Binding SelectedTransaction.Status}"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="Black">
+    BackgroundColor="Black"
+    Visual="Material">
     <StackLayout>
         <Label HorizontalOptions="Center">
             <Label.FormattedText>

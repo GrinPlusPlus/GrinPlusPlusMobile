@@ -10,7 +10,8 @@
     xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
     prism:ViewModelLocator.AutowireViewModel="True"
     sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromRight"
-    BackgroundColor="{StaticResource BackgroundColor}">
+    BackgroundColor="{StaticResource BackgroundColor}"
+    Visual="Material">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Color x:Key="BackgroundColor">#000000</Color>

@@ -9,52 +9,69 @@
     x:Name="Login"
     prism:ViewModelLocator.AutowireViewModel="True"
     sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromRight"
-    BackgroundColor="Black">
+    BackgroundColor="Black"
+    Visual="Material">
     <ContentPage.Content>
-        <StackLayout Margin="50,0,50,10" VerticalOptions="FillAndExpand">
-            <StackLayout Margin="0,100,0,0">
-                <Image
-                    Aspect="AspectFit"
-                    HorizontalOptions="Center"
-                    Source="banner.png"
-                    VerticalOptions="Center" />
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="300" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="150" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <StackLayout
+                Grid.Row="0"
+                Grid.Column="0"
+                Padding="40,100,40,0"
+                HorizontalOptions="Center">
+                <Image Aspect="AspectFit" Source="banner.png" />
                 <Label
                     FontAttributes="Italic"
-                    FontSize="24"
+                    FontSize="Title"
                     HorizontalOptions="Center"
                     Text="{x:Static resource:AppResources.FastPrivateSecure}"
                     TextColor="White" />
             </StackLayout>
-            <ActivityIndicator
-                Margin="0,80,0,0"
-                HorizontalOptions="Center"
-                IsRunning="true"
-                WidthRequest="100"
-                Color="Yellow" />
-            <Label HorizontalOptions="Center" HorizontalTextAlignment="Center">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span
-                            FontAttributes="Bold"
-                            FontSize="38"
-                            Text="{Binding ProgressPercentage}"
-                            TextColor="Yellow" />
-                        <Span
-                            FontAttributes="Bold"
-                            FontSize="Medium"
-                            Text="%"
-                            TextColor="Yellow" />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-            <Label
-                FontAttributes="Bold"
-                HorizontalOptions="Center"
-                HorizontalTextAlignment="Center"
-                Text="{Binding Status}"
-                TextColor="White" />
-            <ProgressBar Progress="{Binding ProgressBarr}" ProgressColor="Yellow" />
-            <StackLayout Margin="0,0,0,60" VerticalOptions="EndAndExpand">
+            <StackLayout
+                Grid.Row="1"
+                Grid.Column="0"
+                Padding="40,0,40,0">
+                <Label HorizontalOptions="Center" HorizontalTextAlignment="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span
+                                FontAttributes="Bold"
+                                FontSize="34"
+                                Text="{Binding ProgressPercentage}"
+                                TextColor="Yellow" />
+                            <Span
+                                FontAttributes="Bold"
+                                FontSize="Medium"
+                                Text="%"
+                                TextColor="Yellow" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <ProgressBar Progress="{Binding ProgressBarr}" ProgressColor="Yellow" />
+                <Label
+                    FontAttributes="Bold"
+                    FontSize="Body"
+                    HorizontalOptions="Center"
+                    Text="{Binding Status}"
+                    TextColor="White" />
+            </StackLayout>
+            <StackLayout
+                Grid.Row="2"
+                Grid.Column="0"
+                Padding="40,0,40,0"
+                Spacing="10">
+                <ActivityIndicator
+                    HorizontalOptions="Center"
+                    IsRunning="true"
+                    WidthRequest="30"
+                    Color="DarkGray" />
                 <Label
                     FontSize="Caption"
                     HorizontalOptions="Center"
@@ -69,6 +86,6 @@
                     Text="{x:Static resource:AppResources.PowerSaverMessage}"
                     TextColor="White" />
             </StackLayout>
-        </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

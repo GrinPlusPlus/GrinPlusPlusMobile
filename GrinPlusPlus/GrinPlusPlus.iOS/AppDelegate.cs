@@ -22,6 +22,7 @@ namespace GrinPlusPlus.iOS
         {
             Xamarin.Forms.Forms.SetFlags(new string[] { "CarouselView_Experimental", "SwipeView_Experimental" });
             global::Xamarin.Forms.Forms.Init();
+            global::Xamarin.Forms.FormsMaterial.Init();
 
             ZXing.Net.Mobile.Forms.iOS.Platform.Init();
             LoadApplication(new App(new iOSInitializer()));

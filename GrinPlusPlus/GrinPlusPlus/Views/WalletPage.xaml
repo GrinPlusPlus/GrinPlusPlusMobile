@@ -6,11 +6,11 @@
     xmlns:c="clr-namespace:GrinPlusPlus.Converters"
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
-    xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
     x:Name="Wallet"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="Black"
-    IconImageSource="outline_account_balance_wallet_white_24.png">
+    IconImageSource="outline_account_balance_wallet_white_24.png"
+    Visual="Material">
     <ContentPage.Resources>
         <ResourceDictionary>
             <c:RelativeDateTimeConverter x:Key="RelativeDateTimeConverter" />

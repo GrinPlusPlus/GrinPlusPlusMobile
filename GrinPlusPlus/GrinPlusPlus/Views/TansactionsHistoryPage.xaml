@@ -6,10 +6,10 @@
     xmlns:c="clr-namespace:GrinPlusPlus.Converters"
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
-    xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="Black"
-    IconImageSource="outline_list_alt_white_24.png">
+    IconImageSource="outline_list_alt_white_24.png"
+    Visual="Material">
     <ContentPage.Resources>
         <ResourceDictionary>
             <c:RelativeDateTimeConverter x:Key="RelativeDateTimeConverter" />

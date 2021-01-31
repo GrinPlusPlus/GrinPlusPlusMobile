@@ -7,6 +7,7 @@ using Prism.Services.Dialogs;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -28,7 +29,7 @@ namespace GrinPlusPlus.ViewModels
         public LoginPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
-            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(0), () =>
             {
                 if (Settings.IsLoggedIn == true || failCounter.Equals(100))
                 {
@@ -55,6 +56,7 @@ namespace GrinPlusPlus.ViewModels
 
                     failCounter = 0;
                 }
+
                 catch (Exception ex)
                 {
                     Console.WriteLine($"Error Getting accounts: {ex.Message}");

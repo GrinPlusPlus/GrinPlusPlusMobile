@@ -10,7 +10,8 @@
     xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="Black"
-    IconImageSource="baseline_self_improvement_white_24.png">
+    IconImageSource="baseline_self_improvement_white_24.png"
+    Visual="Material">
     <ContentPage.ToolbarItems>
         <ToolbarItem
             Command="{Binding OpenBackupWalletPageCommand}"

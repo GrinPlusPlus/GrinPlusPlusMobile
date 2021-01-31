@@ -6,9 +6,9 @@
     xmlns:behavior="clr-namespace:GrinPlusPlus.Behaviors"
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
-    xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="Black">
+    BackgroundColor="Black"
+    Visual="Material">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout

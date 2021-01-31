@@ -11,7 +11,8 @@
     Title="{x:Static resource:AppResources.Address}"
     prism:ViewModelLocator.AutowireViewModel="True"
     sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromRight"
-    BackgroundColor="Black">
+    BackgroundColor="Black"
+    Visual="Material">
     <ContentPage.Content>
         <StackLayout Spacing="10" VerticalOptions="FillAndExpand">
             <Label

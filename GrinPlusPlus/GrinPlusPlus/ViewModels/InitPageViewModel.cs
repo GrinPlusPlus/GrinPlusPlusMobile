@@ -1,9 +1,9 @@
 ﻿using GrinPlusPlus.Api;
-using GrinPlusPlus.Resources;
 using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
 using System;
+using System.Threading;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -11,21 +11,21 @@ namespace GrinPlusPlus.ViewModels
 {
     public class InitPageViewModel : ViewModelBase
     {
-        private string status = "";
+        private string status = Settings.Node.Status;
         public string Status
         {
             get { return status; }
             set { SetProperty(ref status, value); }
         }
 
-        private double _progressBar = 0;
+        private double _progressBar = Settings.Node.ProgressPercentage;
         public double ProgressBarr
         {
             get { return _progressBar; }
             set { SetProperty(ref _progressBar, value); }
         }
 
-        private string _progressPercentage = "0";
+        private string _progressPercentage = string.Format($"{ Settings.Node.ProgressPercentage * 100:F}");
         public string ProgressPercentage
         {
             get { return _progressPercentage; }
@@ -35,17 +35,19 @@ namespace GrinPlusPlus.ViewModels
         public InitPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
-            Status = AppResources.ResourceManager.GetString("InitializingNode");
-
             Preferences.Clear();
             SecureStorage.RemoveAll();
 
-            Device.StartTimer(TimeSpan.FromSeconds(2), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(0), () =>
             {
+                Status = Settings.Node.Status;
+
+                ProgressBarr = Settings.Node.ProgressPercentage;
+
+                ProgressPercentage = string.Format($"{ Settings.Node.ProgressPercentage * 100:F}");
+
                 if (Settings.Node.Status.Equals("Running"))
                 {
-                    ProgressBarr = 1;
-                    ProgressPercentage = "100";
                     MainThread.BeginInvokeOnMainThread(async () =>
                     {
                         string destination = "InitPage";
@@ -61,13 +63,9 @@ namespace GrinPlusPlus.ViewModels
 
                         await NavigationService.NavigateAsync(destination);
                     });
+
                     return false;
                 }
-
-                Status = Settings.Node.Status;
-
-                ProgressBarr = Settings.Node.ProgressPercentage;
-                ProgressPercentage = (ProgressBarr * 100).ToString("F");
 
                 return true;
             });

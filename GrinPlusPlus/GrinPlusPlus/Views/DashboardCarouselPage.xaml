@@ -7,7 +7,8 @@
     xmlns:views="clr-namespace:GrinPlusPlus.Views"
     Title="{Binding Wallet}"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="Black">
+    BackgroundColor="Black"
+    Visual="Material">
     <NavigationPage.TitleView>
         <Grid Margin="0" Padding="0">
             <Grid.ColumnDefinitions>
