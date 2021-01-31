@@ -39,6 +39,8 @@ namespace GrinPlusPlus.Service
         {
             switch (status.SyncStatus)
             {
+                case "FULLY_SYNCED":
+                    return 1;
                 case "SYNCING_HEADERS":
                     return GetFraction((ulong)status.HeaderHeight, (ulong)status.Network.Height);
                 case "DOWNLOADING_TXHASHSET":
