@@ -22,7 +22,6 @@ namespace GrinPlusPlus.Droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            global::Xamarin.Forms.FormsMaterial.Init(this, savedInstanceState);
             ZXing.Net.Mobile.Forms.Android.Platform.Init();
 
             LoadApplication(new App(new AndroidInitializer()));

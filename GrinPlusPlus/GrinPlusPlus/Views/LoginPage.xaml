@@ -9,8 +9,7 @@
     x:Name="Login"
     prism:ViewModelLocator.AutowireViewModel="True"
     sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromRight"
-    BackgroundColor="Black"
-    Visual="Material">
+    BackgroundColor="Black">
     <ContentPage.Content>
         <Grid
             Margin="0"
@@ -49,7 +48,6 @@
                     Command="{prism:NavigateTo 'CreateWalletPage',
                                                UseModalNavigation=False,
                                                Animated=True}"
-                    CornerRadius="5"
                     HeightRequest="44"
                     Text="{x:Static resource:AppResources.CreateWallet}"
                     TextColor="Yellow" />
@@ -58,7 +56,6 @@
                     Command="{prism:NavigateTo 'RestoreWalletPage',
                                                UseModalNavigation=False,
                                                Animated=True}"
-                    CornerRadius="5"
                     HeightRequest="44"
                     Text="{x:Static resource:AppResources.RestoreExistingWallet}"
                     TextColor="Yellow" />
@@ -87,7 +84,6 @@
                             Margin="0"
                             Padding="0"
                             BackgroundColor="Yellow"
-                            CornerRadius="5"
                             HeightRequest="44">
                             <Label
                                 Margin="0"

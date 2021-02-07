@@ -1,4 +1,5 @@
 ﻿using GrinPlusPlus.Api;
+using GrinPlusPlus.Resources;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
@@ -19,14 +20,14 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _reachable, value); }
         }
 
-        private string _slatepackAddress = "";
+        private string _slatepackAddress = string.Empty;
         public string SlatepackAddress
         {
             get { return _slatepackAddress; }
             set { SetProperty(ref _slatepackAddress, value); }
         }
 
-        private string _torAddress = "";
+        private string _torAddress = string.Empty;
         public string TorAddress
         {
             get { return _torAddress; }
@@ -45,6 +46,13 @@ namespace GrinPlusPlus.ViewModels
         private async void CopyAddress()
         {
             await Clipboard.SetTextAsync(SlatepackAddress);
+        }
+
+        private string _availability = string.Empty;
+        public string Availability
+        {
+            get { return _availability; }
+            set { SetProperty(ref _availability, value); }
         }
 
         public DelegateCommand ShareAddressCommand => new DelegateCommand(ShareAddress);
@@ -75,6 +83,9 @@ namespace GrinPlusPlus.ViewModels
                 await UpdateAvailability();
             });
 
+        }
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
 
             Device.StartTimer(TimeSpan.FromSeconds(30), () =>
             {
@@ -98,17 +109,27 @@ namespace GrinPlusPlus.ViewModels
             {
                 Reachable = false;
                 AddressColor = "Orange";
+                Availability = AppResources.ResourceManager.GetString("WalletReachableNot");
                 return;
             }
             try
             {
                 Reachable = await DataProvider.CheckAddressAvailability(TorAddress);
-                AddressColor = Reachable ? "Green" : "Orange";
+                if(Reachable)
+                {
+                    AddressColor = "Green";
+                    Availability = AppResources.ResourceManager.GetString("WalletReachable");
+                } else
+                {
+                    AddressColor = "Orange";
+                    Availability = AppResources.ResourceManager.GetString("WalletReachableNot");
+                }
             }
             catch (Exception ex)
             {
                 Reachable = false;
                 AddressColor = "Orange";
+                Availability = AppResources.ResourceManager.GetString("WalletReachableNot");
                 Console.WriteLine(ex.Message);
             }
         }

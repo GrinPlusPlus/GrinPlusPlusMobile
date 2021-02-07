@@ -6,19 +6,13 @@ using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
 using System;
+using Xamarin.CommunityToolkit.UI.Views.Options;
 using Xamarin.Essentials;
 
 namespace GrinPlusPlus.ViewModels
 {
     public class WalletLoginPageViewModel : ViewModelBase
     {
-        private string _exceptionMessage = "";
-        public string ExceptionMessage
-        {
-            get { return _exceptionMessage; }
-            set { SetProperty(ref _exceptionMessage, value.Trim()); }
-        }
-
         private string _username = "";
         public string Username
         {
@@ -31,13 +25,6 @@ namespace GrinPlusPlus.ViewModels
         {
             get => _isBusy;
             set => SetProperty(ref _isBusy, value);
-        }
-
-        private bool _isIdle = true;
-        public bool IsIdle
-        {
-            get => _isIdle;
-            set => SetProperty(ref _isIdle, value);
         }
 
         private string _password = "";
@@ -62,6 +49,7 @@ namespace GrinPlusPlus.ViewModels
             if (parameters.ContainsKey("username"))
             {
                 Username = parameters.GetValue<string>("username");
+                Title = Username.ToUpper();
             }
         }
 
@@ -69,24 +57,14 @@ namespace GrinPlusPlus.ViewModels
         {
             try
             {
+                IsBusy = true;
+
                 var torAddress = await SecureStorage.GetAsync("tor_address");
                 if (!string.IsNullOrEmpty(torAddress))
                 {
-                    try
-                    {
-                        await DataProvider.DeleteONION(torAddress);
-                        SecureStorage.Remove("tor_address");
-                    }
-                    catch (Exception ex)
-                    {
-                        ExceptionMessage = ex.Message;
-                    }
+                   await DataProvider.DeleteONION(torAddress);
+                   SecureStorage.Remove("tor_address");
                 }
-
-                ExceptionMessage = string.Empty;
-
-                IsBusy = true;
-                IsIdle = false;
 
                 if (string.IsNullOrEmpty(Password))
                 {
@@ -107,12 +85,11 @@ namespace GrinPlusPlus.ViewModels
             }
             catch (Exception ex)
             {
-                ExceptionMessage = ex.Message;
+                await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
             }
             finally
             {
                 IsBusy = false;
-                IsIdle = true;
             }
         }
 
@@ -120,10 +97,7 @@ namespace GrinPlusPlus.ViewModels
         {
             try
             {
-                ExceptionMessage = string.Empty;
-
                 IsBusy = true;
-                IsIdle = false;
 
                 if (string.IsNullOrEmpty(Password))
                 {
@@ -135,12 +109,11 @@ namespace GrinPlusPlus.ViewModels
             }
             catch (Exception ex)
             {
-                ExceptionMessage = ex.Message;
+                await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
             }
             finally
             {
                 IsBusy = false;
-                IsIdle = true;
             }
         }
 

@@ -7,12 +7,10 @@
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
-    xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
     Title="{x:Static resource:AppResources.Address}"
     prism:ViewModelLocator.AutowireViewModel="True"
     sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromRight"
-    BackgroundColor="Black"
-    Visual="Material">
+    BackgroundColor="Black">
     <ContentPage.Content>
         <StackLayout Spacing="10" VerticalOptions="FillAndExpand">
             <Label

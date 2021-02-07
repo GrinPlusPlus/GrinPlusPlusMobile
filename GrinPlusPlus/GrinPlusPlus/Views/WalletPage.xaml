@@ -9,23 +9,22 @@
     x:Name="Wallet"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="Black"
-    IconImageSource="outline_account_balance_wallet_white_24.png"
-    Visual="Material">
+    IconImageSource="outline_account_balance_wallet_white_24.png">
     <ContentPage.Resources>
         <ResourceDictionary>
             <c:RelativeDateTimeConverter x:Key="RelativeDateTimeConverter" />
             <Color x:Key="CellBackgroundColor">#161616</Color>
             <Color x:Key="RepostSwipeItemBackgroundColor">
-                #0073e5
+                #0074C9
             </Color>
-            <Color x:Key="FinalizeSwipeItemBackgroundColor">Green</Color>
-            <Color x:Key="CancelSwipeItemBackgroundColor">Red</Color>
+            <Color x:Key="FinalizeSwipeItemBackgroundColor">#00A721</Color>
+            <Color x:Key="CancelSwipeItemBackgroundColor">#C92400</Color>
             <Style x:Key="FrameStyle" TargetType="Frame">
                 <Setter Property="BackgroundColor" Value="{StaticResource CellBackgroundColor}" />
-                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="CornerRadius" Value="4" />
                 <Setter Property="HasShadow" Value="False" />
                 <Setter Property="Padding" Value="15" />
-                <Setter Property="Margin" Value="2" />
+                <Setter Property="Margin" Value="1" />
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -37,38 +36,34 @@
             Text="{x:Static resource:AppResources.Close}" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout
+        <Grid
             Margin="0"
-            Spacing="0"
-            VerticalOptions="FillAndExpand">
-            <Grid
-                Margin="25"
-                ColumnSpacing="5"
-                HeightRequest="210"
-                RowSpacing="5">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+            Padding="20"
+            ColumnSpacing="0"
+            RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="90" />
+                <RowDefinition Height="90" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="44" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <StackLayout Grid.Row="0" Grid.Column="0">
                 <Label
-                    Grid.Row="0"
                     Text="{x:Static resource:AppResources.Spendable}"
                     TextColor="Gray"
                     TextTransform="Uppercase"
                     VerticalOptions="End"
                     VerticalTextAlignment="End" />
-                <Label
-                    Grid.Row="1"
-                    VerticalOptions="Start"
-                    VerticalTextAlignment="Start">
+                <Label>
                     <Label.FormattedText>
                         <FormattedString>
                             <Span
-                                FontAttributes="Bold"
-                                FontSize="38"
+                                FontSize="40"
                                 Text="{Binding Balance.SpendableInteger}"
                                 TextColor="Yellow" />
                             <Span
@@ -77,7 +72,6 @@
                                 Text="."
                                 TextColor="Yellow" />
                             <Span
-                                FontAttributes="Bold"
                                 FontSize="Medium"
                                 Text="{Binding Balance.SpendableDecimals}"
                                 TextColor="Yellow" />
@@ -88,16 +82,12 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-            </Grid>
-            <Grid
-                Margin="25,0,25,0"
-                ColumnSpacing="5"
-                HeightRequest="150"
-                RowSpacing="5">
+            </StackLayout>
+            <Grid Grid.Row="1" Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="30" />
-                    <RowDefinition Height="30" />
-                    <RowDefinition Height="30" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100" />
@@ -110,13 +100,13 @@
                     Text="{x:Static resource:AppResources.Immature}"
                     TextColor="Gray"
                     TextTransform="Uppercase"
-                    VerticalOptions="Center"
+                    VerticalOptions="CenterAndExpand"
                     VerticalTextAlignment="Center" />
                 <Label
                     Grid.Row="0"
                     Grid.Column="1"
-                    VerticalOptions="Start"
-                    VerticalTextAlignment="Start">
+                    VerticalOptions="CenterAndExpand"
+                    VerticalTextAlignment="Center">
                     <Label.FormattedText>
                         <FormattedString>
                             <Span
@@ -145,13 +135,13 @@
                     Text="{x:Static resource:AppResources.Unconfirmed}"
                     TextColor="Gray"
                     TextTransform="Uppercase"
-                    VerticalOptions="Center"
+                    VerticalOptions="CenterAndExpand"
                     VerticalTextAlignment="Center" />
                 <Label
                     Grid.Row="1"
                     Grid.Column="1"
-                    VerticalOptions="Start"
-                    VerticalTextAlignment="Start">
+                    VerticalOptions="CenterAndExpand"
+                    VerticalTextAlignment="Center">
                     <Label.FormattedText>
                         <FormattedString>
                             <Span
@@ -180,13 +170,13 @@
                     Text="{x:Static resource:AppResources.Locked}"
                     TextColor="Gray"
                     TextTransform="Uppercase"
-                    VerticalOptions="Center"
+                    VerticalOptions="CenterAndExpand"
                     VerticalTextAlignment="Center" />
                 <Label
                     Grid.Row="2"
                     Grid.Column="1"
-                    VerticalOptions="Start"
-                    VerticalTextAlignment="Start">
+                    VerticalOptions="CenterAndExpand"
+                    VerticalTextAlignment="Center">
                     <Label.FormattedText>
                         <FormattedString>
                             <Span
@@ -210,13 +200,14 @@
                 </Label>
             </Grid>
             <CollectionView
-                Margin="25,25,25,25"
+                Grid.Row="3"
+                Grid.Column="0"
                 ItemsSource="{Binding Transactions}"
                 SelectedItem="{Binding SelectedTransaction}"
                 SelectionChangedCommand="{Binding OpenTransactionDetailsCommand}"
                 SelectionMode="Single">
                 <CollectionView.ItemsLayout>
-                    <LinearItemsLayout ItemSpacing="12" Orientation="Vertical" />
+                    <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
@@ -283,17 +274,14 @@
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span
-                                                        FontAttributes="Bold"
-                                                        FontSize="Default"
+                                                        FontSize="Medium"
                                                         Text="{Binding Amount}"
                                                         TextColor="White" />
                                                     <Span
-                                                        FontAttributes="Bold"
                                                         FontSize="Body"
                                                         Text="."
                                                         TextColor="White" />
                                                     <Span
-                                                        FontAttributes="Bold"
                                                         FontSize="Body"
                                                         Text="{Binding Decimals}"
                                                         TextColor="White" />
@@ -312,9 +300,9 @@
                 </CollectionView.ItemTemplate>
                 <CollectionView.EmptyView />
             </CollectionView>
-            <Grid Margin="25,0,25,25">
+            <Grid Grid.Row="5" Grid.Column="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="44" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="5*" />
@@ -325,7 +313,6 @@
                     Grid.Column="0"
                     BackgroundColor="#191919"
                     Command="{Binding SendButtonClickedCommand}"
-                    CornerRadius="5"
                     HeightRequest="44"
                     IsEnabled="{Binding UserCanSend}"
                     Text="{x:Static resource:AppResources.Send}"
@@ -335,11 +322,10 @@
                     Grid.Column="1"
                     BackgroundColor="#191919"
                     Command="{Binding ReceiveButtonClickedCommand}"
-                    CornerRadius="5"
                     HeightRequest="44"
                     Text="{x:Static resource:AppResources.Receive}"
                     TextColor="Yellow" />
             </Grid>
-        </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

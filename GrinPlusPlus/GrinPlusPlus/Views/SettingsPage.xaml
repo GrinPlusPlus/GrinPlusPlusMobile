@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="GrinPlusPlus.Views.SettingsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com"
+    xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
+    Title="{Binding SelectedTransaction.Status}"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="Black"
+    IconImageSource="baseline_settings_applications_white_24.png" />

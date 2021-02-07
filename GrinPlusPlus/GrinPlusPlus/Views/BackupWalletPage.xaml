@@ -5,10 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
-    xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="Black"
-    Visual="Material">
+    BackgroundColor="Black">
     <ContentPage.Content>
         <StackLayout Spacing="8" VerticalOptions="StartAndExpand">
             <Label

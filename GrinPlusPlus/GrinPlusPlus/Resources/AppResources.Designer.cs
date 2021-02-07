@@ -241,6 +241,15 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Initializing your the Grin Node now... the Grin Node runs locally and it takes from 10 to 16 seconds to initialize, please wait... ⏱️.
+        /// </summary>
+        internal static string ConnectingToNode {
+            get {
+                return ResourceManager.GetString("ConnectingToNode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Continue.
         /// </summary>
         internal static string Continue {
@@ -295,6 +304,15 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to After creating a new wallet, please make sure you&apos;re keeping your wallet seed stored safely..
+        /// </summary>
+        internal static string CreateWalletMessage {
+            get {
+                return ResourceManager.GetString("CreateWalletMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Custom.
         /// </summary>
         internal static string Custom {
@@ -327,6 +345,15 @@ namespace GrinPlusPlus.Resources {
         internal static string EnableProximity {
             get {
                 return ResourceManager.GetString("EnableProximity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There was an error while trying to initialize the Grin Node..
+        /// </summary>
+        internal static string ErrorConnectingToNode {
+            get {
+                return ResourceManager.GetString("ErrorConnectingToNode", resourceCulture);
             }
         }
         
@@ -570,6 +597,15 @@ namespace GrinPlusPlus.Resources {
         internal static string OpenWallet {
             get {
                 return ResourceManager.GetString("OpenWallet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wallets interreact using the secure Tor network, but don&apos;t worry, in case Tor is unavailable you are capable of sending and receiving coins manually using Slatepack Messages through any channel you prefer..
+        /// </summary>
+        internal static string OpenWalletMessage {
+            get {
+                return ResourceManager.GetString("OpenWalletMessage", resourceCulture);
             }
         }
         
@@ -916,6 +952,15 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Support.
+        /// </summary>
+        internal static string Support {
+            get {
+                return ResourceManager.GetString("Support", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Swipe Up to Send Grins 😬.
         /// </summary>
         internal static string SwipeUp2Send {
@@ -925,7 +970,16 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tap the Address to copy.
+        ///   Looks up a localized string similar to The Grin Node is now fully synced. Redirecting to the login screen....
+        /// </summary>
+        internal static string SyncedRedirecting {
+            get {
+                return ResourceManager.GetString("SyncedRedirecting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tap address to copy.
         /// </summary>
         internal static string TabToCopy {
             get {
@@ -934,7 +988,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tor Address.
+        ///   Looks up a localized string similar to Tor address.
         /// </summary>
         internal static string TorAddress {
             get {
@@ -957,6 +1011,15 @@ namespace GrinPlusPlus.Resources {
         internal static string TransactionSent {
             get {
                 return ResourceManager.GetString("TransactionSent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Try to start the node again.
+        /// </summary>
+        internal static string TryToStartNodeManually {
+            get {
+                return ResourceManager.GetString("TryToStartNodeManually", resourceCulture);
             }
         }
         
@@ -997,7 +1060,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Waiting for the Node to be synced.
+        ///   Looks up a localized string similar to Waiting for the Node to be up and Running....
         /// </summary>
         internal static string WaitingSync {
             get {
@@ -1011,6 +1074,24 @@ namespace GrinPlusPlus.Resources {
         internal static string Wallet {
             get {
                 return ResourceManager.GetString("Wallet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your wallet is reachable.
+        /// </summary>
+        internal static string WalletReachable {
+            get {
+                return ResourceManager.GetString("WalletReachable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your wallet is not reachable.
+        /// </summary>
+        internal static string WalletReachableNot {
+            get {
+                return ResourceManager.GetString("WalletReachableNot", resourceCulture);
             }
         }
         

@@ -10,13 +10,6 @@ namespace GrinPlusPlus.ViewModels
 {
     public class RestoreWalletPageViewModel : ViewModelBase
     {
-        private string _exceptionMessage = "";
-        public string ExceptionMessage
-        {
-            get { return _exceptionMessage; }
-            set { SetProperty(ref _exceptionMessage, value.Trim()); }
-        }
-
         private string _username = "";
         public string Username
         {
@@ -96,13 +89,6 @@ namespace GrinPlusPlus.ViewModels
             set => SetProperty(ref _isBusy, value);
         }
 
-        private bool _isIdle = true;
-        public bool IsIdle
-        {
-            get => _isIdle;
-            set => SetProperty(ref _isIdle, value);
-        }
-
         public RestoreWalletPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
@@ -114,11 +100,8 @@ namespace GrinPlusPlus.ViewModels
         {
             try
             {
-                ExceptionMessage = string.Empty;
-
                 IsBusy = true;
-                IsIdle = false;
-
+                
                 var login = await DataProvider.RestoreWallet(Username, Password, WalletSeed);
                 await SecureStorage.SetAsync("token", login.Token);
                 await SecureStorage.SetAsync("username", Username);
@@ -129,12 +112,11 @@ namespace GrinPlusPlus.ViewModels
             }
             catch (Exception ex)
             {
-                ExceptionMessage = ex.Message;
+                await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
             }
             finally
             {
                 IsBusy = false;
-                IsIdle = true;
             }
         }
     }

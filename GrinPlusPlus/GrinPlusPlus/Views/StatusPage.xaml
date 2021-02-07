@@ -5,28 +5,24 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
-    Title="{Binding SelectedTransaction.Status}"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="Black"
-    IconImageSource="baseline_settings_applications_white_24.png"
-    Visual="Material">
+    IconImageSource="baseline_network_check_white_24.png">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Padding="20" Spacing="10">
             <Label
-                Padding="20,25,20,0"
-                FontSize="22"
+                FontSize="Large"
                 HorizontalOptions="Start"
                 Text="{Binding Status}"
                 TextColor="White"
                 VerticalOptions="Center" />
             <BoxView
-                Margin="20,0,20,20"
                 HeightRequest="1"
                 HorizontalOptions="Start"
                 WidthRequest="50"
                 Color="White" />
             <Grid
-                Margin="20,10,20,0"
+                Margin="0,10,0,10"
                 ColumnSpacing="10"
                 HeightRequest="80"
                 RowSpacing="10">
@@ -74,11 +70,10 @@
                     TextColor="White" />
             </Grid>
             <Label
-                Margin="20,10,20,0"
                 Text="{x:Static resource:AppResources.ConnectedPeers}"
                 TextColor="Gray"
                 TextTransform="Uppercase" />
-            <CollectionView Margin="20,0,20,0" ItemsSource="{Binding ConnectedPeers}">
+            <CollectionView ItemsSource="{Binding ConnectedPeers}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Label Text="{Binding Address}" TextColor="White" />

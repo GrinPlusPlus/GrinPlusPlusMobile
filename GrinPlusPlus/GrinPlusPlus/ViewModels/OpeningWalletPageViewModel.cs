@@ -15,7 +15,12 @@ namespace GrinPlusPlus.ViewModels
 {
     public class OpeningWalletPageViewModel : ViewModelBase
     {
-        private CancellationTokenSource _cancel;
+        private string _wallet = string.Empty;
+        public string Wallet
+        {
+            get { return _wallet; }
+            set { SetProperty(ref _wallet, value); }
+        }
 
         private string _exceptionMessage;
         public string ExceptionMessage
@@ -28,7 +33,6 @@ namespace GrinPlusPlus.ViewModels
         public OpeningWalletPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
-
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
@@ -37,45 +41,8 @@ namespace GrinPlusPlus.ViewModels
             {
                 try
                 {
-                    var balance = await DataProvider.GetWalletBalance(await SecureStorage.GetAsync("token"));
-
-                    Preferences.Set("balance_spendable", balance.Spendable);
-                    Preferences.Set("balance_locked", balance.Locked);
-                    Preferences.Set("balance_immature", balance.Immature);
-                    Preferences.Set("balance_unconfirmed", balance.Unconfirmed);
-                    Preferences.Set("balance_total", balance.Total);
-
-                    Settings.IsLoggedIn = true;
-
-                    if (await CrossFingerprint.Current.IsAvailableAsync(true))
-                    {
-                        _cancel = new CancellationTokenSource();
-
-                        var wallet = (await SecureStorage.GetAsync("username")).ToUpper();
-                        var message = AppResources.ResourceManager.GetString("ConfirmIdentity");
-
-                        var dialogConfig = new AuthenticationRequestConfiguration(wallet, message)
-                        {
-                            CancelTitle = null,
-                            FallbackTitle = null,
-                            AllowAlternativeAuthentication = true
-                        };
-
-                        var result = await CrossFingerprint.Current.AuthenticateAsync(dialogConfig, _cancel.Token);
-
-                        if (!result.Authenticated)
-                        {
-                            await Logout();
-                        }
-                    }
-
-                    if(Settings.IsLoggedIn)
-                    {
-                        await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/DashboardCarouselPage");
-                    } else
-                    {
-                        await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/LoginPage");
-                    }
+                    Wallet = (await SecureStorage.GetAsync("username")).ToUpper();
+                    await GetWalletBalance();
                 }
                 catch (Exception ex)
                 {
@@ -84,6 +51,42 @@ namespace GrinPlusPlus.ViewModels
                     await NavigationService.GoBackToRootAsync();
                 }
             });
+        }
+
+        private async Task GetWalletBalance()
+        {
+            var balance = await DataProvider.GetWalletBalance(await SecureStorage.GetAsync("token"));
+
+            if (await CrossFingerprint.Current.IsAvailableAsync(true))
+            {
+                var _cancel = new CancellationTokenSource();
+
+                var message = AppResources.ResourceManager.GetString("ConfirmIdentity");
+
+                var dialogConfig = new AuthenticationRequestConfiguration(Wallet, message)
+                {
+                    CancelTitle = null,
+                    FallbackTitle = null,
+                    AllowAlternativeAuthentication = true
+                };
+
+                var result = await CrossFingerprint.Current.AuthenticateAsync(dialogConfig, _cancel.Token);
+
+                if (!result.Authenticated)
+                {
+                    Settings.IsLoggedIn = false;
+                    await Logout();
+                }
+            }
+
+            Preferences.Set("balance_spendable", balance.Spendable);
+            Preferences.Set("balance_locked", balance.Locked);
+            Preferences.Set("balance_immature", balance.Immature);
+            Preferences.Set("balance_unconfirmed", balance.Unconfirmed);
+            Preferences.Set("balance_total", balance.Total);
+
+            Settings.IsLoggedIn = true;
+            await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/DashboardCarouselPage");
         }
 
         async Task Logout()

@@ -5,12 +5,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
-    xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
     x:Name="Login"
     prism:ViewModelLocator.AutowireViewModel="True"
-    sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromRight"
-    BackgroundColor="Black"
-    Visual="Material">
+    BackgroundColor="Black">
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -34,10 +31,31 @@
                     Text="{x:Static resource:AppResources.FastPrivateSecure}"
                     TextColor="White" />
             </StackLayout>
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Padding="40,0,40,0"
+                FontSize="Body"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                IsVisible="{Binding DisplayInitialMessage}"
+                Text="{x:Static resource:AppResources.ConnectingToNode}"
+                TextColor="White" />
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                Padding="40,0,40,0"
+                FontSize="Body"
+                HorizontalOptions="Center"
+                HorizontalTextAlignment="Center"
+                IsVisible="{Binding DisplaySuccessMessage}"
+                Text="{x:Static resource:AppResources.SyncedRedirecting}"
+                TextColor="White" />
             <StackLayout
                 Grid.Row="1"
                 Grid.Column="0"
-                Padding="40,0,40,0">
+                Padding="40,0,40,0"
+                IsVisible="{Binding DisplayProgress}">
                 <Label HorizontalOptions="Center" HorizontalTextAlignment="Center">
                     <Label.FormattedText>
                         <FormattedString>
@@ -63,13 +81,30 @@
                     TextColor="White" />
             </StackLayout>
             <StackLayout
-                Grid.Row="2"
+                Grid.Row="1"
                 Grid.Column="0"
                 Padding="40,0,40,0"
-                Spacing="10">
+                IsVisible="{Binding DisplayError}">
+                <Label
+                    FontSize="Body"
+                    HorizontalOptions="Center"
+                    HorizontalTextAlignment="Center"
+                    Text="{x:Static resource:AppResources.ErrorConnectingToNode}"
+                    TextColor="Red" />
+                <Button
+                    BackgroundColor="#191919"
+                    Command="{Binding SupportButtonClickedCommand}"
+                    Text="{x:Static resource:AppResources.Support}"
+                    TextColor="White" />
+            </StackLayout>
+            <StackLayout
+                Grid.Row="2"
+                Grid.Column="0"
+                Padding="40,0,40,0">
                 <ActivityIndicator
                     HorizontalOptions="Center"
                     IsRunning="true"
+                    IsVisible="{Binding DisplayActivityIndicator}"
                     WidthRequest="30"
                     Color="DarkGray" />
                 <Label

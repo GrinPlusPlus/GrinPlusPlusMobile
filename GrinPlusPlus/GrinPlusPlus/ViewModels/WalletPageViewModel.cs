@@ -78,6 +78,19 @@ namespace GrinPlusPlus.ViewModels
 
             CancelTransactionClickedCommand = new DelegateCommand<object>(CancelTransactionClicked);
 
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                await GetWalletBalance();
+            });
+
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                await LoadTransactions();
+            });
+        }
+
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
             Device.StartTimer(TimeSpan.FromSeconds(5), () =>
             {
                 if (Settings.IsLoggedIn == false)
@@ -93,7 +106,7 @@ namespace GrinPlusPlus.ViewModels
                 return true;
             });
 
-            Device.StartTimer(TimeSpan.FromSeconds(3), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
             {
                 if (Settings.IsLoggedIn == false)
                 {
@@ -145,14 +158,21 @@ namespace GrinPlusPlus.ViewModels
                 {
                     foreach (var transaction in transactions)
                     {
-                        var current = Transactions.First<Transaction>(t => t.Id.Equals(transaction.Id));
-                        if (current != null)
+                        try
                         {
-                            if (!current.Status.Equals(transaction.Status))
+                            var current = Transactions.First<Transaction>(t => t.Id.Equals(transaction.Id));
+                            if (current != null)
                             {
-                                Transactions.Remove(current);
-                                Transactions.Add(transaction);
+                                if (!current.Status.Equals(transaction.Status))
+                                {
+                                    Transactions.Remove(current);
+                                    Transactions.Add(transaction);
+                                }
                             }
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine(ex.Message);
                         }
                     }
                 }

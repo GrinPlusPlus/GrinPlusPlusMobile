@@ -177,6 +177,9 @@
   <data name="ConnectedPeers" xml:space="preserve">
     <value>Connected Peers</value>
   </data>
+  <data name="ConnectingToNode" xml:space="preserve">
+    <value>Initializing your the Grin Node now... the Grin Node runs locally and it takes from 10 to 16 seconds to initialize, please wait... ⏱️</value>
+  </data>
   <data name="Continue" xml:space="preserve">
     <value>Continue</value>
   </data>
@@ -195,6 +198,9 @@
   <data name="CreateWallet" xml:space="preserve">
     <value>Create Wallet</value>
   </data>
+  <data name="CreateWalletMessage" xml:space="preserve">
+    <value>After creating a new wallet, please make sure you're keeping your wallet seed stored safely.</value>
+  </data>
   <data name="Custom" xml:space="preserve">
     <value>Custom</value>
   </data>
@@ -206,6 +212,9 @@
   </data>
   <data name="EnableProximity" xml:space="preserve">
     <value>Receive using Proximity</value>
+  </data>
+  <data name="ErrorConnectingToNode" xml:space="preserve">
+    <value>There was an error while trying to initialize the Grin Node.</value>
   </data>
   <data name="FastPrivateSecure" xml:space="preserve">
     <value>Fast. Private. Secure.</value>
@@ -287,6 +296,9 @@
   </data>
   <data name="OpenWallet" xml:space="preserve">
     <value>Open Wallet</value>
+  </data>
+  <data name="OpenWalletMessage" xml:space="preserve">
+    <value>Wallets interreact using the secure Tor network, but don't worry, in case Tor is unavailable you are capable of sending and receiving coins manually using Slatepack Messages through any channel you prefer.</value>
   </data>
   <data name="Outputs" xml:space="preserve">
     <value>Outputs</value>
@@ -402,20 +414,29 @@
   <data name="Status" xml:space="preserve">
     <value>Status</value>
   </data>
+  <data name="Support" xml:space="preserve">
+    <value>Support</value>
+  </data>
   <data name="SwipeUp2Send" xml:space="preserve">
     <value>Swipe Up to Send Grins 😬</value>
   </data>
+  <data name="SyncedRedirecting" xml:space="preserve">
+    <value>The Grin Node is now fully synced. Redirecting to the login screen...</value>
+  </data>
   <data name="TabToCopy" xml:space="preserve">
-    <value>Tap the Address to copy</value>
+    <value>Tap address to copy</value>
   </data>
   <data name="TorAddress" xml:space="preserve">
-    <value>Tor Address</value>
+    <value>Tor address</value>
   </data>
   <data name="Total" xml:space="preserve">
     <value>Total</value>
   </data>
   <data name="TransactionSent" xml:space="preserve">
     <value>Transaction Sent  〜(ᵐ‿ʷ)〜</value>
+  </data>
+  <data name="TryToStartNodeManually" xml:space="preserve">
+    <value>Try to start the node again</value>
   </data>
   <data name="Unconfirmed" xml:space="preserve">
     <value>Unconfirmed</value>
@@ -430,10 +451,16 @@
     <value>Using NFC</value>
   </data>
   <data name="WaitingSync" xml:space="preserve">
-    <value>Waiting for the Node to be synced</value>
+    <value>Waiting for the Node to be up and Running...</value>
   </data>
   <data name="Wallet" xml:space="preserve">
     <value>Wallet</value>
+  </data>
+  <data name="WalletReachable" xml:space="preserve">
+    <value>Your wallet is reachable</value>
+  </data>
+  <data name="WalletReachableNot" xml:space="preserve">
+    <value>Your wallet is not reachable</value>
   </data>
   <data name="WalletSeed" xml:space="preserve">
     <value>Wallet Seed</value>

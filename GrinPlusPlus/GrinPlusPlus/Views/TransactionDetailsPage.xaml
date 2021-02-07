@@ -8,8 +8,7 @@
     x:Name="TransactionDetails"
     Title="{Binding SelectedTransaction.Status}"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="Black"
-    Visual="Material">
+    BackgroundColor="Black">
     <StackLayout>
         <Label HorizontalOptions="Center">
             <Label.FormattedText>

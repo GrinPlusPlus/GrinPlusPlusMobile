@@ -14,7 +14,7 @@ namespace GrinPlusPlus.ViewModels
 {
     public class TansactionsHistoryPageViewModel : ViewModelBase
     {
-        private ObservableCollection<TransactionGroup> _transactions;
+        private ObservableCollection<TransactionGroup> _transactions = new ObservableCollection<TransactionGroup>();
         public ObservableCollection<TransactionGroup> Transactions
         {
             get { return _transactions; }
@@ -36,9 +36,15 @@ namespace GrinPlusPlus.ViewModels
         public TansactionsHistoryPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
-            Transactions = new ObservableCollection<TransactionGroup>();
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                await LoadWalletHistory();
+            });
 
-            Xamarin.Forms.Device.StartTimer(TimeSpan.FromSeconds(4), () =>
+        }
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            Xamarin.Forms.Device.StartTimer(TimeSpan.FromSeconds(5), () =>
             {
                 if (Settings.IsLoggedIn == false)
                 {
@@ -47,7 +53,6 @@ namespace GrinPlusPlus.ViewModels
 
                 MainThread.BeginInvokeOnMainThread(async () =>
                 {
-
                     await LoadWalletHistory();
                 });
 
@@ -75,7 +80,7 @@ namespace GrinPlusPlus.ViewModels
                 {
                     var update = false;
 
-                    foreach (var group in transactionsGroupedByDate)
+                    foreach (IGrouping<string, Transaction> group in transactionsGroupedByDate)
                     {
                         var date = Transactions.First(t => t.Name.Equals(group.Key));
                         if (date != null)

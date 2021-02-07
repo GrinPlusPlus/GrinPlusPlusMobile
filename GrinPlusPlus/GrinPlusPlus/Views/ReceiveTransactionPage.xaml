@@ -3,14 +3,12 @@
     x:Class="GrinPlusPlus.Views.ReceiveTransactionPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:behavior="clr-namespace:GrinPlusPlus.Behaviors"
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
     prism:ViewModelLocator.AutowireViewModel="True"
     sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromRight"
-    BackgroundColor="Black"
-    Visual="Material">
+    BackgroundColor="Black">
     <ContentPage.Content>
         <StackLayout
             HorizontalOptions="FillAndExpand"

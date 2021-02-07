@@ -10,8 +10,7 @@
     prism:ViewModelLocator.AutowireViewModel="True"
     sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromRight"
     BackgroundColor="{StaticResource BackgroundColor}"
-    NavigationPage.HasBackButton="False"
-    Visual="Material">
+    NavigationPage.HasBackButton="False">
     <ContentPage.ToolbarItems>
         <ToolbarItem
             Command="{prism:GoBack ToRoot}"

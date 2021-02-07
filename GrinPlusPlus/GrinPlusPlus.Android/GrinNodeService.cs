@@ -44,26 +44,24 @@ namespace GrinPlusPlus.Droid
         {
             base.OnCreate();
 
-            StopTor(); // Let's make sure we are killing the tor process.
-
             var librariesPath = PackageManager.GetApplicationInfo(ApplicationInfo.PackageName, PackageInfoFlags.SharedLibraryFiles).NativeLibraryDir;
 
-            libtor = new Java.IO.File(System.IO.Path.Combine(librariesPath, "libtor.so"));
-            libgrin = new Java.IO.File(System.IO.Path.Combine(librariesPath, "libgrin.so"));
+            libtor = new Java.IO.File(Path.Combine(librariesPath, "libtor.so"));
+            libgrin = new Java.IO.File(Path.Combine(librariesPath, "libgrin.so"));
 
             Preferences.Set("Status", Service.SyncHelpers.GetStatusLabel(string.Empty));
             Preferences.Set("ProgressPercentage", (double)0);
 
             SetTimer();
 
-            dataFolder = new Java.IO.File(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), ".GrinPP/MAINNET/NODE"));
+            dataFolder = new Java.IO.File(Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), ".GrinPP/MAINNET/NODE"));
         }
 
         public override StartCommandResult OnStartCommand(Intent intent, StartCommandFlags flags, int startId)
         {
             if (intent.Action == null)
             {
-                RegisterForegroundService("Initializing node");
+                RegisterForegroundService(Service.SyncHelpers.GetStatusLabel(string.Empty));
                 RunBackend();
             }
             else
@@ -127,10 +125,14 @@ namespace GrinPlusPlus.Droid
                 Preferences.Set("Blocks", nodeStatus.Chain.Height);
                 Preferences.Set("NetworkHeight", nodeStatus.Network.Height);
             }
+            catch (System.Net.WebException ex)
+            {
+                Log.Error(TAG, $"Node is not running: {ex.Message}");
+                label = Service.SyncHelpers.GetStatusLabel(string.Empty);
+            }
             catch (Exception ex)
             {
                 Log.Error(TAG, $"Error Communication: {ex.Message}");
-                label = Service.SyncHelpers.GetStatusLabel(string.Empty);
             }
             Preferences.Set("Status", label);
             RegisterForegroundService(label);
@@ -145,7 +147,7 @@ namespace GrinPlusPlus.Droid
 
             // Work has finished, now dispatch anotification to let the user know.
             var notification = new Notification.Builder(AndroidApp.Context, channelId)
-                .SetContentTitle("Grin Full Node")
+                .SetContentTitle("Grin Node")
                 .SetContentText(status)
                 .SetSmallIcon(Resource.Drawable.logo)
                 .SetContentIntent(BuildIntentToShowMainActivity())
@@ -322,9 +324,9 @@ namespace GrinPlusPlus.Droid
 		/// <returns>The restart node action.</returns>
 		Notification.Action BuildRestartNodeAction()
         {
-            var action = "Start";
+            var action = "Run";
             var status = Preferences.Get("Status", string.Empty);
-            if (!status.Equals("Not Connected"))
+            if (!status.Equals("Disconnected"))
             {
                 action = "Restart";
             }
@@ -345,6 +347,12 @@ namespace GrinPlusPlus.Droid
 		/// <returns>The resync node action.</returns>
 		Notification.Action BuildResyncNodeAction()
         {
+            var status = Preferences.Get("Status", string.Empty);
+            if (status.Equals("Disconnected"))
+            {
+                return null;
+            }
+
             var resyncNodeIntent = new Intent(this, GetType());
             resyncNodeIntent.SetAction(Constants.ACTION_RESYNC_NODE);
             var restartTimerPendingIntent = PendingIntent.GetService(this, 0, resyncNodeIntent, 0);
@@ -363,6 +371,12 @@ namespace GrinPlusPlus.Droid
 		/// <returns>The stop service action.</returns>
 		Notification.Action BuildStopServiceAction()
         {
+            var status = Preferences.Get("Status", string.Empty);
+            if (status.Equals("Disconnected"))
+            {
+                return null;
+            }
+
             var stopServiceIntent = new Intent(this, GetType());
             stopServiceIntent.SetAction(Constants.ACTION_STOP_SERVICE);
             var stopServicePendingIntent = PendingIntent.GetService(this, 0, stopServiceIntent, 0);

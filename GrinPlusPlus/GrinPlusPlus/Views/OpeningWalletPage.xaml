@@ -5,27 +5,47 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
-    xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
+    Title="{Binding Wallet}"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="Black"
-    Visual="Material">
+    BackgroundColor="Black">
     <ContentPage.Content>
-        <StackLayout
-            HorizontalOptions="Center"
-            Spacing="20"
-            VerticalOptions="Center">
+        <Grid Padding="20" RowSpacing="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="100" />
+                <RowDefinition Height="40" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <StackLayout
+                Grid.Row="0"
+                Grid.Column="0"
+                VerticalOptions="Center">
+                <Label
+                    FontSize="Large"
+                    HorizontalTextAlignment="Center"
+                    Text="{x:Static resource:AppResources.OpeningPleaseWait}"
+                    TextColor="White" />
+                <ActivityIndicator
+                    IsRunning="true"
+                    WidthRequest="40"
+                    Color="Yellow" />
+                <Label Text="{Binding ExceptionMessage}" TextColor="Red" />
+            </StackLayout>
             <Label
-                FontSize="Large"
-                Text="{x:Static resource:AppResources.OpeningPleaseWait}"
+                Grid.Row="1"
+                Grid.Column="0"
+                FontSize="Default"
+                HorizontalTextAlignment="Center"
+                Text="{x:Static resource:AppResources.OpenWalletMessage}"
                 TextColor="White" />
-            <ActivityIndicator
-                IsRunning="true"
-                WidthRequest="50"
-                Color="Yellow" />
-            <Label
-                FontSize="Large"
-                Text="{Binding ExceptionMessage}"
-                TextColor="Red" />
-        </StackLayout>
+            <Image
+                Grid.Row="2"
+                Grid.Column="0"
+                Aspect="AspectFit"
+                HeightRequest="40"
+                Source="logo.png" />
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

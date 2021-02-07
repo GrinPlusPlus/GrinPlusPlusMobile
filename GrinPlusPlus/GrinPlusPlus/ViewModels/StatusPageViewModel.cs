@@ -6,6 +6,7 @@ using Prism.Services.Dialogs;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -41,7 +42,7 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref networkHeight, value); }
         }
 
-        private ObservableCollection<Peer> _connectedPeers;
+        private ObservableCollection<Peer> _connectedPeers = new ObservableCollection<Peer>();
         public ObservableCollection<Peer> ConnectedPeers
         {
             get { return _connectedPeers; }
@@ -52,8 +53,14 @@ namespace GrinPlusPlus.ViewModels
         public StatusPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
-            ConnectedPeers = new ObservableCollection<Peer>();
-
+            UpdateStatus();
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                await ListConnectedPeersAsync();
+            });
+        }
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
                 if (Settings.IsLoggedIn == false)
@@ -61,69 +68,77 @@ namespace GrinPlusPlus.ViewModels
                     return false;
                 }
 
-                if (!Status.Equals(Settings.Node.Status))
-                {
-                    Status = Settings.Node.Status;
-                }
-                if (!HeaderHeight.Equals(Settings.Node.HeaderHeight))
-                {
-                    HeaderHeight = Settings.Node.HeaderHeight;
-                }
-                if (!Blocks.Equals(Settings.Node.Blocks))
-                {
-                    Blocks = Settings.Node.Blocks;
-                }
-                if (!NetworkHeight.Equals(Settings.Node.NetworkHeight))
-                {
-                    NetworkHeight = Settings.Node.NetworkHeight;
-                }
+                UpdateStatus();
+
                 return true;
             });
 
-            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(10), () =>
             {
                 if (Settings.IsLoggedIn == false)
                 {
                     return false;
                 }
 
-                ListConnectedPeers();
+                MainThread.BeginInvokeOnMainThread(async () =>
+                {
+                    await ListConnectedPeersAsync();
+                });
 
                 return true;
             });
         }
 
-        private void ListConnectedPeers()
+        private void UpdateStatus()
         {
-            MainThread.BeginInvokeOnMainThread(async () =>
+            if (!Status.Equals(Settings.Node.Status))
             {
-                try
-                {
-                    var connectedPeers = await DataProvider.GetNodeConnectedPeers();
-                    if (ConnectedPeers.Count > 0)
-                    {
-                        foreach (Peer peer in ConnectedPeers)
-                        {
-                            if (!connectedPeers.Any(p => p.Address.Equals(peer.Address)))
-                            {
-                                ConnectedPeers.Remove(peer);
-                            }
-                        }
-                    }
+                Status = Settings.Node.Status;
+            }
+            if (!HeaderHeight.Equals(Settings.Node.HeaderHeight))
+            {
+                HeaderHeight = Settings.Node.HeaderHeight;
+            }
+            if (!Blocks.Equals(Settings.Node.Blocks))
+            {
+                Blocks = Settings.Node.Blocks;
+            }
+            if (!NetworkHeight.Equals(Settings.Node.NetworkHeight))
+            {
+                NetworkHeight = Settings.Node.NetworkHeight;
+            }
+        }
 
-                    foreach (Peer peer in connectedPeers)
+        private async Task ListConnectedPeersAsync()
+        {
+            
+            try
+            {
+                var connectedPeers = await DataProvider.GetNodeConnectedPeers();
+                if (ConnectedPeers.Count > 0)
+                {
+                    foreach (Peer peer in ConnectedPeers)
                     {
-                        if (!ConnectedPeers.Any(p => p.Address.Equals(peer.Address)))
+                        if (!connectedPeers.Any(p => p.Address.Equals(peer.Address)))
                         {
-                            ConnectedPeers.Add(peer);
+                            ConnectedPeers.Remove(peer);
                         }
                     }
                 }
-                catch (Exception ex)
+
+                foreach (Peer peer in connectedPeers)
                 {
-                    Console.WriteLine(ex.Message);
+                    if (!ConnectedPeers.Any(p => p.Address.Equals(peer.Address)))
+                    {
+                        ConnectedPeers.Add(peer);
+                    }
                 }
-            });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
         }
     }
 }
