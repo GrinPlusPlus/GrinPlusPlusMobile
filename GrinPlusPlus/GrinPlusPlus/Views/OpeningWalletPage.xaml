@@ -40,12 +40,6 @@
                 HorizontalTextAlignment="Center"
                 Text="{x:Static resource:AppResources.OpenWalletMessage}"
                 TextColor="White" />
-            <Image
-                Grid.Row="2"
-                Grid.Column="0"
-                Aspect="AspectFit"
-                HeightRequest="40"
-                Source="logo.png" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

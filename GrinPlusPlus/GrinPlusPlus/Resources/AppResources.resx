@@ -168,6 +168,9 @@
   <data name="Confirm" xml:space="preserve">
     <value>Confirm</value>
   </data>
+  <data name="Confirmations" xml:space="preserve">
+    <value>Confirmations</value>
+  </data>
   <data name="ConfirmIdentity" xml:space="preserve">
     <value>Please confirm your identity to continue</value>
   </data>
@@ -229,7 +232,7 @@
     <value>Finalize Transaction</value>
   </data>
   <data name="GetWalletSeed" xml:space="preserve">
-    <value>Get Wallet Seed</value>
+    <value>Display Wallet Seed Phrase</value>
   </data>
   <data name="Headers" xml:space="preserve">
     <value>Headers</value>
@@ -255,11 +258,17 @@
   <data name="Locked" xml:space="preserve">
     <value>Locked</value>
   </data>
+  <data name="MaximumPeers" xml:space="preserve">
+    <value>Maximum number of Peers</value>
+  </data>
   <data name="Message" xml:space="preserve">
     <value>Message</value>
   </data>
   <data name="Method" xml:space="preserve">
     <value>Method</value>
+  </data>
+  <data name="MinimumPeers" xml:space="preserve">
+    <value>Minimum number of Peers</value>
   </data>
   <data name="Network" xml:space="preserve">
     <value>Network</value>

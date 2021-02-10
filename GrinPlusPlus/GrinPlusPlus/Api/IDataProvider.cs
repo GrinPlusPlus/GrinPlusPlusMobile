@@ -40,7 +40,7 @@ namespace GrinPlusPlus.Api
 
         Task<bool> RepostTransaction(string token, int transaction);
 
-        Task<bool> CheckAddressAvailability(string address);
+        Task<bool> CheckAddressAvailability(string address, string api = null);
 
         Task DeleteONION(string torAddress);
 

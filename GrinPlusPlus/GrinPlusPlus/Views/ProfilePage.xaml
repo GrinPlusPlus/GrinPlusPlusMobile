@@ -10,13 +10,6 @@
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="Black"
     IconImageSource="baseline_qr_code_white_24.png">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem
-            Command="{Binding OpenBackupWalletPageCommand}"
-            Order="Primary"
-            Priority="0"
-            Text="{x:Static resource:AppResources.BackupWallet}" />
-    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid
             Margin="0"

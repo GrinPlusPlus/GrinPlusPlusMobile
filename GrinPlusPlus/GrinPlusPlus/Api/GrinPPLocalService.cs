@@ -239,21 +239,22 @@ namespace GrinPlusPlus.Api
             };
         }
 
-        public async Task<bool> CheckAddressAvailability(string address)
+        public async Task<bool> CheckAddressAvailability(string address, string api = null)
         {
             var proxy = new HttpToSocks5Proxy("127.0.0.1", 3422);
             var handler = new HttpClientHandler { Proxy = proxy };
 
-            var url = "http://grinchck.ahcbagldgzdpa74g2mh74fvk5zjzpfjbvgqin6g3mfuu66tynv2gkiid.onion/check/";
+            var url = api ?? "http://grinchck.ahcbagldgzdpa74g2mh74fvk5zjzpfjbvgqin6g3mfuu66tynv2gkiid.onion/check/";
 
             var destination = $"http://{address}.onion";
 
             var parameters = new Dictionary<string, string> { { "wallet", destination } };
             var encodedContent = new FormUrlEncodedContent(parameters);
-            
-            var httpclient = new HttpClient(handler, true);
 
-            httpclient.Timeout = TimeSpan.FromSeconds(30);
+            var httpclient = new HttpClient(handler, true)
+            {
+                Timeout = TimeSpan.FromSeconds(30)
+            };
 
             var response = await httpclient.PostAsync(url, encodedContent).ConfigureAwait(false);
             

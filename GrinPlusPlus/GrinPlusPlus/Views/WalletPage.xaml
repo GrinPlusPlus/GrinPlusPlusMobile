@@ -28,13 +28,6 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <ContentPage.ToolbarItems>
-        <ToolbarItem
-            Command="{Binding LogoutCommand}"
-            Order="Primary"
-            Priority="0"
-            Text="{x:Static resource:AppResources.Close}" />
-    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid
             Margin="0"

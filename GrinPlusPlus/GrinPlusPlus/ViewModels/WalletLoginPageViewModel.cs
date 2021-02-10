@@ -13,7 +13,7 @@ namespace GrinPlusPlus.ViewModels
 {
     public class WalletLoginPageViewModel : ViewModelBase
     {
-        private string _username = "";
+        private string _username = string.Empty;
         public string Username
         {
             get => _username.Trim();
@@ -27,7 +27,7 @@ namespace GrinPlusPlus.ViewModels
             set => SetProperty(ref _isBusy, value);
         }
 
-        private string _password = "";
+        private string _password = string.Empty;
         public string Password
         {
             get => _password.Trim();

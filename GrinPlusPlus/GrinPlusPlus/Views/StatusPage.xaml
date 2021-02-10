@@ -5,22 +5,22 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
+    Padding="20"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="Black"
     IconImageSource="baseline_network_check_white_24.png">
     <ContentPage.Content>
-        <StackLayout Padding="20" Spacing="10">
+        <StackLayout Spacing="10">
+            <Label
+                Text="{x:Static resource:AppResources.Status}"
+                TextColor="Gray"
+                TextTransform="Uppercase" />
             <Label
                 FontSize="Large"
                 HorizontalOptions="Start"
                 Text="{Binding Status}"
                 TextColor="White"
                 VerticalOptions="Center" />
-            <BoxView
-                HeightRequest="1"
-                HorizontalOptions="Start"
-                WidthRequest="50"
-                Color="White" />
             <Grid
                 Margin="0,10,0,10"
                 ColumnSpacing="10"

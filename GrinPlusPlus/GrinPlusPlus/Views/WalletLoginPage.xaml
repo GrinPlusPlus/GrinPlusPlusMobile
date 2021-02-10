@@ -9,9 +9,6 @@
     Title="{Binding Title}"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="Black">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{Binding DeleteWalletCommand}" Text="{x:Static resource:AppResources.DeleteWallet}" />
-    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout
             Padding="20,0,20,0"
@@ -36,7 +33,7 @@
                 </Entry.Effects>
             </Entry>
             <StackLayout
-                Margin="0,10,0,0"
+                Margin="0,10,0,20"
                 Padding="0"
                 BackgroundColor="#191919"
                 HeightRequest="44"
@@ -44,7 +41,6 @@
                 <Button
                     BackgroundColor="#191919"
                     Command="{Binding OpenWalletCommand}"
-                    CornerRadius="5"
                     HeightRequest="44"
                     IsEnabled="{Binding Password, Converter={xct:IsNotNullOrEmptyConverter}}"
                     IsVisible="{Binding IsBusy, Converter={xct:InvertedBoolConverter}}"
@@ -56,6 +52,13 @@
                     IsVisible="{Binding IsBusy}"
                     Color="LightGray" />
             </StackLayout>
+            <Button
+                BackgroundColor="#191919"
+                Command="{Binding DeleteWalletCommand}"
+                HeightRequest="44"
+                IsEnabled="{Binding Password, Converter={xct:IsNotNullOrEmptyConverter}}"
+                Text="{x:Static resource:AppResources.DeleteWallet}"
+                TextColor="Red" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

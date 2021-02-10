@@ -35,6 +35,30 @@ namespace GrinPlusPlus
             set => Preferences.Set(nameof(CurrentCultureInfo), value);
         }
 
+        public static string GrinChckAPIURL
+        {
+            get => Preferences.Get(nameof(GrinChckAPIURL), "http://grinchck.ahcbagldgzdpa74g2mh74fvk5zjzpfjbvgqin6g3mfuu66tynv2gkiid.onion/check/");
+            set => Preferences.Set(nameof(GrinChckAPIURL), value);
+        }
+
+        public static int Confirmations
+        {
+            get => Preferences.Get(nameof(Confirmations), 10);
+            set => Preferences.Set(nameof(Confirmations), value);
+        }
+
+        public static int MinimumPeers
+        {
+            get => Preferences.Get(nameof(MinimumPeers), 10);
+            set => Preferences.Set(nameof(MinimumPeers), value);
+        }
+
+        public static int MaximumPeers
+        {
+            get => Preferences.Get(nameof(MaximumPeers), 60);
+            set => Preferences.Set(nameof(MaximumPeers), value);
+        }
+
         public static class Node
         {
             public static string Status

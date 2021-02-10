@@ -5,7 +5,182 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
-    Title="{Binding SelectedTransaction.Status}"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="Black"
-    IconImageSource="baseline_settings_applications_white_24.png" />
+    IconImageSource="baseline_settings_applications_white_24.png">
+    <ContentPage.Content>
+        <Grid
+            Margin="0,10,0,0"
+            Padding="0"
+            ColumnSpacing="0"
+            RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="65*" />
+                <ColumnDefinition Width="35*" />
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Padding="20,0,0,0"
+                Text="{x:Static resource:AppResources.Confirmations}"
+                TextColor="WhiteSmoke"
+                VerticalOptions="Center" />
+            <Entry
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="0,0,20,0"
+                BackgroundColor="Transparent"
+                FontSize="Body"
+                HorizontalTextAlignment="End"
+                IsSpellCheckEnabled="False"
+                IsTextPredictionEnabled="False"
+                Keyboard="Telephone"
+                Text="{Binding Confirmations}"
+                TextColor="White"
+                VerticalOptions="Center">
+                <Entry.Effects>
+                    <xct:RemoveBorderEffect />
+                </Entry.Effects>
+            </Entry>
+            <BoxView
+                Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                BackgroundColor="#191919"
+                HeightRequest="1" />
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                Padding="20,0,0,0"
+                Text="{x:Static resource:AppResources.MinimumPeers}"
+                TextColor="WhiteSmoke"
+                VerticalOptions="Center" />
+            <Entry
+                Grid.Row="2"
+                Grid.Column="1"
+                Margin="0,0,20,0"
+                BackgroundColor="Transparent"
+                FontSize="Body"
+                HorizontalTextAlignment="End"
+                IsSpellCheckEnabled="False"
+                IsTextPredictionEnabled="False"
+                Keyboard="Telephone"
+                Text="{Binding MinimumPeers}"
+                TextColor="White"
+                VerticalOptions="Center">
+                <Entry.Effects>
+                    <xct:RemoveBorderEffect />
+                </Entry.Effects>
+            </Entry>
+            <BoxView
+                Grid.Row="3"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                BackgroundColor="#191919"
+                HeightRequest="1" />
+            <Label
+                Grid.Row="4"
+                Grid.Column="0"
+                Padding="20,0,0,0"
+                Text="{x:Static resource:AppResources.MaximumPeers}"
+                TextColor="WhiteSmoke"
+                VerticalOptions="Center" />
+            <Entry
+                Grid.Row="4"
+                Grid.Column="1"
+                Margin="0,0,20,0"
+                BackgroundColor="Transparent"
+                FontSize="Body"
+                HorizontalTextAlignment="End"
+                IsSpellCheckEnabled="False"
+                IsTextPredictionEnabled="False"
+                Keyboard="Telephone"
+                Text="{Binding MaximumPeers}"
+                TextColor="White"
+                VerticalOptions="Center">
+                <Entry.Effects>
+                    <xct:RemoveBorderEffect />
+                </Entry.Effects>
+            </Entry>
+            <BoxView
+                Grid.Row="5"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                BackgroundColor="#191919"
+                HeightRequest="1" />
+            <Label
+                Grid.Row="6"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Padding="20,0,0,0"
+                Text="GrinChck API URL"
+                TextColor="WhiteSmoke"
+                VerticalOptions="Center" />
+            <Entry
+                Grid.Row="7"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Margin="20,0,20,0"
+                BackgroundColor="#191919"
+                FontSize="Body"
+                HorizontalTextAlignment="Center"
+                IsSpellCheckEnabled="False"
+                IsTextPredictionEnabled="False"
+                Keyboard="Url"
+                Text="{Binding GrinChckAPIUrl}"
+                TextColor="White"
+                VerticalOptions="Start">
+                <Entry.Effects>
+                    <xct:RemoveBorderEffect />
+                </Entry.Effects>
+            </Entry>
+            <BoxView
+                Grid.Row="8"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                BackgroundColor="#191919"
+                HeightRequest="1" />
+            <Button
+                Grid.Row="9"
+                Grid.Column="0"
+                Margin="20,10,0,0"
+                BackgroundColor="#191919"
+                Command="{Binding OpenBackupWalletPageCommand}"
+                Text="{x:Static resource:AppResources.BackupWallet}"
+                TextColor="Brown" />
+            <Button
+                Grid.Row="9"
+                Grid.Column="1"
+                Margin="5,10,20,0"
+                BackgroundColor="#191919"
+                Command="{Binding LogoutCommand}"
+                Text="Close"
+                TextColor="Orange" />
+            <StackLayout
+                Grid.Row="10"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Padding="20,0,20,40"
+                VerticalOptions="End">
+                <Label
+                    HorizontalOptions="Center"
+                    Text="Grin++ v0.0.1"
+                    TextColor="#333333" />
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

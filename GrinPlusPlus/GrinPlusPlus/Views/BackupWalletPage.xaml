@@ -5,75 +5,52 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    Title="{x:Static resource:AppResources.BackupWallet}"
+    Padding="20"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="Black">
     <ContentPage.Content>
-        <StackLayout Spacing="8" VerticalOptions="StartAndExpand">
+        <StackLayout Spacing="8">
             <Label
-                Padding="20,5,20,0"
-                FontSize="22"
-                HorizontalOptions="Start"
-                Text="{x:Static resource:AppResources.BackupWallet}"
-                TextColor="White"
-                VerticalOptions="Center" />
-            <BoxView
-                Margin="20,0,20,20"
-                HeightRequest="1"
-                HorizontalOptions="Start"
-                WidthRequest="50"
-                Color="White" />
-            <Label
-                FontAttributes="Bold"
-                FontSize="28"
-                HorizontalOptions="Center"
-                Text="{Binding Username}"
-                TextColor="Yellow"
-                TextTransform="Uppercase"
-                VerticalOptions="Center" />
-            <Label
-                Margin="20,20,20,0"
                 Text="{x:Static resource:AppResources.Password}"
                 TextColor="Gray"
                 TextTransform="Uppercase" />
             <Entry
-                Margin="20,0,20,20"
                 BackgroundColor="#191919"
                 IsPassword="True"
                 IsSpellCheckEnabled="False"
                 IsTextPredictionEnabled="False"
                 Text="{Binding Password}"
                 TextColor="White"
-                VerticalTextAlignment="Center" />
+                VerticalTextAlignment="Center">
+                <Entry.Effects>
+                    <xct:RemoveBorderEffect />
+                </Entry.Effects>
+            </Entry>
             <Button
-                Margin="50,10,50,0"
-                BackgroundColor="#191919"
+                BackgroundColor="Transparent"
                 Command="{Binding BackupWalletCommand}"
-                CornerRadius="5"
                 HeightRequest="44"
                 IsEnabled="{Binding IsIdle}"
                 Text="{x:Static resource:AppResources.GetWalletSeed}"
                 TextColor="Yellow" />
             <Editor
-                Margin="20,10,20,0"
+                Margin="0,20,0,0"
                 AutoSize="Disabled"
-                BackgroundColor="#191919"
+                BackgroundColor="#090909"
                 FontSize="Body"
-                HeightRequest="110"
+                HeightRequest="120"
                 IsReadOnly="True"
                 IsSpellCheckEnabled="False"
                 IsTextPredictionEnabled="False"
                 Text="{Binding WalletSeed}"
-                TextColor="White" />
-            <Button
-                Margin="50,0,50,0"
-                BackgroundColor="#191919"
-                Command="{Binding CopyWalletSeedCommand}"
-                CornerRadius="5"
-                HeightRequest="44"
-                Text="{x:Static resource:AppResources.CopyToClipboard}"
-                TextColor="White" />
+                TextColor="White">
+                <Editor.Effects>
+                    <xct:RemoveBorderEffect />
+                </Editor.Effects>
+            </Editor>
             <Label
-                Margin="20,20,20,0"
                 HorizontalOptions="Center"
                 HorizontalTextAlignment="Center"
                 Text="{Binding ExceptionMessage}"

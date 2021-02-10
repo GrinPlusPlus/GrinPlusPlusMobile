@@ -214,6 +214,15 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Confirmations.
+        /// </summary>
+        internal static string Confirmations {
+            get {
+                return ResourceManager.GetString("Confirmations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please confirm your identity to continue.
         /// </summary>
         internal static string ConfirmIdentity {
@@ -394,7 +403,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Get Wallet Seed.
+        ///   Looks up a localized string similar to Display Wallet Seed Phrase.
         /// </summary>
         internal static string GetWalletSeed {
             get {
@@ -475,6 +484,15 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maximum number of Peers.
+        /// </summary>
+        internal static string MaximumPeers {
+            get {
+                return ResourceManager.GetString("MaximumPeers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Message.
         /// </summary>
         internal static string Message {
@@ -489,6 +507,15 @@ namespace GrinPlusPlus.Resources {
         internal static string Method {
             get {
                 return ResourceManager.GetString("Method", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum number of Peers.
+        /// </summary>
+        internal static string MinimumPeers {
+            get {
+                return ResourceManager.GetString("MinimumPeers", resourceCulture);
             }
         }
         
