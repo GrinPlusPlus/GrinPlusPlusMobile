@@ -55,6 +55,9 @@
                 <Entry.Effects>
                     <xct:RemoveBorderEffect />
                 </Entry.Effects>
+                <Entry.Behaviors>
+                    <xct:EventToCommandBehavior Command="{Binding UpdateNodeSettingsCommand}" EventName="TextChanged" />
+                </Entry.Behaviors>
             </Entry>
             <BoxView
                 Grid.Row="1"
@@ -85,6 +88,9 @@
                 <Entry.Effects>
                     <xct:RemoveBorderEffect />
                 </Entry.Effects>
+                <Entry.Behaviors>
+                    <xct:EventToCommandBehavior Command="{Binding UpdateNodeSettingsCommand}" EventName="TextChanged" />
+                </Entry.Behaviors>
             </Entry>
             <BoxView
                 Grid.Row="3"
@@ -115,6 +121,9 @@
                 <Entry.Effects>
                     <xct:RemoveBorderEffect />
                 </Entry.Effects>
+                <Entry.Behaviors>
+                    <xct:EventToCommandBehavior Command="{Binding UpdateNodeSettingsCommand}" EventName="TextChanged" />
+                </Entry.Behaviors>
             </Entry>
             <BoxView
                 Grid.Row="5"

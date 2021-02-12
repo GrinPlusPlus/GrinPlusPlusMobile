@@ -42,8 +42,8 @@ namespace GrinPlusPlus.Api
 
         Task<bool> CheckAddressAvailability(string address, string api = null);
 
-        Task DeleteONION(string torAddress);
+        Task UpdateNodeSettings(int MinimumPeers, int MaximumPeers, int Confirmations);
 
-        Task AddONION();
+        Task<NodePreferences> GetNodeSettings();
     }
 }

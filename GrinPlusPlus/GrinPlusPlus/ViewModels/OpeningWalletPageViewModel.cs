@@ -42,15 +42,29 @@ namespace GrinPlusPlus.ViewModels
                 try
                 {
                     Wallet = (await SecureStorage.GetAsync("username")).ToUpper();
+                    await GetNodePreferences();
                     await GetWalletBalance();
+                    Settings.IsLoggedIn = true;
+                    await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/DashboardCarouselPage");
                 }
                 catch (Exception ex)
                 {
                     ExceptionMessage = ex.Message;
-                    Thread.Sleep(3000);
+                    Thread.Sleep(2000);
+                    Preferences.Clear();
+                    SecureStorage.RemoveAll();
                     await NavigationService.GoBackToRootAsync();
                 }
             });
+        }
+
+        private async Task GetNodePreferences()
+        {
+            var preferences = await DataProvider.GetNodeSettings();
+
+            Settings.Confirmations = preferences.Confirmations;
+            Settings.MinimumPeers = preferences.MinimumPeers;
+            Settings.MaximumPeers = preferences.MaximumPeers;
         }
 
         private async Task GetWalletBalance()
@@ -84,9 +98,6 @@ namespace GrinPlusPlus.ViewModels
             Preferences.Set("balance_immature", balance.Immature);
             Preferences.Set("balance_unconfirmed", balance.Unconfirmed);
             Preferences.Set("balance_total", balance.Total);
-
-            Settings.IsLoggedIn = true;
-            await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/DashboardCarouselPage");
         }
 
         async Task Logout()
@@ -94,12 +105,6 @@ namespace GrinPlusPlus.ViewModels
             try
             {
                 await DataProvider.DoLogout(await SecureStorage.GetAsync("token"));
-                var torAddress = await SecureStorage.GetAsync("tor_address");
-                if (!string.IsNullOrEmpty(torAddress))
-                {
-                    await DataProvider.DeleteONION(torAddress);
-                    SecureStorage.Remove("tor_address");
-                }
             }
             catch (Exception ex)
             {

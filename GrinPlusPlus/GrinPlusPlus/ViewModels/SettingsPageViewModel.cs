@@ -6,12 +6,7 @@ using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
 using System;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Xamarin.Essentials;
-using Xamarin.Forms;
 
 
 namespace GrinPlusPlus.ViewModels
@@ -48,6 +43,8 @@ namespace GrinPlusPlus.ViewModels
 
         public DelegateCommand OpenBackupWalletPageCommand => new DelegateCommand(OpenBackupWalletPage);
 
+        public DelegateCommand UpdateNodeSettingsCommand => new DelegateCommand(UpdateNodeSetting);
+
         public DelegateCommand LogoutCommand => new DelegateCommand(Logout);
 
         public SettingsPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
@@ -65,25 +62,33 @@ namespace GrinPlusPlus.ViewModels
         {
             try
             {
-                await DataProvider.DoLogout(await SecureStorage.GetAsync("token"));
-                var torAddress = await SecureStorage.GetAsync("tor_address");
-                if (!string.IsNullOrEmpty(torAddress))
-                {
-                    await DataProvider.DeleteONION(torAddress);
-                    SecureStorage.Remove("tor_address");
-                }
+                var token = await SecureStorage.GetAsync("token");
+                await DataProvider.DoLogout(token);
+
+                Preferences.Clear();
+                SecureStorage.RemoveAll();
+
+                Settings.IsLoggedIn = false;
+
+                await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/LoginPage");
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
+        }
 
-            Settings.IsLoggedIn = false;
-
-            Preferences.Clear();
-            SecureStorage.RemoveAll();
-
-            await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/LoginPage");
+        async void UpdateNodeSetting()
+        {
+            try
+            {
+                await DataProvider.UpdateNodeSettings(MinimumPeers, MaximumPeers, Confirmations);
+                Console.WriteLine("Node Settings Updated");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
     }
 }

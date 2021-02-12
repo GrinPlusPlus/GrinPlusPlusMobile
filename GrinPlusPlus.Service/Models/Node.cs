@@ -5,6 +5,19 @@ namespace GrinPlusPlus.Service.Models
 {
     public class Node
     {
+        public class Settings
+        {
+            [JsonProperty("min_peers")]
+            public int MinimumPeers { get; set; }
+
+            [JsonProperty("max_peers")]
+            public int MaximumPeers { get; set; }
+
+            [JsonProperty("min_confirmations")]
+            public int Confirmations { get; set; }
+        }
+
+
         public class Chain
         {
             [JsonProperty("hash")]

@@ -59,19 +59,14 @@ namespace GrinPlusPlus.ViewModels
             {
                 IsBusy = true;
 
-                var torAddress = await SecureStorage.GetAsync("tor_address");
-                if (!string.IsNullOrEmpty(torAddress))
-                {
-                   await DataProvider.DeleteONION(torAddress);
-                   SecureStorage.Remove("tor_address");
-                }
-
                 if (string.IsNullOrEmpty(Password))
                 {
                     throw new Exception(AppResources.ResourceManager.GetString("PasswordCanNotBeEmpty"));
                 }
 
                 var wallet = await DataProvider.DoLogin(Username, Password);
+
+                SecureStorage.RemoveAll();
 
                 MainThread.BeginInvokeOnMainThread(async () =>
                 {

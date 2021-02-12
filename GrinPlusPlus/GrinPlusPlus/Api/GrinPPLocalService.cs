@@ -5,8 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Net.Sockets;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace GrinPlusPlus.Api
@@ -272,17 +270,20 @@ namespace GrinPlusPlus.Api
             await Service.Owner.Instance.CloseWallet(token);
         }
 
-        public async Task DeleteONION(string torAddress)
+        public async Task UpdateNodeSettings(int MinimumPeers, int MaximumPeers, int Confirmations)
         {
-            TorControlClient tc = new TorControlClient();
-            await tc.ConnectAsync("127.0.0.1", 3422);
-            await tc.AuthenticateAsync("MyPassword"); 
-            await tc.SignalAsync($"DEL_ONION {torAddress}");
+            await Service.Foreign.Instance.UpdateSettings(MinimumPeers, MaximumPeers, Confirmations);
         }
 
-        public Task AddONION()
+        public async Task<NodePreferences> GetNodeSettings()
         {
-            throw new NotImplementedException();
+            var settings = await Service.Foreign.Instance.GetSettings();
+            return new NodePreferences()
+            {
+                MinimumPeers = settings.MinimumPeers,
+                MaximumPeers = settings.MaximumPeers,
+                Confirmations = settings.Confirmations
+            };
         }
     }
 }
