@@ -65,6 +65,17 @@ namespace GrinPlusPlus.ViewModels
                 var token = await SecureStorage.GetAsync("token");
                 await DataProvider.DoLogout(token);
 
+                var torAddress = await SecureStorage.GetAsync("tor_address");
+                if (!string.IsNullOrEmpty(torAddress))
+                {
+                    var tc = new TorControlClient();
+                    await tc.ConnectAsync("127.0.0.1", 3423);
+                    await tc.AuthenticateAsync("MyPassword");
+                    await tc.CleanCircuitsAsync();
+                    await tc.DeleteONION(torAddress);
+                    await tc.QuitAsync();
+                }
+
                 Preferences.Clear();
                 SecureStorage.RemoveAll();
 

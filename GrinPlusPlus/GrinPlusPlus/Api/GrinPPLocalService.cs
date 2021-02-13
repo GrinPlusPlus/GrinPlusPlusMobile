@@ -1,5 +1,4 @@
 ﻿using GrinPlusPlus.Models;
-using Knapcode.TorSharp.Tools.Tor;
 using MihaZupan;
 using System;
 using System.Collections.Generic;
@@ -23,7 +22,8 @@ namespace GrinPlusPlus.Api
             {
                 Token = wallet.Token,
                 SlatepackAdddress = wallet.SlatepackAdddress,
-                TorAdddress = wallet.TorAdddress
+                TorAddress = wallet.TorAdddress,
+                ListenerPort = wallet.Listener
             };
         }
 
@@ -45,7 +45,8 @@ namespace GrinPlusPlus.Api
             {
                 Token = login.Token,
                 SlatepackAdddress = login.SlatepackAdddress,
-                TorAdddress = login.TorAdddress
+                TorAddress = login.TorAdddress,
+                ListenerPort = login.Listener
             };
         }
 
@@ -139,7 +140,7 @@ namespace GrinPlusPlus.Api
             {
                 Token = wallet.Token,
                 SlatepackAdddress = wallet.SlatepackAdddress,
-                TorAdddress = wallet.TorAdddress
+                TorAddress = wallet.TorAdddress
             };
         }
 

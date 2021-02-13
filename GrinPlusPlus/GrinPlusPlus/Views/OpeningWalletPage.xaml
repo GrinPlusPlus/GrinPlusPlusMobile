@@ -31,7 +31,12 @@
                     IsRunning="true"
                     WidthRequest="40"
                     Color="Yellow" />
-                <Label Text="{Binding ExceptionMessage}" TextColor="Red" />
+                <Label
+                    Margin="0,10,0,0"
+                    FontSize="Large"
+                    HorizontalOptions="Center"
+                    Text="{Binding ExceptionMessage}"
+                    TextColor="Red" />
             </StackLayout>
             <Label
                 Grid.Row="1"

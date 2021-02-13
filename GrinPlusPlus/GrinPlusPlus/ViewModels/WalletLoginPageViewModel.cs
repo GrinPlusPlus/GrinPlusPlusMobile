@@ -1,12 +1,11 @@
 ﻿using GrinPlusPlus.Api;
 using GrinPlusPlus.Resources;
-
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
 using System;
-using Xamarin.CommunityToolkit.UI.Views.Options;
+using System.Reflection;
 using Xamarin.Essentials;
 
 namespace GrinPlusPlus.ViewModels
@@ -41,15 +40,18 @@ namespace GrinPlusPlus.ViewModels
         public WalletLoginPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
-
+            SecureStorage.RemoveAll();
         }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
+        public override async void OnNavigatedTo(INavigationParameters parameters)
         {
             if (parameters.ContainsKey("username"))
             {
                 Username = parameters.GetValue<string>("username");
                 Title = Username.ToUpper();
+            } else
+            {
+                await NavigationService.GoBackToRootAsync();
             }
         }
 
@@ -66,17 +68,18 @@ namespace GrinPlusPlus.ViewModels
 
                 var wallet = await DataProvider.DoLogin(Username, Password);
 
-                SecureStorage.RemoveAll();
+                await SecureStorage.SetAsync("token", wallet.Token);
+                await SecureStorage.SetAsync("username", Username);
+                await SecureStorage.SetAsync("slatepack_address", wallet.SlatepackAdddress);
+                await SecureStorage.SetAsync("tor_address", wallet.TorAddress ?? string.Empty);
+                
+                var tc = new TorControlClient();
+                await tc.ConnectAsync("127.0.0.1", 3423);
+                await tc.AuthenticateAsync("MyPassword");
+                await tc.CleanCircuitsAsync();
+                await tc.QuitAsync();
 
-                MainThread.BeginInvokeOnMainThread(async () =>
-                {
-                    await SecureStorage.SetAsync("token", wallet.Token);
-                    await SecureStorage.SetAsync("username", Username);
-                    await SecureStorage.SetAsync("slatepack_address", wallet.SlatepackAdddress);
-                    await SecureStorage.SetAsync("tor_address", wallet.TorAdddress ?? "");
-
-                    await NavigationService.NavigateAsync("OpeningWalletPage");
-                });
+                await NavigationService.NavigateAsync("OpeningWalletPage");
             }
             catch (Exception ex)
             {

@@ -33,15 +33,15 @@ namespace GrinPlusPlus.ViewModels
         public OpeningWalletPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
-        }
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                Wallet = (await SecureStorage.GetAsync("username")).ToUpper();
+            });
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
-        {
             MainThread.BeginInvokeOnMainThread(async () =>
             {
                 try
                 {
-                    Wallet = (await SecureStorage.GetAsync("username")).ToUpper();
                     await GetNodePreferences();
                     await GetWalletBalance();
                     Settings.IsLoggedIn = true;
@@ -50,10 +50,18 @@ namespace GrinPlusPlus.ViewModels
                 catch (Exception ex)
                 {
                     ExceptionMessage = ex.Message;
-                    Thread.Sleep(2000);
-                    Preferences.Clear();
-                    SecureStorage.RemoveAll();
-                    await NavigationService.GoBackToRootAsync();
+                    await Logout();
+                }
+                finally
+                {
+                    if(Settings.IsLoggedIn)
+                    {
+                        await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/DashboardCarouselPage");
+                    } else
+                    {
+                        Thread.Sleep(2000);
+                        await NavigationService.GoBackToRootAsync();
+                    }
                 }
             });
         }
@@ -70,6 +78,12 @@ namespace GrinPlusPlus.ViewModels
         private async Task GetWalletBalance()
         {
             var balance = await DataProvider.GetWalletBalance(await SecureStorage.GetAsync("token"));
+            
+            Preferences.Set("balance_spendable", balance.Spendable);
+            Preferences.Set("balance_locked", balance.Locked);
+            Preferences.Set("balance_immature", balance.Immature);
+            Preferences.Set("balance_unconfirmed", balance.Unconfirmed);
+            Preferences.Set("balance_total", balance.Total);
 
             if (await CrossFingerprint.Current.IsAvailableAsync(true))
             {
@@ -81,23 +95,16 @@ namespace GrinPlusPlus.ViewModels
                 {
                     CancelTitle = null,
                     FallbackTitle = null,
-                    AllowAlternativeAuthentication = true
+                    AllowAlternativeAuthentication = false
                 };
 
                 var result = await CrossFingerprint.Current.AuthenticateAsync(dialogConfig, _cancel.Token);
 
                 if (!result.Authenticated)
                 {
-                    Settings.IsLoggedIn = false;
-                    await Logout();
+                    throw new Exception("Not authenticated.");
                 }
             }
-
-            Preferences.Set("balance_spendable", balance.Spendable);
-            Preferences.Set("balance_locked", balance.Locked);
-            Preferences.Set("balance_immature", balance.Immature);
-            Preferences.Set("balance_unconfirmed", balance.Unconfirmed);
-            Preferences.Set("balance_total", balance.Total);
         }
 
         async Task Logout()

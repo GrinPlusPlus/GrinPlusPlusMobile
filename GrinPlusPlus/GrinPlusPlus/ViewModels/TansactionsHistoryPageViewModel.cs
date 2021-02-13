@@ -46,15 +46,16 @@ namespace GrinPlusPlus.ViewModels
         {
             Xamarin.Forms.Device.StartTimer(TimeSpan.FromSeconds(5), () =>
             {
-                if (Settings.IsLoggedIn == false)
+                if (!Settings.IsLoggedIn)
                 {
                     return false;
-                }
-
-                MainThread.BeginInvokeOnMainThread(async () =>
+                } else
                 {
-                    await LoadWalletHistory();
-                });
+                    MainThread.BeginInvokeOnMainThread(async () =>
+                    {
+                        await LoadWalletHistory();
+                    });
+                }
 
                 return true;
             });
@@ -64,8 +65,9 @@ namespace GrinPlusPlus.ViewModels
         {
             try
             {
-                var transactionsGroupedByDate = (await DataProvider.GetTransactions(
-                                                       await SecureStorage.GetAsync("token"),
+                var token = await SecureStorage.GetAsync("token");
+
+                var transactionsGroupedByDate = (await DataProvider.GetTransactions(token,
                                                        new string[] { "COINBASE", "SENT", "RECEIVED", "SENT_CANCELED", "RECEIVED_CANCELED" })
                                                 ).GroupBy(x => x.Date.ToString("dddd, dd MMMM yyyy"));
                 if (Transactions.Count == 0)
