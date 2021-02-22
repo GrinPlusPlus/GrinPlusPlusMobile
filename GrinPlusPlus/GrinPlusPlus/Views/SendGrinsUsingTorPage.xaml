@@ -9,14 +9,22 @@
     BackgroundColor="Black">
     <ContentPage.Content>
         <StackLayout
+            Margin="20,0,20,0"
             HorizontalOptions="Center"
             Spacing="30"
             VerticalOptions="Center">
             <Label
                 FontSize="Medium"
+                HorizontalTextAlignment="Center"
+                Text="{x:Static resource:AppResources.OpenWalletMessage}"
+                TextColor="White" />
+            <Label
+                FontSize="Medium"
+                HorizontalTextAlignment="Center"
                 Text="{x:Static resource:AppResources.SendingPleaseWait}"
                 TextColor="White" />
             <ActivityIndicator
+                HorizontalOptions="Center"
                 IsRunning="true"
                 WidthRequest="50"
                 Color="Yellow" />

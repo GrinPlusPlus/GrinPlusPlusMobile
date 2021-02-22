@@ -12,8 +12,6 @@
         <Grid Padding="20" RowSpacing="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
-                <RowDefinition Height="100" />
-                <RowDefinition Height="40" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -38,13 +36,7 @@
                     Text="{Binding ExceptionMessage}"
                     TextColor="Red" />
             </StackLayout>
-            <Label
-                Grid.Row="1"
-                Grid.Column="0"
-                FontSize="Default"
-                HorizontalTextAlignment="Center"
-                Text="{x:Static resource:AppResources.OpenWalletMessage}"
-                TextColor="White" />
+
         </Grid>
     </ContentPage.Content>
 </ContentPage>

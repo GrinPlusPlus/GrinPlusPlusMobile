@@ -6,67 +6,144 @@
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
-    Title="{x:Static resource:AppResources.SetAmount}"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     prism:ViewModelLocator.AutowireViewModel="True"
     sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromRight"
     BackgroundColor="{StaticResource BackgroundColor}"
     NavigationPage.HasBackButton="False">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem
-            Command="{prism:GoBack ToRoot}"
-            Order="Primary"
-            Priority="0"
-            Text="{x:Static resource:AppResources.Cancel}" />
-    </ContentPage.ToolbarItems>
+    <NavigationPage.TitleView>
+        <Label>
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span
+                        FontSize="Caption"
+                        Text="{x:Static resource:AppResources.Spendable}"
+                        TextColor="{StaticResource TextColor}" />
+                    <Span
+                        FontSize="Caption"
+                        Text=": "
+                        TextColor="{StaticResource TextColor}" />
+                    <Span
+                        FontAttributes="Bold"
+                        FontSize="Body"
+                        Text="{Binding Spendable, StringFormat='{}{0:N9}'}"
+                        TextColor="{StaticResource TextColor}" />
+                    <Span
+                        FontSize="Caption"
+                        Text=" ツ"
+                        TextColor="{StaticResource TextColor}" />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+    </NavigationPage.TitleView>
     <ContentPage.Resources>
         <ResourceDictionary>
             <Color x:Key="BackgroundColor">#000000</Color>
+            <Color x:Key="TextColor">#818181</Color>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout VerticalOptions="FillAndExpand">
-            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                <Label
-                    FontAttributes="Bold"
-                    FontSize="12"
-                    HorizontalOptions="Center"
-                    Text="{Binding SpendableLabel}"
-                    TextColor="Gray"
-                    TextTransform="Uppercase" />
-                <Label
-                    FontSize="40"
+        <Grid
+            Padding="0"
+            BackgroundColor="{StaticResource BackgroundColor}"
+            ColumnSpacing="0"
+            RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="44" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="44" />
+                <RowDefinition Height="260" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="20,0,20,0"
+                Text="{x:Static resource:AppResources.Address}"
+                TextColor="Gray"
+                TextTransform="Uppercase" />
+            <StackLayout
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="20,0,20,0"
+                HorizontalOptions="FillAndExpand"
+                Orientation="Horizontal">
+                <Entry
+                    BackgroundColor="#191919"
                     HorizontalOptions="FillAndExpand"
-                    HorizontalTextAlignment="Center"
-                    Text="{Binding Amount}"
-                    TextColor="Yellow"
-                    VerticalTextAlignment="Center" />
-                <Label
-                    FontSize="Medium"
-                    HorizontalOptions="Center"
-                    Text="{x:Static resource:AppResources.Fee}"
-                    TextColor="Gray"
-                    TextTransform="Uppercase" />
-                <Label HorizontalOptions="Center" TextColor="White">
+                    IsSpellCheckEnabled="False"
+                    IsTextPredictionEnabled="False"
+                    Text="{Binding Address}"
+                    TextColor="White"
+                    VerticalTextAlignment="Center">
+                    <Entry.Effects>
+                        <xct:RemoveBorderEffect />
+                    </Entry.Effects>
+                </Entry>
+                <Button
+                    BackgroundColor="#0C0C0C"
+                    Command="{Binding OnQRButtonClickedCommand}"
+                    HeightRequest="40"
+                    ImageSource="baseline_qr_code_white_24.png"
+                    WidthRequest="44" />
+            </StackLayout>
+            <StackLayout
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="20,0,15,0"
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="Center">
+                <Label HorizontalOptions="FillAndExpand">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span FontSize="16" Text="{Binding Fee}" />
-                            <Span FontSize="12" Text=" ツ" />
+                            <Span
+                                FontSize="40"
+                                Text="{Binding Amount}"
+                                TextColor="Yellow" />
+                            <Span
+                                FontSize="Small"
+                                Text=" ツ"
+                                TextColor="Yellow" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label TextColor="{StaticResource TextColor}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span FontSize="Caption" Text="  " />
+                            <Span FontSize="Body" Text="{Binding Fee, StringFormat='{}{0:N9}'}" />
+                            <Span FontSize="Caption" Text=" ツ" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
             </StackLayout>
+            <Button
+                Grid.Row="3"
+                Grid.Column="0"
+                Margin="30,0,30,0"
+                BackgroundColor="#0C0C0C"
+                Command="{Binding ContinueButtonClickedCommand}"
+                HeightRequest="44"
+                IsEnabled="{Binding IsValid}"
+                Text="{x:Static resource:AppResources.Continue}"
+                TextColor="Yellow" />
             <Grid
-                Margin="20,0,20,10"
+                Grid.Row="4"
+                Grid.Column="0"
+                Margin="0"
+                Padding="0"
+                BackgroundColor="#0C0C0C"
                 ColumnSpacing="0"
-                HorizontalOptions="Center"
                 RowSpacing="0"
                 VerticalOptions="EndAndExpand">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="80" />
-                    <RowDefinition Height="80" />
-                    <RowDefinition Height="80" />
-                    <RowDefinition Height="80" />
-                    <RowDefinition Height="44" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -76,124 +153,112 @@
                 <Button
                     Grid.Row="0"
                     Grid.Column="0"
-                    BackgroundColor="Transparent"
+                    BackgroundColor="#0C0C0C"
                     Command="{Binding KeyboardButtonClickedCommand}"
                     CommandParameter="1"
                     FontSize="28"
                     Text="1"
-                    TextColor="White" />
+                    TextColor="WhiteSmoke" />
                 <Button
                     Grid.Row="0"
                     Grid.Column="1"
-                    BackgroundColor="Transparent"
+                    BackgroundColor="#0C0C0C"
                     Command="{Binding KeyboardButtonClickedCommand}"
                     CommandParameter="2"
                     FontSize="28"
                     Text="2"
-                    TextColor="White" />
+                    TextColor="WhiteSmoke" />
                 <Button
                     Grid.Row="0"
                     Grid.Column="2"
-                    BackgroundColor="Transparent"
+                    BackgroundColor="#0C0C0C"
                     Command="{Binding KeyboardButtonClickedCommand}"
                     CommandParameter="3"
                     FontSize="28"
                     Text="3"
-                    TextColor="White" />
+                    TextColor="WhiteSmoke" />
                 <Button
                     Grid.Row="1"
                     Grid.Column="0"
-                    BackgroundColor="Transparent"
+                    BackgroundColor="#0C0C0C"
                     Command="{Binding KeyboardButtonClickedCommand}"
                     CommandParameter="4"
                     FontSize="28"
                     Text="4"
-                    TextColor="White" />
+                    TextColor="WhiteSmoke" />
                 <Button
                     Grid.Row="1"
                     Grid.Column="1"
-                    BackgroundColor="Transparent"
+                    BackgroundColor="#0C0C0C"
                     Command="{Binding KeyboardButtonClickedCommand}"
                     CommandParameter="5"
                     FontSize="28"
                     Text="5"
-                    TextColor="White" />
+                    TextColor="WhiteSmoke" />
                 <Button
                     Grid.Row="1"
                     Grid.Column="2"
-                    BackgroundColor="Transparent"
+                    BackgroundColor="#0C0C0C"
                     Command="{Binding KeyboardButtonClickedCommand}"
                     CommandParameter="6"
                     FontSize="28"
                     Text="6"
-                    TextColor="White" />
+                    TextColor="WhiteSmoke" />
                 <Button
                     Grid.Row="2"
                     Grid.Column="0"
-                    BackgroundColor="Transparent"
+                    BackgroundColor="#0C0C0C"
                     Command="{Binding KeyboardButtonClickedCommand}"
                     CommandParameter="7"
                     FontSize="28"
                     Text="7"
-                    TextColor="White" />
+                    TextColor="WhiteSmoke" />
                 <Button
                     Grid.Row="2"
                     Grid.Column="1"
-                    BackgroundColor="Transparent"
+                    BackgroundColor="#0C0C0C"
                     Command="{Binding KeyboardButtonClickedCommand}"
                     CommandParameter="8"
                     FontSize="28"
                     Text="8"
-                    TextColor="White" />
+                    TextColor="WhiteSmoke" />
                 <Button
                     Grid.Row="2"
                     Grid.Column="2"
-                    BackgroundColor="Transparent"
+                    BackgroundColor="#0C0C0C"
                     Command="{Binding KeyboardButtonClickedCommand}"
                     CommandParameter="9"
                     FontSize="28"
                     Text="9"
-                    TextColor="White" />
+                    TextColor="WhiteSmoke" />
                 <Button
                     Grid.Row="3"
                     Grid.Column="0"
-                    BackgroundColor="Transparent"
+                    BackgroundColor="#0C0C0C"
                     Command="{Binding KeyboardButtonClickedCommand}"
                     CommandParameter="."
                     FontSize="28"
                     Text="."
-                    TextColor="White" />
+                    TextColor="WhiteSmoke" />
                 <Button
                     Grid.Row="3"
                     Grid.Column="1"
-                    BackgroundColor="Transparent"
+                    BackgroundColor="#0C0C0C"
                     Command="{Binding KeyboardButtonClickedCommand}"
                     CommandParameter="0"
                     FontSize="28"
                     Text="0"
-                    TextColor="White" />
+                    TextColor="WhiteSmoke" />
                 <Button
                     Grid.Row="3"
                     Grid.Column="2"
-                    BackgroundColor="Transparent"
+                    BackgroundColor="#0C0C0C"
                     Command="{Binding KeyboardButtonClickedCommand}"
                     CommandParameter="DEL"
                     FontSize="25"
                     Text="←"
-                    TextColor="White" />
-                <Button
-                    Grid.Row="4"
-                    Grid.Column="0"
-                    Grid.ColumnSpan="3"
-                    Margin="20,0,20,0"
-                    BackgroundColor="#191919"
-                    Command="{Binding ContinueButtonClickedCommand}"
-                    CornerRadius="5"
-                    HeightRequest="44"
-                    IsEnabled="{Binding IsValid}"
-                    Text="{x:Static resource:AppResources.Continue}"
-                    TextColor="Yellow" />
+                    TextColor="WhiteSmoke" />
             </Grid>
-        </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

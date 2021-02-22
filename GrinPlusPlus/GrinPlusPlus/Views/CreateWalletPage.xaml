@@ -80,7 +80,7 @@
                 HeightRequest="44"
                 Spacing="0">
                 <Button
-                    BackgroundColor="#191919"
+                    BackgroundColor="#0C0C0C"
                     Command="{Binding CreateWalletCommand}"
                     CornerRadius="5"
                     HeightRequest="44"

@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace GrinPlusPlus.ViewModels
 {
@@ -31,6 +32,8 @@ namespace GrinPlusPlus.ViewModels
             }
         }
 
+        public string Token = string.Empty;
+
         public DelegateCommand OpenTransactionDetailsCommand => new DelegateCommand(OpenTransactionDetails);
 
         public TansactionsHistoryPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
@@ -38,24 +41,22 @@ namespace GrinPlusPlus.ViewModels
         {
             MainThread.BeginInvokeOnMainThread(async () =>
             {
+                Token = await SecureStorage.GetAsync("token");
+
                 await LoadWalletHistory();
             });
 
-        }
-        public override void OnNavigatedTo(INavigationParameters parameters)
-        {
-            Xamarin.Forms.Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
             {
-                if (!Settings.IsLoggedIn)
+                if (Settings.IsLoggedIn == false)
                 {
                     return false;
-                } else
-                {
-                    MainThread.BeginInvokeOnMainThread(async () =>
-                    {
-                        await LoadWalletHistory();
-                    });
                 }
+
+                MainThread.BeginInvokeOnMainThread(async () =>
+                {
+                    await LoadWalletHistory();
+                });
 
                 return true;
             });
@@ -65,11 +66,10 @@ namespace GrinPlusPlus.ViewModels
         {
             try
             {
-                var token = await SecureStorage.GetAsync("token");
-
-                var transactionsGroupedByDate = (await DataProvider.GetTransactions(token,
+                var transactionsGroupedByDate = (await DataProvider.GetTransactions(Token,
                                                        new string[] { "COINBASE", "SENT", "RECEIVED", "SENT_CANCELED", "RECEIVED_CANCELED" })
                                                 ).GroupBy(x => x.Date.ToString("dddd, dd MMMM yyyy"));
+                
                 if (Transactions.Count == 0)
                 {
                     foreach (var group in transactionsGroupedByDate)
@@ -77,41 +77,40 @@ namespace GrinPlusPlus.ViewModels
                         Transactions.Add(new TransactionGroup(group.Key,
                                 transactionsGroupedByDate.First(g => g.Key.Equals(group.Key)).ToList()));
                     }
-                }
-                else
-                {
-                    var update = false;
 
-                    foreach (IGrouping<string, Transaction> group in transactionsGroupedByDate)
+                    return;
+                }
+
+                var update = false;
+
+                foreach (IGrouping<string, Transaction> group in transactionsGroupedByDate)
+                {
+                    var date = Transactions.First(t => t.Name.Equals(group.Key));
+                    if (date != null)
                     {
-                        var date = Transactions.First(t => t.Name.Equals(group.Key));
-                        if (date != null)
-                        {
-                            if (group.Count() != date.Count())
-                            {
-                                update = true;
-                                break;
-                            }
-                        }
-                        if (!Transactions.Any(t => t.Name.Equals(group.Key)))
+                        if (group.Count() != date.Count())
                         {
                             update = true;
                             break;
                         }
                     }
-
-                    if (update)
+                    if (!Transactions.Any(t => t.Name.Equals(group.Key)))
                     {
-                        Transactions = new ObservableCollection<TransactionGroup>();
-
-                        foreach (var group in transactionsGroupedByDate)
-                        {
-                            Transactions.Add(new TransactionGroup(group.Key,
-                                    transactionsGroupedByDate.First(g => g.Key.Equals(group.Key)).ToList()));
-                        }
+                        update = true;
+                        break;
                     }
                 }
 
+                if (update)
+                {
+                    Transactions = new ObservableCollection<TransactionGroup>();
+
+                    foreach (var group in transactionsGroupedByDate)
+                    {
+                        Transactions.Add(new TransactionGroup(group.Key,
+                                transactionsGroupedByDate.First(g => g.Key.Equals(group.Key)).ToList()));
+                    }
+                }
             }
             catch (Exception ex)
             {

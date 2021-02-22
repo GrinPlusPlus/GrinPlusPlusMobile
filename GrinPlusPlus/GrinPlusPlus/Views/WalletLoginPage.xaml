@@ -39,7 +39,7 @@
                 HeightRequest="44"
                 Spacing="0">
                 <Button
-                    BackgroundColor="#191919"
+                    BackgroundColor="#0C0C0C"
                     Command="{Binding OpenWalletCommand}"
                     HeightRequest="44"
                     IsEnabled="{Binding Password, Converter={xct:IsNotNullOrEmptyConverter}}"
@@ -53,7 +53,7 @@
                     Color="LightGray" />
             </StackLayout>
             <Button
-                BackgroundColor="#191919"
+                BackgroundColor="Transparent"
                 Command="{Binding DeleteWalletCommand}"
                 HeightRequest="44"
                 IsEnabled="{Binding Password, Converter={xct:IsNotNullOrEmptyConverter}}"

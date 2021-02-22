@@ -24,7 +24,7 @@ namespace GrinPlusPlus
             if (d.IndexOf(".") > -1)
             {
                 d = d.Substring(d.IndexOf("."));
-                return d.PadRight(9, '0').Replace(".", "");
+                return d.PadRight(10, '0').Replace(".", "");
             }
             return ".".PadRight(10, '0').Replace(".", "");
         }

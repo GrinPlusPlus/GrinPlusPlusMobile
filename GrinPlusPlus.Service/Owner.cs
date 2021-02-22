@@ -125,8 +125,9 @@ namespace GrinPlusPlus.Service
         {
             statuses = statuses ?? new string[]
             {
-                "COINBASE", "SENT", "RECEIVED", "SENT_CANCELED", "RECEIVED_CANCELED",
-                "SENDING_NOT_FINALIZED", "RECEIVING_IN_PROGRESS", "SENDING_FINALIZED"
+                "COINBASE", "SENT", "RECEIVED", "SENT_CANCELED",
+                "RECEIVED_CANCELED","SENDING_NOT_FINALIZED","RECEIVING_IN_PROGRESS",
+                "SENDING_FINALIZED"
             };
 
             var payload = new Dictionary<string, object>(){

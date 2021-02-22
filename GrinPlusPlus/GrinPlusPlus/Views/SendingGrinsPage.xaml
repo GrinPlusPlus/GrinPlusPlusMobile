@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
+    Title="{x:Static resource:AppResources.PleaseConfirm}"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="Black">
     <ContentPage.Content>
@@ -16,32 +17,7 @@
             Spacing="10"
             VerticalOptions="FillAndExpand">
             <Label
-                Margin="20,10,20,0"
-                FontSize="22"
-                HorizontalOptions="Start"
-                Text="{x:Static resource:AppResources.PleaseConfirm}"
-                TextColor="White"
-                VerticalOptions="Center" />
-            <BoxView
-                Margin="20,0,20,5"
-                HeightRequest="1"
-                HorizontalOptions="Start"
-                WidthRequest="50"
-                Color="White" />
-            <Label
-                Margin="20,10,20,0"
-                IsVisible="{Binding IsAddressLabelVisible}"
-                Text="{x:Static resource:AppResources.Address}"
-                TextColor="Gray"
-                TextTransform="Uppercase" />
-            <Label
-                Margin="20,0,20,0"
-                FontSize="18"
-                IsVisible="{Binding IsAddressLabelVisible}"
-                Text="{Binding Address}"
-                TextColor="White" />
-            <Label
-                Margin="20,10,20,0"
+                Margin="20,15,20,0"
                 Text="{x:Static resource:AppResources.Amount}"
                 TextColor="Gray"
                 TextTransform="Uppercase" />
@@ -49,18 +25,18 @@
                 <Label.FormattedText>
                     <FormattedString>
                         <Span
-                            FontSize="18"
-                            Text="{Binding Amount}"
+                            FontSize="38"
+                            Text="{Binding Amount, StringFormat='{}{0:N9}'}"
                             TextColor="White" />
                         <Span
-                            FontSize="Caption"
+                            FontSize="16"
                             Text=" ツ"
                             TextColor="White" />
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
             <Label
-                Margin="20,10,20,0"
+                Margin="20,15,20,0"
                 Text="{x:Static resource:AppResources.Fee}"
                 TextColor="Gray"
                 TextTransform="Uppercase" />
@@ -80,26 +56,25 @@
             </Label>
             <Label
                 Margin="20,10,20,0"
-                IsVisible="{Binding IsMessageLabelVisible}"
-                Text="{x:Static resource:AppResources.Message}"
+                IsVisible="{Binding IsAddressLabelVisible}"
+                Text="{x:Static resource:AppResources.Address}"
                 TextColor="Gray"
                 TextTransform="Uppercase" />
             <Label
-                Margin="20,0,20,10"
+                Margin="20,0,20,0"
                 FontSize="18"
-                IsVisible="{Binding IsMessageLabelVisible}"
-                Text="{Binding Message}"
+                IsVisible="{Binding IsAddressLabelVisible}"
+                Text="{Binding Address}"
                 TextColor="White" />
             <Button
-                Margin="50,50,50,0"
-                BackgroundColor="#191919"
+                Margin="20,100,20,0"
+                BackgroundColor="#0C0C0C"
                 Command="{Binding SendUsingTorCommand}"
-                CornerRadius="5"
                 HeightRequest="44"
                 Text="{x:Static resource:AppResources.Send}"
                 TextColor="Yellow" />
             <Button
-                Margin="50,0,50,40"
+                Margin="20,0,20,40"
                 BackgroundColor="Transparent"
                 Command="{Binding CancelCommand}"
                 CornerRadius="5"

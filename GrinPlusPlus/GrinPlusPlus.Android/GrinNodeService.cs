@@ -181,8 +181,8 @@ namespace GrinPlusPlus.Droid
 
         void RunBackend()
         {
-            // RunTor();
-            // RunGrinNode();
+            RunTor();
+            RunGrinNode();
         }
 
         private void RunGrinNode()

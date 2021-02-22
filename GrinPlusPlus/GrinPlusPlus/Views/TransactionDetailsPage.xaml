@@ -14,19 +14,16 @@
             <Label.FormattedText>
                 <FormattedString>
                     <Span
-                        FontAttributes="Bold"
                         FontSize="38"
                         Text="{Binding SelectedTransaction.Amount}"
                         TextColor="Yellow" />
                     <Span
-                        FontAttributes="Bold"
                         FontSize="Medium"
                         Text="."
                         TextColor="Yellow" />
                     <Span
-                        FontAttributes="Bold"
                         FontSize="Medium"
-                        Text="{Binding SelectedTransaction.Decimals}"
+                        Text="{Binding SelectedTransaction.Decimals, StringFormat='{}{0:N9}'}"
                         TextColor="Yellow" />
                     <Span
                         FontSize="Small"
@@ -68,15 +65,13 @@
             Text="{x:Static resource:AppResources.Address}"
             TextColor="Gray"
             TextTransform="Uppercase" />
-        <Button
+        <Label
             Margin="20,0,20,0"
-            BackgroundColor="#191919"
-            Command="{Binding CopyTextCommand}"
-            CommandParameter="{Binding SelectedTransaction.Address}"
+            BackgroundColor="#0C0C0C"
             Text="{Binding SelectedTransaction.Address}"
             TextColor="White" />
         <Label
-            Margin="20,10,20,0"
+            Margin="20,20,20,0"
             Text="{x:Static resource:AppResources.Outputs}"
             TextColor="Gray"
             TextTransform="Uppercase" />
@@ -85,6 +80,7 @@
                 <DataTemplate>
                     <Grid RowSpacing="10">
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
@@ -101,8 +97,7 @@
                         <Label
                             Grid.Row="0"
                             Grid.Column="1"
-                            FontAttributes="Bold"
-                            Text="{Binding Amount}"
+                            Text="{Binding Amount, StringFormat='{}{0:N9}'}"
                             TextColor="White" />
                         <Label
                             Grid.Row="1"
@@ -112,9 +107,10 @@
                             TextTransform="Uppercase"
                             VerticalOptions="Center" />
                         <Button
-                            Grid.Row="1"
-                            Grid.Column="1"
-                            BackgroundColor="#191919"
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            BackgroundColor="#0C0C0C"
                             Command="{Binding Source={x:Reference TransactionDetails}, Path=BindingContext.CopyTextCommand}"
                             CommandParameter="{Binding Commitment}"
                             FontSize="Caption"

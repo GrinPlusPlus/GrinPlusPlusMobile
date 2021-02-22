@@ -37,7 +37,7 @@ namespace GrinPlusPlus
 
         public static string GrinChckAPIURL
         {
-            get => Preferences.Get(nameof(GrinChckAPIURL), "http://grinchck.ahcbagldgzdpa74g2mh74fvk5zjzpfjbvgqin6g3mfuu66tynv2gkiid.onion/check/");
+            get => Preferences.Get(nameof(GrinChckAPIURL), "http://74.208.28.172:8443/check/");
             set => Preferences.Set(nameof(GrinChckAPIURL), value);
         }
 

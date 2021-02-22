@@ -304,7 +304,7 @@
                 <Button
                     Grid.Row="0"
                     Grid.Column="0"
-                    BackgroundColor="#191919"
+                    BackgroundColor="#0C0C0C"
                     Command="{Binding SendButtonClickedCommand}"
                     HeightRequest="44"
                     IsEnabled="{Binding UserCanSend}"
@@ -313,7 +313,7 @@
                 <Button
                     Grid.Row="0"
                     Grid.Column="1"
-                    BackgroundColor="#191919"
+                    BackgroundColor="#0C0C0C"
                     Command="{Binding ReceiveButtonClickedCommand}"
                     HeightRequest="44"
                     Text="{x:Static resource:AppResources.Receive}"

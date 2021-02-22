@@ -82,7 +82,7 @@
                 Padding="50,0,50,0"
                 BackgroundColor="Black">
                 <Button
-                    BackgroundColor="#191919"
+                    BackgroundColor="#0C0C0C"
                     Command="{Binding ShareAddressCommand}"
                     HeightRequest="44"
                     Text="{x:Static resource:AppResources.ShareAddress}"

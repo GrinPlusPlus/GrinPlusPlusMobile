@@ -152,20 +152,6 @@ namespace GrinPlusPlus.Api
             }
             var estimation = await Service.Owner.Instance.EstimateTransactionFee(token, amount, message, strategy, inputs);
             var estimationInputs = new List<Output>();
-            foreach (var input in estimation.Inputs)
-            {
-                estimationInputs.Add(new Output()
-                {
-                    Amount = input.Amount,
-                    BlockHeight = input.BlockHeight,
-                    Index = input.Index,
-                    Status = input.Status,
-                    Label = input.Label,
-                    Commitment = input.Commitment,
-                    KeychainPath = input.KeychainPath,
-                    TransactionId = input.TransactionId
-                });
-            }
             return new FeeEstimation() { Fee = estimation.Fee, Inputs = estimationInputs };
         }
 

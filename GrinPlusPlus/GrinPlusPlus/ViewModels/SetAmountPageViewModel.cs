@@ -15,22 +15,20 @@ namespace GrinPlusPlus.ViewModels
     {
         public DelegateCommand<string> KeyboardButtonClickedCommand => new DelegateCommand<string>(KeyboardButtonClicked);
 
-        public DelegateCommand MaxButtonClickedCommand => new DelegateCommand(MaxButtonClicked);
-
         public DelegateCommand ContinueButtonClickedCommand => new DelegateCommand(ContinueButtonClicked);
+
+        private string _address = string.Empty;
+        public string Address
+        {
+            get { return _address; }
+            set { SetProperty(ref _address, value); }
+        }
 
         private double _spendable;
         public double Spendable
         {
             get { return _spendable; }
             set { SetProperty(ref _spendable, value); }
-        }
-
-        private string _spendableLabel;
-        public string SpendableLabel
-        {
-            get { return _spendableLabel; }
-            set { SetProperty(ref _spendableLabel, value); }
         }
 
         private bool isValid = false;
@@ -55,16 +53,31 @@ namespace GrinPlusPlus.ViewModels
             get { return Helpers.TextCurrencyToDouble(Amount); }
         }
 
-        private string _fee = string.Empty;
+        private string _fee = "0";
         public string Fee
         {
             get { return _fee; }
             set { SetProperty(ref _fee, value); }
         }
 
+        private bool _sendMax = false;
+        public bool SendMax
+        {
+            get { return _sendMax; }
+            set { SetProperty(ref _sendMax, value); }
+        }
+
+        public DelegateCommand OnQRButtonClickedCommand => new DelegateCommand(OnQRButtonClicked);
+
+        private async void OnQRButtonClicked()
+        {
+            await NavigationService.NavigateAsync(name: "QRScannerPage", parameters: null, useModalNavigation: true, animated: true);
+        }
+
         public CultureInfo Culture { get; private set; }
 
-        public SetAmountPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
+        public SetAmountPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, 
+                                      IPageDialogService pageDialogService) 
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
             Culture = new CultureInfo("en-US");
@@ -72,10 +85,22 @@ namespace GrinPlusPlus.ViewModels
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
-            if (parameters.ContainsKey("spendable"))
+            var navigationMode = parameters.GetNavigationMode();
+
+            switch (navigationMode)
             {
-                Spendable = (double)parameters["spendable"];
-                SpendableLabel = $"MAX: {Spendable} ツ";
+                case Prism.Navigation.NavigationMode.New:
+                    if (parameters.ContainsKey("spendable"))
+                    {
+                        Spendable = (double)parameters["spendable"];
+                    }
+                    break;
+                case Prism.Navigation.NavigationMode.Back:
+                    if (parameters.ContainsKey("qr_scanner_result"))
+                    {
+                        Address = (string)parameters["qr_scanner_result"];
+                    }
+                    break;
             }
         }
 
@@ -85,10 +110,20 @@ namespace GrinPlusPlus.ViewModels
 
             if (numbers.Contains(character))
             {
+                var parts = Amount.Split('.');
+                if (parts.Length.Equals(2))
+                {
+                    if (parts[1].Length.Equals(9))
+                    {
+                        return;
+                    }
+                }
+
                 if (Amount.Equals("0"))
                 {
                     Amount = string.Empty;
                 }
+
                 Amount = $"{Amount}{character}";
             }
             else
@@ -100,7 +135,6 @@ namespace GrinPlusPlus.ViewModels
                         return;
                     }
                     Amount = $"{Amount}{character}";
-
                 }
                 else if (character.Equals("DEL"))
                 {
@@ -115,19 +149,18 @@ namespace GrinPlusPlus.ViewModels
             TriggerFeeCalculation();
         }
 
-
-        void MaxButtonClicked()
-        {
-            Amount = $"{Spendable}";
-            Fee = "0";
-            IsValid = true;
-        }
-
         async void ContinueButtonClicked()
         {
             try
             {
-                await NavigationService.NavigateAsync("EnterAddressMessagePage", new NavigationParameters { { "amount", __amount }, { "max", false } });
+                await NavigationService.NavigateAsync("SendingGrinsPage",
+                    new NavigationParameters
+                    {
+                        { "address", Address },
+                        { "amount", __amount },
+                        { "max", SendMax }
+                    }
+                );
             }
             catch (Exception ex)
             {
@@ -137,39 +170,38 @@ namespace GrinPlusPlus.ViewModels
 
         private void TriggerFeeCalculation()
         {
+            if (Amount.LastIndexOf(".").Equals(Amount.Length - 1))
+            {
+                IsValid = false;
+                Fee = "0";
+                return;
+            }
+            else if (__amount.Equals(0))
+            {
+                IsValid = false;
+                Fee = "0";
+                return;
+            }
+            else if (__amount > Spendable - Helpers.TextCurrencyToDouble(Fee))
+            {
+                IsValid = false;
+                Fee = "0";
+                return;
+            }
+
             MainThread.BeginInvokeOnMainThread(async () =>
             {
-                if (Amount.LastIndexOf(".").Equals(Amount.Length - 1))
+                try
+                {
+                    FeeEstimation estimation = await DataProvider.EstimateFee(await SecureStorage.GetAsync("token"), __amount);
+                    Fee = (estimation.Fee / Math.Pow(10, 9)).ToString("F9");
+                    IsValid = true;
+                }
+                catch (Exception ex)
                 {
                     IsValid = false;
                     Fee = "0";
-                    return;
-                }
-                else if (__amount.Equals(0))
-                {
-                    IsValid = false;
-                    Fee = "0";
-                    return;
-                }
-                else if (__amount > Spendable - Helpers.TextCurrencyToDouble(Fee))
-                {
-                    IsValid = false;
-                    return;
-                }
-                else
-                {
-                    try
-                    {
-                        FeeEstimation estimation = await DataProvider.EstimateFee(await SecureStorage.GetAsync("token"), __amount);
-                        Fee = (estimation.Fee / Math.Pow(10, 9)).ToString("F9");
-                        IsValid = true;
-                    }
-                    catch (Exception ex)
-                    {
-                        IsValid = false;
-                        Fee = "0";
-                        await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
-                    }
+                    await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
                 }
             });
         }

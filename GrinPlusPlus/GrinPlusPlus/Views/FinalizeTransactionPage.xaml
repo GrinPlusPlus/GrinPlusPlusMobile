@@ -6,6 +6,8 @@
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    Title="{x:Static resource:AppResources.FinalizeTransaction}"
     prism:ViewModelLocator.AutowireViewModel="True"
     sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromRight"
     BackgroundColor="Black">
@@ -16,63 +18,41 @@
             Spacing="10"
             VerticalOptions="FillAndExpand">
             <Label
-                Padding="20,5,20,0"
-                FontSize="22"
-                HorizontalOptions="Start"
-                Text="{x:Static resource:AppResources.FinalizeTransaction}"
-                TextColor="White"
-                VerticalOptions="Center" />
-            <BoxView
-                Margin="20,0,20,10"
-                HeightRequest="1"
-                HorizontalOptions="Start"
-                WidthRequest="50"
-                Color="White" />
-            <Label
                 Margin="20,0,20,0"
                 Text="{x:Static resource:AppResources.SlatepackMessage}"
                 TextColor="Gray"
                 TextTransform="Uppercase" />
             <Editor
-                Margin="20,0,20,40"
+                Margin="20,0,20,10"
                 AutoSize="Disabled"
-                BackgroundColor="#191919"
-                CharacterSpacing="1"
-                FontSize="14"
-                HeightRequest="150"
+                BackgroundColor="#0C0C0C"
+                CharacterSpacing="4"
+                FontSize="12"
+                HeightRequest="220"
                 IsSpellCheckEnabled="False"
                 IsTextPredictionEnabled="False"
                 Text="{Binding SlatepackMessage}"
-                TextColor="LightGray" />
+                TextColor="LightGray">
+                <Editor.Effects>
+                    <xct:RemoveBorderEffect />
+                </Editor.Effects>
+            </Editor>
             <Button
-                Margin="50,0,50,0"
-                BackgroundColor="#191919"
+                Margin="20,0,20,20"
+                BackgroundColor="#0C0C0C"
                 Command="{Binding PasteFromClipboardCommand}"
-                CornerRadius="5"
                 HeightRequest="44"
                 ImageSource="baseline_content_paste_white_18.png"
                 Text="{x:Static resource:AppResources.PasteFromClipboard}"
                 TextColor="White" />
-            <StackLayout
-                Margin="50,0,50,20"
-                Spacing="10"
-                VerticalOptions="EndAndExpand">
-                <Button
-                    BackgroundColor="#191919"
-                    Command="{Binding FinalizeTransactionCommand}"
-                    CornerRadius="5"
-                    HeightRequest="44"
-                    Text="{x:Static resource:AppResources.Finalize}"
-                    TextColor="Yellow" />
-                <Button
-                    BackgroundColor="#191919"
-                    Command="{Binding CloseScreenCommand}"
-                    CornerRadius="5"
-                    HeightRequest="44"
-                    Text="{x:Static resource:AppResources.Close}"
-                    TextColor="White"
-                    VerticalOptions="EndAndExpand" />
-            </StackLayout>
+            <Button
+                Margin="20,0,20,20"
+                BackgroundColor="#0C0C0C"
+                Command="{Binding FinalizeTransactionCommand}"
+                HeightRequest="44"
+                Text="{x:Static resource:AppResources.Finalize}"
+                TextColor="Yellow"
+                VerticalOptions="EndAndExpand" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

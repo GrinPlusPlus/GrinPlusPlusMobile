@@ -44,7 +44,7 @@
                 Padding="40,20,40,0"
                 Spacing="10">
                 <Button
-                    BackgroundColor="#191919"
+                    BackgroundColor="#0C0C0C"
                     Command="{prism:NavigateTo 'CreateWalletPage',
                                                UseModalNavigation=False,
                                                Animated=True}"

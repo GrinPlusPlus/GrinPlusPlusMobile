@@ -167,7 +167,7 @@
                 Grid.Row="9"
                 Grid.Column="0"
                 Margin="20,10,0,0"
-                BackgroundColor="#191919"
+                BackgroundColor="#0C0C0C"
                 Command="{Binding OpenBackupWalletPageCommand}"
                 Text="{x:Static resource:AppResources.BackupWallet}"
                 TextColor="Brown" />
@@ -175,7 +175,7 @@
                 Grid.Row="9"
                 Grid.Column="1"
                 Margin="5,10,20,0"
-                BackgroundColor="#191919"
+                BackgroundColor="#0C0C0C"
                 Command="{Binding LogoutCommand}"
                 Text="Close"
                 TextColor="Orange" />
