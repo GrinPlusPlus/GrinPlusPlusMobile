@@ -71,60 +71,57 @@ namespace GrinPlusPlus.ViewModels
         {
             MainThread.BeginInvokeOnMainThread(async () =>
             {
-                SlatepackAddress = await SecureStorage.GetAsync("slatepack_address");
                 TorAddress = await SecureStorage.GetAsync("tor_address");
-                await UpdateAvailability();
+                SlatepackAddress = await SecureStorage.GetAsync("slatepack_address");
             });
-
-        }
-        public override void OnNavigatedTo(INavigationParameters parameters)
-        {
 
             Device.StartTimer(TimeSpan.FromSeconds(30), () =>
             {
-                if(Settings.IsLoggedIn == false)
+                if (Settings.IsLoggedIn == false)
                 {
                     return false;
                 }
 
-                MainThread.BeginInvokeOnMainThread(async () =>
-                {
-                    await UpdateAvailability();
-                });
+                UpdateAvailability();
 
                 return true;
             });
         }
 
-        async Task UpdateAvailability()
+        void UpdateAvailability()
         {
-            if (string.IsNullOrEmpty(TorAddress))
+            MainThread.BeginInvokeOnMainThread(async () =>
             {
-                Reachable = false;
-                AddressColor = "Orange";
-                Availability = AppResources.ResourceManager.GetString("WalletReachableNot");
-                return;
-            }
-            try
-            {
-                Reachable = await DataProvider.CheckAddressAvailability(TorAddress, Settings.GrinChckAPIURL);
-                if(Reachable)
+
+                if (string.IsNullOrEmpty(TorAddress))
                 {
-                    AddressColor = "Green";
-                    Availability = AppResources.ResourceManager.GetString("WalletReachable");
-                } else
-                {
+                    Reachable = false;
                     AddressColor = "Orange";
                     Availability = AppResources.ResourceManager.GetString("WalletReachableNot");
+                    return;
                 }
-            }
-            catch (Exception ex)
-            {
-                Reachable = false;
-                AddressColor = "Orange";
-                Availability = AppResources.ResourceManager.GetString("WalletReachableNot");
-                Console.WriteLine(ex.Message);
-            }
+                try
+                {
+                    Reachable = await DataProvider.CheckAddressAvailability(TorAddress, Settings.GrinChckAPIURL);
+                    if (Reachable)
+                    {
+                        AddressColor = "Green";
+                        Availability = AppResources.ResourceManager.GetString("WalletReachable");
+                    }
+                    else
+                    {
+                        AddressColor = "Orange";
+                        Availability = AppResources.ResourceManager.GetString("WalletReachableNot");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Reachable = false;
+                    AddressColor = "Orange";
+                    Availability = AppResources.ResourceManager.GetString("WalletReachableNot");
+                    Console.WriteLine(ex.Message);
+                }
+            });
         }
     }
 }
