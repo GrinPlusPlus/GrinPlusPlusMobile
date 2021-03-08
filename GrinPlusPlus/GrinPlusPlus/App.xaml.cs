@@ -37,7 +37,7 @@ namespace GrinPlusPlus
                 }
                 else
                 {
-                    destination = "/SharedTransitionNavigationPage/LoginPage";
+                    destination = "/SharedTransitionNavigationPage/DashboardCarouselPage";
                 }
             }
 
