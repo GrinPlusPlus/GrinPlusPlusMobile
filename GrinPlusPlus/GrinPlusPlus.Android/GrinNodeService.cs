@@ -69,6 +69,14 @@ namespace GrinPlusPlus.Droid
                 if (intent.Action.Equals(Constants.ACTION_STOP_SERVICE))
                 {
                     Log.Info(TAG, "Stop Service called.");
+
+                    try { 
+                        Xamarin.Essentials.Platform.CurrentActivity.Finish();
+                    } catch (Exception e)
+                    {
+
+                    }
+
                     StopBackend();
 
                     if (timer != null)
@@ -382,7 +390,7 @@ namespace GrinPlusPlus.Droid
             var stopServicePendingIntent = PendingIntent.GetService(this, 0, stopServiceIntent, 0);
 
             var builder = new Notification.Action.Builder(null,
-                                                          "STOP",
+                                                          "EXIT",
                                                           stopServicePendingIntent);
             return builder.Build();
         }
