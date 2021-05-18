@@ -9,7 +9,6 @@ using Prism.Ioc;
 namespace GrinPlusPlus.Droid
 {
     [Activity(Label = "Grin++", Icon = "@mipmap/ic_launcher", Theme = "@style/MainTheme", ScreenOrientation = ScreenOrientation.Portrait)]
-    [BroadcastReceiver(Enabled = true, Exported = false)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
