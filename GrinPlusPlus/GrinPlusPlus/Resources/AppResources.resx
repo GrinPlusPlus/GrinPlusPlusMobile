@@ -126,6 +126,9 @@
   <data name="AddressCantBeNull" xml:space="preserve">
     <value>Make sure to set the adresss of the receiver</value>
   </data>
+  <data name="Addresses" xml:space="preserve">
+    <value>Addresses</value>
+  </data>
   <data name="AlignQRCode" xml:space="preserve">
     <value>Align the QR within the frame</value>
   </data>
@@ -134,6 +137,9 @@
   </data>
   <data name="AmountCantBeNull" xml:space="preserve">
     <value>Amount should be more than 0</value>
+  </data>
+  <data name="Amounts" xml:space="preserve">
+    <value>Amounts</value>
   </data>
   <data name="BackupWallet" xml:space="preserve">
     <value>Backup Wallet</value>
@@ -207,17 +213,59 @@
   <data name="Custom" xml:space="preserve">
     <value>Custom</value>
   </data>
+  <data name="Dandelion" xml:space="preserve">
+    <value>Dandelion</value>
+  </data>
   <data name="Date" xml:space="preserve">
     <value>Date</value>
   </data>
   <data name="DeleteWallet" xml:space="preserve">
     <value>Delete Wallet</value>
   </data>
+  <data name="Emission" xml:space="preserve">
+    <value>Emission</value>
+  </data>
   <data name="EnableProximity" xml:space="preserve">
     <value>Receive using Proximity</value>
   </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
   <data name="ErrorConnectingToNode" xml:space="preserve">
     <value>There was an error while trying to initialize the Grin Node.</value>
+  </data>
+  <data name="ErrorConnectingToNodeAdvice" xml:space="preserve">
+    <value>Please try to run the node again using the notification bar action buttons</value>
+  </data>
+  <data name="FactAddresses" xml:space="preserve">
+    <value>Notably, there are no on-chain addresses either, as transaction building is interactive. Keys used in SlatepackAddresses are derived from a path from the master seed in a given wallet account</value>
+  </data>
+  <data name="FactEmission" xml:space="preserve">
+    <value>A new grin ツ is emitted every second, forever, meaning the emission rate stays constant and completely linear. As time passes, the relative dilution becomes smaller; After 10 years, it falls below 10%. After 20, below 5%. This results in a decreasing inflation rate, known as disinflation</value>
+  </data>
+  <data name="FactPrivate" xml:space="preserve">
+    <value>Privacy by default. Transactions have no amount, no addresses and can be trivially aggregated. This enables complete fungibility without precluding the ability to selectively disclose information as needed</value>
+  </data>
+  <data name="FactsAmounts" xml:space="preserve">
+    <value>First, there are no amounts. A mimblewimble implementation natively uses Confidential Transactions, meaning all amounts are hidden; They are provably impossible to uncover, yet easily verified. Even before anything else, simply hiding amounts makes any analysis significantly more challenging</value>
+  </data>
+  <data name="FactsDandelion" xml:space="preserve">
+    <value>An important piece of information that commonly leaks is the IP address that originally sent the transaction. To tackle this issue, grin employs Dandelion++ (originally proposed as a BIP), a protocol designed to hide a transaction's origin IP address</value>
+  </data>
+  <data name="FactSlatepack" xml:space="preserve">
+    <value>Slatepack is the universal transaction standard for Grin. Slatepacks  are encrypted when the user uses a grin1 address to send smiles; otherwise, the transaction information is only obfuscated</value>
+  </data>
+  <data name="FactsMimblewimble" xml:space="preserve">
+    <value>Mimblewimble is a blockchain protocol that allows for a completely private transaction platform through a unique security framework that is markedly different from that of the pseudonymous Bitcoin cryptocurrency. In Mimblewimble, there are no addresses and transactions are fully confidential. Its distributed ledger is also relatively more compact than the other chains in the crypto space</value>
+  </data>
+  <data name="FactsOpen" xml:space="preserve">
+    <value>Grin is developed openly, by individual contributors all over the world. There's no company or foundation behind it, and no ICO, founder reward, pre-mine or dev-tax. The coin distribution is designed to be as fair (but not gratis) as is known to be possible</value>
+  </data>
+  <data name="FactsScalable" xml:space="preserve">
+    <value>Grin scales mostly with the number of users and minimally with the number of transactions. Past transactional data can be pruned, making grin drastically lightweight compared to other blockchains</value>
+  </data>
+  <data name="FactTransactions" xml:space="preserve">
+    <value>Mimblewimble transactions are interactive, meaning both parties need some kind of communication to interact with each other and exchange the necessary data to create a transaction.</value>
   </data>
   <data name="FastPrivateSecure" xml:space="preserve">
     <value>Fast. Private. Secure.</value>
@@ -266,6 +314,9 @@
   </data>
   <data name="Method" xml:space="preserve">
     <value>Method</value>
+  </data>
+  <data name="Mimblewimble" xml:space="preserve">
+    <value>Mimblewimble</value>
   </data>
   <data name="MinimumPeers" xml:space="preserve">
     <value>Minimum number of Peers</value>
@@ -328,7 +379,10 @@
     <value>Please Confirm</value>
   </data>
   <data name="PowerSaverMessage" xml:space="preserve">
-    <value>Make sure the POWER SAVER is DISABLED for this Application</value>
+    <value>Make sure the POWER SAVER is DISABLED</value>
+  </data>
+  <data name="Private" xml:space="preserve">
+    <value>Private</value>
   </data>
   <data name="QRCode" xml:space="preserve">
     <value>QR Code</value>
@@ -356,6 +410,9 @@
   </data>
   <data name="RestoreWallet" xml:space="preserve">
     <value>Restore Wallet</value>
+  </data>
+  <data name="Scalable" xml:space="preserve">
+    <value>Scalable</value>
   </data>
   <data name="ScanningQRCode" xml:space="preserve">
     <value>Scanning a QR Code</value>
@@ -440,6 +497,9 @@
   </data>
   <data name="Total" xml:space="preserve">
     <value>Total</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>Transactions</value>
   </data>
   <data name="TransactionSent" xml:space="preserve">
     <value>Transaction Sent  〜(ᵐ‿ʷ)〜</value>

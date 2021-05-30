@@ -88,6 +88,15 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Addresses.
+        /// </summary>
+        internal static string Addresses {
+            get {
+                return ResourceManager.GetString("Addresses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Align the QR within the frame.
         /// </summary>
         internal static string AlignQRCode {
@@ -111,6 +120,15 @@ namespace GrinPlusPlus.Resources {
         internal static string AmountCantBeNull {
             get {
                 return ResourceManager.GetString("AmountCantBeNull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Amounts.
+        /// </summary>
+        internal static string Amounts {
+            get {
+                return ResourceManager.GetString("Amounts", resourceCulture);
             }
         }
         
@@ -331,6 +349,15 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dandelion.
+        /// </summary>
+        internal static string Dandelion {
+            get {
+                return ResourceManager.GetString("Dandelion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date.
         /// </summary>
         internal static string Date {
@@ -349,6 +376,15 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Emission.
+        /// </summary>
+        internal static string Emission {
+            get {
+                return ResourceManager.GetString("Emission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Receive using Proximity.
         /// </summary>
         internal static string EnableProximity {
@@ -358,11 +394,119 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        internal static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There was an error while trying to initialize the Grin Node..
         /// </summary>
         internal static string ErrorConnectingToNode {
             get {
                 return ResourceManager.GetString("ErrorConnectingToNode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please try to run the node again using the notification bar action buttons.
+        /// </summary>
+        internal static string ErrorConnectingToNodeAdvice {
+            get {
+                return ResourceManager.GetString("ErrorConnectingToNodeAdvice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notably, there are no on-chain addresses either, as transaction building is interactive. Keys used in SlatepackAddresses are derived from a path from the master seed in a given wallet account.
+        /// </summary>
+        internal static string FactAddresses {
+            get {
+                return ResourceManager.GetString("FactAddresses", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A new grin ツ is emitted every second, forever, meaning the emission rate stays constant and completely linear. As time passes, the relative dilution becomes smaller; After 10 years, it falls below 10%. After 20, below 5%. This results in a decreasing inflation rate, known as disinflation.
+        /// </summary>
+        internal static string FactEmission {
+            get {
+                return ResourceManager.GetString("FactEmission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Privacy by default. Transactions have no amount, no addresses and can be trivially aggregated. This enables complete fungibility without precluding the ability to selectively disclose information as needed.
+        /// </summary>
+        internal static string FactPrivate {
+            get {
+                return ResourceManager.GetString("FactPrivate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First, there are no amounts. A mimblewimble implementation natively uses Confidential Transactions, meaning all amounts are hidden; They are provably impossible to uncover, yet easily verified. Even before anything else, simply hiding amounts makes any analysis significantly more challenging.
+        /// </summary>
+        internal static string FactsAmounts {
+            get {
+                return ResourceManager.GetString("FactsAmounts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An important piece of information that commonly leaks is the IP address that originally sent the transaction. To tackle this issue, grin employs Dandelion++ (originally proposed as a BIP), a protocol designed to hide a transaction&apos;s origin IP address.
+        /// </summary>
+        internal static string FactsDandelion {
+            get {
+                return ResourceManager.GetString("FactsDandelion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Slatepack is the universal transaction standard for Grin. Slatepacks  are encrypted when the user uses a grin1 address to send smiles; otherwise, the transaction information is only obfuscated.
+        /// </summary>
+        internal static string FactSlatepack {
+            get {
+                return ResourceManager.GetString("FactSlatepack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mimblewimble is a blockchain protocol that allows for a completely private transaction platform through a unique security framework that is markedly different from that of the pseudonymous Bitcoin cryptocurrency. In Mimblewimble, there are no addresses and transactions are fully confidential. Its distributed ledger is also relatively more compact than the other chains in the crypto space.
+        /// </summary>
+        internal static string FactsMimblewimble {
+            get {
+                return ResourceManager.GetString("FactsMimblewimble", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Grin is developed openly, by individual contributors all over the world. There&apos;s no company or foundation behind it, and no ICO, founder reward, pre-mine or dev-tax. The coin distribution is designed to be as fair (but not gratis) as is known to be possible.
+        /// </summary>
+        internal static string FactsOpen {
+            get {
+                return ResourceManager.GetString("FactsOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Grin scales mostly with the number of users and minimally with the number of transactions. Past transactional data can be pruned, making grin drastically lightweight compared to other blockchains.
+        /// </summary>
+        internal static string FactsScalable {
+            get {
+                return ResourceManager.GetString("FactsScalable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mimblewimble transactions are interactive, meaning both parties need some kind of communication to interact with each other and exchange the necessary data to create a transaction..
+        /// </summary>
+        internal static string FactTransactions {
+            get {
+                return ResourceManager.GetString("FactTransactions", resourceCulture);
             }
         }
         
@@ -507,6 +651,15 @@ namespace GrinPlusPlus.Resources {
         internal static string Method {
             get {
                 return ResourceManager.GetString("Method", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mimblewimble.
+        /// </summary>
+        internal static string Mimblewimble {
+            get {
+                return ResourceManager.GetString("Mimblewimble", resourceCulture);
             }
         }
         
@@ -691,11 +844,20 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Make sure the POWER SAVER is DISABLED for this Application.
+        ///   Looks up a localized string similar to Make sure the POWER SAVER is DISABLED.
         /// </summary>
         internal static string PowerSaverMessage {
             get {
                 return ResourceManager.GetString("PowerSaverMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Private.
+        /// </summary>
+        internal static string Private {
+            get {
+                return ResourceManager.GetString("Private", resourceCulture);
             }
         }
         
@@ -777,6 +939,15 @@ namespace GrinPlusPlus.Resources {
         internal static string RestoreWallet {
             get {
                 return ResourceManager.GetString("RestoreWallet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scalable.
+        /// </summary>
+        internal static string Scalable {
+            get {
+                return ResourceManager.GetString("Scalable", resourceCulture);
             }
         }
         
@@ -1029,6 +1200,15 @@ namespace GrinPlusPlus.Resources {
         internal static string Total {
             get {
                 return ResourceManager.GetString("Total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transactions.
+        /// </summary>
+        internal static string Transactions {
+            get {
+                return ResourceManager.GetString("Transactions", resourceCulture);
             }
         }
         

@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="GrinPlusPlus.Views.ErrorPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com"
+    xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="Black">
+    <StackLayout Margin="35" Spacing="10">
+        <Label
+            FontSize="Title"
+            Text="{x:Static resource:AppResources.Error}"
+            TextColor="White" />
+        <Label
+            FontAttributes="Bold"
+            FontSize="Medium"
+            Text="{x:Static resource:AppResources.ErrorConnectingToNode}"
+            TextColor="White" />
+        <Label Text="{x:Static resource:AppResources.ErrorConnectingToNodeAdvice}" TextColor="White" />
+        <Button
+            BackgroundColor="#191919"
+            Command="{Binding SupportButtonClickedCommand}"
+            Text="{x:Static resource:AppResources.Support}"
+            TextColor="LightGray" />
+    </StackLayout>
+</ContentPage>

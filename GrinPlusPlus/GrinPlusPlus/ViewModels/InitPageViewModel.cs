@@ -1,9 +1,13 @@
 ﻿using GrinPlusPlus.Api;
+using GrinPlusPlus.Models;
+using GrinPlusPlus.Resources;
+using GrinPlusPlus.Extensions;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
 using System;
+using System.Collections.ObjectModel;
 using System.Threading;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -33,27 +37,6 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _progressPercentage, value); }
         }
 
-        private bool displayError = false;
-        public bool DisplayError
-        {
-            get { return displayError; }
-            set { SetProperty(ref displayError, value); }
-        }
-
-        private bool displayProgress = false;
-        public bool DisplayProgress
-        {
-            get { return displayProgress; }
-            set { SetProperty(ref displayProgress, value); }
-        }
-
-        private bool displayInitialMessage = true;
-        public bool DisplayInitialMessage
-        {
-            get { return displayInitialMessage; }
-            set { SetProperty(ref displayInitialMessage, value); }
-        }
-
         private bool displayActivityIndicator = true;
         public bool DisplayActivityIndicator
         {
@@ -61,19 +44,11 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref displayActivityIndicator, value); }
         }
 
-        private bool displaySuccessMessage = false;
-        public bool DisplaySuccessMessage
+        private ObservableCollection<Fact> _grinFacts = new ObservableCollection<Fact>();
+        public ObservableCollection<Fact> GrinFacts
         {
-            get { return displaySuccessMessage; }
-            set { SetProperty(ref displaySuccessMessage, value); }
-        }
-        
-
-        public DelegateCommand SupportButtonClickedCommand => new DelegateCommand(SupportButtonClicked);
-
-        async void SupportButtonClicked()
-        {
-            await Launcher.TryOpenAsync(new Uri("https://t.me/GrinPP"));
+            get { return _grinFacts; }
+            set { SetProperty(ref _grinFacts, value); }
         }
 
         public InitPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
@@ -82,38 +57,21 @@ namespace GrinPlusPlus.ViewModels
             Preferences.Clear();
             SecureStorage.RemoveAll();
 
+            FillGrinFacts();
+
             Device.StartTimer(TimeSpan.FromSeconds(2), () =>
             {
-                if(DisplayError)
-                {
-                    return false;
-                }
-
                 Status = Settings.Node.Status;
                 ProgressBarr = Settings.Node.ProgressPercentage;
                 ProgressPercentage = string.Format($"{ Settings.Node.ProgressPercentage * 100:F}");
 
                 if (Settings.Node.Status.Equals("Running"))
                 {
-                    // Show Success Message
-                    DisplayProgress = false;
-                    DisplaySuccessMessage = true;
-                    DisplayActivityIndicator = true;
-                    DisplayInitialMessage = false;
-                    DisplayError = false;
+                    DisplayActivityIndicator = false;
 
                     return false;
                 } else
-                {
-                    DisplayInitialMessage = false;
-                    DisplayProgress = true;
-                }
-
-                if (DisplaySuccessMessage)
-                {
-                    return false;
-                }
-
+                
                 return true;
             });
 
@@ -121,19 +79,19 @@ namespace GrinPlusPlus.ViewModels
             {
                 if (Settings.Node.Status.Equals("Disconnected"))
                 {
-                    // Show Error Message
-                    DisplayProgress = false;
-                    DisplaySuccessMessage = false;
                     DisplayActivityIndicator = false;
-                    DisplayInitialMessage = false;
-                    DisplayError = true;
+
+                    MainThread.BeginInvokeOnMainThread(async () =>
+                    {
+                        await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/ErrorPage");
+                    });
                 }
                 return false;
             });
 
             Device.StartTimer(TimeSpan.FromSeconds(5), () =>
             {
-                if(DisplaySuccessMessage)
+                if (Settings.Node.Status.Equals("Running"))
                 {
                     MainThread.BeginInvokeOnMainThread(async () =>
                     {
@@ -145,6 +103,22 @@ namespace GrinPlusPlus.ViewModels
 
                 return true;
             });
+        }
+
+        private void FillGrinFacts()
+        {
+            _grinFacts.Add(new Fact{ Title = AppResources.ResourceManager.GetString("Emission"), Details = AppResources.ResourceManager.GetString("FactEmission") });
+            _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Slatepack"), Details = AppResources.ResourceManager.GetString("FactSlatepack") });
+            _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Transactions"), Details = AppResources.ResourceManager.GetString("FactTransactions") });
+            _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Addresses"), Details = AppResources.ResourceManager.GetString("FactAddresses") });
+            _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Private"), Details = AppResources.ResourceManager.GetString("FactPrivate") });
+            _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Scalable"), Details = AppResources.ResourceManager.GetString("FactsScalable") });
+            _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Amounts"), Details = AppResources.ResourceManager.GetString("FactsAmounts") });
+            _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Open"), Details = AppResources.ResourceManager.GetString("FactsOpen") });
+            _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Dandelion"), Details = AppResources.ResourceManager.GetString("FactsDandelion") });
+            _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Mimblewimble"), Details = AppResources.ResourceManager.GetString("FactsMimblewimble") });
+
+            _grinFacts.Shuffle();
         }
     }
 }

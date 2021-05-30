@@ -75,6 +75,7 @@ namespace GrinPlusPlus
             containerRegistry.RegisterForNavigation<OpeningWalletPage, OpeningWalletPageViewModel>();
             containerRegistry.RegisterForNavigation<BackupWalletPage, BackupWalletPageViewModel>();
             containerRegistry.RegisterForNavigation<SettingsPage, SettingsPageViewModel>();
+            containerRegistry.RegisterForNavigation<ErrorPage, ErrorPageViewModel>();
         }
 
         protected override void OnSleep()

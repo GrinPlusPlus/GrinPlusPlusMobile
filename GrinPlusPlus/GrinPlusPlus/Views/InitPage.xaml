@@ -6,121 +6,146 @@
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     x:Name="Login"
+    Padding="20,20,20,30"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="Black">
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="300" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="350" />
+                <RowDefinition Height="10" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="150" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="7*" />
+                <ColumnDefinition Width="3*" />
             </Grid.ColumnDefinitions>
-            <StackLayout
+            <Image
                 Grid.Row="0"
                 Grid.Column="0"
-                Padding="40,100,40,0"
-                HorizontalOptions="Center">
-                <Image Aspect="AspectFit" Source="banner.png" />
+                Margin="0"
+                Aspect="AspectFit"
+                HorizontalOptions="Start"
+                Source="banner.png" />
+            <ActivityIndicator
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="0"
+                HorizontalOptions="EndAndExpand"
+                IsRunning="true"
+                IsVisible="{Binding DisplayActivityIndicator}"
+                WidthRequest="40"
+                Color="Yellow" />
+            <CarouselView
+                Grid.Row="1"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                IndicatorView="CarouselStepBar"
+                ItemsSource="{Binding GrinFacts}">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="0,110,0,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="25" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Source="baseline_privacy_tip_white_24.png" />
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                FontSize="Medium"
+                                Text="{Binding Title}"
+                                TextColor="White" />
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Padding="10,0,5,0"
+                                FontAttributes="Italic"
+                                FontSize="Body"
+                                LineBreakMode="TailTruncation"
+                                MaxLines="20"
+                                Text="{Binding Details}"
+                                TextColor="LightGray" />
+                        </Grid>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            <IndicatorView
+                x:Name="CarouselStepBar"
+                Grid.Row="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Margin="0"
+                HorizontalOptions="FillAndExpand"
+                IndicatorColor="Gray"
+                ItemsSource="{Binding GrinFacts}"
+                MaximumVisible="10"
+                SelectedIndicatorColor="White"
+                VerticalOptions="Center" />
+            <Grid
+                Grid.Row="3"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                VerticalOptions="End">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="7*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
                 <Label
-                    FontAttributes="Italic"
-                    FontSize="Title"
-                    HorizontalOptions="Center"
-                    Text="{x:Static resource:AppResources.FastPrivateSecure}"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    FontSize="Body"
+                    Text="{Binding Status}"
                     TextColor="White" />
-            </StackLayout>
-            <Label
-                Grid.Row="1"
-                Grid.Column="0"
-                Padding="40,0,40,0"
-                FontSize="Body"
-                HorizontalOptions="Center"
-                HorizontalTextAlignment="Center"
-                IsVisible="{Binding DisplayInitialMessage}"
-                Text="{x:Static resource:AppResources.ConnectingToNode}"
-                TextColor="White" />
-            <Label
-                Grid.Row="1"
-                Grid.Column="0"
-                Padding="40,0,40,0"
-                FontSize="Body"
-                HorizontalOptions="Center"
-                HorizontalTextAlignment="Center"
-                IsVisible="{Binding DisplaySuccessMessage}"
-                Text="{x:Static resource:AppResources.SyncedRedirecting}"
-                TextColor="White" />
-            <StackLayout
-                Grid.Row="1"
-                Grid.Column="0"
-                Padding="40,0,40,0"
-                IsVisible="{Binding DisplayProgress}">
-                <Label HorizontalOptions="Center" HorizontalTextAlignment="Center">
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    HorizontalOptions="EndAndExpand">
                     <Label.FormattedText>
                         <FormattedString>
                             <Span
                                 FontAttributes="Bold"
-                                FontSize="34"
+                                FontSize="Default"
                                 Text="{Binding ProgressPercentage}"
                                 TextColor="Yellow" />
                             <Span
                                 FontAttributes="Bold"
                                 FontSize="Medium"
-                                Text="%"
+                                Text=" %"
                                 TextColor="Yellow" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-                <ProgressBar Progress="{Binding ProgressBarr}" ProgressColor="Yellow" />
+                <ProgressBar
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Progress="{Binding ProgressBarr}"
+                    ProgressColor="Yellow" />
                 <Label
-                    FontAttributes="Bold"
-                    FontSize="Body"
-                    HorizontalOptions="Center"
-                    Text="{Binding Status}"
-                    TextColor="White" />
-            </StackLayout>
-            <StackLayout
-                Grid.Row="1"
-                Grid.Column="0"
-                Padding="40,0,40,0"
-                IsVisible="{Binding DisplayError}">
-                <Label
-                    FontSize="Body"
-                    HorizontalOptions="Center"
-                    HorizontalTextAlignment="Center"
-                    Text="{x:Static resource:AppResources.ErrorConnectingToNode}"
-                    TextColor="Red" />
-                <Button
-                    BackgroundColor="#191919"
-                    Command="{Binding SupportButtonClickedCommand}"
-                    Text="{x:Static resource:AppResources.Support}"
-                    TextColor="White" />
-            </StackLayout>
-            <StackLayout
-                Grid.Row="2"
-                Grid.Column="0"
-                Padding="40,0,40,0">
-                <ActivityIndicator
-                    HorizontalOptions="Center"
-                    IsRunning="true"
-                    IsVisible="{Binding DisplayActivityIndicator}"
-                    WidthRequest="30"
-                    Color="DarkGray" />
-                <Label
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    FontAttributes="Italic"
                     FontSize="Caption"
-                    HorizontalOptions="Center"
-                    HorizontalTextAlignment="Center"
-                    Text="{x:Static resource:AppResources.WaitingSync}"
-                    TextColor="White" />
-                <Label
-                    FontAttributes="Bold"
-                    FontSize="Caption"
-                    HorizontalOptions="Center"
-                    HorizontalTextAlignment="Center"
                     Text="{x:Static resource:AppResources.PowerSaverMessage}"
                     TextColor="White" />
-            </StackLayout>
+            </Grid>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
