@@ -37,7 +37,7 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _progressPercentage, value); }
         }
 
-        private bool displayActivityIndicator = true;
+        private bool displayActivityIndicator = false;
         public bool DisplayActivityIndicator
         {
             get { return displayActivityIndicator; }
@@ -61,6 +61,7 @@ namespace GrinPlusPlus.ViewModels
 
             Device.StartTimer(TimeSpan.FromSeconds(2), () =>
             {
+                DisplayActivityIndicator = true;
                 Status = Settings.Node.Status;
                 ProgressBarr = Settings.Node.ProgressPercentage;
                 ProgressPercentage = string.Format($"{ Settings.Node.ProgressPercentage * 100:F}");

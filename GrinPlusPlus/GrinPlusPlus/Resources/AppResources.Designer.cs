@@ -322,7 +322,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create Wallet.
+        ///   Looks up a localized string similar to Create new wallet.
         /// </summary>
         internal static string CreateWallet {
             get {
@@ -925,7 +925,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Restore Existing Wallet.
+        ///   Looks up a localized string similar to Restore existing wallet.
         /// </summary>
         internal static string RestoreExistingWallet {
             get {
@@ -934,7 +934,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Restore Wallet.
+        ///   Looks up a localized string similar to Restore wallet.
         /// </summary>
         internal static string RestoreWallet {
             get {
@@ -1317,6 +1317,15 @@ namespace GrinPlusPlus.Resources {
         internal static string Yes {
             get {
                 return ResourceManager.GetString("Yes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your wallets.
+        /// </summary>
+        internal static string YourWallets {
+            get {
+                return ResourceManager.GetString("YourWallets", resourceCulture);
             }
         }
     }

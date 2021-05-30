@@ -27,13 +27,13 @@ namespace GrinPlusPlus
 
             InitializeComponent();
 
-            string destination = "InitPage";
+            string destination = "/InitPage";
 
             if (Settings.Node.Status.Equals("Running"))
             {
                 if (Settings.IsLoggedIn)
                 {
-                    destination = "OpeningWalletPage";
+                    destination = "/OpeningWalletPage";
                 }
                 else
                 {

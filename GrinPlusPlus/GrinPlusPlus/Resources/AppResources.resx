@@ -205,7 +205,7 @@
     <value>Create a new account or use your wallet seed to restore a previous one</value>
   </data>
   <data name="CreateWallet" xml:space="preserve">
-    <value>Create Wallet</value>
+    <value>Create new wallet</value>
   </data>
   <data name="CreateWalletMessage" xml:space="preserve">
     <value>After creating a new wallet, please make sure you're keeping your wallet seed stored safely.</value>
@@ -406,10 +406,10 @@
     <value>Restore</value>
   </data>
   <data name="RestoreExistingWallet" xml:space="preserve">
-    <value>Restore Existing Wallet</value>
+    <value>Restore existing wallet</value>
   </data>
   <data name="RestoreWallet" xml:space="preserve">
-    <value>Restore Wallet</value>
+    <value>Restore wallet</value>
   </data>
   <data name="Scalable" xml:space="preserve">
     <value>Scalable</value>
@@ -536,5 +536,8 @@
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>
+  </data>
+  <data name="YourWallets" xml:space="preserve">
+    <value>Your wallets</value>
   </data>
 </root>
