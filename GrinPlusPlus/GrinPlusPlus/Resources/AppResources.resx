@@ -220,7 +220,7 @@
     <value>Date</value>
   </data>
   <data name="DeleteWallet" xml:space="preserve">
-    <value>Delete Wallet</value>
+    <value>Delete wallet</value>
   </data>
   <data name="Emission" xml:space="preserve">
     <value>Emission</value>
@@ -475,7 +475,7 @@
     <value>Slatepack Message Text</value>
   </data>
   <data name="Spendable" xml:space="preserve">
-    <value>SPENDABLE</value>
+    <value>Spendable</value>
   </data>
   <data name="Status" xml:space="preserve">
     <value>Status</value>

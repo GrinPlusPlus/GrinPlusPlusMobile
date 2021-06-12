@@ -45,7 +45,6 @@ namespace GrinPlusPlus.ViewModels
                     await GetNodePreferences();
                     await GetWalletBalance();
                     Settings.IsLoggedIn = true;
-                    await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/DashboardCarouselPage");
                 }
                 catch (Exception ex)
                 {
@@ -56,7 +55,7 @@ namespace GrinPlusPlus.ViewModels
                 {
                     if(Settings.IsLoggedIn)
                     {
-                        await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/DashboardCarouselPage");
+                        await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/WalletPage");
                     } else
                     {
                         Thread.Sleep(2000);

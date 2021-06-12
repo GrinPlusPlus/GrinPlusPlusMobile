@@ -91,5 +91,11 @@ namespace GrinPlusPlus
                 set => Preferences.Set(nameof(ProgressPercentage), value);
             }
         }
+
+        public static bool Reachable
+        {
+            get => Preferences.Get(nameof(Reachable), false);
+            set => Preferences.Set(nameof(Reachable), value);
+        }
     }
 }

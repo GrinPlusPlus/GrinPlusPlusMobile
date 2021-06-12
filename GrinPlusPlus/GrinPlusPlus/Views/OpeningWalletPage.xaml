@@ -6,37 +6,37 @@
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     Title="{Binding Wallet}"
+    Padding="20,0,20,40"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="Black">
     <ContentPage.Content>
-        <Grid Padding="20" RowSpacing="10">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-            <StackLayout
+        <StackLayout
+            HorizontalOptions="Center"
+            Spacing="10"
+            VerticalOptions="Center">
+            <Image
                 Grid.Row="0"
                 Grid.Column="0"
-                VerticalOptions="Center">
-                <Label
-                    FontSize="Large"
-                    HorizontalTextAlignment="Center"
-                    Text="{x:Static resource:AppResources.OpeningPleaseWait}"
-                    TextColor="White" />
-                <ActivityIndicator
-                    IsRunning="true"
-                    WidthRequest="40"
-                    Color="Yellow" />
-                <Label
-                    Margin="0,10,0,0"
-                    FontSize="Large"
-                    HorizontalOptions="Center"
-                    Text="{Binding ExceptionMessage}"
-                    TextColor="Red" />
-            </StackLayout>
-
-        </Grid>
+                Margin="0"
+                Aspect="AspectFit"
+                HorizontalOptions="Center"
+                Source="logo.png"
+                WidthRequest="52" />
+            <Label
+                FontSize="Medium"
+                HorizontalTextAlignment="Center"
+                Text="{x:Static resource:AppResources.OpeningPleaseWait}"
+                TextColor="White" />
+            <Label
+                Margin="0,10,0,0"
+                FontSize="Medium"
+                HorizontalOptions="Center"
+                Text="{Binding ExceptionMessage}"
+                TextColor="Red" />
+            <ActivityIndicator
+                IsRunning="true"
+                VerticalOptions="End"
+                Color="White" />
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

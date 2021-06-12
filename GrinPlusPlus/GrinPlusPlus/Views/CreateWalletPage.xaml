@@ -8,25 +8,23 @@
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     Title="{x:Static resource:AppResources.CreateWallet}"
+    Padding="20,0,20,40"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="Black">
     <ContentPage.Content>
         <StackLayout
-            Padding="20,0,20,0"
             HorizontalOptions="FillAndExpand"
             Orientation="Vertical"
             Spacing="10"
             VerticalOptions="FillAndExpand">
-            <Label
-                FontSize="Body"
-                Text="{x:Static resource:AppResources.CreateWalletMessage}"
-                TextColor="White" />
             <Label
                 Text="{x:Static resource:AppResources.Account}"
                 TextColor="Gray"
                 TextTransform="Uppercase" />
             <Entry
                 BackgroundColor="#191919"
+                FontSize="Medium"
+                HeightRequest="48"
                 IsSpellCheckEnabled="False"
                 IsTextPredictionEnabled="False"
                 Text="{Binding Username}"
@@ -45,6 +43,8 @@
                 TextTransform="Uppercase" />
             <Entry
                 BackgroundColor="#191919"
+                FontSize="Medium"
+                HeightRequest="48"
                 IsPassword="True"
                 IsSpellCheckEnabled="False"
                 IsTextPredictionEnabled="False"
@@ -60,6 +60,8 @@
             </Entry>
             <Entry
                 BackgroundColor="#191919"
+                FontSize="Medium"
+                HeightRequest="48"
                 IsPassword="True"
                 IsSpellCheckEnabled="False"
                 IsTextPredictionEnabled="False"
@@ -76,23 +78,25 @@
             <StackLayout
                 Margin="0,10,0,0"
                 Padding="0"
-                BackgroundColor="#191919"
-                HeightRequest="44"
+                BackgroundColor="#0C0C0C"
+                HeightRequest="48"
                 Spacing="0">
                 <Button
                     BackgroundColor="#0C0C0C"
                     Command="{Binding CreateWalletCommand}"
                     CornerRadius="5"
-                    HeightRequest="44"
+                    FontSize="Medium"
+                    HeightRequest="48"
                     IsEnabled="{Binding IsPasswordConfirmationValid}"
                     IsVisible="{Binding IsBusy, Converter={xct:InvertedBoolConverter}}"
                     Text="{x:Static resource:AppResources.Create}"
-                    TextColor="Yellow" />
+                    TextColor="Yellow"
+                    TextTransform="None" />
                 <ActivityIndicator
                     HeightRequest="40"
                     IsRunning="{Binding IsBusy}"
                     IsVisible="{Binding IsBusy}"
-                    Color="LightGray" />
+                    Color="Black" />
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

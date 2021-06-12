@@ -7,9 +7,33 @@
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     x:Name="Wallet"
+    Title="{Binding Wallet}"
+    Padding="10"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="Black"
     IconImageSource="outline_account_balance_wallet_white_24.png">
+    <NavigationPage.TitleView>
+        <Grid Margin="0" Padding="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Image
+                Grid.Row="0"
+                Grid.Column="0"
+                Margin="0"
+                HorizontalOptions="Center"
+                Source="{Binding StatusIcon}" />
+            <Label
+                Grid.Row="0"
+                Grid.Column="1"
+                FontSize="21"
+                Text="{Binding Wallet}"
+                TextColor="White"
+                VerticalOptions="Center"
+                VerticalTextAlignment="Center" />
+        </Grid>
+    </NavigationPage.TitleView>
     <ContentPage.Resources>
         <ResourceDictionary>
             <c:RelativeDateTimeConverter x:Key="RelativeDateTimeConverter" />
@@ -28,15 +52,29 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Command="{prism:NavigateTo 'ProfilePage',
+                                       UseModalNavigation=False,
+                                       Animated=True}"
+            IconImageSource="baseline_qr_code_white_24.png"
+            Order="Primary"
+            Priority="0"
+            Text="" />
+        <ToolbarItem
+            Command="{Binding ShareAddressCommand}"
+            IconImageSource="baseline_share_white_24.png"
+            Order="Primary"
+            Priority="1"
+            Text="" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid
             Margin="0"
-            Padding="20"
             ColumnSpacing="0"
             RowSpacing="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="90" />
-                <RowDefinition Height="90" />
+                <RowDefinition Height="180" />
                 <RowDefinition Height="30" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="30" />
@@ -45,153 +83,206 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <StackLayout Grid.Row="0" Grid.Column="0">
-                <Label
-                    Text="{x:Static resource:AppResources.Spendable}"
-                    TextColor="Gray"
-                    TextTransform="Uppercase"
-                    VerticalOptions="End"
-                    VerticalTextAlignment="End" />
-                <Label>
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span
-                                FontSize="40"
-                                Text="{Binding Balance.SpendableInteger}"
-                                TextColor="Yellow" />
-                            <Span
-                                FontAttributes="Bold"
-                                FontSize="Medium"
-                                Text="."
-                                TextColor="Yellow" />
-                            <Span
-                                FontSize="Medium"
-                                Text="{Binding Balance.SpendableDecimals}"
-                                TextColor="Yellow" />
-                            <Span
-                                FontSize="Small"
-                                Text=" ツ"
-                                TextColor="Yellow" />
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-            </StackLayout>
-            <Grid Grid.Row="1" Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    FontSize="Caption"
-                    Text="{x:Static resource:AppResources.Immature}"
-                    TextColor="Gray"
-                    TextTransform="Uppercase"
-                    VerticalOptions="CenterAndExpand"
-                    VerticalTextAlignment="Center" />
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    VerticalOptions="CenterAndExpand"
-                    VerticalTextAlignment="Center">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span
-                                FontSize="Default"
-                                Text="{Binding Balance.ImmatureInteger}"
-                                TextColor="White" />
-                            <Span
-                                FontSize="Caption"
-                                Text="."
-                                TextColor="White" />
-                            <Span
-                                FontSize="Caption"
-                                Text="{Binding Balance.ImmatureDecimals}"
-                                TextColor="White" />
-                            <Span
-                                FontSize="Small"
-                                Text=" ツ"
-                                TextColor="White" />
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-                <Label
-                    Grid.Row="1"
-                    Grid.Column="0"
-                    FontSize="Caption"
-                    Text="{x:Static resource:AppResources.Unconfirmed}"
-                    TextColor="Gray"
-                    TextTransform="Uppercase"
-                    VerticalOptions="CenterAndExpand"
-                    VerticalTextAlignment="Center" />
-                <Label
-                    Grid.Row="1"
-                    Grid.Column="1"
-                    VerticalOptions="CenterAndExpand"
-                    VerticalTextAlignment="Center">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span
-                                FontSize="Default"
-                                Text="{Binding Balance.UnconfirmedInteger}"
-                                TextColor="White" />
-                            <Span
-                                FontSize="Caption"
-                                Text="."
-                                TextColor="White" />
-                            <Span
-                                FontSize="Caption"
-                                Text="{Binding Balance.UnconfirmedDecimals}"
-                                TextColor="White" />
-                            <Span
-                                FontSize="Small"
-                                Text=" ツ"
-                                TextColor="White" />
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-                <Label
-                    Grid.Row="2"
-                    Grid.Column="0"
-                    FontSize="Caption"
-                    Text="{x:Static resource:AppResources.Locked}"
-                    TextColor="Gray"
-                    TextTransform="Uppercase"
-                    VerticalOptions="CenterAndExpand"
-                    VerticalTextAlignment="Center" />
-                <Label
-                    Grid.Row="2"
-                    Grid.Column="1"
-                    VerticalOptions="CenterAndExpand"
-                    VerticalTextAlignment="Center">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span
-                                FontSize="Default"
-                                Text="{Binding Balance.LockedInteger}"
-                                TextColor="White" />
-                            <Span
-                                FontSize="Caption"
-                                Text="."
-                                TextColor="White" />
-                            <Span
-                                FontSize="Caption"
-                                Text="{Binding Balance.LockedDecimals}"
-                                TextColor="White" />
-                            <Span
-                                FontSize="Small"
-                                Text=" ツ"
-                                TextColor="White" />
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-            </Grid>
+            <Frame
+                Grid.Row="0"
+                Grid.Column="0"
+                Padding="15"
+                BackgroundColor="#FFEE00"
+                BorderColor="Transparent"
+                CornerRadius="10">
+                <Grid
+                    Margin="0"
+                    ColumnSpacing="0"
+                    RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="50" />
+                        <RowDefinition Height="1" />
+                        <RowDefinition Height="5" />
+                        <RowDefinition Height="25" />
+                        <RowDefinition Height="25" />
+                        <RowDefinition Height="25" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="40" />
+                    </Grid.ColumnDefinitions>
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        FontAttributes="Bold"
+                        Text="{x:Static resource:AppResources.Spendable}"
+                        TextColor="Black"
+                        TextTransform="None"
+                        VerticalOptions="End"
+                        VerticalTextAlignment="End" />
+                    <Label
+                        Grid.Row="0"
+                        Grid.RowSpan="3"
+                        Grid.Column="3"
+                        FontSize="24"
+                        HorizontalOptions="End"
+                        Text="ツ"
+                        TextColor="Black"
+                        TextTransform="None"
+                        VerticalOptions="Start"
+                        VerticalTextAlignment="Start" />
+                    <Label
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="4">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span
+                                    FontSize="40"
+                                    Text="{Binding Balance.SpendableInteger}"
+                                    TextColor="Black" />
+                                <Span
+                                    FontAttributes="Bold"
+                                    FontSize="Medium"
+                                    Text="."
+                                    TextColor="Black" />
+                                <Span
+                                    FontSize="Medium"
+                                    Text="{Binding Balance.SpendableDecimals}"
+                                    TextColor="Black" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <BoxView
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="4"
+                        BackgroundColor="Black" />
+                    <Label
+                        Grid.Row="4"
+                        Grid.Column="0"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span
+                                    FontSize="Caption"
+                                    Text="{x:Static resource:AppResources.Immature}"
+                                    TextColor="Black" />
+                                <Span
+                                    FontSize="Caption"
+                                    Text=":"
+                                    TextColor="Black" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label
+                        Grid.Row="4"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="3"
+                        HorizontalOptions="End"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span
+                                    FontSize="Default"
+                                    Text="{Binding Balance.ImmatureInteger}"
+                                    TextColor="Black" />
+                                <Span
+                                    FontSize="Caption"
+                                    Text="."
+                                    TextColor="Black" />
+                                <Span
+                                    FontSize="Caption"
+                                    Text="{Binding Balance.ImmatureDecimals}"
+                                    TextColor="Black" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label
+                        Grid.Row="5"
+                        Grid.Column="0"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span
+                                    FontSize="Caption"
+                                    Text="{x:Static resource:AppResources.Unconfirmed}"
+                                    TextColor="Black" />
+                                <Span
+                                    FontSize="Caption"
+                                    Text=":"
+                                    TextColor="Black" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label
+                        Grid.Row="5"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="3"
+                        HorizontalOptions="End"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span
+                                    FontSize="Default"
+                                    Text="{Binding Balance.UnconfirmedInteger}"
+                                    TextColor="Black" />
+                                <Span
+                                    FontSize="Caption"
+                                    Text="."
+                                    TextColor="Black" />
+                                <Span
+                                    FontSize="Caption"
+                                    Text="{Binding Balance.UnconfirmedDecimals}"
+                                    TextColor="Black" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label
+                        Grid.Row="6"
+                        Grid.Column="0"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span
+                                    FontSize="Caption"
+                                    Text="{x:Static resource:AppResources.Locked}"
+                                    TextColor="Black" />
+                                <Span
+                                    FontSize="Caption"
+                                    Text=":"
+                                    TextColor="Black" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label
+                        Grid.Row="6"
+                        Grid.Column="1"
+                        Grid.ColumnSpan="3"
+                        HorizontalOptions="End"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span
+                                    FontSize="Default"
+                                    Text="{Binding Balance.LockedInteger}"
+                                    TextColor="Black" />
+                                <Span
+                                    FontSize="Caption"
+                                    Text="."
+                                    TextColor="Black" />
+                                <Span
+                                    FontSize="Caption"
+                                    Text="{Binding Balance.LockedDecimals}"
+                                    TextColor="Black" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </Grid>
+            </Frame>
             <CollectionView
                 Grid.Row="3"
                 Grid.Column="0"

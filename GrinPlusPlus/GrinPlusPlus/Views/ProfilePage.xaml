@@ -3,20 +3,25 @@
     x:Class="GrinPlusPlus.Views.ProfilePage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:c="clr-namespace:GrinPlusPlus.Converters"
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     xmlns:zxcm="clr-namespace:ZXing.Common;assembly=zxing"
     xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="Black"
-    IconImageSource="baseline_qr_code_white_24.png">
+    BackgroundColor="Black">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <c:AvailabilityColorConverter x:Key="AvailabilityColorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <Grid
             Margin="0"
             ColumnSpacing="0"
             RowSpacing="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="210" />
+                <RowDefinition Height="300" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="75" />
                 <RowDefinition Height="1" />
@@ -32,8 +37,7 @@
                 <Label
                     HorizontalOptions="Center"
                     Text="{x:Static resource:AppResources.QRCode}"
-                    TextColor="Gray"
-                    TextTransform="Uppercase" />
+                    TextColor="Gray" />
                 <Frame
                     Padding="10"
                     BackgroundColor="#191919"
@@ -42,12 +46,12 @@
                     <zxing:ZXingBarcodeImageView
                         BarcodeFormat="QR_CODE"
                         BarcodeValue="{Binding SlatepackAddress}"
-                        HeightRequest="140"
-                        WidthRequest="140">
+                        HeightRequest="200"
+                        WidthRequest="200">
                         <zxing:ZXingBarcodeImageView.BarcodeOptions>
                             <zxcm:EncodingOptions
-                                Width="260"
-                                Height="260"
+                                Width="360"
+                                Height="360"
                                 Margin="0"
                                 PureBarcode="True" />
                         </zxing:ZXingBarcodeImageView.BarcodeOptions>
@@ -62,36 +66,31 @@
                 <Label
                     HorizontalOptions="Center"
                     Text="{x:Static resource:AppResources.SlatepackAddress}"
-                    TextColor="Gray"
-                    TextTransform="Uppercase" />
+                    TextColor="Gray" />
                 <Button
                     BackgroundColor="#191919"
                     Command="{Binding CopyAddressCommand}"
+                    CornerRadius="5"
                     Text="{Binding SlatepackAddress}"
-                    TextColor="{Binding AddressColor}"
-                    TextTransform="Uppercase" />
-                <Label
-                    HorizontalOptions="Center"
-                    Text="{x:Static resource:AppResources.TabToCopy}"
-                    TextColor="Gray" />
-                <Label HorizontalOptions="Center" Text="{Binding Availability}" />
-            </StackLayout>
-            <StackLayout
-                Grid.Row="2"
-                Grid.Column="0"
-                Padding="50,0,50,0"
-                BackgroundColor="Black">
-                <Button
-                    BackgroundColor="#0C0C0C"
-                    Command="{Binding ShareAddressCommand}"
-                    HeightRequest="44"
-                    Text="{x:Static resource:AppResources.ShareAddress}"
-                    TextColor="Yellow" />
+                    TextColor="{Binding Reachable, Converter={StaticResource AvailabilityColorConverter}}"
+                    TextTransform="Lowercase" />
+                <Label HorizontalOptions="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="(" TextColor="Gray" />
+
+                            <Span Text="{x:Static resource:AppResources.TabToCopy}" TextColor="Gray" />
+                            <Span Text=")" TextColor="Gray" />
+
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
             </StackLayout>
             <BoxView
                 Grid.Row="3"
                 Grid.Column="0"
-                BackgroundColor="{Binding AddressColor}"
+                BackgroundColor="{Binding Reachable, Converter={StaticResource AvailabilityColorConverter}}"
                 HeightRequest="1" />
         </Grid>
     </ContentPage.Content>

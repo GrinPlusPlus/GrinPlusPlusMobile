@@ -367,7 +367,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete Wallet.
+        ///   Looks up a localized string similar to Delete wallet.
         /// </summary>
         internal static string DeleteWallet {
             get {
@@ -1132,7 +1132,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SPENDABLE.
+        ///   Looks up a localized string similar to Spendable.
         /// </summary>
         internal static string Spendable {
             get {

@@ -13,7 +13,14 @@ namespace GrinPlusPlus.ViewModels
 {
     public class ProfilePageViewModel : ViewModelBase
     {
-        private bool _reachable;
+        private string _availability = string.Empty;
+        public string Availability
+        {
+            get { return _availability; }
+            set { SetProperty(ref _availability, value); }
+        }
+
+        private bool _reachable = Settings.Reachable;
         public bool Reachable
         {
             get { return _reachable; }
@@ -27,32 +34,11 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _slatepackAddress, value); }
         }
 
-        private string _torAddress = string.Empty;
-        public string TorAddress
-        {
-            get { return _torAddress; }
-            set { SetProperty(ref _torAddress, value); }
-        }
-
-        private string _addressColor = "White";
-        public string AddressColor
-        {
-            get { return _addressColor; }
-            set { SetProperty(ref _addressColor, value); }
-        }
-
         public DelegateCommand CopyAddressCommand => new DelegateCommand(CopyAddress);
 
         private async void CopyAddress()
         {
             await Clipboard.SetTextAsync(SlatepackAddress);
-        }
-
-        private string _availability = string.Empty;
-        public string Availability
-        {
-            get { return _availability; }
-            set { SetProperty(ref _availability, value); }
         }
 
         public DelegateCommand ShareAddressCommand => new DelegateCommand(ShareAddress);
@@ -71,56 +57,7 @@ namespace GrinPlusPlus.ViewModels
         {
             MainThread.BeginInvokeOnMainThread(async () =>
             {
-                TorAddress = await SecureStorage.GetAsync("tor_address");
                 SlatepackAddress = await SecureStorage.GetAsync("slatepack_address");
-            });
-
-            Device.StartTimer(TimeSpan.FromSeconds(30), () =>
-            {
-                if (Settings.IsLoggedIn == false)
-                {
-                    return false;
-                }
-
-                UpdateAvailability();
-
-                return true;
-            });
-        }
-
-        void UpdateAvailability()
-        {
-            MainThread.BeginInvokeOnMainThread(async () =>
-            {
-
-                if (string.IsNullOrEmpty(TorAddress))
-                {
-                    Reachable = false;
-                    AddressColor = "Orange";
-                    Availability = AppResources.ResourceManager.GetString("WalletReachableNot");
-                    return;
-                }
-                try
-                {
-                    Reachable = await DataProvider.CheckAddressAvailability(TorAddress, Settings.GrinChckAPIURL);
-                    if (Reachable)
-                    {
-                        AddressColor = "Green";
-                        Availability = AppResources.ResourceManager.GetString("WalletReachable");
-                    }
-                    else
-                    {
-                        AddressColor = "Orange";
-                        Availability = AppResources.ResourceManager.GetString("WalletReachableNot");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Reachable = false;
-                    AddressColor = "Orange";
-                    Availability = AppResources.ResourceManager.GetString("WalletReachableNot");
-                    Console.WriteLine(ex.Message);
-                }
             });
         }
     }
