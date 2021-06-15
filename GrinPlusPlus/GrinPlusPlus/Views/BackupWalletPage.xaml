@@ -29,18 +29,20 @@
                 </Entry.Effects>
             </Entry>
             <Button
-                BackgroundColor="Transparent"
+                BackgroundColor="#0C0C0C"
                 Command="{Binding BackupWalletCommand}"
-                HeightRequest="44"
+                CornerRadius="5"
+                HeightRequest="48"
                 IsEnabled="{Binding IsIdle}"
                 Text="{x:Static resource:AppResources.GetWalletSeed}"
-                TextColor="Yellow" />
+                TextColor="White"
+                TextTransform="None" />
             <Editor
                 Margin="0,20,0,0"
                 AutoSize="Disabled"
                 BackgroundColor="#090909"
                 FontSize="Body"
-                HeightRequest="120"
+                HeightRequest="140"
                 IsReadOnly="True"
                 IsSpellCheckEnabled="False"
                 IsTextPredictionEnabled="False"

@@ -6,6 +6,7 @@ using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
@@ -13,36 +14,104 @@ using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
-
 namespace GrinPlusPlus.ViewModels
 {
     public class WalletPageViewModel : ViewModelBase
     {
-        private ObservableCollection<Transaction> _transactions = new ObservableCollection<Transaction>();
-        public ObservableCollection<Transaction> Transactions
+        private ObservableCollection<Transaction> _unfinalizedTransactions = new ObservableCollection<Transaction>();
+        public ObservableCollection<Transaction> UnfinalizedTransactions
         {
-            get { return _transactions; }
-            set { SetProperty(ref _transactions, value); }
+            get
+            {
+                return _unfinalizedTransactions;
+            }
+            set
+            {
+                SetProperty(ref _unfinalizedTransactions, value);
+            }
+        }
+
+        private ObservableCollection<Transaction> _transactionHistory = new ObservableCollection<Transaction>();
+        public ObservableCollection<Transaction> TransactionHistory
+        {
+            get
+            {
+                return _transactionHistory;
+            }
+            set
+            {
+                SetProperty(ref _transactionHistory, value);
+            }
         }
 
         private Balance _balance;
+
+        private int _currentSelectedFilterIndex = 0;
+        public int CurrentSelectedFilterIndex
+        {
+            get
+            {
+                return _currentSelectedFilterIndex;
+            }
+            set
+            {
+                SetProperty(ref _currentSelectedFilterIndex, value);
+            }
+        }
+
+        private ObservableCollection<TransactionStatus> _transactionStatuseOptions = new ObservableCollection<TransactionStatus>()
+        {
+            new TransactionStatus() { Label = AppResources.ResourceManager.GetString("All"), Filter = "Keelung"},
+            new TransactionStatus() { Label = AppResources.ResourceManager.GetString("Pending"), Filter = "Keelung"},
+            new TransactionStatus() { Label = AppResources.ResourceManager.GetString("Received"), Filter = "Keelung"},
+            new TransactionStatus() { Label = AppResources.ResourceManager.GetString("Sent"), Filter = "Keelung"},
+            new TransactionStatus() { Label = AppResources.ResourceManager.GetString("Cancelled"), Filter = "Keelung"},
+            new TransactionStatus() { Label = AppResources.ResourceManager.GetString("Coinbase"), Filter = "Keelung"},
+        };
+        public ObservableCollection<TransactionStatus> TransactionStatusOptions
+        { 
+            get
+            {
+                return _transactionStatuseOptions;
+            }
+            set
+            {
+                SetProperty(ref _transactionStatuseOptions, value);
+            }
+        }
+
         public Balance Balance
         {
-            get { return _balance; }
-            set { SetProperty(ref _balance, value); }
+            get
+            {
+                return _balance;
+            }
+            set
+            {
+                SetProperty(ref _balance, value);
+            }
         }
 
         private bool _userCanSend = false;
         public bool UserCanSend
         {
-            get { return _userCanSend; }
-            set { SetProperty(ref _userCanSend, value); }
+            get
+            {
+                return _userCanSend;
+            }
+            set
+            {
+                SetProperty(ref _userCanSend, value);
+            }
         }
 
         private Transaction _selectedTransaction;
         public Transaction SelectedTransaction
         {
-            get { return _selectedTransaction; }
+            get
+            {
+                return _selectedTransaction;
+            }
             set
             {
                 SetProperty(ref _selectedTransaction, value);
@@ -52,35 +121,62 @@ namespace GrinPlusPlus.ViewModels
         private string _torAddress = string.Empty;
         public string TorAddress
         {
-            get { return _torAddress; }
-            set { SetProperty(ref _torAddress, value); }
+            get
+            {
+                return _torAddress;
+            }
+            set
+            {
+                SetProperty(ref _torAddress, value);
+            }
         }
 
         private string _wallet = "";
         public string Wallet
         {
-            get { return _wallet; }
-            set { SetProperty(ref _wallet, value); }
+            get
+            {
+                return _wallet;
+            }
+            set
+            {
+                SetProperty(ref _wallet, value);
+            }
         }
-
 
         private string _statusIcon = "baseline_wifi_white_24.png";
         public string StatusIcon
         {
-            get { return _statusIcon; }
-            set { SetProperty(ref _statusIcon, value); }
+            get
+            {
+                return _statusIcon;
+            }
+            set
+            {
+                SetProperty(ref _statusIcon, value);
+            }
         }
 
         private string _slatepackAddress = string.Empty;
         public string SlatepackAddress
         {
-            get { return _slatepackAddress; }
-            set { SetProperty(ref _slatepackAddress, value); }
+            get
+            {
+                return _slatepackAddress;
+            }
+            set
+            {
+                SetProperty(ref _slatepackAddress, value);
+            }
         }
 
         public DelegateCommand OpenTransactionDetailsCommand => new DelegateCommand(OpenTransactionDetails);
 
-        public DelegateCommand<object> CancelTransactionClickedCommand { get; private set; }
+        public DelegateCommand<object> CancelTransactionClickedCommand
+        {
+            get;
+            private set;
+        }
 
         public DelegateCommand SendButtonClickedCommand => new DelegateCommand(SendButtonClicked);
 
@@ -99,41 +195,41 @@ namespace GrinPlusPlus.ViewModels
             });
         }
 
+        public DelegateCommand SelectedFilterIndexChangedCommand => new DelegateCommand(SelectedFilterIndexChanged);
+        private async void SelectedFilterIndexChanged()
+        {
+            new NotImplementedException();
+        }
+
         public override async void OnNavigatedTo(INavigationParameters parameters)
         {
-            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
-            {
+            Device.StartTimer(TimeSpan.FromSeconds(5), () => {
                 if (Settings.IsLoggedIn == false)
                 {
                     return false;
                 }
 
-                MainThread.BeginInvokeOnMainThread(async () =>
-                {
+                MainThread.BeginInvokeOnMainThread(async () => {
                     await GetWalletBalance();
                 });
 
                 return true;
             });
 
-            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
-            {
+            Device.StartTimer(TimeSpan.FromSeconds(5), () => {
                 if (Settings.IsLoggedIn == false)
                 {
                     return false;
                 }
 
-                MainThread.BeginInvokeOnMainThread(async () =>
-                {
+                MainThread.BeginInvokeOnMainThread(async () => {
                     await LoadTransactions();
                 });
 
                 return true;
             });
 
-
-            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
-            {
+            Device.StartTimer(TimeSpan.FromSeconds(5), () => {
                 if (Settings.IsLoggedIn == false)
                 {
                     return false;
@@ -156,8 +252,8 @@ namespace GrinPlusPlus.ViewModels
             SlatepackAddress = await SecureStorage.GetAsync("slatepack_address");
         }
 
-        public WalletPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
-            : base(navigationService, dataProvider, dialogService, pageDialogService)
+        public WalletPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, 
+            IPageDialogService pageDialogService) : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
             Balance = new Balance
             {
@@ -172,18 +268,15 @@ namespace GrinPlusPlus.ViewModels
 
             CancelTransactionClickedCommand = new DelegateCommand<object>(CancelTransactionClicked);
 
-            MainThread.BeginInvokeOnMainThread(async () =>
-            {
+            MainThread.BeginInvokeOnMainThread(async () => {
                 await GetWalletBalance();
             });
 
-            MainThread.BeginInvokeOnMainThread(async () =>
-            {
+            MainThread.BeginInvokeOnMainThread(async () => {
                 await LoadTransactions();
             });
 
-            Device.StartTimer(TimeSpan.FromSeconds(30), () =>
-            {
+            Device.StartTimer(TimeSpan.FromSeconds(30), () => {
                 if (Settings.IsLoggedIn == false)
                 {
                     return false;
@@ -197,8 +290,7 @@ namespace GrinPlusPlus.ViewModels
 
         void UpdateAvailability()
         {
-            MainThread.BeginInvokeOnMainThread(async () =>
-            {
+            MainThread.BeginInvokeOnMainThread(async () => {
 
                 if (string.IsNullOrEmpty(TorAddress))
                 {
@@ -221,11 +313,8 @@ namespace GrinPlusPlus.ViewModels
             try
             {
                 var balance = await DataProvider.GetWalletBalance(await SecureStorage.GetAsync("token"));
-                if (Balance.Total != balance.Total ||
-                    Balance.Spendable != balance.Spendable ||
-                    Balance.Immature != balance.Immature ||
-                    Balance.Unconfirmed != balance.Unconfirmed ||
-                    Balance.Locked != balance.Locked)
+                if (Balance.Total != balance.Total || Balance.Spendable != balance.Spendable || Balance.Immature != balance.Immature || 
+                    Balance.Unconfirmed != balance.Unconfirmed || Balance.Locked != balance.Locked)
                 {
                     Balance = balance;
                     UserCanSend = Balance.Spendable > 0;
@@ -241,35 +330,20 @@ namespace GrinPlusPlus.ViewModels
         {
             try
             {
-                var transactions = await DataProvider.GetTransactions(await SecureStorage.GetAsync("token"),
-                    new string[] { "SENDING_NOT_FINALIZED", "RECEIVING_IN_PROGRESS", "SENDING_FINALIZED" });
+                var transactions = await DataProvider.GetTransactions(await SecureStorage.GetAsync("token"), new string[] {
+                  "SENDING_NOT_FINALIZED",
+                  "RECEIVING_IN_PROGRESS",
+                  "SENDING_FINALIZED",
+                  "COINBASE",
+                  "SENT",
+                  "RECEIVED",
+                  "SENT_CANCELED",
+                  "RECEIVED_CANCELED"
+                });
 
-                if (Transactions.ToList().Count != transactions.Count)
-                {
-                    Transactions = new ObservableCollection<Transaction>(transactions.ToArray());
-                }
-                else
-                {
-                    foreach (var transaction in transactions)
-                    {
-                        try
-                        {
-                            var current = Transactions.First<Transaction>(t => t.Id.Equals(transaction.Id));
-                            if (current != null)
-                            {
-                                if (!current.Status.Equals(transaction.Status))
-                                {
-                                    Transactions.Remove(current);
-                                    Transactions.Add(transaction);
-                                }
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            Console.WriteLine(ex.Message);
-                        }
-                    }
-                }
+                var unfinalized = transactions.FindAll(t => t.Status.ToLower().Contains("not finalized"));
+                LoadUnfinalizedTransactions(unfinalized);
+                LoadTransactionHistory(transactions.Except(unfinalized).ToList());
             }
             catch (Exception ex)
             {
@@ -277,11 +351,76 @@ namespace GrinPlusPlus.ViewModels
             }
         }
 
+        private void LoadUnfinalizedTransactions(List<Transaction> transactions)
+        {
+            if (UnfinalizedTransactions.ToList().Count != transactions.Count)
+            {
+                UnfinalizedTransactions = new ObservableCollection<Transaction>(transactions.ToArray());
+            }
+            else
+            {
+                foreach (var transaction in transactions)
+                {
+                    try
+                    {
+                        var current = UnfinalizedTransactions.First<Transaction>(t => t.Id.Equals(transaction.Id));
+                        if (current != null)
+                        {
+                            if (!current.Status.Equals(transaction.Status))
+                            {
+                                UnfinalizedTransactions.Remove(current);
+                                UnfinalizedTransactions.Add(transaction);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                }
+            }
+        }
+
+        private void LoadTransactionHistory(List<Transaction> transactions)
+        {
+            if (TransactionHistory.ToList().Count != transactions.Count)
+            {
+                TransactionHistory = new ObservableCollection<Transaction>(transactions.ToArray());
+            }
+            else
+            {
+                foreach (var transaction in transactions)
+                {
+                    try
+                    {
+                        var current = TransactionHistory.First<Transaction>(t => t.Id.Equals(transaction.Id));
+                        if (current != null)
+                        {
+                            if (!current.Status.Equals(transaction.Status))
+                            {
+                                TransactionHistory.Remove(current);
+                                TransactionHistory.Add(transaction);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                }
+            }
+        }
+
         async void SendButtonClicked()
         {
             if (UserCanSend)
             {
-                await NavigationService.NavigateAsync("SetAmountPage", new NavigationParameters { { "spendable", Balance.Spendable / Math.Pow(10, 9) } });
+                await NavigationService.NavigateAsync("SetAmountPage", new NavigationParameters {
+                  {
+                    "spendable",
+                    Balance.Spendable / Math.Pow(10, 9)
+                  }
+                });
             }
         }
 
@@ -289,7 +428,6 @@ namespace GrinPlusPlus.ViewModels
         {
             await NavigationService.NavigateAsync("ReceiveTransactionPage");
         }
-
 
         async void FinalizeTransactionClicked()
         {
@@ -319,8 +457,19 @@ namespace GrinPlusPlus.ViewModels
         async void OpenTransactionDetails()
         {
             if (SelectedTransaction is null) return;
-            await NavigationService.NavigateAsync("TransactionDetailsPage", new NavigationParameters { { "transaction", SelectedTransaction } });
+            await NavigationService.NavigateAsync("TransactionDetailsPage", new NavigationParameters {
+                {
+                  "transaction",
+                  SelectedTransaction
+                }
+              });
             SelectedTransaction = null;
+        }
+
+        public class TransactionStatus
+        {
+            public string Label { get; set; }
+            public string Filter { get; set; }
         }
     }
 }

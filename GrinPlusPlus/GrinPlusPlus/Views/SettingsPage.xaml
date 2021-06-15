@@ -6,9 +6,17 @@
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    Title="{x:Static resource:AppResources.Settings}"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="Black"
     IconImageSource="baseline_settings_applications_white_24.png">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Command="{Binding LogoutCommand}"
+            Order="Primary"
+            Priority="0"
+            Text="{x:Static resource:AppResources.Close}" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid
             Margin="0,10,0,0"
@@ -166,19 +174,15 @@
             <Button
                 Grid.Row="9"
                 Grid.Column="0"
-                Margin="20,10,0,0"
+                Grid.ColumnSpan="2"
+                Margin="20,10,20,0"
                 BackgroundColor="#0C0C0C"
                 Command="{Binding OpenBackupWalletPageCommand}"
+                CornerRadius="5"
                 Text="{x:Static resource:AppResources.BackupWallet}"
-                TextColor="Brown" />
-            <Button
-                Grid.Row="9"
-                Grid.Column="1"
-                Margin="5,10,20,0"
-                BackgroundColor="#0C0C0C"
-                Command="{Binding LogoutCommand}"
-                Text="Close"
-                TextColor="Orange" />
+                TextColor="Orange"
+                TextTransform="None"
+                WidthRequest="50" />
             <StackLayout
                 Grid.Row="10"
                 Grid.Column="0"
@@ -187,7 +191,7 @@
                 VerticalOptions="End">
                 <Label
                     HorizontalOptions="Center"
-                    Text="Grin++ v0.0.1"
+                    Text="Grin++ v0.3.0"
                     TextColor="#333333" />
             </StackLayout>
         </Grid>

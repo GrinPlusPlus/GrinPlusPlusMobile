@@ -48,7 +48,7 @@
                     IsEnabled="{Binding Password, Converter={xct:IsNotNullOrEmptyConverter}}"
                     IsVisible="{Binding IsBusy, Converter={xct:InvertedBoolConverter}}"
                     Text="{x:Static resource:AppResources.Open}"
-                    TextColor="Yellow"
+                    TextColor="White"
                     TextTransform="None" />
                 <ActivityIndicator
                     HeightRequest="40"

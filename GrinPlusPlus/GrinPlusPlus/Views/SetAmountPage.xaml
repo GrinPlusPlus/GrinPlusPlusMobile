@@ -9,33 +9,8 @@
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     prism:ViewModelLocator.AutowireViewModel="True"
     sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromRight"
-    BackgroundColor="{StaticResource BackgroundColor}"
-    NavigationPage.HasBackButton="False">
-    <NavigationPage.TitleView>
-        <Label>
-            <Label.FormattedText>
-                <FormattedString>
-                    <Span
-                        FontSize="Caption"
-                        Text="{x:Static resource:AppResources.Spendable}"
-                        TextColor="{StaticResource TextColor}" />
-                    <Span
-                        FontSize="Caption"
-                        Text=": "
-                        TextColor="{StaticResource TextColor}" />
-                    <Span
-                        FontAttributes="Bold"
-                        FontSize="Body"
-                        Text="{Binding Spendable, StringFormat='{}{0:N9}'}"
-                        TextColor="{StaticResource TextColor}" />
-                    <Span
-                        FontSize="Caption"
-                        Text=" ツ"
-                        TextColor="{StaticResource TextColor}" />
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
-    </NavigationPage.TitleView>
+    BackgroundColor="{StaticResource BackgroundColor}">
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <Color x:Key="BackgroundColor">#000000</Color>
@@ -126,10 +101,12 @@
                 Margin="30,0,30,0"
                 BackgroundColor="#0C0C0C"
                 Command="{Binding ContinueButtonClickedCommand}"
+                CornerRadius="5"
                 HeightRequest="44"
                 IsEnabled="{Binding IsValid}"
                 Text="{x:Static resource:AppResources.Continue}"
-                TextColor="Yellow" />
+                TextColor="White"
+                TextTransform="None" />
             <Grid
                 Grid.Row="4"
                 Grid.Column="0"

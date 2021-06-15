@@ -37,21 +37,16 @@
                     <xct:RemoveBorderEffect />
                 </Editor.Effects>
             </Editor>
-            <Button
-                Margin="20,0,20,0"
-                BackgroundColor="#0C0C0C"
-                Command="{Binding PasteFromClipboardCommand}"
-                HeightRequest="44"
-                ImageSource="baseline_content_paste_white_18.png"
-                Text="{x:Static resource:AppResources.PasteFromClipboard}"
-                TextColor="White" />
+
             <Button
                 Margin="20,0,20,20"
                 BackgroundColor="#0C0C0C"
                 Command="{Binding ReceiveTransactionCommand}"
+                CornerRadius="5"
                 HeightRequest="44"
                 Text="{x:Static resource:AppResources.Receive}"
-                TextColor="Yellow"
+                TextColor="White"
+                TextTransform="None"
                 VerticalOptions="EndAndExpand" />
         </StackLayout>
     </ContentPage.Content>

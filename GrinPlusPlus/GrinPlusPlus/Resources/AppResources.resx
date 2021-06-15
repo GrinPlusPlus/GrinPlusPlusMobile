@@ -132,6 +132,9 @@
   <data name="AlignQRCode" xml:space="preserve">
     <value>Align the QR within the frame</value>
   </data>
+  <data name="All" xml:space="preserve">
+    <value>All</value>
+  </data>
   <data name="Amount" xml:space="preserve">
     <value>Amount</value>
   </data>
@@ -372,6 +375,9 @@
   <data name="PasteFromClipboard" xml:space="preserve">
     <value>Paste from Clipboard</value>
   </data>
+  <data name="Pending" xml:space="preserve">
+    <value>Pending</value>
+  </data>
   <data name="PickSendingMethod" xml:space="preserve">
     <value>Select Sending Method</value>
   </data>
@@ -423,6 +429,9 @@
   <data name="SeedLength" xml:space="preserve">
     <value>Seed Length</value>
   </data>
+  <data name="SelectStatus" xml:space="preserve">
+    <value>Select status</value>
+  </data>
   <data name="Send" xml:space="preserve">
     <value>Send</value>
   </data>
@@ -437,6 +446,9 @@
   </data>
   <data name="SetAmount" xml:space="preserve">
     <value>Set Amount</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
   </data>
   <data name="Share" xml:space="preserve">
     <value>Share</value>
@@ -498,6 +510,9 @@
   <data name="Total" xml:space="preserve">
     <value>Total</value>
   </data>
+  <data name="TransactionHistory" xml:space="preserve">
+    <value>Transaction history</value>
+  </data>
   <data name="Transactions" xml:space="preserve">
     <value>Transactions</value>
   </data>
@@ -509,6 +524,9 @@
   </data>
   <data name="Unconfirmed" xml:space="preserve">
     <value>Unconfirmed</value>
+  </data>
+  <data name="UnfinalizedTransactions" xml:space="preserve">
+    <value>Unfinalized transactions</value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>Username</value>

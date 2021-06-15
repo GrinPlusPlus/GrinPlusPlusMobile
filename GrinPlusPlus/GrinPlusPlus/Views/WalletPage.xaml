@@ -8,9 +8,8 @@
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     x:Name="Wallet"
     Title="{Binding Wallet}"
-    Padding="10"
+    Padding="10,0,10,5"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="Black"
     IconImageSource="outline_account_balance_wallet_white_24.png">
     <NavigationPage.TitleView>
         <Grid Margin="0" Padding="0">
@@ -27,7 +26,7 @@
             <Label
                 Grid.Row="0"
                 Grid.Column="1"
-                FontSize="21"
+                FontSize="18"
                 Text="{Binding Wallet}"
                 TextColor="White"
                 VerticalOptions="Center"
@@ -37,19 +36,63 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <c:RelativeDateTimeConverter x:Key="RelativeDateTimeConverter" />
-            <Color x:Key="CellBackgroundColor">#161616</Color>
-            <Color x:Key="RepostSwipeItemBackgroundColor">
-                #0074C9
-            </Color>
-            <Color x:Key="FinalizeSwipeItemBackgroundColor">#00A721</Color>
-            <Color x:Key="CancelSwipeItemBackgroundColor">#C92400</Color>
+            <Color x:Key="CellBackgroundColor">#191919</Color>
             <Style x:Key="FrameStyle" TargetType="Frame">
                 <Setter Property="BackgroundColor" Value="{StaticResource CellBackgroundColor}" />
-                <Setter Property="CornerRadius" Value="4" />
+                <Setter Property="CornerRadius" Value="5" />
                 <Setter Property="HasShadow" Value="False" />
-                <Setter Property="Padding" Value="15" />
+                <Setter Property="Padding" Value="14" />
                 <Setter Property="Margin" Value="1" />
             </Style>
+            <DataTemplate x:Key="TransactionItemTemplate">
+                <Frame Style="{StaticResource FrameStyle}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="6*" />
+                            <ColumnDefinition Width="4*" />
+                        </Grid.ColumnDefinitions>
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            FontSize="Default"
+                            Text="{Binding Status}"
+                            TextColor="WhiteSmoke"
+                            VerticalOptions="End" />
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            FontSize="Caption"
+                            HorizontalOptions="End"
+                            Text="{Binding Date, Converter={StaticResource RelativeDateTimeConverter}}"
+                            TextColor="Gray"
+                            VerticalOptions="End" />
+                        <Label
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            VerticalOptions="Center">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span
+                                        FontSize="18"
+                                        Text="{Binding Amount}"
+                                        TextColor="WhiteSmoke" />
+                                    <Span Text="." TextColor="WhiteSmoke" />
+                                    <Span Text="{Binding Decimals}" TextColor="WhiteSmoke" />
+                                    <Span
+                                        FontSize="12"
+                                        Text="  ツ"
+                                        TextColor="WhiteSmoke" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </Grid>
+                </Frame>
+            </DataTemplate>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -72,13 +115,12 @@
         <Grid
             Margin="0"
             ColumnSpacing="0"
-            RowSpacing="0">
+            RowSpacing="10">
             <Grid.RowDefinitions>
-                <RowDefinition Height="180" />
-                <RowDefinition Height="30" />
+                <RowDefinition Height="160" />
+                <RowDefinition Height="140" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="30" />
-                <RowDefinition Height="44" />
+                <RowDefinition Height="48" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -86,7 +128,8 @@
             <Frame
                 Grid.Row="0"
                 Grid.Column="0"
-                Padding="15"
+                Margin="8,0,8,0"
+                Padding="15,10,15,10"
                 BackgroundColor="#FFEE00"
                 BorderColor="Transparent"
                 CornerRadius="10">
@@ -99,9 +142,9 @@
                         <RowDefinition Height="50" />
                         <RowDefinition Height="1" />
                         <RowDefinition Height="5" />
-                        <RowDefinition Height="25" />
-                        <RowDefinition Height="25" />
-                        <RowDefinition Height="25" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="20" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="80" />
@@ -111,7 +154,6 @@
                     <Label
                         Grid.Row="0"
                         Grid.Column="0"
-                        FontAttributes="Bold"
                         Text="{x:Static resource:AppResources.Spendable}"
                         TextColor="Black"
                         TextTransform="None"
@@ -121,7 +163,7 @@
                         Grid.Row="0"
                         Grid.RowSpan="3"
                         Grid.Column="3"
-                        FontSize="24"
+                        FontSize="25"
                         HorizontalOptions="End"
                         Text="ツ"
                         TextColor="Black"
@@ -135,7 +177,7 @@
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span
-                                    FontSize="40"
+                                    FontSize="35"
                                     Text="{Binding Balance.SpendableInteger}"
                                     TextColor="Black" />
                                 <Span
@@ -144,7 +186,7 @@
                                     Text="."
                                     TextColor="Black" />
                                 <Span
-                                    FontSize="Medium"
+                                    FontSize="22"
                                     Text="{Binding Balance.SpendableDecimals}"
                                     TextColor="Black" />
                             </FormattedString>
@@ -162,14 +204,8 @@
                         VerticalTextAlignment="Center">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span
-                                    FontSize="Caption"
-                                    Text="{x:Static resource:AppResources.Immature}"
-                                    TextColor="Black" />
-                                <Span
-                                    FontSize="Caption"
-                                    Text=":"
-                                    TextColor="Black" />
+                                <Span Text="{x:Static resource:AppResources.Immature}" TextColor="Black" />
+                                <Span Text=":" TextColor="Black" />
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
@@ -183,15 +219,15 @@
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span
-                                    FontSize="Default"
+                                    FontSize="18"
                                     Text="{Binding Balance.ImmatureInteger}"
                                     TextColor="Black" />
                                 <Span
-                                    FontSize="Caption"
+                                    FontSize="18"
                                     Text="."
                                     TextColor="Black" />
                                 <Span
-                                    FontSize="Caption"
+                                    FontSize="14"
                                     Text="{Binding Balance.ImmatureDecimals}"
                                     TextColor="Black" />
                             </FormattedString>
@@ -204,14 +240,8 @@
                         VerticalTextAlignment="Center">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span
-                                    FontSize="Caption"
-                                    Text="{x:Static resource:AppResources.Unconfirmed}"
-                                    TextColor="Black" />
-                                <Span
-                                    FontSize="Caption"
-                                    Text=":"
-                                    TextColor="Black" />
+                                <Span Text="{x:Static resource:AppResources.Unconfirmed}" TextColor="Black" />
+                                <Span Text=":" TextColor="Black" />
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
@@ -225,15 +255,15 @@
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span
-                                    FontSize="Default"
+                                    FontSize="18"
                                     Text="{Binding Balance.UnconfirmedInteger}"
                                     TextColor="Black" />
                                 <Span
-                                    FontSize="Caption"
+                                    FontSize="18"
                                     Text="."
                                     TextColor="Black" />
                                 <Span
-                                    FontSize="Caption"
+                                    FontSize="14"
                                     Text="{Binding Balance.UnconfirmedDecimals}"
                                     TextColor="Black" />
                             </FormattedString>
@@ -246,14 +276,8 @@
                         VerticalTextAlignment="Center">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span
-                                    FontSize="Caption"
-                                    Text="{x:Static resource:AppResources.Locked}"
-                                    TextColor="Black" />
-                                <Span
-                                    FontSize="Caption"
-                                    Text=":"
-                                    TextColor="Black" />
+                                <Span Text="{x:Static resource:AppResources.Locked}" TextColor="Black" />
+                                <Span Text=":" TextColor="Black" />
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
@@ -267,15 +291,15 @@
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span
-                                    FontSize="Default"
+                                    FontSize="18"
                                     Text="{Binding Balance.LockedInteger}"
                                     TextColor="Black" />
                                 <Span
-                                    FontSize="Caption"
+                                    FontSize="18"
                                     Text="."
                                     TextColor="Black" />
                                 <Span
-                                    FontSize="Caption"
+                                    FontSize="14"
                                     Text="{Binding Balance.LockedDecimals}"
                                     TextColor="Black" />
                             </FormattedString>
@@ -284,131 +308,174 @@
                 </Grid>
             </Frame>
             <CollectionView
-                Grid.Row="3"
+                Grid.Row="1"
                 Grid.Column="0"
-                ItemsSource="{Binding Transactions}"
+                Margin="10,5,10,5"
+                ItemTemplate="{StaticResource TransactionItemTemplate}"
+                ItemsSource="{Binding UnfinalizedTransactions}"
                 SelectedItem="{Binding SelectedTransaction}"
                 SelectionChangedCommand="{Binding OpenTransactionDetailsCommand}"
                 SelectionMode="Single">
+                <CollectionView.Header>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="20" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Source="baseline_outlined_flag_white_20.png"
+                            VerticalOptions="CenterAndExpand"
+                            WidthRequest="18" />
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            FontSize="16"
+                            TextColor="Gray"
+                            VerticalOptions="Center"
+                            VerticalTextAlignment="Center">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{x:Static resource:AppResources.UnfinalizedTransactions}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Picker
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            IsEnabled="False" />
+                    </Grid>
+                </CollectionView.Header>
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
                 </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <SwipeView>
-                            <SwipeView.LeftItems>
-                                <SwipeItems Mode="Reveal" SwipeBehaviorOnInvoked="RemainOpen">
-                                    <SwipeItem
-                                        BackgroundColor="{StaticResource CancelSwipeItemBackgroundColor}"
-                                        Command="{Binding Source={x:Reference Wallet}, Path=BindingContext.CancelTransactionClickedCommand}"
-                                        CommandParameter="{Binding Id}"
-                                        IconImageSource="baseline_cancel_white_18.png"
-                                        IsVisible="{Binding CanBeCanceled}" />
-                                </SwipeItems>
-                            </SwipeView.LeftItems>
-                            <SwipeView.RightItems>
-                                <SwipeItems Mode="Reveal" SwipeBehaviorOnInvoked="RemainOpen">
-                                    <SwipeItem
-                                        BackgroundColor="{StaticResource FinalizeSwipeItemBackgroundColor}"
-                                        Command="{Binding Source={x:Reference Wallet}, Path=BindingContext.FinalizeTransactionClickedCommand}"
-                                        CommandParameter="{Binding Id}"
-                                        IconImageSource="baseline_add_task_white_18"
-                                        IsVisible="{Binding CanBeFinalized}"
-                                        Text="{x:Static resource:AppResources.Finalize}" />
-                                    <SwipeItem
-                                        BackgroundColor="{StaticResource RepostSwipeItemBackgroundColor}"
-                                        Command="{Binding Source={x:Reference Wallet}, Path=BindingContext.RepostTransactionClickedCommand}"
-                                        CommandParameter="{Binding Id}"
-                                        IsVisible="{Binding CanBeReposted}"
-                                        Text="{x:Static resource:AppResources.Repost}" />
-                                </SwipeItems>
-                            </SwipeView.RightItems>
-                            <SwipeView.Content>
-                                <Frame Style="{StaticResource FrameStyle}">
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="Auto" />
-                                            <RowDefinition Height="*" />
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="6*" />
-                                            <ColumnDefinition Width="4*" />
-                                        </Grid.ColumnDefinitions>
-                                        <Label
-                                            Grid.Row="0"
-                                            Grid.Column="0"
-                                            FontSize="Caption"
-                                            Text="{Binding Status}"
-                                            TextColor="WhiteSmoke"
-                                            TextTransform="Uppercase"
-                                            VerticalOptions="End" />
-                                        <Label
-                                            Grid.Row="0"
-                                            Grid.Column="1"
-                                            FontSize="Caption"
-                                            HorizontalOptions="End"
-                                            Text="{Binding Date, Converter={StaticResource RelativeDateTimeConverter}}"
-                                            TextColor="WhiteSmoke"
-                                            VerticalOptions="End" />
-                                        <Label
-                                            Grid.Row="1"
-                                            Grid.Column="0"
-                                            Grid.ColumnSpan="2"
-                                            VerticalOptions="Center">
-                                            <Label.FormattedText>
-                                                <FormattedString>
-                                                    <Span
-                                                        FontSize="Medium"
-                                                        Text="{Binding Amount}"
-                                                        TextColor="White" />
-                                                    <Span
-                                                        FontSize="Body"
-                                                        Text="."
-                                                        TextColor="White" />
-                                                    <Span
-                                                        FontSize="Body"
-                                                        Text="{Binding Decimals}"
-                                                        TextColor="White" />
-                                                    <Span
-                                                        FontSize="Caption"
-                                                        Text=" ツ"
-                                                        TextColor="White" />
-                                                </FormattedString>
-                                            </Label.FormattedText>
-                                        </Label>
-                                    </Grid>
-                                </Frame>
-                            </SwipeView.Content>
-                        </SwipeView>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
                 <CollectionView.EmptyView />
             </CollectionView>
-            <Grid Grid.Row="5" Grid.Column="0">
+            <CollectionView
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="10,5,10,5"
+                ItemTemplate="{StaticResource TransactionItemTemplate}"
+                ItemsSource="{Binding TransactionHistory}"
+                SelectedItem="{Binding SelectedTransaction}"
+                SelectionChangedCommand="{Binding OpenTransactionDetailsCommand}"
+                SelectionMode="Single">
+                <CollectionView.Header>
+                    <Grid
+                        Margin="0"
+                        Padding="0"
+                        VerticalOptions="End">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="38" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Image
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Source="baseline_history_white_20.png"
+                            VerticalOptions="Center"
+                            WidthRequest="18" />
+                        <Label
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            FontSize="16"
+                            TextColor="Gray"
+                            VerticalOptions="Center"
+                            VerticalTextAlignment="Center">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{x:Static resource:AppResources.TransactionHistory}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Picker
+                            Title="{x:Static resource:AppResources.SelectStatus}"
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            FontSize="Body"
+                            HorizontalOptions="End"
+                            HorizontalTextAlignment="Center"
+                            ItemDisplayBinding="{Binding Label}"
+                            ItemsSource="{Binding TransactionStatusOptions}"
+                            SelectedIndex="{Binding CurrentSelectedFilterIndex}"
+                            TextColor="Yellow"
+                            TitleColor="White" />
+                    </Grid>
+                </CollectionView.Header>
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.EmptyView />
+            </CollectionView>
+            <Grid
+                Grid.Row="3"
+                Grid.Column="0"
+                VerticalOptions="Center">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="48" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="48" />
+                    <ColumnDefinition Width="48" />
                     <ColumnDefinition Width="5*" />
                     <ColumnDefinition Width="5*" />
                 </Grid.ColumnDefinitions>
                 <Button
                     Grid.Row="0"
                     Grid.Column="0"
-                    BackgroundColor="#0C0C0C"
-                    Command="{Binding SendButtonClickedCommand}"
-                    HeightRequest="44"
-                    IsEnabled="{Binding UserCanSend}"
-                    Text="{x:Static resource:AppResources.Send}"
-                    TextColor="Yellow" />
+                    BackgroundColor="Black"
+                    Command="{prism:NavigateTo 'SettingsPage',
+                                               UseModalNavigation=False,
+                                               Animated=True}"
+                    HeightRequest="48"
+                    ImageSource="baseline_settings_applications_white_24.png"
+                    VerticalOptions="Center" />
                 <Button
                     Grid.Row="0"
                     Grid.Column="1"
-                    BackgroundColor="#0C0C0C"
+                    BackgroundColor="Black"
+                    Command="{prism:NavigateTo 'StatusPage',
+                                               UseModalNavigation=False,
+                                               Animated=True}"
+                    HeightRequest="50"
+                    ImageSource="baseline_network_check_white_24.png"
+                    VerticalOptions="Center" />
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    BackgroundColor="Black"
+                    Command="{Binding SendButtonClickedCommand}"
+                    FontSize="16"
+                    HeightRequest="48"
+                    HorizontalOptions="End"
+                    ImageSource="baseline_north_east_white_20.png"
+                    IsEnabled="{Binding UserCanSend}"
+                    Text="{x:Static resource:AppResources.Send}"
+                    TextColor="White"
+                    TextTransform="None"
+                    VerticalOptions="Center" />
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="3"
+                    BackgroundColor="Black"
                     Command="{Binding ReceiveButtonClickedCommand}"
-                    HeightRequest="44"
+                    FontSize="16"
+                    HeightRequest="48"
+                    HorizontalOptions="End"
+                    ImageSource="baseline_south_west_white_20.png"
                     Text="{x:Static resource:AppResources.Receive}"
-                    TextColor="Yellow" />
+                    TextColor="White"
+                    TextTransform="None"
+                    VerticalOptions="Center" />
             </Grid>
         </Grid>
     </ContentPage.Content>

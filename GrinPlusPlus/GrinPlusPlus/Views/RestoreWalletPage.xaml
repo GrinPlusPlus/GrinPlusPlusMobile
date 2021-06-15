@@ -107,7 +107,7 @@
                     IsEnabled="{Binding WalletSeed, Converter={xct:IsNotNullOrEmptyConverter}}"
                     IsVisible="{Binding IsBusy, Converter={xct:InvertedBoolConverter}}"
                     Text="{x:Static resource:AppResources.Restore}"
-                    TextColor="Yellow"
+                    TextColor="White"
                     TextTransform="None" />
                 <ActivityIndicator
                     HeightRequest="40"
