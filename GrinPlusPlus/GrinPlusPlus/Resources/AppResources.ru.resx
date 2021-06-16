@@ -1,0 +1,561 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Account" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="AddressCantBeNull" xml:space="preserve">
+    <value>Make sure to set the adresss of the receiver</value>
+  </data>
+  <data name="Addresses" xml:space="preserve">
+    <value>Addresses</value>
+  </data>
+  <data name="AlignQRCode" xml:space="preserve">
+    <value>Align the QR within the frame</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="AmountCantBeNull" xml:space="preserve">
+    <value>Amount should be more than 0</value>
+  </data>
+  <data name="Amounts" xml:space="preserve">
+    <value>Amounts</value>
+  </data>
+  <data name="BackupWallet" xml:space="preserve">
+    <value>Backup Wallet</value>
+  </data>
+  <data name="Blocks" xml:space="preserve">
+    <value>Blocks</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Cancelled" xml:space="preserve">
+    <value>Canceled</value>
+  </data>
+  <data name="CancelTransaction" xml:space="preserve">
+    <value>Cancel Transaction</value>
+  </data>
+  <data name="CancelTransactionQuestion" xml:space="preserve">
+    <value>Are you sure you want to cancel this Transaction?</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Coinbase" xml:space="preserve">
+    <value>Coinbase</value>
+  </data>
+  <data name="Commitment" xml:space="preserve">
+    <value>Commitment</value>
+  </data>
+  <data name="Completed" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="Confirmations" xml:space="preserve">
+    <value>Confirmations</value>
+  </data>
+  <data name="ConfirmIdentity" xml:space="preserve">
+    <value>Please confirm your identity to continue</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+  <data name="ConnectedPeers" xml:space="preserve">
+    <value>Connected Peers</value>
+  </data>
+  <data name="ConnectingToNode" xml:space="preserve">
+    <value>Initializing your the Grin Node now... the Grin Node runs locally and it takes from 10 to 16 seconds to initialize, please wait... ⏱️</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="CopySlatepackMessage" xml:space="preserve">
+    <value>Copy Slatepack Message</value>
+  </data>
+  <data name="CopyToClipboard" xml:space="preserve">
+    <value>Copy to Clipboard</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="CreateOneOrRestoreIt" xml:space="preserve">
+    <value>Create a new account or use your wallet seed to restore a previous one</value>
+  </data>
+  <data name="CreateWallet" xml:space="preserve">
+    <value>Create new wallet</value>
+  </data>
+  <data name="CreateWalletMessage" xml:space="preserve">
+    <value>After creating a new wallet, please make sure you're keeping your wallet seed stored safely.</value>
+  </data>
+  <data name="Custom" xml:space="preserve">
+    <value>Custom</value>
+  </data>
+  <data name="Dandelion" xml:space="preserve">
+    <value>Dandelion</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="DeleteWallet" xml:space="preserve">
+    <value>Delete wallet</value>
+  </data>
+  <data name="Emission" xml:space="preserve">
+    <value>Emission</value>
+  </data>
+  <data name="EnableProximity" xml:space="preserve">
+    <value>Receive using Proximity</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="ErrorConnectingToNode" xml:space="preserve">
+    <value>There was an error while trying to initialize the Grin Node.</value>
+  </data>
+  <data name="ErrorConnectingToNodeAdvice" xml:space="preserve">
+    <value>Please try to run the node again using the notification bar action buttons</value>
+  </data>
+  <data name="FactAddresses" xml:space="preserve">
+    <value>Notably, there are no on-chain addresses either, as transaction building is interactive. Keys used in SlatepackAddresses are derived from a path from the master seed in a given wallet account</value>
+  </data>
+  <data name="FactEmission" xml:space="preserve">
+    <value>A new grin ツ is emitted every second, forever, meaning the emission rate stays constant and completely linear. As time passes, the relative dilution becomes smaller; After 10 years, it falls below 10%. After 20, below 5%. This results in a decreasing inflation rate, known as disinflation</value>
+  </data>
+  <data name="FactPrivate" xml:space="preserve">
+    <value>Privacy by default. Transactions have no amount, no addresses and can be trivially aggregated. This enables complete fungibility without precluding the ability to selectively disclose information as needed</value>
+  </data>
+  <data name="FactsAmounts" xml:space="preserve">
+    <value>First, there are no amounts. A mimblewimble implementation natively uses Confidential Transactions, meaning all amounts are hidden; They are provably impossible to uncover, yet easily verified. Even before anything else, simply hiding amounts makes any analysis significantly more challenging</value>
+  </data>
+  <data name="FactsDandelion" xml:space="preserve">
+    <value>An important piece of information that commonly leaks is the IP address that originally sent the transaction. To tackle this issue, grin employs Dandelion++ (originally proposed as a BIP), a protocol designed to hide a transaction's origin IP address</value>
+  </data>
+  <data name="FactSlatepack" xml:space="preserve">
+    <value>Slatepack is the universal transaction standard for Grin. Slatepacks  are encrypted when the user uses a grin1 address to send smiles; otherwise, the transaction information is only obfuscated</value>
+  </data>
+  <data name="FactsMimblewimble" xml:space="preserve">
+    <value>Mimblewimble is a blockchain protocol that allows for a completely private transaction platform through a unique security framework that is markedly different from that of the pseudonymous Bitcoin cryptocurrency. In Mimblewimble, there are no addresses and transactions are fully confidential. Its distributed ledger is also relatively more compact than the other chains in the crypto space</value>
+  </data>
+  <data name="FactsOpen" xml:space="preserve">
+    <value>Grin is developed openly, by individual contributors all over the world. There's no company or foundation behind it, and no ICO, founder reward, pre-mine or dev-tax. The coin distribution is designed to be as fair (but not gratis) as is known to be possible</value>
+  </data>
+  <data name="FactsScalable" xml:space="preserve">
+    <value>Grin scales mostly with the number of users and minimally with the number of transactions. Past transactional data can be pruned, making grin drastically lightweight compared to other blockchains</value>
+  </data>
+  <data name="FactTransactions" xml:space="preserve">
+    <value>Mimblewimble transactions are interactive, meaning both parties need some kind of communication to interact with each other and exchange the necessary data to create a transaction.</value>
+  </data>
+  <data name="FastPrivateSecure" xml:space="preserve">
+    <value>Fast. Private. Secure.</value>
+  </data>
+  <data name="Fee" xml:space="preserve">
+    <value>Fee</value>
+  </data>
+  <data name="Finalize" xml:space="preserve">
+    <value>Finalize</value>
+  </data>
+  <data name="FinalizeTransaction" xml:space="preserve">
+    <value>Finalize Transaction</value>
+  </data>
+  <data name="GetWalletSeed" xml:space="preserve">
+    <value>Display Wallet Seed Phrase</value>
+  </data>
+  <data name="Headers" xml:space="preserve">
+    <value>Headers</value>
+  </data>
+  <data name="History" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="Immature" xml:space="preserve">
+    <value>Immature</value>
+  </data>
+  <data name="InitializingNode" xml:space="preserve">
+    <value>Initializing node</value>
+  </data>
+  <data name="InProgress" xml:space="preserve">
+    <value>In Progress</value>
+  </data>
+  <data name="Kernels" xml:space="preserve">
+    <value>Kernerls</value>
+  </data>
+  <data name="LoadFromFile" xml:space="preserve">
+    <value>Load from File</value>
+  </data>
+  <data name="Locked" xml:space="preserve">
+    <value>Locked</value>
+  </data>
+  <data name="MaximumPeers" xml:space="preserve">
+    <value>Maximum number of Peers</value>
+  </data>
+  <data name="Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="Method" xml:space="preserve">
+    <value>Method</value>
+  </data>
+  <data name="Mimblewimble" xml:space="preserve">
+    <value>Mimblewimble</value>
+  </data>
+  <data name="MinimumPeers" xml:space="preserve">
+    <value>Minimum number of Peers</value>
+  </data>
+  <data name="Network" xml:space="preserve">
+    <value>Network</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="NFC" xml:space="preserve">
+    <value>NFC</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Node" xml:space="preserve">
+    <value>Node</value>
+  </data>
+  <data name="NonInteractive" xml:space="preserve">
+    <value>Without Interactivity</value>
+  </data>
+  <data name="NotReachable" xml:space="preserve">
+    <value>Not Reachable</value>
+  </data>
+  <data name="NoWalletFound" xml:space="preserve">
+    <value>No accounts were found</value>
+  </data>
+  <data name="OfflineTransaction" xml:space="preserve">
+    <value>Text - QR Code - File </value>
+  </data>
+  <data name="Open" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="OpeningPleaseWait" xml:space="preserve">
+    <value>Opening wallet, please wait...</value>
+  </data>
+  <data name="OpenWallet" xml:space="preserve">
+    <value>Open Wallet</value>
+  </data>
+  <data name="OpenWalletMessage" xml:space="preserve">
+    <value>Wallets interreact using the secure Tor network, but don't worry, in case Tor is unavailable you are capable of sending and receiving coins manually using Slatepack Messages through any channel you prefer.</value>
+  </data>
+  <data name="Outputs" xml:space="preserve">
+    <value>Outputs</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PasswordCanNotBeEmpty" xml:space="preserve">
+    <value>Password can't be empty</value>
+  </data>
+  <data name="PasteFromClipboard" xml:space="preserve">
+    <value>Paste from Clipboard</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+  <data name="PickSendingMethod" xml:space="preserve">
+    <value>Select Sending Method</value>
+  </data>
+  <data name="PleaseConfirm" xml:space="preserve">
+    <value>Please Confirm</value>
+  </data>
+  <data name="PowerSaverMessage" xml:space="preserve">
+    <value>Make sure the POWER SAVER is DISABLED</value>
+  </data>
+  <data name="Private" xml:space="preserve">
+    <value>Private</value>
+  </data>
+  <data name="QRCode" xml:space="preserve">
+    <value>QR Code</value>
+  </data>
+  <data name="Reachable" xml:space="preserve">
+    <value>Reachable</value>
+  </data>
+  <data name="Receive" xml:space="preserve">
+    <value>Receive</value>
+  </data>
+  <data name="Received" xml:space="preserve">
+    <value>Received</value>
+  </data>
+  <data name="ReceiveTransaction" xml:space="preserve">
+    <value>Receive Transaction</value>
+  </data>
+  <data name="Repost" xml:space="preserve">
+    <value>Repost</value>
+  </data>
+  <data name="Restore" xml:space="preserve">
+    <value>Restore</value>
+  </data>
+  <data name="RestoreExistingWallet" xml:space="preserve">
+    <value>Restore existing wallet</value>
+  </data>
+  <data name="RestoreWallet" xml:space="preserve">
+    <value>Restore wallet</value>
+  </data>
+  <data name="Scalable" xml:space="preserve">
+    <value>Scalable</value>
+  </data>
+  <data name="ScanningQRCode" xml:space="preserve">
+    <value>Scanning a QR Code</value>
+  </data>
+  <data name="ScanQRCode" xml:space="preserve">
+    <value>Scan QRCode</value>
+  </data>
+  <data name="SeedLength" xml:space="preserve">
+    <value>Seed Length</value>
+  </data>
+  <data name="SelectStatus" xml:space="preserve">
+    <value>Select status</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="Sending" xml:space="preserve">
+    <value>Sending</value>
+  </data>
+  <data name="SendingPleaseWait" xml:space="preserve">
+    <value>Sending Grins, please wait...</value>
+  </data>
+  <data name="Sent" xml:space="preserve">
+    <value>Sent</value>
+  </data>
+  <data name="SetAmount" xml:space="preserve">
+    <value>Set Amount</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Share" xml:space="preserve">
+    <value>Share</value>
+  </data>
+  <data name="ShareAddress" xml:space="preserve">
+    <value>Share Address</value>
+  </data>
+  <data name="ShareSlatepackMessage" xml:space="preserve">
+    <value>Share Slatepack Message</value>
+  </data>
+  <data name="ShareSlatepackMessageAsFile" xml:space="preserve">
+    <value>Share as File</value>
+  </data>
+  <data name="ShareSlatePackMessageQuote" xml:space="preserve">
+    <value>The Receiver should introduce this Slatepack Message into their Wallet in order to receive the transaction.</value>
+  </data>
+  <data name="ShareSlatePackMessageQuoteToFinalize" xml:space="preserve">
+    <value>Send this Slatepack Message to the Sender to in order to Finalize the transaction.</value>
+  </data>
+  <data name="Slate" xml:space="preserve">
+    <value>Slate</value>
+  </data>
+  <data name="Slatepack" xml:space="preserve">
+    <value>Slatepack</value>
+  </data>
+  <data name="SlatepackAddress" xml:space="preserve">
+    <value>Slatepack Address</value>
+  </data>
+  <data name="SlatepackMessage" xml:space="preserve">
+    <value>Slatepack Message</value>
+  </data>
+  <data name="SlatepackMessageFile" xml:space="preserve">
+    <value>Slatepack Message File</value>
+  </data>
+  <data name="SlatepackMessageText" xml:space="preserve">
+    <value>Slatepack Message Text</value>
+  </data>
+  <data name="Spendable" xml:space="preserve">
+    <value>Spendable</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Support" xml:space="preserve">
+    <value>Support</value>
+  </data>
+  <data name="SwipeUp2Send" xml:space="preserve">
+    <value>Swipe Up to Send Grins 😬</value>
+  </data>
+  <data name="SyncedRedirecting" xml:space="preserve">
+    <value>The Grin Node is now fully synced. Redirecting to the login screen...</value>
+  </data>
+  <data name="TabToCopy" xml:space="preserve">
+    <value>Tap address to copy</value>
+  </data>
+  <data name="TorAddress" xml:space="preserve">
+    <value>Tor address</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="TransactionHistory" xml:space="preserve">
+    <value>Transaction history</value>
+  </data>
+  <data name="Transactions" xml:space="preserve">
+    <value>Transactions</value>
+  </data>
+  <data name="TransactionSent" xml:space="preserve">
+    <value>Transaction Sent  〜(ᵐ‿ʷ)〜</value>
+  </data>
+  <data name="TryToStartNodeManually" xml:space="preserve">
+    <value>Try to start the node again</value>
+  </data>
+  <data name="Unconfirmed" xml:space="preserve">
+    <value>Unconfirmed</value>
+  </data>
+  <data name="UnfinalizedTransactions" xml:space="preserve">
+    <value>Unfinalized transactions</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="UsingInteractivity" xml:space="preserve">
+    <value>Interactive Messages</value>
+  </data>
+  <data name="UsingNFC" xml:space="preserve">
+    <value>Using NFC</value>
+  </data>
+  <data name="WaitingSync" xml:space="preserve">
+    <value>Waiting for the Node to be up and Running...</value>
+  </data>
+  <data name="Wallet" xml:space="preserve">
+    <value>Wallet</value>
+  </data>
+  <data name="WalletReachable" xml:space="preserve">
+    <value>Your wallet is reachable</value>
+  </data>
+  <data name="WalletReachableNot" xml:space="preserve">
+    <value>Your wallet is not reachable</value>
+  </data>
+  <data name="WalletSeed" xml:space="preserve">
+    <value>Wallet Seed</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="YourWallets" xml:space="preserve">
+    <value>Your wallets</value>
+  </data>
+</root>
