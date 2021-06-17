@@ -45,63 +45,6 @@
                 <Setter Property="Padding" Value="10" />
                 <Setter Property="Margin" Value="1" />
             </Style>
-            <DataTemplate x:Key="TransactionItemTemplate">
-                <Frame Style="{StaticResource FrameStyle}">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="20" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="150" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Label
-                            Grid.Row="0"
-                            Grid.Column="0"
-                            FontSize="Default"
-                            Text="{Binding Status}"
-                            TextColor="WhiteSmoke"
-                            VerticalOptions="End" />
-                        <Label
-                            Grid.Row="0"
-                            Grid.Column="1"
-                            FontSize="Caption"
-                            HorizontalOptions="End"
-                            Text="{Binding Date, Converter={StaticResource RelativeDateTimeConverter}}"
-                            TextColor="Gray"
-                            VerticalOptions="End" />
-                        <StackLayout
-                            Grid.Row="1"
-                            Grid.Column="0"
-                            Grid.ColumnSpan="2"
-                            Orientation="Horizontal"
-                            Spacing="10">
-                            <Image
-                                Opacity="0.6"
-                                Source="{Binding Status, Converter={StaticResource StatusIconConverter}}"
-                                VerticalOptions="Center"
-                                WidthRequest="18" />
-                            <Label VerticalOptions="Center">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span
-                                            FontSize="18"
-                                            Text="{Binding Amount}"
-                                            TextColor="WhiteSmoke" />
-                                        <Span Text="." TextColor="WhiteSmoke" />
-                                        <Span Text="{Binding Decimals}" TextColor="WhiteSmoke" />
-                                        <Span
-                                            FontSize="12"
-                                            Text="  ツ"
-                                            TextColor="WhiteSmoke" />
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
-                        </StackLayout>
-                    </Grid>
-                </Frame>
-            </DataTemplate>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -320,11 +263,68 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 Margin="10,5,10,5"
-                ItemTemplate="{StaticResource TransactionItemTemplate}"
                 ItemsSource="{Binding UnfinalizedTransactions}"
-                SelectedItem="{Binding SelectedTransaction}"
-                SelectionChangedCommand="{Binding OpenTransactionDetailsCommand}"
+                SelectedItem="{Binding SelectedUnfinalizedTransaction}"
                 SelectionMode="Single">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Style="{StaticResource FrameStyle}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    FontSize="Default"
+                                    Text="{Binding Status}"
+                                    TextColor="WhiteSmoke"
+                                    VerticalOptions="End" />
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    FontSize="Caption"
+                                    HorizontalOptions="End"
+                                    Text="{Binding Date, Converter={StaticResource RelativeDateTimeConverter}}"
+                                    TextColor="Gray"
+                                    VerticalOptions="End" />
+                                <StackLayout
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    Orientation="Horizontal"
+                                    Spacing="10">
+                                    <Image
+                                        Opacity="0.6"
+                                        Source="{Binding Status, Converter={StaticResource StatusIconConverter}}"
+                                        VerticalOptions="Center"
+                                        WidthRequest="18" />
+                                    <Label VerticalOptions="Center">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span
+                                                    FontSize="18"
+                                                    Text="{Binding Amount}"
+                                                    TextColor="WhiteSmoke" />
+                                                <Span Text="." TextColor="WhiteSmoke" />
+                                                <Span Text="{Binding Decimals}" TextColor="WhiteSmoke" />
+                                                <Span
+                                                    FontSize="12"
+                                                    Text="  ツ"
+                                                    TextColor="WhiteSmoke" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
                 <CollectionView.Header>
                     <Grid>
                         <Grid.RowDefinitions>
@@ -369,11 +369,68 @@
                 Grid.Row="2"
                 Grid.Column="0"
                 Margin="10,5,10,5"
-                ItemTemplate="{StaticResource TransactionItemTemplate}"
                 ItemsSource="{Binding FilteredTransactionHistory}"
-                SelectedItem="{Binding SelectedTransaction}"
-                SelectionChangedCommand="{Binding OpenTransactionDetailsCommand}"
+                SelectedItem="{Binding SelectedFilteredTransaction}"
                 SelectionMode="Single">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Style="{StaticResource FrameStyle}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="0"
+                                    FontSize="Default"
+                                    Text="{Binding Status}"
+                                    TextColor="WhiteSmoke"
+                                    VerticalOptions="End" />
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    FontSize="Caption"
+                                    HorizontalOptions="End"
+                                    Text="{Binding Date, Converter={StaticResource RelativeDateTimeConverter}}"
+                                    TextColor="Gray"
+                                    VerticalOptions="End" />
+                                <StackLayout
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Grid.ColumnSpan="2"
+                                    Orientation="Horizontal"
+                                    Spacing="10">
+                                    <Image
+                                        Opacity="0.6"
+                                        Source="{Binding Status, Converter={StaticResource StatusIconConverter}}"
+                                        VerticalOptions="Center"
+                                        WidthRequest="18" />
+                                    <Label VerticalOptions="Center">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span
+                                                    FontSize="18"
+                                                    Text="{Binding Amount}"
+                                                    TextColor="WhiteSmoke" />
+                                                <Span Text="." TextColor="WhiteSmoke" />
+                                                <Span Text="{Binding Decimals}" TextColor="WhiteSmoke" />
+                                                <Span
+                                                    FontSize="12"
+                                                    Text="  ツ"
+                                                    TextColor="WhiteSmoke" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
                 <CollectionView.Header>
                     <Grid
                         Margin="0"

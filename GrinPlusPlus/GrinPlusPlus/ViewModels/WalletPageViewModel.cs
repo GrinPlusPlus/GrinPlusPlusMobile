@@ -138,19 +138,6 @@ namespace GrinPlusPlus.ViewModels
             }
         }
 
-        private Transaction _selectedTransaction;
-        public Transaction SelectedTransaction
-        {
-            get
-            {
-                return _selectedTransaction;
-            }
-            set
-            {
-                SetProperty(ref _selectedTransaction, value);
-            }
-        }
-
         private string _torAddress = string.Empty;
         public string TorAddress
         {
@@ -203,7 +190,53 @@ namespace GrinPlusPlus.ViewModels
             }
         }
 
-        public DelegateCommand OpenTransactionDetailsCommand => new DelegateCommand(OpenTransactionDetails);
+        private Transaction _selectedUnfinalizedTransaction;
+        public Transaction SelectedUnfinalizedTransaction
+        {
+            get
+            {
+                return _selectedUnfinalizedTransaction;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    MainThread.BeginInvokeOnMainThread(async () => {
+                        await NavigationService.NavigateAsync("TransactionDetailsPage", new NavigationParameters {
+                        {
+                          "transaction",
+                          value
+                        }
+                      });
+                    });
+                }
+                SetProperty(ref _selectedUnfinalizedTransaction, value);
+            }
+        }
+
+        private Transaction _selectedFilteredTransaction;
+        public Transaction SelectedFilteredTransaction
+        {
+            get
+            {
+                return _selectedFilteredTransaction;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    MainThread.BeginInvokeOnMainThread(async () => {
+                        await NavigationService.NavigateAsync("TransactionDetailsPage", new NavigationParameters {
+                        {
+                          "transaction",
+                          value
+                        }
+                      });
+                    });
+                }
+                SetProperty(ref _selectedFilteredTransaction, value);
+            }
+        }
 
         public DelegateCommand<object> CancelTransactionClickedCommand
         {
@@ -470,21 +503,9 @@ namespace GrinPlusPlus.ViewModels
             }
         }
 
-        async void OpenTransactionDetails()
-        {
-            if (SelectedTransaction is null) return;
-            await NavigationService.NavigateAsync("TransactionDetailsPage", new NavigationParameters {
-                {
-                  "transaction",
-                  SelectedTransaction
-                }
-              });
-            SelectedTransaction = null;
-        }
-
-        public class TransactionStatus
-        {
-            public string Label { get; set; }
-        }
+       public class TransactionStatus
+       {
+           public string Label { get; set; }
+       }
     }
 }
