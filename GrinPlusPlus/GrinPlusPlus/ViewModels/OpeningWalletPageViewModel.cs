@@ -90,11 +90,11 @@ namespace GrinPlusPlus.ViewModels
 
                 var message = AppResources.ResourceManager.GetString("ConfirmIdentity");
 
-                var dialogConfig = new AuthenticationRequestConfiguration(Wallet, message)
+                var dialogConfig = new AuthenticationRequestConfiguration("Fingerprint", message)
                 {
                     CancelTitle = null,
                     FallbackTitle = null,
-                    AllowAlternativeAuthentication = false
+                    AllowAlternativeAuthentication = true
                 };
 
                 var result = await CrossFingerprint.Current.AuthenticateAsync(dialogConfig, _cancel.Token);

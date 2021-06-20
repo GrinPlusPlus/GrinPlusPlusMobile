@@ -24,7 +24,7 @@ namespace GrinPlusPlus
         protected override async void OnInitialized()
         {
             Thread.CurrentThread.CurrentUICulture = CultureInfo.InstalledUICulture;
-
+            
             InitializeComponent();
 
             string destination = "/InitPage";
