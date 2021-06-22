@@ -265,26 +265,43 @@
                 Margin="10,5,10,5"
                 ItemsSource="{Binding UnfinalizedTransactions}"
                 SelectedItem="{Binding SelectedUnfinalizedTransaction}"
-                SelectionMode="Single">
+                SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Frame Style="{StaticResource FrameStyle}">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="20" />
-                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="42" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="185" />
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <Label
                                     Grid.Row="0"
                                     Grid.Column="0"
-                                    FontSize="Default"
-                                    Text="{Binding Status}"
-                                    TextColor="WhiteSmoke"
-                                    VerticalOptions="End" />
+                                    VerticalOptions="Center">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span
+                                                FontAttributes="Bold"
+                                                FontSize="18"
+                                                Text="{Binding Amount}"
+                                                TextColor="WhiteSmoke" />
+                                            <Span
+                                                FontAttributes="Bold"
+                                                Text="."
+                                                TextColor="WhiteSmoke" />
+                                            <Span Text="{Binding Decimals}" TextColor="WhiteSmoke" />
+                                            <Span
+                                                FontAttributes="Bold"
+                                                FontSize="12"
+                                                Text="  ツ"
+                                                TextColor="WhiteSmoke" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
                                 <Label
                                     Grid.Row="0"
                                     Grid.Column="1"
@@ -293,34 +310,35 @@
                                     Text="{Binding Date, Converter={StaticResource RelativeDateTimeConverter}}"
                                     TextColor="Gray"
                                     VerticalOptions="End" />
-                                <StackLayout
+                                <Grid
                                     Grid.Row="1"
                                     Grid.Column="0"
-                                    Grid.ColumnSpan="2"
-                                    Orientation="Horizontal"
-                                    Spacing="10">
-                                    <Image
-                                        Opacity="0.6"
-                                        Source="{Binding Status, Converter={StaticResource StatusIconConverter}}"
-                                        VerticalOptions="Center"
-                                        WidthRequest="18" />
-                                    <Label VerticalOptions="Center">
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span
-                                                    FontSize="18"
-                                                    Text="{Binding Amount}"
-                                                    TextColor="WhiteSmoke" />
-                                                <Span Text="." TextColor="WhiteSmoke" />
-                                                <Span Text="{Binding Decimals}" TextColor="WhiteSmoke" />
-                                                <Span
-                                                    FontSize="12"
-                                                    Text="  ツ"
-                                                    TextColor="WhiteSmoke" />
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
-                                </StackLayout>
+                                    Grid.ColumnSpan="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="5*" />
+                                        <ColumnDefinition Width="5*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Button
+                                        Grid.Row="0"
+                                        Grid.Column="0"
+                                        Command="{prism:NavigateTo 'FinalizeTransactionPage',
+                                                                   UseModalNavigation=False,
+                                                                   Animated=True}"
+                                        IsVisible="{Binding CanBeFinalized}"
+                                        Text="{x:Static resource:AppResources.Finalize}"
+                                        TextTransform="None" />
+                                    <Button
+                                        Grid.Row="0"
+                                        Grid.Column="1"
+                                        Command="{Binding Source={x:Reference Wallet}, Path=BindingContext.CancelTransactionCommand}"
+                                        CommandParameter="{Binding Id}"
+                                        IsVisible="{Binding CanBeCanceled}"
+                                        Text="{x:Static resource:AppResources.Cancel}"
+                                        TextTransform="None" />
+                                </Grid>
                             </Grid>
                         </Frame>
                     </DataTemplate>
@@ -414,6 +432,7 @@
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span
+                                                    FontAttributes="Bold"
                                                     FontSize="18"
                                                     Text="{Binding Amount}"
                                                     TextColor="WhiteSmoke" />
@@ -533,7 +552,9 @@
                     Grid.Row="0"
                     Grid.Column="3"
                     BackgroundColor="Black"
-                    Command="{Binding ReceiveButtonClickedCommand}"
+                    Command="{prism:NavigateTo 'ReceiveTransactionPage',
+                                               UseModalNavigation=False,
+                                               Animated=True}"
                     FontSize="16"
                     HeightRequest="48"
                     HorizontalOptions="End"

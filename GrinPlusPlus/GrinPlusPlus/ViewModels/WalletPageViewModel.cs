@@ -48,7 +48,7 @@ namespace GrinPlusPlus.ViewModels
 
         private Balance _balance;
 
-        private int _currentSelectedFilterIndex = 0;
+        private int _currentSelectedFilterIndex = 1;
         public int CurrentSelectedFilterIndex
         {
             get
@@ -238,17 +238,9 @@ namespace GrinPlusPlus.ViewModels
             }
         }
 
-        public DelegateCommand<object> CancelTransactionClickedCommand
-        {
-            get;
-            private set;
-        }
+        public DelegateCommand<object> CancelTransactionCommand { get; private set; }
 
         public DelegateCommand SendButtonClickedCommand => new DelegateCommand(SendButtonClicked);
-
-        public DelegateCommand ReceiveButtonClickedCommand => new DelegateCommand(ReceiveButtonClicked);
-
-        public DelegateCommand FinalizeTransactionClickedCommand => new DelegateCommand(FinalizeTransactionClicked);
 
         public DelegateCommand ShareAddressCommand => new DelegateCommand(ShareAddress);
 
@@ -326,7 +318,7 @@ namespace GrinPlusPlus.ViewModels
 
             UserCanSend = Balance.Spendable > 0;
 
-            CancelTransactionClickedCommand = new DelegateCommand<object>(CancelTransactionClicked);
+            CancelTransactionCommand = new DelegateCommand<object>(CancelTransaction);
 
             MainThread.BeginInvokeOnMainThread(async () => {
                 await GetWalletBalance();
@@ -473,24 +465,11 @@ namespace GrinPlusPlus.ViewModels
             }
         }
 
-        async void ReceiveButtonClicked()
+        async void CancelTransaction(object id)
         {
-            await NavigationService.NavigateAsync("ReceiveTransactionPage");
-        }
-
-        async void FinalizeTransactionClicked()
-        {
-            await NavigationService.NavigateAsync("FinalizeTransactionPage");
-        }
-
-        async void CancelTransactionClicked(object id)
-        {
-            var cancelTransactionLabel = AppResources.ResourceManager.GetString("CancelTransaction");
-            var cancelTransactionMessage = AppResources.ResourceManager.GetString("CancelTransactionQuestion");
-            var cancelTransactionYes = AppResources.ResourceManager.GetString("Yes");
-            var cancelTransactionNo = AppResources.ResourceManager.GetString("No");
-
-            if (await PageDialogService.DisplayAlertAsync(cancelTransactionLabel, cancelTransactionMessage, cancelTransactionYes, cancelTransactionNo))
+            if (await PageDialogService.DisplayAlertAsync(AppResources.ResourceManager.GetString("CancelTransaction"),
+                                                          AppResources.ResourceManager.GetString("CancelTransactionQuestion"),
+                                                          AppResources.ResourceManager.GetString("Yes"), AppResources.ResourceManager.GetString("No")))
             {
                 try
                 {
@@ -498,7 +477,7 @@ namespace GrinPlusPlus.ViewModels
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine(ex.Message);
+                    await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
                 }
             }
         }

@@ -180,6 +180,9 @@
   <data name="Confirmations" xml:space="preserve">
     <value>Confirmations</value>
   </data>
+  <data name="ConfirmedHeight" xml:space="preserve">
+    <value>Confirmed Height</value>
+  </data>
   <data name="ConfirmIdentity" xml:space="preserve">
     <value>Please confirm your identity to continue</value>
   </data>

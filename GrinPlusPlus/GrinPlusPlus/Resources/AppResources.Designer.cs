@@ -250,6 +250,15 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Confirmed Height.
+        /// </summary>
+        internal static string ConfirmedHeight {
+            get {
+                return ResourceManager.GetString("ConfirmedHeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please confirm your identity to continue.
         /// </summary>
         internal static string ConfirmIdentity {

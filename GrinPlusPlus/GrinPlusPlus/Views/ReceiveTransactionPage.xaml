@@ -37,13 +37,13 @@
                     <xct:RemoveBorderEffect />
                 </Editor.Effects>
             </Editor>
-
             <Button
                 Margin="20,0,20,20"
                 BackgroundColor="#0C0C0C"
                 Command="{Binding ReceiveTransactionCommand}"
                 CornerRadius="5"
                 HeightRequest="44"
+                IsEnabled="{Binding SlatepackMessage, Converter={xct:IsNotNullOrEmptyConverter}}"
                 Text="{x:Static resource:AppResources.Receive}"
                 TextColor="White"
                 TextTransform="None"
