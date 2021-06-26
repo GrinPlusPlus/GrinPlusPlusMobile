@@ -234,6 +234,9 @@
   <data name="DeleteWallet" xml:space="preserve">
     <value>Delete wallet</value>
   </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
   <data name="Emission" xml:space="preserve">
     <value>Emission</value>
   </data>

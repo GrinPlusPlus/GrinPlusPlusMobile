@@ -7,6 +7,7 @@
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     x:Name="TransactionDetails"
+    Title="{x:Static resource:AppResources.Details}"
     Padding="20,0,20,10"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="Black">
@@ -26,7 +27,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <Grid RowSpacing="10">
+        <Grid RowSpacing="8">
             <Grid.RowDefinitions>
                 <RowDefinition Height="55" />
                 <RowDefinition Height="50" />
@@ -34,6 +35,8 @@
                 <RowDefinition Height="50" />
                 <RowDefinition Height="50" />
                 <RowDefinition Height="50" />
+                <RowDefinition Height="25" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -123,6 +126,70 @@
                     Text="{Binding SelectedTransaction.Slate}"
                     TextColor="White" />
             </StackLayout>
+            <Label
+                Grid.Row="6"
+                Grid.Column="0"
+                Margin="0,5,0,0"
+                FontSize="16"
+                Text="{x:Static resource:AppResources.Outputs}"
+                TextColor="Gray" />
+            <CollectionView
+                Grid.Row="7"
+                Grid.Column="0"
+                ItemsSource="{Binding SelectedTransaction.Outputs}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid RowSpacing="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Text="{x:Static resource:AppResources.Amount}"
+                                TextColor="#2f2f2f" />
+                            <Label
+                                Grid.Row="0"
+                                Grid.Column="1"
+                                TextColor="White">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span FontSize="14" Text="{Binding Amount, StringFormat='{}{0:N9}'}" />
+                                        <Span FontSize="12" Text=" ツ" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <Label
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Text="{x:Static resource:AppResources.Commitment}"
+                                TextColor="#2f2f2f"
+                                VerticalOptions="Center" />
+                            <Button
+                                Grid.Row="2"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                BackgroundColor="#0C0C0C"
+                                Command="{Binding Source={x:Reference TransactionDetails}, Path=BindingContext.CopyTextCommand}"
+                                CommandParameter="{Binding Commitment}"
+                                CornerRadius="5"
+                                FontSize="14"
+                                Text="{Binding Commitment}"
+                                TextColor="White"
+                                TextTransform="None" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.EmptyView>
+                    <Label Text="-" TextColor="White" />
+                </CollectionView.EmptyView>
+            </CollectionView>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
