@@ -6,10 +6,12 @@
     xmlns:c="clr-namespace:GrinPlusPlus.Converters"
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
+    xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
     x:Name="Wallet"
     Title="{Binding Wallet}"
     Padding="10,0,10,5"
     prism:ViewModelLocator.AutowireViewModel="True"
+    sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromRight"
     IconImageSource="outline_account_balance_wallet_white_24.png">
     <NavigationPage.TitleView>
         <Grid Margin="0" Padding="0">
@@ -324,11 +326,13 @@
                                     <Button
                                         Grid.Row="0"
                                         Grid.Column="0"
+                                        BackgroundColor="Transparent"
                                         Command="{prism:NavigateTo 'FinalizeTransactionPage',
                                                                    UseModalNavigation=False,
                                                                    Animated=True}"
                                         IsVisible="{Binding CanBeFinalized}"
                                         Text="{x:Static resource:AppResources.Finalize}"
+                                        TextColor="Yellow"
                                         TextTransform="None" />
                                     <Button
                                         Grid.Row="0"
