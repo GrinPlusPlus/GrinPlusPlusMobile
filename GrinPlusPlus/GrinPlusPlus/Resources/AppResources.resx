@@ -129,6 +129,9 @@
   <data name="Addresses" xml:space="preserve">
     <value>Addresses</value>
   </data>
+  <data name="AddressNote" xml:space="preserve">
+    <value>The receiver's address is also used to encrypt the transaction information, its use is not mandatory but highly recommended</value>
+  </data>
   <data name="AlignQRCode" xml:space="preserve">
     <value>Align the QR within the frame</value>
   </data>
@@ -197,6 +200,9 @@
   </data>
   <data name="Continue" xml:space="preserve">
     <value>Continue</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Copy</value>
   </data>
   <data name="CopySlatepackMessage" xml:space="preserve">
     <value>Copy Slatepack Message</value>
@@ -364,7 +370,7 @@
     <value>Open Wallet</value>
   </data>
   <data name="OpenWalletMessage" xml:space="preserve">
-    <value>Wallets interreact using the secure Tor network, but don't worry, in case Tor is unavailable you are capable of sending and receiving coins manually using Slatepack Messages through any channel you prefer.</value>
+    <value>Wallets interact using the Tor network, in case Tor is unavailable you are capable of sending and receiving coins manually using Slatepack Messages through any channel you prefer</value>
   </data>
   <data name="Outputs" xml:space="preserve">
     <value>Outputs</value>
@@ -442,7 +448,7 @@
     <value>Sending</value>
   </data>
   <data name="SendingPleaseWait" xml:space="preserve">
-    <value>Sending Grins, please wait...</value>
+    <value>Sending, please wait...</value>
   </data>
   <data name="Sent" xml:space="preserve">
     <value>Sent</value>
@@ -466,10 +472,10 @@
     <value>Share as File</value>
   </data>
   <data name="ShareSlatePackMessageQuote" xml:space="preserve">
-    <value>The Receiver should introduce this Slatepack Message into their Wallet in order to receive the transaction.</value>
+    <value>Can't communicate with the Receiver via TOR, but do not worry, you are still able of initiating the transaction by sharing this Slatepack message. The Receiver should introduce this Slatepack into their Wallet</value>
   </data>
   <data name="ShareSlatePackMessageQuoteToFinalize" xml:space="preserve">
-    <value>Send this Slatepack Message to the Sender to in order to Finalize the transaction.</value>
+    <value>Send this Slatepack Message to the Sender to in order to Finalize the transaction</value>
   </data>
   <data name="Slate" xml:space="preserve">
     <value>Slate</value>

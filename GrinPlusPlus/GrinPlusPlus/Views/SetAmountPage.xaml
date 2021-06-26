@@ -7,10 +7,10 @@
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    Title="{x:Static resource:AppResources.Send}"
     prism:ViewModelLocator.AutowireViewModel="True"
     sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromRight"
     BackgroundColor="{StaticResource BackgroundColor}">
-
     <ContentPage.Resources>
         <ResourceDictionary>
             <Color x:Key="BackgroundColor">#000000</Color>
@@ -24,8 +24,9 @@
             ColumnSpacing="0"
             RowSpacing="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
+                <RowDefinition Height="24" />
                 <RowDefinition Height="44" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="44" />
                 <RowDefinition Height="260" />
@@ -44,7 +45,7 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 Margin="20,0,20,0"
-                HorizontalOptions="FillAndExpand"
+                HorizontalOptions="Fill"
                 Orientation="Horizontal">
                 <Entry
                     BackgroundColor="#191919"
@@ -65,38 +66,50 @@
                     ImageSource="baseline_qr_code_white_24.png"
                     WidthRequest="44" />
             </StackLayout>
-            <StackLayout
+            <Label
                 Grid.Row="2"
                 Grid.Column="0"
-                Margin="20,0,15,0"
+                Margin="20,0,20,0"
+                FontAttributes="Italic"
+                TextColor="Gray">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{x:Static resource:AppResources.AddressNote}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <StackLayout
+                Grid.Row="3"
+                Grid.Column="0"
+                Margin="20,0,10,0"
                 HorizontalOptions="FillAndExpand"
-                VerticalOptions="Center">
+                VerticalOptions="CenterAndExpand">
                 <Label HorizontalOptions="FillAndExpand">
                     <Label.FormattedText>
                         <FormattedString>
                             <Span
-                                FontSize="40"
+                                FontSize="52"
                                 Text="{Binding Amount}"
-                                TextColor="Yellow" />
-                            <Span
-                                FontSize="Small"
-                                Text=" ツ"
                                 TextColor="Yellow" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-                <Label TextColor="{StaticResource TextColor}">
+                <Label FontSize="18" TextColor="White">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span FontSize="Caption" Text="  " />
-                            <Span FontSize="Body" Text="{Binding Fee, StringFormat='{}{0:N9}'}" />
-                            <Span FontSize="Caption" Text=" ツ" />
+                            <Span Text="{x:Static resource:AppResources.Fee}" TextColor="Gray" />
+                            <Span Text=": " TextColor="Gray" />
+                            <Span
+                                FontAttributes="Bold"
+                                FontSize="20"
+                                Text="{Binding Fee, StringFormat='{}{0:N9}'}" />
+                            <Span FontSize="12" Text=" ツ" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
             </StackLayout>
             <Button
-                Grid.Row="3"
+                Grid.Row="4"
                 Grid.Column="0"
                 Margin="30,0,30,0"
                 BackgroundColor="#0C0C0C"
@@ -108,7 +121,7 @@
                 TextColor="White"
                 TextTransform="None" />
             <Grid
-                Grid.Row="4"
+                Grid.Row="5"
                 Grid.Column="0"
                 Margin="0"
                 Padding="0"

@@ -84,10 +84,9 @@ namespace GrinPlusPlus.ViewModels
             {
                 _cancel = new CancellationTokenSource();
 
-                var wallet = (await SecureStorage.GetAsync("username")).ToUpper();
                 var message = AppResources.ResourceManager.GetString("ConfirmIdentity");
 
-                var dialogConfig = new AuthenticationRequestConfiguration(wallet, message)
+                var dialogConfig = new AuthenticationRequestConfiguration("Fingerprint", message)
                 {
                     CancelTitle = null,
                     FallbackTitle = null,

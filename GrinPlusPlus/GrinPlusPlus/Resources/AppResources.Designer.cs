@@ -97,6 +97,15 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The receiver&apos;s address is also used to encrypt the transaction information, its use is not mandatory but highly recommended.
+        /// </summary>
+        internal static string AddressNote {
+            get {
+                return ResourceManager.GetString("AddressNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Align the QR within the frame.
         /// </summary>
         internal static string AlignQRCode {
@@ -300,6 +309,15 @@ namespace GrinPlusPlus.Resources {
         internal static string Continue {
             get {
                 return ResourceManager.GetString("Continue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy.
+        /// </summary>
+        internal static string Copy {
+            get {
+                return ResourceManager.GetString("Copy", resourceCulture);
             }
         }
         
@@ -799,7 +817,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wallets interreact using the secure Tor network, but don&apos;t worry, in case Tor is unavailable you are capable of sending and receiving coins manually using Slatepack Messages through any channel you prefer..
+        ///   Looks up a localized string similar to Wallets interact using the Tor network, in case Tor is unavailable you are capable of sending and receiving coins manually using Slatepack Messages through any channel you prefer.
         /// </summary>
         internal static string OpenWalletMessage {
             get {
@@ -1033,7 +1051,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sending Grins, please wait....
+        ///   Looks up a localized string similar to Sending, please wait....
         /// </summary>
         internal static string SendingPleaseWait {
             get {
@@ -1105,7 +1123,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Receiver should introduce this Slatepack Message into their Wallet in order to receive the transaction..
+        ///   Looks up a localized string similar to Can&apos;t communicate with the Receiver via TOR, but do not worry, you are still able of initiating the transaction by sharing this Slatepack message. The Receiver should introduce this Slatepack into their Wallet.
         /// </summary>
         internal static string ShareSlatePackMessageQuote {
             get {
@@ -1114,7 +1132,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Send this Slatepack Message to the Sender to in order to Finalize the transaction..
+        ///   Looks up a localized string similar to Send this Slatepack Message to the Sender to in order to Finalize the transaction.
         /// </summary>
         internal static string ShareSlatePackMessageQuoteToFinalize {
             get {

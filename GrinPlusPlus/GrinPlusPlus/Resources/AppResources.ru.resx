@@ -129,6 +129,9 @@
   <data name="Addresses" xml:space="preserve">
     <value>Адреса</value>
   </data>
+  <data name="AddressNote" xml:space="preserve">
+    <value>The receiver's address is also used to encrypt the transaction information, it use is not mandatory but highly recommended</value>
+  </data>
   <data name="AlignQRCode" xml:space="preserve">
     <value>Выровнять QR код по рамке</value>
   </data>
@@ -197,6 +200,9 @@
   </data>
   <data name="Continue" xml:space="preserve">
     <value>Продолжить</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Copy</value>
   </data>
   <data name="CopySlatepackMessage" xml:space="preserve">
     <value>Скопировать Slatepack сообщение</value>

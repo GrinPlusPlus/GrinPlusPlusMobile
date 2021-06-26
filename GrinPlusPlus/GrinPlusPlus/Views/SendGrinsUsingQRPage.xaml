@@ -6,30 +6,24 @@
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    Title="{x:Static resource:AppResources.SlatepackMessage}"
+    Padding="20"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="Black">
+    BackgroundColor="Black"
+    NavigationPage.HasBackButton="False">
     <ContentPage.Content>
         <StackLayout
             HorizontalOptions="FillAndExpand"
             Orientation="Vertical"
             Spacing="10"
             VerticalOptions="FillAndExpand">
-            <Label
-                Margin="20,10,20,5"
-                Text="{x:Static resource:AppResources.ShareSlatePackMessageQuote}"
-                TextColor="White" />
-            <Label
-                Margin="20,0,20,0"
-                Text="Slatepack Message"
-                TextColor="#2f2f2f"
-                TextTransform="Uppercase" />
+            <Label Text="{x:Static resource:AppResources.ShareSlatePackMessageQuote}" TextColor="White" />
             <Editor
-                Margin="20,5,20,10"
                 AutoSize="Disabled"
                 BackgroundColor="#0C0C0C"
                 CharacterSpacing="4"
-                FontSize="12"
-                HeightRequest="220"
+                FontSize="Caption"
+                HeightRequest="250"
                 IsReadOnly="True"
                 IsSpellCheckEnabled="False"
                 IsTextPredictionEnabled="False"
@@ -39,27 +33,43 @@
                     <xct:RemoveBorderEffect />
                 </Editor.Effects>
             </Editor>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="44" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="5*" />
+                </Grid.ColumnDefinitions>
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    BackgroundColor="#0C0C0C"
+                    Command="{Binding CopySlatepackMessageCommand}"
+                    CornerRadius="5"
+                    HeightRequest="44"
+                    Text="{x:Static resource:AppResources.Copy}"
+                    TextColor="White"
+                    TextTransform="None" />
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    BackgroundColor="#0C0C0C"
+                    Command="{Binding ShareSlatepackMessageCommand}"
+                    CornerRadius="5"
+                    HeightRequest="44"
+                    Text="{x:Static resource:AppResources.Share}"
+                    TextColor="White"
+                    TextTransform="None" />
+            </Grid>
             <Button
-                Margin="20,0,20,0"
-                BackgroundColor="#0C0C0C"
-                Command="{Binding CopySlatepackMessageCommand}"
-                HeightRequest="44"
-                Text="{x:Static resource:AppResources.CopySlatepackMessage}"
-                TextColor="White" />
-            <Button
-                Margin="20,0,20,0"
-                BackgroundColor="#0C0C0C"
-                Command="{Binding ShareSlatepackMessageCommand}"
-                HeightRequest="44"
-                Text="{x:Static resource:AppResources.ShareSlatepackMessage}"
-                TextColor="White" />
-            <Button
-                Margin="20,0,20,30"
                 BackgroundColor="#0C0C0C"
                 Command="{Binding CloseScreenCommand}"
+                CornerRadius="5"
                 HeightRequest="44"
                 Text="{x:Static resource:AppResources.Close}"
-                TextColor="Yellow"
+                TextColor="White"
+                TextTransform="None"
                 VerticalOptions="EndAndExpand" />
         </StackLayout>
     </ContentPage.Content>

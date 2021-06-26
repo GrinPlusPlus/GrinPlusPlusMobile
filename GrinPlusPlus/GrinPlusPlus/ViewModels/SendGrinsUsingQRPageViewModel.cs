@@ -63,5 +63,6 @@ namespace GrinPlusPlus.ViewModels
                 SendingResponse = (SendingResponse)parameters["sending_response"];
             }
         }
+
     }
 }
