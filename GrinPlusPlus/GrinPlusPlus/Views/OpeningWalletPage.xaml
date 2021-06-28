@@ -7,7 +7,8 @@
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     Padding="20,0,20,40"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="Black">
+    BackgroundColor="Black"
+    NavigationPage.HasBackButton="False">
     <ContentPage.Content>
         <StackLayout
             HorizontalOptions="Center"

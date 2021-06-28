@@ -113,8 +113,10 @@ namespace GrinPlusPlus.ViewModels
                     await SecureStorage.SetAsync("token", wallet.Token);
                     await SecureStorage.SetAsync("username", Username);
                     await SecureStorage.SetAsync("slatepack_address", wallet.SlatepackAdddress);
+                    
+                    await SecureStorage.SetAsync("wallet_seed", wallet.Seed);
 
-                    await NavigationService.NavigateAsync("OpeningWalletPage");
+                    await NavigationService.NavigateAsync("WalletSeedPage");
                 }
             }
             catch (Exception ex)

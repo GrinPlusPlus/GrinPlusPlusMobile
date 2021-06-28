@@ -55,6 +55,7 @@ namespace GrinPlusPlus.ViewModels
                 {
                     if(Settings.IsLoggedIn)
                     {
+                        SecureStorage.Remove("wallet_seed");
                         await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/WalletPage");
                     } else
                     {

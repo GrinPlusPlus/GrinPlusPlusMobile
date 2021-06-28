@@ -1,0 +1,787 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="GrinPlusPlus.Views.ConfirmWalletSeedPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:c="clr-namespace:GrinPlusPlus.Converters"
+    xmlns:prism="http://prismlibrary.com"
+    xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
+    Title="{x:Static resource:AppResources.Confirm}"
+    Padding="20,0,20,0"
+    prism:ViewModelLocator.AutowireViewModel="True">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <c:EmptyToBooleanConverter x:Key="EmptyToBooleanConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView VerticalScrollBarVisibility="Never">
+            <Grid ColumnSpacing="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="38" />
+                    <RowDefinition Height="38" />
+                    <RowDefinition Height="38" />
+                    <RowDefinition Height="38" />
+                    <RowDefinition Height="38" />
+                    <RowDefinition Height="38" />
+                    <RowDefinition Height="38" />
+                    <RowDefinition Height="38" />
+                    <RowDefinition Height="38" />
+                    <RowDefinition Height="38" />
+                    <RowDefinition Height="38" />
+                    <RowDefinition Height="38" />
+                    <RowDefinition Height="38" />
+                    <RowDefinition Height="44" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="5*" />
+                </Grid.ColumnDefinitions>
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Margin="0,0,0,5"
+                    Text="Please, fill the empty boxes before continuing"
+                    TextColor="White" />
+                <StackLayout
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="1.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        x:Name="Entry1"
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[0], Converter={StaticResource EmptyToBooleanConverter}}"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding DisplayedWalletSeedWordsList[0]}"
+                        TextColor="White"
+                        VerticalOptions="Center">
+                        <Entry.Behaviors>
+                            <prism:EventToCommandBehavior
+                                Command="{Binding UnfocusedEntryCommand}"
+                                CommandParameter="{Binding Source={x:Reference Entry1}, Path=Text}"
+                                EventName="Unfocused" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="13.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        x:Name="Entry13"
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[12], Converter={StaticResource EmptyToBooleanConverter}}"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding DisplayedWalletSeedWordsList[12]}"
+                        TextColor="White"
+                        VerticalOptions="Center">
+                        <Entry.Behaviors>
+                            <prism:EventToCommandBehavior
+                                Command="{Binding UnfocusedEntryCommand}"
+                                CommandParameter="{Binding Source={x:Reference Entry13}, Path=Text}"
+                                EventName="Unfocused" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="2.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        x:Name="Entry2"
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[1], Converter={StaticResource EmptyToBooleanConverter}}"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding DisplayedWalletSeedWordsList[1]}"
+                        TextColor="White"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center">
+                        <Entry.Behaviors>
+                            <prism:EventToCommandBehavior
+                                Command="{Binding UnfocusedEntryCommand}"
+                                CommandParameter="{Binding Source={x:Reference Entry2}, Path=Text}"
+                                EventName="Unfocused" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="14.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        x:Name="Entry14"
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[13], Converter={StaticResource EmptyToBooleanConverter}}"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding DisplayedWalletSeedWordsList[13]}"
+                        TextColor="White"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center">
+                        <Entry.Behaviors>
+                            <prism:EventToCommandBehavior
+                                Command="{Binding UnfocusedEntryCommand}"
+                                CommandParameter="{Binding Source={x:Reference Entry14}, Path=Text}"
+                                EventName="Unfocused" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="3.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        x:Name="Entry3"
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[2], Converter={StaticResource EmptyToBooleanConverter}}"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding DisplayedWalletSeedWordsList[2]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center">
+                        <Entry.Behaviors>
+                            <prism:EventToCommandBehavior
+                                Command="{Binding UnfocusedEntryCommand}"
+                                CommandParameter="{Binding Source={x:Reference Entry3}, Path=Text}"
+                                EventName="Unfocused" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="15.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        x:Name="Entry15"
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[14], Converter={StaticResource EmptyToBooleanConverter}}"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding DisplayedWalletSeedWordsList[14]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center">
+                        <Entry.Behaviors>
+                            <prism:EventToCommandBehavior
+                                Command="{Binding UnfocusedEntryCommand}"
+                                CommandParameter="{Binding Source={x:Reference Entry15}, Path=Text}"
+                                EventName="Unfocused" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="4.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        x:Name="Entry4"
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[3], Converter={StaticResource EmptyToBooleanConverter}}"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding DisplayedWalletSeedWordsList[3]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center">
+                        <Entry.Behaviors>
+                            <prism:EventToCommandBehavior
+                                Command="{Binding UnfocusedEntryCommand}"
+                                CommandParameter="{Binding Source={x:Reference Entry4}, Path=Text}"
+                                EventName="Unfocused" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="16.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        x:Name="Entry16"
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[15], Converter={StaticResource EmptyToBooleanConverter}}"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding DisplayedWalletSeedWordsList[15]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center">
+                        <Entry.Behaviors>
+                            <prism:EventToCommandBehavior
+                                Command="{Binding UnfocusedEntryCommand}"
+                                CommandParameter="{Binding Source={x:Reference Entry16}, Path=Text}"
+                                EventName="Unfocused" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="5.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        x:Name="Entry5"
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[4], Converter={StaticResource EmptyToBooleanConverter}}"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding DisplayedWalletSeedWordsList[4]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center">
+                        <Entry.Behaviors>
+                            <prism:EventToCommandBehavior
+                                Command="{Binding UnfocusedEntryCommand}"
+                                CommandParameter="{Binding Source={x:Reference Entry5}, Path=Text}"
+                                EventName="Unfocused" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="17.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        x:Name="Entry17"
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[16], Converter={StaticResource EmptyToBooleanConverter}}"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding DisplayedWalletSeedWordsList[16]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center">
+                        <Entry.Behaviors>
+                            <prism:EventToCommandBehavior
+                                Command="{Binding UnfocusedEntryCommand}"
+                                CommandParameter="{Binding Source={x:Reference Entry17}, Path=Text}"
+                                EventName="Unfocused" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="6"
+                    Grid.Column="0"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="6.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        x:Name="Entry6"
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[5], Converter={StaticResource EmptyToBooleanConverter}}"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding DisplayedWalletSeedWordsList[5]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center">
+                        <Entry.Behaviors>
+                            <prism:EventToCommandBehavior
+                                Command="{Binding UnfocusedEntryCommand}"
+                                CommandParameter="{Binding Source={x:Reference Entry6}, Path=Text}"
+                                EventName="Unfocused" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="6"
+                    Grid.Column="1"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="18.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        x:Name="Entry18"
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[17], Converter={StaticResource EmptyToBooleanConverter}}"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding DisplayedWalletSeedWordsList[17]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center">
+                        <Entry.Behaviors>
+                            <prism:EventToCommandBehavior
+                                Command="{Binding UnfocusedEntryCommand}"
+                                CommandParameter="{Binding Source={x:Reference Entry18}, Path=Text}"
+                                EventName="Unfocused" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="7"
+                    Grid.Column="0"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="7.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        x:Name="Entry7"
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[6], Converter={StaticResource EmptyToBooleanConverter}}"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding DisplayedWalletSeedWordsList[6]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center">
+                        <Entry.Behaviors>
+                            <prism:EventToCommandBehavior
+                                Command="{Binding UnfocusedEntryCommand}"
+                                CommandParameter="{Binding Source={x:Reference Entry7}, Path=Text}"
+                                EventName="Unfocused" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="7"
+                    Grid.Column="1"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="19.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        x:Name="Entry19"
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[18], Converter={StaticResource EmptyToBooleanConverter}}"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding DisplayedWalletSeedWordsList[18]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center">
+                        <Entry.Behaviors>
+                            <prism:EventToCommandBehavior
+                                Command="{Binding UnfocusedEntryCommand}"
+                                CommandParameter="{Binding Source={x:Reference Entry19}, Path=Text}"
+                                EventName="Unfocused" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="8"
+                    Grid.Column="0"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="8.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        x:Name="Entry8"
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[7], Converter={StaticResource EmptyToBooleanConverter}}"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding DisplayedWalletSeedWordsList[7]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center">
+                        <Entry.Behaviors>
+                            <prism:EventToCommandBehavior
+                                Command="{Binding UnfocusedEntryCommand}"
+                                CommandParameter="{Binding Source={x:Reference Entry8}, Path=Text}"
+                                EventName="Unfocused" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="8"
+                    Grid.Column="1"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="20.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        x:Name="Entry20"
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[19], Converter={StaticResource EmptyToBooleanConverter}}"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding DisplayedWalletSeedWordsList[19]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center">
+                        <Entry.Behaviors>
+                            <prism:EventToCommandBehavior
+                                Command="{Binding UnfocusedEntryCommand}"
+                                CommandParameter="{Binding Source={x:Reference Entry20}, Path=Text}"
+                                EventName="Unfocused" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="9"
+                    Grid.Column="0"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="9.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        x:Name="Entry9"
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[8], Converter={StaticResource EmptyToBooleanConverter}}"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding DisplayedWalletSeedWordsList[8]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center">
+                        <Entry.Behaviors>
+                            <prism:EventToCommandBehavior
+                                Command="{Binding UnfocusedEntryCommand}"
+                                CommandParameter="{Binding Source={x:Reference Entry9}, Path=Text}"
+                                EventName="Unfocused" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="9"
+                    Grid.Column="1"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="21.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        x:Name="Entry21"
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[20], Converter={StaticResource EmptyToBooleanConverter}}"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding DisplayedWalletSeedWordsList[20]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center">
+                        <Entry.Behaviors>
+                            <prism:EventToCommandBehavior
+                                Command="{Binding UnfocusedEntryCommand}"
+                                CommandParameter="{Binding Source={x:Reference Entry21}, Path=Text}"
+                                EventName="Unfocused" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="10"
+                    Grid.Column="0"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="10.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        x:Name="Entry10"
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[9], Converter={StaticResource EmptyToBooleanConverter}}"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding DisplayedWalletSeedWordsList[9]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center">
+                        <Entry.Behaviors>
+                            <prism:EventToCommandBehavior
+                                Command="{Binding UnfocusedEntryCommand}"
+                                CommandParameter="{Binding Source={x:Reference Entry10}, Path=Text}"
+                                EventName="Unfocused" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="10"
+                    Grid.Column="1"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="22.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        x:Name="Entry22"
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[21], Converter={StaticResource EmptyToBooleanConverter}}"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding DisplayedWalletSeedWordsList[21]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center">
+                        <Entry.Behaviors>
+                            <prism:EventToCommandBehavior
+                                Command="{Binding UnfocusedEntryCommand}"
+                                CommandParameter="{Binding Source={x:Reference Entry22}, Path=Text}"
+                                EventName="Unfocused" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="11"
+                    Grid.Column="0"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="11.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        x:Name="Entry11"
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[10], Converter={StaticResource EmptyToBooleanConverter}}"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding DisplayedWalletSeedWordsList[10]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center">
+                        <Entry.Behaviors>
+                            <prism:EventToCommandBehavior
+                                Command="{Binding UnfocusedEntryCommand}"
+                                CommandParameter="{Binding Source={x:Reference Entry11}, Path=Text}"
+                                EventName="Unfocused" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="11"
+                    Grid.Column="1"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="23.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        x:Name="Entry23"
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[22], Converter={StaticResource EmptyToBooleanConverter}}"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding DisplayedWalletSeedWordsList[22]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center">
+                        <Entry.Behaviors>
+                            <prism:EventToCommandBehavior
+                                Command="{Binding UnfocusedEntryCommand}"
+                                CommandParameter="{Binding Source={x:Reference Entry23}, Path=Text}"
+                                EventName="Unfocused" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="12"
+                    Grid.Column="0"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="12.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        x:Name="Entry12"
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[11], Converter={StaticResource EmptyToBooleanConverter}}"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding DisplayedWalletSeedWordsList[11]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center">
+                        <Entry.Behaviors>
+                            <prism:EventToCommandBehavior
+                                Command="{Binding UnfocusedEntryCommand}"
+                                CommandParameter="{Binding Source={x:Reference Entry12}, Path=Text}"
+                                EventName="Unfocused" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="12"
+                    Grid.Column="1"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="24.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        x:Name="Entry24"
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[23], Converter={StaticResource EmptyToBooleanConverter}}"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding DisplayedWalletSeedWordsList[23]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center">
+                        <Entry.Behaviors>
+                            <prism:EventToCommandBehavior
+                                Command="{Binding UnfocusedEntryCommand}"
+                                CommandParameter="{Binding Source={x:Reference Entry24}, Path=Text}"
+                                EventName="Unfocused" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </StackLayout>
+                <Button
+                    Grid.Row="13"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    BackgroundColor="#0C0C0C"
+                    Command="{prism:NavigateTo 'OpeningWalletPage',
+                                               UseModalNavigation=False,
+                                               Animated=True}"
+                    CornerRadius="5"
+                    HeightRequest="44"
+                    IsEnabled="{Binding IsValid}"
+                    Text="{x:Static resource:AppResources.Continue}"
+                    TextColor="White"
+                    TextTransform="None" />
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

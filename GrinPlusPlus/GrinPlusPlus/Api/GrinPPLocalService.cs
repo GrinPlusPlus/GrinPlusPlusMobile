@@ -23,7 +23,8 @@ namespace GrinPlusPlus.Api
                 Token = wallet.Token,
                 SlatepackAdddress = wallet.SlatepackAdddress,
                 TorAddress = wallet.TorAdddress,
-                ListenerPort = wallet.Listener
+                ListenerPort = wallet.Listener,
+                Seed = wallet.Seed
             };
         }
 

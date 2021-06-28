@@ -27,7 +27,7 @@ namespace GrinPlusPlus
             
             InitializeComponent();
 
-            string destination = "/InitPage";
+            string destination = "InitPage";
 
             if (Settings.Node.Status.Equals("Running"))
             {
@@ -74,6 +74,8 @@ namespace GrinPlusPlus
             containerRegistry.RegisterForNavigation<BackupWalletPage, BackupWalletPageViewModel>();
             containerRegistry.RegisterForNavigation<SettingsPage, SettingsPageViewModel>();
             containerRegistry.RegisterForNavigation<ErrorPage, ErrorPageViewModel>();
+            containerRegistry.RegisterForNavigation<ConfirmWalletSeedPage, ConfirmWalletSeedPageViewModel>();
+            containerRegistry.RegisterForNavigation<WalletSeedPage, WalletSeedPageViewModel>();
         }
 
         protected override void OnSleep()

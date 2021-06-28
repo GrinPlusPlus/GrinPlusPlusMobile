@@ -9,5 +9,7 @@
         public string SlatepackAdddress { get; set; }
 
         public int ListenerPort { get; set; }
+
+        public string Seed { get; set; }
     }
 }

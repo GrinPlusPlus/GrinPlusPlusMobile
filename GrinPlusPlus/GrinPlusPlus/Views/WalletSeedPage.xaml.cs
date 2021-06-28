@@ -2,9 +2,9 @@
 
 namespace GrinPlusPlus.Views
 {
-    public partial class OpeningWalletPage : ContentPage
+    public partial class WalletSeedPage : ContentPage
     {
-        public OpeningWalletPage()
+        public WalletSeedPage()
         {
             InitializeComponent();
         }
