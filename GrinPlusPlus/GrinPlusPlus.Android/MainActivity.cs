@@ -2,6 +2,7 @@
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
+using Android.Views;
 using Plugin.Fingerprint;
 using Prism;
 using Prism.Ioc;
@@ -23,6 +24,8 @@ namespace GrinPlusPlus.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             ZXing.Net.Mobile.Forms.Android.Platform.Init();
+
+            Window.SetFlags(WindowManagerFlags.Secure, WindowManagerFlags.Secure);
 
             LoadApplication(new App(new AndroidInitializer()));
         }
