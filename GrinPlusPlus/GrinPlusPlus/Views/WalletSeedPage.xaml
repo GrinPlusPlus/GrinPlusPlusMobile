@@ -46,7 +46,7 @@
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
                     Margin="0,0,0,5"
-                    Text="Your seed phrase is the only backup to your private keys, which can give you access to your crypto assets. Copy each word in a safe place."
+                    Text="{x:Static resource:AppResources.WalletSeedInit}"
                     TextColor="White" />
                 <StackLayout
                     Grid.Row="1"

@@ -574,6 +574,15 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please, fill the empty boxes before continuing.
+        /// </summary>
+        internal static string FillEmptyBoxes {
+            get {
+                return ResourceManager.GetString("FillEmptyBoxes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Finalize.
         /// </summary>
         internal static string Finalize {
@@ -1398,6 +1407,15 @@ namespace GrinPlusPlus.Resources {
         internal static string WalletSeed {
             get {
                 return ResourceManager.GetString("WalletSeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your seed phrase is the only backup to your private keys, which can give you access to your crypto assets. Copy each word in a safe place..
+        /// </summary>
+        internal static string WalletSeedInit {
+            get {
+                return ResourceManager.GetString("WalletSeedInit", resourceCulture);
             }
         }
         

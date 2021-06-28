@@ -288,6 +288,9 @@
   <data name="Fee" xml:space="preserve">
     <value>Комиссия </value>
   </data>
+  <data name="FillEmptyBoxes" xml:space="preserve">
+    <value>Please, fill the empty boxes before continuing</value>
+  </data>
   <data name="Finalize" xml:space="preserve">
     <value>Завершение</value>
   </data>
@@ -563,6 +566,9 @@
   </data>
   <data name="WalletSeed" xml:space="preserve">
     <value>Seed кошелька</value>
+  </data>
+  <data name="WalletSeedInit" xml:space="preserve">
+    <value>Your seed phrase is the only backup to your private keys, which can give you access to your crypto assets. Copy each word in a safe place.</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Да</value>

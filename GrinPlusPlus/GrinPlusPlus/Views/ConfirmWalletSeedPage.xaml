@@ -43,7 +43,7 @@
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
                     Margin="0,0,0,5"
-                    Text="Please, fill the empty boxes before continuing"
+                    Text="{x:Static resource:AppResources.FillEmptyBoxes}"
                     TextColor="White" />
                 <StackLayout
                     Grid.Row="1"
