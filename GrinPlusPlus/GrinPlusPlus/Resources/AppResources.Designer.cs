@@ -187,7 +187,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancel Transaction.
+        ///   Looks up a localized string similar to Cancel transaction.
         /// </summary>
         internal static string CancelTransaction {
             get {
@@ -430,7 +430,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Receive using Proximity.
+        ///   Looks up a localized string similar to Receive using NFC.
         /// </summary>
         internal static string EnableProximity {
             get {
@@ -511,7 +511,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Slatepack is the universal transaction standard for Grin. Slatepacks  are encrypted when the user uses a grin1 address to send smiles; otherwise, the transaction information is only obfuscated.
+        ///   Looks up a localized string similar to Slatepack is the universal transaction standard for Grin. Slatepacks  are encrypted when the user uses a grin1 address to send gins; otherwise, the transaction information is only obfuscated.
         /// </summary>
         internal static string FactSlatepack {
             get {
@@ -799,7 +799,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Text - QR Code - File .
+        ///   Looks up a localized string similar to Offline transaction.
         /// </summary>
         internal static string OfflineTransaction {
             get {
@@ -889,7 +889,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select Sending Method.
+        ///   Looks up a localized string similar to Select method.
         /// </summary>
         internal static string PickSendingMethod {
             get {

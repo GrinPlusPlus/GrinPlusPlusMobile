@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -118,55 +118,55 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Account" xml:space="preserve">
-    <value>Account</value>
+    <value>Аккаунт</value>
   </data>
   <data name="Address" xml:space="preserve">
-    <value>Address</value>
+    <value>Адреса</value>
   </data>
   <data name="AddressCantBeNull" xml:space="preserve">
-    <value>Make sure to set the adresss of the receiver</value>
+    <value>Переконайтеся що ви ввели адресу одержувача</value>
   </data>
   <data name="Addresses" xml:space="preserve">
-    <value>Addresses</value>
+    <value>Адреси</value>
   </data>
   <data name="AddressNote" xml:space="preserve">
-    <value>The receiver's address is also used to encrypt the transaction information, its use is not mandatory but highly recommended</value>
+    <value>Адреса одержувача також використовується для шифрування інформації про транзакцію, її використання не є обов'язковим, але настійно рекомендується</value>
   </data>
   <data name="AlignQRCode" xml:space="preserve">
-    <value>Align the QR within the frame</value>
+    <value>Вирівняти QR код по рамці</value>
   </data>
   <data name="All" xml:space="preserve">
-    <value>All</value>
+    <value>Усе</value>
   </data>
   <data name="Amount" xml:space="preserve">
-    <value>Amount</value>
+    <value>Кількість</value>
   </data>
   <data name="AmountCantBeNull" xml:space="preserve">
-    <value>Amount should be more than 0</value>
+    <value>Кількість повинна бути більше 0</value>
   </data>
   <data name="Amounts" xml:space="preserve">
-    <value>Amounts</value>
+    <value>Баланси</value>
   </data>
   <data name="BackupWallet" xml:space="preserve">
-    <value>Backup Wallet</value>
+    <value>Резервне копіювання</value>
   </data>
   <data name="Blocks" xml:space="preserve">
-    <value>Blocks</value>
+    <value>Блоки</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Скасування</value>
   </data>
   <data name="Cancelled" xml:space="preserve">
-    <value>Canceled</value>
+    <value>Скасовані</value>
   </data>
   <data name="CancelTransaction" xml:space="preserve">
-    <value>Cancel transaction</value>
+    <value>Скасування транзакції</value>
   </data>
   <data name="CancelTransactionQuestion" xml:space="preserve">
-    <value>Are you sure you want to cancel this Transaction?</value>
+    <value>Ви впевнені, що хочете скасувати транзакцію?</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>Close</value>
+    <value>Закрити</value>
   </data>
   <data name="Coinbase" xml:space="preserve">
     <value>Coinbase</value>
@@ -175,52 +175,52 @@
     <value>Commitment</value>
   </data>
   <data name="Completed" xml:space="preserve">
-    <value>Completed</value>
+    <value>Виконано</value>
   </data>
   <data name="Confirm" xml:space="preserve">
-    <value>Confirm</value>
+    <value>Підтвердити</value>
   </data>
   <data name="Confirmations" xml:space="preserve">
-    <value>Confirmations</value>
+    <value>Підтвердження</value>
   </data>
   <data name="ConfirmedHeight" xml:space="preserve">
-    <value>Confirmed Height</value>
+    <value>Підтверджена висота</value>
   </data>
   <data name="ConfirmIdentity" xml:space="preserve">
-    <value>Please confirm your identity to continue</value>
+    <value>Підтвердіть свою особистість для продовження</value>
   </data>
   <data name="ConfirmPassword" xml:space="preserve">
-    <value>Confirm Password</value>
+    <value>Підтвердити пароль</value>
   </data>
   <data name="ConnectedPeers" xml:space="preserve">
-    <value>Connected Peers</value>
+    <value>Підключені піри</value>
   </data>
   <data name="ConnectingToNode" xml:space="preserve">
-    <value>Initializing your the Grin Node now... the Grin Node runs locally and it takes from 10 to 16 seconds to initialize, please wait... ⏱️</value>
+    <value>Ініціалізація вашої ноди Grin ... нода запускається локально і необхідний час для запуску, приблизно 10-15 секунд, будь ласка чекайте ... ⏱️</value>
   </data>
   <data name="Continue" xml:space="preserve">
-    <value>Continue</value>
+    <value>Продовжити</value>
   </data>
   <data name="Copy" xml:space="preserve">
-    <value>Copy</value>
+    <value>Копіювати</value>
   </data>
   <data name="CopySlatepackMessage" xml:space="preserve">
-    <value>Copy Slatepack Message</value>
+    <value>Скопіювати Slatepack повідомлення</value>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
-    <value>Copy to Clipboard</value>
+    <value>До буферу обміну</value>
   </data>
   <data name="Create" xml:space="preserve">
-    <value>Create</value>
+    <value>Створити</value>
   </data>
   <data name="CreateOneOrRestoreIt" xml:space="preserve">
-    <value>Create a new account or use your wallet seed to restore a previous one</value>
+    <value>Створіть новий гаманець або використовуйте вашу seed-фразу для відновлення наявного</value>
   </data>
   <data name="CreateWallet" xml:space="preserve">
-    <value>Create new wallet</value>
+    <value>Створити новий гаманець</value>
   </data>
   <data name="CreateWalletMessage" xml:space="preserve">
-    <value>After creating a new wallet, please make sure you're keeping your wallet seed stored safely.</value>
+    <value>Після створення гаманця, будь ласка переконайтеся що ви зберегли вашу seed-фразу надійно.</value>
   </data>
   <data name="Custom" xml:space="preserve">
     <value>Custom</value>
@@ -229,259 +229,259 @@
     <value>Dandelion</value>
   </data>
   <data name="Date" xml:space="preserve">
-    <value>Date</value>
+    <value>Дата</value>
   </data>
   <data name="DeleteWallet" xml:space="preserve">
-    <value>Delete wallet</value>
+    <value>Видалити гаманець</value>
   </data>
   <data name="Details" xml:space="preserve">
-    <value>Details</value>
+    <value>Деталі</value>
   </data>
   <data name="Emission" xml:space="preserve">
-    <value>Emission</value>
+    <value>Емісія</value>
   </data>
   <data name="EnableProximity" xml:space="preserve">
-    <value>Receive using NFC</value>
+    <value>Отримати використовуючи Proximity</value>
   </data>
   <data name="Error" xml:space="preserve">
-    <value>Error</value>
+    <value>Помилка</value>
   </data>
   <data name="ErrorConnectingToNode" xml:space="preserve">
-    <value>There was an error while trying to initialize the Grin Node.</value>
+    <value>Помилка під час ініціалізації Grin ноди.</value>
   </data>
   <data name="ErrorConnectingToNodeAdvice" xml:space="preserve">
-    <value>Please try to run the node again using the notification bar action buttons</value>
+    <value>Будь ласка спробуйте запустити ноду заново, шляхом кліка по відповідній кнопці в повідомленнях пристрої</value>
   </data>
   <data name="FactAddresses" xml:space="preserve">
-    <value>Notably, there are no on-chain addresses either, as transaction building is interactive. Keys used in SlatepackAddresses are derived from a path from the master seed in a given wallet account</value>
+    <value>Тут немає мережевих адрес, оскільки побудова транзакцій є інтерактивним. Ключі, що використовуються в SlatepackAddresses, є похідними шляху від основного початкового числа в цього облікового запису гаманця.</value>
   </data>
   <data name="FactEmission" xml:space="preserve">
-    <value>A new grin ツ is emitted every second, forever, meaning the emission rate stays constant and completely linear. As time passes, the relative dilution becomes smaller; After 10 years, it falls below 10%. After 20, below 5%. This results in a decreasing inflation rate, known as disinflation</value>
+    <value>Нова монета Grin ツ з'являється кожну секунду, нескінченно, емісія лінійна і постійна. Згодом відносна інфляція стає менше; Через 10 років вона падає нижче 10%. Після 20 - нижче 5%. Це призводить до зниження рівня інфляції, відомому як дезінфляція.</value>
   </data>
   <data name="FactPrivate" xml:space="preserve">
-    <value>Privacy by default. Transactions have no amount, no addresses and can be trivially aggregated. This enables complete fungibility without precluding the ability to selectively disclose information as needed</value>
+    <value>Приватність за замовчуванням. У транзакції не публікується: кількість посилаються монет, немає адрес, вони можуть бути легко об'еденени.Такім чином монети не унікальні, але в той же час є можливість частково надавати необхідну інформацію.</value>
   </data>
   <data name="FactsAmounts" xml:space="preserve">
-    <value>First, there are no amounts. A mimblewimble implementation natively uses Confidential Transactions, meaning all amounts are hidden; They are provably impossible to uncover, yet easily verified. Even before anything else, simply hiding amounts makes any analysis significantly more challenging</value>
+    <value>По-перше, немає кількості монет. Реалізація mimblewimble використовує конфіденційні транзакції, тобто все суми приховані; Їх неможливо виявити, але легко перевірити. Просте приховування сум значно ускладнює аналіз.</value>
   </data>
   <data name="FactsDandelion" xml:space="preserve">
-    <value>An important piece of information that commonly leaks is the IP address that originally sent the transaction. To tackle this issue, grin employs Dandelion++ (originally proposed as a BIP), a protocol designed to hide a transaction's origin IP address</value>
+    <value>Важливою частиною інформації, яка зазвичай просочується, є IP-адреса, з якого спочатку була відправлена транзакція. Щоб вирішити цю проблему, grin використовує Dandelion ++ (спочатку запропонований як BIP), протокол, призначений для приховання IP-адреси джерела транзакції.</value>
   </data>
   <data name="FactSlatepack" xml:space="preserve">
-    <value>Slatepack is the universal transaction standard for Grin. Slatepacks  are encrypted when the user uses a grin1 address to send gins; otherwise, the transaction information is only obfuscated</value>
+    <value>Slatepack - це універсальний стандарт транзакцій для Grin. Пакети Slatepack зашифровуються, коли користувач використовує адресу для відправки Grin; в іншому випадку інформація про транзакції тільки ускладнюється</value>
   </data>
   <data name="FactsMimblewimble" xml:space="preserve">
-    <value>Mimblewimble is a blockchain protocol that allows for a completely private transaction platform through a unique security framework that is markedly different from that of the pseudonymous Bitcoin cryptocurrency. In Mimblewimble, there are no addresses and transactions are fully confidential. Its distributed ledger is also relatively more compact than the other chains in the crypto space</value>
+    <value>Mimblewimble - це протокол блокчейна, який дозволяє використовувати платформу для повністю закритих транзакцій за допомогою унікальної структури безпеки, яка помітно відрізняється від псевдоаномнімной криптовалюта біткойнов. У Mimblewimble немає адрес, і транзакції повністю конфіденційні. Його розподілений реєстр також щодо компактніше, ніж інші ланцюжки в кріптопространстве.</value>
   </data>
   <data name="FactsOpen" xml:space="preserve">
-    <value>Grin is developed openly, by individual contributors all over the world. There's no company or foundation behind it, and no ICO, founder reward, pre-mine or dev-tax. The coin distribution is designed to be as fair (but not gratis) as is known to be possible</value>
+    <value>Grin розробляється відкрито окремими учасниками з усього світу. За цим немає ні компанії, ні фонду, ні ICO, ні винагороди засновника, ні податку на розробку. Розподіл монет повинно бути настільки справедливим (але не безкоштовним), наскільки це можливо.</value>
   </data>
   <data name="FactsScalable" xml:space="preserve">
-    <value>Grin scales mostly with the number of users and minimally with the number of transactions. Past transactional data can be pruned, making grin drastically lightweight compared to other blockchains</value>
+    <value>Grin масштабується в основному з кількістю користувачів і мінімально з кількістю транзакцій. Дані минулих транзакцій можуть бути видалені, що значно спрощує Grin в порівнянні з іншими блокчейнамі.</value>
   </data>
   <data name="FactTransactions" xml:space="preserve">
-    <value>Mimblewimble transactions are interactive, meaning both parties need some kind of communication to interact with each other and exchange the necessary data to create a transaction.</value>
+    <value>Транзакції Mimblewimble є інтерактивними. Одержувач і відправник повинні бути в мережі для отримання\відправки Grin.</value>
   </data>
   <data name="FastPrivateSecure" xml:space="preserve">
-    <value>Fast. Private. Secure.</value>
+    <value>Швидко. Конфіденційно. Безпечно.</value>
   </data>
   <data name="Fee" xml:space="preserve">
-    <value>Fee</value>
+    <value>Комісія</value>
   </data>
   <data name="FillEmptyBoxes" xml:space="preserve">
-    <value>Please, fill the empty boxes before continuing</value>
+    <value>Будь ласка, заповніть порожні поля, перш ніж продовжувати</value>
   </data>
   <data name="Finalize" xml:space="preserve">
-    <value>Finalize</value>
+    <value>Завершення</value>
   </data>
   <data name="FinalizeTransaction" xml:space="preserve">
-    <value>Finalize Transaction</value>
+    <value>Завершити транзакцію</value>
   </data>
   <data name="GetWalletSeed" xml:space="preserve">
-    <value>Display Wallet Seed Phrase</value>
+    <value>Показати Seed-фразу</value>
   </data>
   <data name="Headers" xml:space="preserve">
-    <value>Headers</value>
+    <value>заголовки</value>
   </data>
   <data name="History" xml:space="preserve">
-    <value>History</value>
+    <value>Історія</value>
   </data>
   <data name="Immature" xml:space="preserve">
-    <value>Immature</value>
+    <value>Непідтверджені</value>
   </data>
   <data name="InitializingNode" xml:space="preserve">
-    <value>Initializing node</value>
+    <value>Ініціалізація ноди</value>
   </data>
   <data name="InProgress" xml:space="preserve">
-    <value>In Progress</value>
+    <value>В процесі</value>
   </data>
   <data name="Kernels" xml:space="preserve">
     <value>Kernerls</value>
   </data>
   <data name="LoadFromFile" xml:space="preserve">
-    <value>Load from File</value>
+    <value>Завантажити з файлу</value>
   </data>
   <data name="Locked" xml:space="preserve">
-    <value>Locked</value>
+    <value>Заблоковані</value>
   </data>
   <data name="MaximumPeers" xml:space="preserve">
-    <value>Maximum number of Peers</value>
+    <value>Максимальна кількість пірів</value>
   </data>
   <data name="Message" xml:space="preserve">
-    <value>Message</value>
+    <value>Повідомлення</value>
   </data>
   <data name="Method" xml:space="preserve">
-    <value>Method</value>
+    <value>Метод</value>
   </data>
   <data name="Mimblewimble" xml:space="preserve">
     <value>Mimblewimble</value>
   </data>
   <data name="MinimumPeers" xml:space="preserve">
-    <value>Minimum number of Peers</value>
+    <value>Мінімальна кількість пірів</value>
   </data>
   <data name="Network" xml:space="preserve">
-    <value>Network</value>
+    <value>Мережа</value>
   </data>
   <data name="Next" xml:space="preserve">
-    <value>Next</value>
+    <value>Наступне</value>
   </data>
   <data name="NFC" xml:space="preserve">
     <value>NFC</value>
   </data>
   <data name="No" xml:space="preserve">
-    <value>No</value>
+    <value>Ні</value>
   </data>
   <data name="Node" xml:space="preserve">
-    <value>Node</value>
+    <value>Нода</value>
   </data>
   <data name="NonInteractive" xml:space="preserve">
-    <value>Without Interactivity</value>
+    <value>Без інтерактивності</value>
   </data>
   <data name="NotReachable" xml:space="preserve">
-    <value>Not Reachable</value>
+    <value>Не доступно</value>
   </data>
   <data name="NoWalletFound" xml:space="preserve">
-    <value>No accounts were found</value>
+    <value>Немає акаунтів</value>
   </data>
   <data name="OfflineTransaction" xml:space="preserve">
-    <value>Offline transaction</value>
+    <value>Текст - QR код - Файл</value>
   </data>
   <data name="Open" xml:space="preserve">
-    <value>Open</value>
+    <value>Відчинити</value>
   </data>
   <data name="OpeningPleaseWait" xml:space="preserve">
-    <value>Opening wallet, please wait...</value>
+    <value>Відкриваємо гаманець, зачекайте будь ласка ...</value>
   </data>
   <data name="OpenWallet" xml:space="preserve">
-    <value>Open Wallet</value>
+    <value>Відкрити гаманець</value>
   </data>
   <data name="OpenWalletMessage" xml:space="preserve">
-    <value>Wallets interact using the Tor network, in case Tor is unavailable you are capable of sending and receiving coins manually using Slatepack Messages through any channel you prefer</value>
+    <value>Гаманці взаємодіють за допомогою захищеної мережі Tor. Якщо Tor недоступний, ви можете відправляти і отримувати монети вручну за допомогою повідомлень Slatepack будь-яким каналом, якому ви віддаєте перевагу.</value>
   </data>
   <data name="Outputs" xml:space="preserve">
-    <value>Outputs</value>
+    <value>Виходи</value>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Password</value>
+    <value>Паролі</value>
   </data>
   <data name="PasswordCanNotBeEmpty" xml:space="preserve">
-    <value>Password can't be empty</value>
+    <value>Паролі не можуть бути порожніми</value>
   </data>
   <data name="PasteFromClipboard" xml:space="preserve">
-    <value>Paste from Clipboard</value>
+    <value>Вставити з буфера обміну</value>
   </data>
   <data name="Pending" xml:space="preserve">
-    <value>Pending</value>
+    <value>Зарахування</value>
   </data>
   <data name="PickSendingMethod" xml:space="preserve">
-    <value>Select method</value>
+    <value>Виберіть метод відправки</value>
   </data>
   <data name="PleaseConfirm" xml:space="preserve">
-    <value>Please Confirm</value>
+    <value>Будь ласка підтвердіть</value>
   </data>
   <data name="PowerSaverMessage" xml:space="preserve">
-    <value>Make sure the POWER SAVER is DISABLED</value>
+    <value>Переконайтеся що для додатка відключений режим ЕНЕРГОЗБЕРЕЖЕННЯ</value>
   </data>
   <data name="Private" xml:space="preserve">
-    <value>Private</value>
+    <value>Конфіденційність</value>
   </data>
   <data name="QRCode" xml:space="preserve">
-    <value>QR Code</value>
+    <value>QR код</value>
   </data>
   <data name="Reachable" xml:space="preserve">
-    <value>Reachable</value>
+    <value>Доступні</value>
   </data>
   <data name="Receive" xml:space="preserve">
-    <value>Receive</value>
+    <value>Отримати</value>
   </data>
   <data name="Received" xml:space="preserve">
-    <value>Received</value>
+    <value>Отримані</value>
   </data>
   <data name="ReceiveTransaction" xml:space="preserve">
-    <value>Receive Transaction</value>
+    <value>Отримані транзакції</value>
   </data>
   <data name="Repost" xml:space="preserve">
-    <value>Repost</value>
+    <value>Репост</value>
   </data>
   <data name="Restore" xml:space="preserve">
-    <value>Restore</value>
+    <value>Відновлення</value>
   </data>
   <data name="RestoreExistingWallet" xml:space="preserve">
-    <value>Restore existing wallet</value>
+    <value>Відновити існуючий гаманець</value>
   </data>
   <data name="RestoreWallet" xml:space="preserve">
-    <value>Restore wallet</value>
+    <value>Восстановить</value>
   </data>
   <data name="Scalable" xml:space="preserve">
-    <value>Scalable</value>
+    <value>Масштабування</value>
   </data>
   <data name="ScanningQRCode" xml:space="preserve">
-    <value>Scanning a QR Code</value>
+    <value>Сканувати QR код</value>
   </data>
   <data name="ScanQRCode" xml:space="preserve">
-    <value>Scan QRCode</value>
+    <value>Сканувати QRCode</value>
   </data>
   <data name="SeedLength" xml:space="preserve">
-    <value>Seed Length</value>
+    <value>Seed довжина</value>
   </data>
   <data name="SelectStatus" xml:space="preserve">
-    <value>Select status</value>
+    <value>Виберіть статус</value>
   </data>
   <data name="Send" xml:space="preserve">
-    <value>Send</value>
+    <value>Послати</value>
   </data>
   <data name="Sending" xml:space="preserve">
-    <value>Sending</value>
+    <value>Відправлення</value>
   </data>
   <data name="SendingPleaseWait" xml:space="preserve">
-    <value>Sending, please wait...</value>
+    <value>Відправляю Grins, зачекайте будь ласка...</value>
   </data>
   <data name="Sent" xml:space="preserve">
-    <value>Sent</value>
+    <value>Надіслати</value>
   </data>
   <data name="SetAmount" xml:space="preserve">
-    <value>Set Amount</value>
+    <value>Встановити кількість</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Налаштування</value>
   </data>
   <data name="Share" xml:space="preserve">
-    <value>Share</value>
+    <value>Поділитися</value>
   </data>
   <data name="ShareAddress" xml:space="preserve">
-    <value>Share Address</value>
+    <value>Поділитися адресою</value>
   </data>
   <data name="ShareSlatepackMessage" xml:space="preserve">
-    <value>Share Slatepack Message</value>
+    <value>Поділитися Slatepack повідомленням</value>
   </data>
   <data name="ShareSlatepackMessageAsFile" xml:space="preserve">
-    <value>Share as File</value>
+    <value>Надіслати як файл</value>
   </data>
   <data name="ShareSlatePackMessageQuote" xml:space="preserve">
-    <value>Can't communicate with the Receiver via TOR, but do not worry, you are still able of initiating the transaction by sharing this Slatepack message. The Receiver should introduce this Slatepack into their Wallet</value>
+    <value>Одержувач повинен ввести це повідомлення Slatepack у свій гаманець, щоб отримати транзакцію.</value>
   </data>
   <data name="ShareSlatePackMessageQuoteToFinalize" xml:space="preserve">
-    <value>Send this Slatepack Message to the Sender to in order to Finalize the transaction</value>
+    <value>Надішліть це повідомлення Slatepack відправнику, щоб завершити транзакцію.</value>
   </data>
   <data name="Slate" xml:space="preserve">
     <value>Slate</value>
@@ -490,90 +490,90 @@
     <value>Slatepack</value>
   </data>
   <data name="SlatepackAddress" xml:space="preserve">
-    <value>Slatepack Address</value>
+    <value>Slatepack адреса</value>
   </data>
   <data name="SlatepackMessage" xml:space="preserve">
-    <value>Slatepack Message</value>
+    <value>Slatepack повідомлення</value>
   </data>
   <data name="SlatepackMessageFile" xml:space="preserve">
-    <value>Slatepack Message File</value>
+    <value>Slatepack повідомлення файлом</value>
   </data>
   <data name="SlatepackMessageText" xml:space="preserve">
-    <value>Slatepack Message Text</value>
+    <value>Slatepack повідомлення текстом</value>
   </data>
   <data name="Spendable" xml:space="preserve">
-    <value>Spendable</value>
+    <value>Доступні</value>
   </data>
   <data name="Status" xml:space="preserve">
-    <value>Status</value>
+    <value>Статус</value>
   </data>
   <data name="Support" xml:space="preserve">
-    <value>Support</value>
+    <value>Підтримка</value>
   </data>
   <data name="SwipeUp2Send" xml:space="preserve">
-    <value>Swipe Up to Send Grins 😬</value>
+    <value>Свайп вгору для відправки Grin 😬</value>
   </data>
   <data name="SyncedRedirecting" xml:space="preserve">
-    <value>The Grin Node is now fully synced. Redirecting to the login screen...</value>
+    <value>Нода Grin тепер повністю синхронізований. Перенаправлення на екран входу в систему...</value>
   </data>
   <data name="TabToCopy" xml:space="preserve">
-    <value>Tap address to copy</value>
+    <value>Клацніть на поштову адресу для копіювання</value>
   </data>
   <data name="TorAddress" xml:space="preserve">
-    <value>Tor address</value>
+    <value>Tor адреса</value>
   </data>
   <data name="Total" xml:space="preserve">
-    <value>Total</value>
+    <value>Всього</value>
   </data>
   <data name="TransactionHistory" xml:space="preserve">
-    <value>Transaction history</value>
+    <value>Історія транзакцій</value>
   </data>
   <data name="Transactions" xml:space="preserve">
-    <value>Transactions</value>
+    <value>Транзакції</value>
   </data>
   <data name="TransactionSent" xml:space="preserve">
-    <value>Transaction Sent  〜(ᵐ‿ʷ)〜</value>
+    <value>Транзакції відправлені  〜(ᵐ‿ʷ)〜</value>
   </data>
   <data name="TryToStartNodeManually" xml:space="preserve">
-    <value>Try to start the node again</value>
+    <value>Спробувати знову запустити ноду</value>
   </data>
   <data name="Unconfirmed" xml:space="preserve">
-    <value>Unconfirmed</value>
+    <value>Непідтверджені</value>
   </data>
   <data name="UnfinalizedTransactions" xml:space="preserve">
-    <value>Unfinalized transactions</value>
+    <value>Незавершені транзакції</value>
   </data>
   <data name="Username" xml:space="preserve">
-    <value>Username</value>
+    <value>Ім'я користувача</value>
   </data>
   <data name="UsingInteractivity" xml:space="preserve">
-    <value>Interactive Messages</value>
+    <value>Інтерактивні транзакції</value>
   </data>
   <data name="UsingNFC" xml:space="preserve">
-    <value>Using NFC</value>
+    <value>Використовувати NFC</value>
   </data>
   <data name="WaitingSync" xml:space="preserve">
-    <value>Waiting for the Node to be up and Running...</value>
+    <value>Чекаємо запуску ноди і починаємо...</value>
   </data>
   <data name="Wallet" xml:space="preserve">
-    <value>Wallet</value>
+    <value>Гаманець</value>
   </data>
   <data name="WalletReachable" xml:space="preserve">
-    <value>Your wallet is reachable</value>
+    <value>Гаманець доступний</value>
   </data>
   <data name="WalletReachableNot" xml:space="preserve">
-    <value>Your wallet is not reachable</value>
+    <value>Ваш гаманець не доступний</value>
   </data>
   <data name="WalletSeed" xml:space="preserve">
-    <value>Wallet Seed</value>
+    <value>Seed гаманця</value>
   </data>
   <data name="WalletSeedInit" xml:space="preserve">
-    <value>Your seed phrase is the only backup to your private keys, which can give you access to your crypto assets. Copy each word in a safe place.</value>
+    <value>Ваша початкова фраза - це єдина резервна копія ваших приватних ключів, яка може надати вам доступ до ваших крипто-активів. Скопіюйте кожне слово в безпечному місці.</value>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>Yes</value>
+    <value>Так</value>
   </data>
   <data name="YourWallets" xml:space="preserve">
-    <value>Your wallets</value>
+    <value>Ваші гаманці</value>
   </data>
 </root>

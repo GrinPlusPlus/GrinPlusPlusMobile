@@ -118,55 +118,55 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Account" xml:space="preserve">
-    <value>Account</value>
+    <value>Konto</value>
   </data>
   <data name="Address" xml:space="preserve">
-    <value>Address</value>
+    <value>Adresse</value>
   </data>
   <data name="AddressCantBeNull" xml:space="preserve">
-    <value>Make sure to set the adresss of the receiver</value>
+    <value>Die Adresse kann nicht leer sein</value>
   </data>
   <data name="Addresses" xml:space="preserve">
-    <value>Addresses</value>
+    <value>Adressen</value>
   </data>
   <data name="AddressNote" xml:space="preserve">
-    <value>The receiver's address is also used to encrypt the transaction information, its use is not mandatory but highly recommended</value>
+    <value>Die Empfängeradresse wird auch zur Verschlüsselung der Transaktionsdaten verwendet, ihre Verwendung ist nicht zwingend erforderlich, wird aber dringend empfohlen.</value>
   </data>
   <data name="AlignQRCode" xml:space="preserve">
-    <value>Align the QR within the frame</value>
+    <value>Richten Sie den QR-Code am Rahmen aus</value>
   </data>
   <data name="All" xml:space="preserve">
-    <value>All</value>
+    <value>Alles</value>
   </data>
   <data name="Amount" xml:space="preserve">
-    <value>Amount</value>
+    <value>Betrag</value>
   </data>
   <data name="AmountCantBeNull" xml:space="preserve">
-    <value>Amount should be more than 0</value>
+    <value>Der Betrag kann nicht leer sein</value>
   </data>
   <data name="Amounts" xml:space="preserve">
-    <value>Amounts</value>
+    <value>Beträge</value>
   </data>
   <data name="BackupWallet" xml:space="preserve">
-    <value>Backup Wallet</value>
+    <value>Backup-Geldbörse</value>
   </data>
   <data name="Blocks" xml:space="preserve">
-    <value>Blocks</value>
+    <value>Blöcke</value>
   </data>
   <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+    <value>Stornieren</value>
   </data>
   <data name="Cancelled" xml:space="preserve">
-    <value>Canceled</value>
+    <value>Abgebrochen</value>
   </data>
   <data name="CancelTransaction" xml:space="preserve">
-    <value>Cancel transaction</value>
+    <value>Transaktion stornieren</value>
   </data>
   <data name="CancelTransactionQuestion" xml:space="preserve">
-    <value>Are you sure you want to cancel this Transaction?</value>
+    <value>Möchten Sie diese Transaktion wirklich abbrechen?</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>Close</value>
+    <value>Schließen</value>
   </data>
   <data name="Coinbase" xml:space="preserve">
     <value>Coinbase</value>
@@ -175,64 +175,64 @@
     <value>Commitment</value>
   </data>
   <data name="Completed" xml:space="preserve">
-    <value>Completed</value>
+    <value>Abgeschlossen</value>
   </data>
   <data name="Confirm" xml:space="preserve">
-    <value>Confirm</value>
+    <value>Bestätigen</value>
   </data>
   <data name="Confirmations" xml:space="preserve">
-    <value>Confirmations</value>
+    <value>Bestätigungen</value>
   </data>
   <data name="ConfirmedHeight" xml:space="preserve">
-    <value>Confirmed Height</value>
+    <value>Konfirmation Höhe</value>
   </data>
   <data name="ConfirmIdentity" xml:space="preserve">
-    <value>Please confirm your identity to continue</value>
+    <value>Identität bestätigen</value>
   </data>
   <data name="ConfirmPassword" xml:space="preserve">
-    <value>Confirm Password</value>
+    <value>Bestätigen Sie das Passwort</value>
   </data>
   <data name="ConnectedPeers" xml:space="preserve">
-    <value>Connected Peers</value>
+    <value>Peers</value>
   </data>
   <data name="ConnectingToNode" xml:space="preserve">
-    <value>Initializing your the Grin Node now... the Grin Node runs locally and it takes from 10 to 16 seconds to initialize, please wait... ⏱️</value>
+    <value>Node wird gestartet ... der Node wird lokal ausgeführt, es kann 10-15 Sekunden dauern, bis er gestartet wird...</value>
   </data>
   <data name="Continue" xml:space="preserve">
-    <value>Continue</value>
+    <value>Weitergehen</value>
   </data>
   <data name="Copy" xml:space="preserve">
-    <value>Copy</value>
+    <value>Kopieren</value>
   </data>
   <data name="CopySlatepackMessage" xml:space="preserve">
-    <value>Copy Slatepack Message</value>
+    <value>Slatepack Message kopieren</value>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
-    <value>Copy to Clipboard</value>
+    <value>In die Zwischenablage kopieren</value>
   </data>
   <data name="Create" xml:space="preserve">
-    <value>Create</value>
+    <value>Kreieren</value>
   </data>
   <data name="CreateOneOrRestoreIt" xml:space="preserve">
-    <value>Create a new account or use your wallet seed to restore a previous one</value>
+    <value>Erstellen Sie ein neues Konto oder stellen Sie die Wallet wieder her</value>
   </data>
   <data name="CreateWallet" xml:space="preserve">
-    <value>Create new wallet</value>
+    <value>Wallet erstellen</value>
   </data>
   <data name="CreateWalletMessage" xml:space="preserve">
-    <value>After creating a new wallet, please make sure you're keeping your wallet seed stored safely.</value>
+    <value>Stellen Sie nach dem Erstellen einer neuen Wallet sicher, dass Sie Ihren Wallet-Seed sicher aufbewahren</value>
   </data>
   <data name="Custom" xml:space="preserve">
-    <value>Custom</value>
+    <value>Personalisiert</value>
   </data>
   <data name="Dandelion" xml:space="preserve">
     <value>Dandelion</value>
   </data>
   <data name="Date" xml:space="preserve">
-    <value>Date</value>
+    <value>Datum</value>
   </data>
   <data name="DeleteWallet" xml:space="preserve">
-    <value>Delete wallet</value>
+    <value>Wallet löschen</value>
   </data>
   <data name="Details" xml:space="preserve">
     <value>Details</value>
@@ -241,46 +241,46 @@
     <value>Emission</value>
   </data>
   <data name="EnableProximity" xml:space="preserve">
-    <value>Receive using NFC</value>
+    <value>Empfangen mit NFC</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
   <data name="ErrorConnectingToNode" xml:space="preserve">
-    <value>There was an error while trying to initialize the Grin Node.</value>
+    <value>Beim Versuch, den Knoten zu initialisieren, ist ein Fehler aufgetreten.</value>
   </data>
   <data name="ErrorConnectingToNodeAdvice" xml:space="preserve">
-    <value>Please try to run the node again using the notification bar action buttons</value>
+    <value>Versuchen Sie, den Knoten erneut über die Aktionsschaltflächen in der Benachrichtigungsleiste auszuführen</value>
   </data>
   <data name="FactAddresses" xml:space="preserve">
-    <value>Notably, there are no on-chain addresses either, as transaction building is interactive. Keys used in SlatepackAddresses are derived from a path from the master seed in a given wallet account</value>
+    <value>Insbesondere gibt es auch keine Adressen in der Blockchain, da die Erstellung von Transaktionen interaktiv erfolgt. Die verwendeten Schlüssel werden aus einem Pfad vom Master-Seed abgeleitet.</value>
   </data>
   <data name="FactEmission" xml:space="preserve">
-    <value>A new grin ツ is emitted every second, forever, meaning the emission rate stays constant and completely linear. As time passes, the relative dilution becomes smaller; After 10 years, it falls below 10%. After 20, below 5%. This results in a decreasing inflation rate, known as disinflation</value>
+    <value>Jede Sekunde wird ein Grin ツ emittiert, und zwar für immer, d. h. die Emissionsrate bleibt konstant und völlig linear. Im Laufe der Zeit wird die relative Verwässerung kleiner; nach 10 Jahren fällt sie unter 10 %. Nach 20, unter 5 %. Dies führt zu einer sinkenden Inflationsrate, die als Disinflation bezeichnet wird.</value>
   </data>
   <data name="FactPrivate" xml:space="preserve">
-    <value>Privacy by default. Transactions have no amount, no addresses and can be trivially aggregated. This enables complete fungibility without precluding the ability to selectively disclose information as needed</value>
+    <value>Datenschutz standardmäßig. Transaktionen haben keinen Betrag und keine Adresse und können trivial aggregiert werden. Dies ermöglicht eine vollständige Fungibilität, ohne die Möglichkeit auszuschließen, Informationen bei Bedarf selektiv offenzulegen.</value>
   </data>
   <data name="FactsAmounts" xml:space="preserve">
-    <value>First, there are no amounts. A mimblewimble implementation natively uses Confidential Transactions, meaning all amounts are hidden; They are provably impossible to uncover, yet easily verified. Even before anything else, simply hiding amounts makes any analysis significantly more challenging</value>
+    <value>Erstens: Es gibt keine Beträge. Mimblewimble verwendet nativ vertrauliche Transaktionen, was bedeutet, dass alle Beträge versteckt sind; sie sind wahrscheinlich nicht zu entdecken, aber leicht zu überprüfen. Vor allem die einfache Tatsache, dass die Beträge versteckt werden, macht jede Analyse viel schwieriger.</value>
   </data>
   <data name="FactsDandelion" xml:space="preserve">
-    <value>An important piece of information that commonly leaks is the IP address that originally sent the transaction. To tackle this issue, grin employs Dandelion++ (originally proposed as a BIP), a protocol designed to hide a transaction's origin IP address</value>
+    <value>Eine wichtige Information, die häufig durchgesickert ist, ist die IP-Adresse, von der die Transaktion ursprünglich ausging. Um dieses Problem zu lösen, verwendet grin Dandelion++ (ursprünglich als BIP vorgeschlagen), ein Protokoll, das entwickelt wurde, um die Quell-IP-Adresse einer Transaktion zu verbergen.</value>
   </data>
   <data name="FactSlatepack" xml:space="preserve">
-    <value>Slatepack is the universal transaction standard for Grin. Slatepacks  are encrypted when the user uses a grin1 address to send gins; otherwise, the transaction information is only obfuscated</value>
+    <value>Slatepack ist der universelle Transaktionsstandard für Grin. Slatepacks werden verschlüsselt, wenn der Benutzer eine grin1-Adresse zum Senden von grins verwendet; ansonsten werden die Transaktionsinformationen nur verschleiert.</value>
   </data>
   <data name="FactsMimblewimble" xml:space="preserve">
-    <value>Mimblewimble is a blockchain protocol that allows for a completely private transaction platform through a unique security framework that is markedly different from that of the pseudonymous Bitcoin cryptocurrency. In Mimblewimble, there are no addresses and transactions are fully confidential. Its distributed ledger is also relatively more compact than the other chains in the crypto space</value>
+    <value>Mimblewimble ist ein Blockchain-Protokoll, das durch ein einzigartiges Sicherheits-Framework, das sich deutlich von der pseudonymen Kryptowährung Bitcoin unterscheidet, eine komplett private Transaktionsplattform ermöglicht. In Mimblewimble gibt es keine Adressen und die Transaktionen sind völlig vertraulich. Sein verteiltes Ledger ist auch relativ kompakter als die anderen Ketten im Krypto-Raum.</value>
   </data>
   <data name="FactsOpen" xml:space="preserve">
-    <value>Grin is developed openly, by individual contributors all over the world. There's no company or foundation behind it, and no ICO, founder reward, pre-mine or dev-tax. The coin distribution is designed to be as fair (but not gratis) as is known to be possible</value>
+    <value>Grin wird offen entwickelt, von einzelnen Mitwirkenden aus der ganzen Welt. Es steht keine Firma oder Stiftung dahinter, und es gibt keinen ICO, keine Gründerbelohnung, kein Pre-Mining und keine Dev-Steuer. Die Münzverteilung soll so fair (aber nicht kostenlos) sein, wie es bekanntlich möglich ist.</value>
   </data>
   <data name="FactsScalable" xml:space="preserve">
-    <value>Grin scales mostly with the number of users and minimally with the number of transactions. Past transactional data can be pruned, making grin drastically lightweight compared to other blockchains</value>
+    <value>Grin skaliert in erster Linie mit der Anzahl der Benutzer und nur minimal mit der Anzahl der Transaktionen. Frühere Transaktionsdaten können entfernt werden, was Grin im Vergleich zu anderen Blockchains drastisch leicht macht.</value>
   </data>
   <data name="FactTransactions" xml:space="preserve">
-    <value>Mimblewimble transactions are interactive, meaning both parties need some kind of communication to interact with each other and exchange the necessary data to create a transaction.</value>
+    <value>Mimblewimble-Transaktionen sind interaktiv, was bedeutet, dass beide Parteien eine Form der Kommunikation benötigen, um zu interagieren und die Daten auszutauschen, die zur Erstellung einer Transaktion notwendig sind.</value>
   </data>
   <data name="FastPrivateSecure" xml:space="preserve">
     <value>Fast. Private. Secure.</value>
@@ -289,199 +289,199 @@
     <value>Fee</value>
   </data>
   <data name="FillEmptyBoxes" xml:space="preserve">
-    <value>Please, fill the empty boxes before continuing</value>
+    <value>Bitte füllen Sie die leeren Felder aus, bevor Sie fortfahren.</value>
   </data>
   <data name="Finalize" xml:space="preserve">
-    <value>Finalize</value>
+    <value>Abschließen</value>
   </data>
   <data name="FinalizeTransaction" xml:space="preserve">
-    <value>Finalize Transaction</value>
+    <value>Transaktion abschließen</value>
   </data>
   <data name="GetWalletSeed" xml:space="preserve">
-    <value>Display Wallet Seed Phrase</value>
+    <value>Seed erhalten</value>
   </data>
   <data name="Headers" xml:space="preserve">
-    <value>Headers</value>
+    <value>Kopfzeilen</value>
   </data>
   <data name="History" xml:space="preserve">
-    <value>History</value>
+    <value>Aufzeichnung</value>
   </data>
   <data name="Immature" xml:space="preserve">
     <value>Immature</value>
   </data>
   <data name="InitializingNode" xml:space="preserve">
-    <value>Initializing node</value>
+    <value>Knoten initialisieren</value>
   </data>
   <data name="InProgress" xml:space="preserve">
-    <value>In Progress</value>
+    <value>in Bearbeitung</value>
   </data>
   <data name="Kernels" xml:space="preserve">
     <value>Kernerls</value>
   </data>
   <data name="LoadFromFile" xml:space="preserve">
-    <value>Load from File</value>
+    <value>Archiv lesen</value>
   </data>
   <data name="Locked" xml:space="preserve">
     <value>Locked</value>
   </data>
   <data name="MaximumPeers" xml:space="preserve">
-    <value>Maximum number of Peers</value>
+    <value>Maximale Peers</value>
   </data>
   <data name="Message" xml:space="preserve">
-    <value>Message</value>
+    <value>Nachricht</value>
   </data>
   <data name="Method" xml:space="preserve">
-    <value>Method</value>
+    <value>Methode</value>
   </data>
   <data name="Mimblewimble" xml:space="preserve">
     <value>Mimblewimble</value>
   </data>
   <data name="MinimumPeers" xml:space="preserve">
-    <value>Minimum number of Peers</value>
+    <value>Minimum Peers</value>
   </data>
   <data name="Network" xml:space="preserve">
-    <value>Network</value>
+    <value>Netzwerk</value>
   </data>
   <data name="Next" xml:space="preserve">
-    <value>Next</value>
+    <value>Nächster</value>
   </data>
   <data name="NFC" xml:space="preserve">
     <value>NFC</value>
   </data>
   <data name="No" xml:space="preserve">
-    <value>No</value>
+    <value>Nein</value>
   </data>
   <data name="Node" xml:space="preserve">
-    <value>Node</value>
+    <value>Knoten</value>
   </data>
   <data name="NonInteractive" xml:space="preserve">
-    <value>Without Interactivity</value>
+    <value>Keine Interaktion</value>
   </data>
   <data name="NotReachable" xml:space="preserve">
-    <value>Not Reachable</value>
+    <value>Nicht erreichbar</value>
   </data>
   <data name="NoWalletFound" xml:space="preserve">
-    <value>No accounts were found</value>
+    <value>Es gibt keine Konten</value>
   </data>
   <data name="OfflineTransaction" xml:space="preserve">
-    <value>Offline transaction</value>
+    <value>Offline</value>
   </data>
   <data name="Open" xml:space="preserve">
-    <value>Open</value>
+    <value>Öffnen</value>
   </data>
   <data name="OpeningPleaseWait" xml:space="preserve">
-    <value>Opening wallet, please wait...</value>
+    <value>Wallet öffnen, bitte warten ...</value>
   </data>
   <data name="OpenWallet" xml:space="preserve">
-    <value>Open Wallet</value>
+    <value>Wallet öffnen</value>
   </data>
   <data name="OpenWalletMessage" xml:space="preserve">
-    <value>Wallets interact using the Tor network, in case Tor is unavailable you are capable of sending and receiving coins manually using Slatepack Messages through any channel you prefer</value>
+    <value>Wallets interagieren über das Tor-Netzwerk. Falls Tor nicht verfügbar ist, können Sie Coins manuell mit Slatepack-Nachrichten über jeden von Ihnen bevorzugten Kanal senden und empfangen</value>
   </data>
   <data name="Outputs" xml:space="preserve">
     <value>Outputs</value>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Password</value>
+    <value>Passwort</value>
   </data>
   <data name="PasswordCanNotBeEmpty" xml:space="preserve">
-    <value>Password can't be empty</value>
+    <value>Passwort kann nicht leer sein</value>
   </data>
   <data name="PasteFromClipboard" xml:space="preserve">
-    <value>Paste from Clipboard</value>
+    <value>Einfügen aus der Zwischenablage</value>
   </data>
   <data name="Pending" xml:space="preserve">
-    <value>Pending</value>
+    <value>Anhängig</value>
   </data>
   <data name="PickSendingMethod" xml:space="preserve">
-    <value>Select method</value>
+    <value>Methode auswählen</value>
   </data>
   <data name="PleaseConfirm" xml:space="preserve">
-    <value>Please Confirm</value>
+    <value>Bitte bestätigen</value>
   </data>
   <data name="PowerSaverMessage" xml:space="preserve">
-    <value>Make sure the POWER SAVER is DISABLED</value>
+    <value>Deaktivieren Sie POWER SAVER für diese Anwendung</value>
   </data>
   <data name="Private" xml:space="preserve">
-    <value>Private</value>
+    <value>Privat</value>
   </data>
   <data name="QRCode" xml:space="preserve">
-    <value>QR Code</value>
+    <value>QR-Code</value>
   </data>
   <data name="Reachable" xml:space="preserve">
-    <value>Reachable</value>
+    <value>Erreichbar</value>
   </data>
   <data name="Receive" xml:space="preserve">
-    <value>Receive</value>
+    <value>Erhalten</value>
   </data>
   <data name="Received" xml:space="preserve">
-    <value>Received</value>
+    <value>Empfangen</value>
   </data>
   <data name="ReceiveTransaction" xml:space="preserve">
-    <value>Receive Transaction</value>
+    <value>Transaktion erhalten</value>
   </data>
   <data name="Repost" xml:space="preserve">
     <value>Repost</value>
   </data>
   <data name="Restore" xml:space="preserve">
-    <value>Restore</value>
+    <value>Wiederherstellen</value>
   </data>
   <data name="RestoreExistingWallet" xml:space="preserve">
-    <value>Restore existing wallet</value>
+    <value>Wallet wiederherstellen</value>
   </data>
   <data name="RestoreWallet" xml:space="preserve">
-    <value>Restore wallet</value>
+    <value>Restaurar Wallet</value>
   </data>
   <data name="Scalable" xml:space="preserve">
-    <value>Scalable</value>
+    <value>Skalierbar</value>
   </data>
   <data name="ScanningQRCode" xml:space="preserve">
-    <value>Scanning a QR Code</value>
+    <value>QR-Code lesen</value>
   </data>
   <data name="ScanQRCode" xml:space="preserve">
-    <value>Scan QRCode</value>
+    <value>QR-Code scannen</value>
   </data>
   <data name="SeedLength" xml:space="preserve">
-    <value>Seed Length</value>
+    <value>Länge</value>
   </data>
   <data name="SelectStatus" xml:space="preserve">
-    <value>Select status</value>
+    <value>Status</value>
   </data>
   <data name="Send" xml:space="preserve">
-    <value>Send</value>
+    <value>Senden</value>
   </data>
   <data name="Sending" xml:space="preserve">
-    <value>Sending</value>
+    <value>Senden</value>
   </data>
   <data name="SendingPleaseWait" xml:space="preserve">
-    <value>Sending, please wait...</value>
+    <value>Senden, bitte warten...</value>
   </data>
   <data name="Sent" xml:space="preserve">
-    <value>Sent</value>
+    <value>Geschickt</value>
   </data>
   <data name="SetAmount" xml:space="preserve">
-    <value>Set Amount</value>
+    <value>Betrag</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Einstellungen</value>
   </data>
   <data name="Share" xml:space="preserve">
-    <value>Share</value>
+    <value>Teilen</value>
   </data>
   <data name="ShareAddress" xml:space="preserve">
-    <value>Share Address</value>
+    <value>Adresse teilen</value>
   </data>
   <data name="ShareSlatepackMessage" xml:space="preserve">
-    <value>Share Slatepack Message</value>
+    <value>Slatepack-Nachricht teilen</value>
   </data>
   <data name="ShareSlatepackMessageAsFile" xml:space="preserve">
-    <value>Share as File</value>
+    <value>Slatepack-Nachricht teilen</value>
   </data>
   <data name="ShareSlatePackMessageQuote" xml:space="preserve">
-    <value>Can't communicate with the Receiver via TOR, but do not worry, you are still able of initiating the transaction by sharing this Slatepack message. The Receiver should introduce this Slatepack into their Wallet</value>
+    <value>Der Empfänger muss diese Slatepack-Nachricht in sein Wallet eingeben, um die Transaktion zu erhalten.</value>
   </data>
   <data name="ShareSlatePackMessageQuoteToFinalize" xml:space="preserve">
-    <value>Send this Slatepack Message to the Sender to in order to Finalize the transaction</value>
+    <value>Senden Sie diese Slatepack-Nachricht an den Absender, um die Transaktion abzuschließen</value>
   </data>
   <data name="Slate" xml:space="preserve">
     <value>Slate</value>
@@ -496,84 +496,84 @@
     <value>Slatepack Message</value>
   </data>
   <data name="SlatepackMessageFile" xml:space="preserve">
-    <value>Slatepack Message File</value>
+    <value>Slatepack Message</value>
   </data>
   <data name="SlatepackMessageText" xml:space="preserve">
-    <value>Slatepack Message Text</value>
+    <value>Slatepack Message</value>
   </data>
   <data name="Spendable" xml:space="preserve">
-    <value>Spendable</value>
+    <value>Verschenkbar</value>
   </data>
   <data name="Status" xml:space="preserve">
     <value>Status</value>
   </data>
   <data name="Support" xml:space="preserve">
-    <value>Support</value>
+    <value>Hilfe</value>
   </data>
   <data name="SwipeUp2Send" xml:space="preserve">
     <value>Swipe Up to Send Grins 😬</value>
   </data>
   <data name="SyncedRedirecting" xml:space="preserve">
-    <value>The Grin Node is now fully synced. Redirecting to the login screen...</value>
+    <value>Der Knoten ist jetzt vollständig synchronisiert. Weiterleitung zum Anmeldebildschirm ...</value>
   </data>
   <data name="TabToCopy" xml:space="preserve">
-    <value>Tap address to copy</value>
+    <value>Tab zum Kopieren</value>
   </data>
   <data name="TorAddress" xml:space="preserve">
-    <value>Tor address</value>
+    <value>Tor-Adresse</value>
   </data>
   <data name="Total" xml:space="preserve">
-    <value>Total</value>
+    <value>Gesamt</value>
   </data>
   <data name="TransactionHistory" xml:space="preserve">
-    <value>Transaction history</value>
+    <value>Geschichtlich</value>
   </data>
   <data name="Transactions" xml:space="preserve">
-    <value>Transactions</value>
+    <value>Transaktionen</value>
   </data>
   <data name="TransactionSent" xml:space="preserve">
-    <value>Transaction Sent  〜(ᵐ‿ʷ)〜</value>
+    <value>Transaktion gesendet</value>
   </data>
   <data name="TryToStartNodeManually" xml:space="preserve">
-    <value>Try to start the node again</value>
+    <value>Versuchen Sie erneut, den Knoten neu zu starten</value>
   </data>
   <data name="Unconfirmed" xml:space="preserve">
     <value>Unconfirmed</value>
   </data>
   <data name="UnfinalizedTransactions" xml:space="preserve">
-    <value>Unfinalized transactions</value>
+    <value>Unvollendet</value>
   </data>
   <data name="Username" xml:space="preserve">
-    <value>Username</value>
+    <value>Konto</value>
   </data>
   <data name="UsingInteractivity" xml:space="preserve">
-    <value>Interactive Messages</value>
+    <value>Interaktive Nachrichten</value>
   </data>
   <data name="UsingNFC" xml:space="preserve">
-    <value>Using NFC</value>
+    <value>Verwenden von NFC</value>
   </data>
   <data name="WaitingSync" xml:space="preserve">
-    <value>Waiting for the Node to be up and Running...</value>
+    <value>Warten, dass der Knoten die Synchronisierung beendet...</value>
   </data>
   <data name="Wallet" xml:space="preserve">
     <value>Wallet</value>
   </data>
   <data name="WalletReachable" xml:space="preserve">
-    <value>Your wallet is reachable</value>
+    <value>Ihr Wallet ist erreichbar</value>
   </data>
   <data name="WalletReachableNot" xml:space="preserve">
-    <value>Your wallet is not reachable</value>
+    <value>Ihr Wallet ist nicht erreichbar</value>
   </data>
   <data name="WalletSeed" xml:space="preserve">
     <value>Wallet Seed</value>
   </data>
   <data name="WalletSeedInit" xml:space="preserve">
-    <value>Your seed phrase is the only backup to your private keys, which can give you access to your crypto assets. Copy each word in a safe place.</value>
+    <value>Ihre anfängliche Passphrase ist die einzige Sicherung Ihrer privaten Schlüssel, mit der Sie auf Ihre kryptografischen Daten zugreifen können. Kopieren Sie jedes Wort an einen sicheren Ort.</value>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>Yes</value>
+    <value>Ja</value>
   </data>
   <data name="YourWallets" xml:space="preserve">
-    <value>Your wallets</value>
+    <value>Wallets</value>
   </data>
 </root>
