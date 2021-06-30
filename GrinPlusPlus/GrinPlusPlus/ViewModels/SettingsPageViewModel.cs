@@ -6,6 +6,7 @@ using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
 using System;
+using System.Diagnostics;
 using Xamarin.Essentials;
 
 
@@ -74,7 +75,7 @@ namespace GrinPlusPlus.ViewModels
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
             }
         }
 
@@ -83,11 +84,10 @@ namespace GrinPlusPlus.ViewModels
             try
             {
                 await DataProvider.UpdateNodeSettings(MinimumPeers, MaximumPeers, Confirmations);
-                Console.WriteLine("Node Settings Updated");
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
             }
         }
     }

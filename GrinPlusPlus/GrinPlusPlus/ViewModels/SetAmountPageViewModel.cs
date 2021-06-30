@@ -5,6 +5,7 @@ using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
 using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using Xamarin.Essentials;
@@ -164,6 +165,8 @@ namespace GrinPlusPlus.ViewModels
             }
             catch (Exception ex)
             {
+                Debug.WriteLine(ex.Message);
+
                 await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
             }
         }
@@ -201,6 +204,8 @@ namespace GrinPlusPlus.ViewModels
                 {
                     IsValid = false;
                     Fee = "0";
+
+                    Debug.WriteLine(ex.Message);
                     await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
                 }
             });

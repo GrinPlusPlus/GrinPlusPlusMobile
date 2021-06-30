@@ -355,6 +355,8 @@ namespace GrinPlusPlus.ViewModels
                 }
                 catch (Exception ex)
                 {
+                    Debug.WriteLine(ex.Message);
+
                     Settings.Reachable = false;
                 }
             });
@@ -374,7 +376,7 @@ namespace GrinPlusPlus.ViewModels
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
             }
         }
 
@@ -397,7 +399,7 @@ namespace GrinPlusPlus.ViewModels
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
             }
         }
 
@@ -421,6 +423,8 @@ namespace GrinPlusPlus.ViewModels
                 }
                 catch (Exception ex)
                 {
+                    Debug.WriteLine(ex.Message);
+
                     UnfinalizedTransactions.Add(transaction);
                 }
             }
@@ -447,6 +451,8 @@ namespace GrinPlusPlus.ViewModels
                 }
                 catch (Exception ex)
                 {
+                    Debug.WriteLine(ex.Message);
+
                     FilteredTransactionHistory.Add(transaction);
                 }
             }
@@ -477,6 +483,8 @@ namespace GrinPlusPlus.ViewModels
                 }
                 catch (Exception ex)
                 {
+                    Debug.WriteLine(ex.Message);
+
                     await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
                 }
             }

@@ -25,7 +25,7 @@ namespace GrinPlusPlus.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             ZXing.Net.Mobile.Forms.Android.Platform.Init();
 
-            Window.SetFlags(WindowManagerFlags.Secure, WindowManagerFlags.Secure);
+            // Window.SetFlags(WindowManagerFlags.Secure, WindowManagerFlags.Secure);
 
             LoadApplication(new App(new AndroidInitializer()));
         }

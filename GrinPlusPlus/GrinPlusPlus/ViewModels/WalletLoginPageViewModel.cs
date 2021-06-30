@@ -5,6 +5,7 @@ using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
 using System;
+using System.Diagnostics;
 using System.Reflection;
 using Xamarin.Essentials;
 
@@ -83,6 +84,8 @@ namespace GrinPlusPlus.ViewModels
             }
             catch (Exception ex)
             {
+                Debug.WriteLine(ex.Message);
+
                 await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
             }
             finally
@@ -107,6 +110,8 @@ namespace GrinPlusPlus.ViewModels
             }
             catch (Exception ex)
             {
+                Debug.WriteLine(ex.Message);
+
                 await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
             }
             finally

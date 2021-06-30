@@ -5,6 +5,7 @@ using Prism.Services;
 using Prism.Services.Dialogs;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -136,7 +137,7 @@ namespace GrinPlusPlus.ViewModels
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
             }
             
         }

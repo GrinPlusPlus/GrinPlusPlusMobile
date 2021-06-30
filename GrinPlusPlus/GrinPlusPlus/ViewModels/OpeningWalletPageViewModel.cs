@@ -6,6 +6,7 @@ using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
 using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -49,6 +50,9 @@ namespace GrinPlusPlus.ViewModels
                 catch (Exception ex)
                 {
                     ExceptionMessage = ex.Message;
+
+                    Debug.WriteLine(ex.Message);
+
                     await Logout();
                 }
                 finally
@@ -115,7 +119,7 @@ namespace GrinPlusPlus.ViewModels
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
+                Debug.WriteLine(ex.Message);
             }
 
             Preferences.Clear();

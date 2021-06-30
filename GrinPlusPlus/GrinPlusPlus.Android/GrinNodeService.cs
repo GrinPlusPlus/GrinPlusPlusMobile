@@ -74,7 +74,7 @@ namespace GrinPlusPlus.Droid
                         Xamarin.Essentials.Platform.CurrentActivity.Finish();
                     } catch (Exception e)
                     {
-
+                        Log.Verbose(TAG, e.Message);
                     }
 
                     StopBackend();
@@ -228,6 +228,7 @@ namespace GrinPlusPlus.Droid
             catch (Exception ex)
             {
                 RegisterForegroundService(ex.Message);
+                Log.Info(TAG, ex.Message);
             }
         }
 

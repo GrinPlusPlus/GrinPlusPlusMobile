@@ -122,6 +122,8 @@ namespace GrinPlusPlus.ViewModels
             catch (Exception ex)
             {
                 ExceptionMessage = ex.Message;
+
+                Debug.WriteLine(ex.Message);
             } finally
             {
                 IsBusy = false;
