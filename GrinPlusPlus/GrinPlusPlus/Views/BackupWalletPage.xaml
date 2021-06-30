@@ -5,10 +5,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
+    xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     Title="{x:Static resource:AppResources.BackupWallet}"
     Padding="20"
     prism:ViewModelLocator.AutowireViewModel="True"
+    sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromRight"
     BackgroundColor="Black">
     <ContentPage.Content>
         <StackLayout Spacing="8">
@@ -37,21 +39,6 @@
                 Text="{x:Static resource:AppResources.GetWalletSeed}"
                 TextColor="White"
                 TextTransform="None" />
-            <Editor
-                Margin="0,20,0,0"
-                AutoSize="Disabled"
-                BackgroundColor="#090909"
-                FontSize="Body"
-                HeightRequest="140"
-                IsReadOnly="True"
-                IsSpellCheckEnabled="False"
-                IsTextPredictionEnabled="False"
-                Text="{Binding WalletSeed}"
-                TextColor="White">
-                <Editor.Effects>
-                    <xct:RemoveBorderEffect />
-                </Editor.Effects>
-            </Editor>
             <Label
                 HorizontalOptions="Center"
                 HorizontalTextAlignment="Center"

@@ -1,0 +1,568 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="GrinPlusPlus.Views.WalletSeedBackupPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:prism="http://prismlibrary.com"
+    xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
+    xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
+    Title="{x:Static resource:AppResources.WalletSeed}"
+    Padding="20,20,20,0"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromRight">
+    <ContentPage.Content>
+        <ScrollView VerticalScrollBarVisibility="Never">
+            <Grid ColumnSpacing="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="38" />
+                    <RowDefinition Height="38" />
+                    <RowDefinition Height="38" />
+                    <RowDefinition Height="38" />
+                    <RowDefinition Height="38" />
+                    <RowDefinition Height="38" />
+                    <RowDefinition Height="38" />
+                    <RowDefinition Height="38" />
+                    <RowDefinition Height="38" />
+                    <RowDefinition Height="38" />
+                    <RowDefinition Height="38" />
+                    <RowDefinition Height="38" />
+                    <RowDefinition Height="38" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="5*" />
+                </Grid.ColumnDefinitions>
+                <StackLayout
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="1.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="True"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding WalletSeedWordsList[0]}"
+                        TextColor="White"
+                        VerticalOptions="Center" />
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="13.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="True"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding WalletSeedWordsList[12]}"
+                        TextColor="White"
+                        VerticalOptions="Center" />
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="2.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="True"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding WalletSeedWordsList[1]}"
+                        TextColor="White"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center" />
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="14.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="True"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding WalletSeedWordsList[13]}"
+                        TextColor="White"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center" />
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="3.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="True"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding WalletSeedWordsList[2]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center" />
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="15.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="True"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding WalletSeedWordsList[14]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center" />
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="4.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="True"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding WalletSeedWordsList[3]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center" />
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="16.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="True"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding WalletSeedWordsList[15]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center" />
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="5.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="True"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding WalletSeedWordsList[4]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center" />
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="17.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="True"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding WalletSeedWordsList[16]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center" />
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="6.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="True"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding WalletSeedWordsList[5]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center" />
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="18.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="True"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding WalletSeedWordsList[17]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center" />
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="6"
+                    Grid.Column="0"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="7.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="True"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding WalletSeedWordsList[6]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center" />
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="6"
+                    Grid.Column="1"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="19.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="True"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding WalletSeedWordsList[18]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center" />
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="7"
+                    Grid.Column="0"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="8.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="True"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding WalletSeedWordsList[7]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center" />
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="7"
+                    Grid.Column="1"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="20.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="True"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding WalletSeedWordsList[19]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center" />
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="8"
+                    Grid.Column="0"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="9.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="True"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding WalletSeedWordsList[8]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center" />
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="8"
+                    Grid.Column="1"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="21.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="True"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding WalletSeedWordsList[20]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center" />
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="9"
+                    Grid.Column="0"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="10.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="True"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding WalletSeedWordsList[9]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center" />
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="9"
+                    Grid.Column="1"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="22.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="True"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding WalletSeedWordsList[21]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center" />
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="10"
+                    Grid.Column="0"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="11.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="True"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding WalletSeedWordsList[10]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center" />
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="10"
+                    Grid.Column="1"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="23.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="True"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding WalletSeedWordsList[22]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center" />
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="11"
+                    Grid.Column="0"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="12.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="True"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding WalletSeedWordsList[11]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center" />
+                </StackLayout>
+                <StackLayout
+                    Grid.Row="11"
+                    Grid.Column="1"
+                    Orientation="Horizontal">
+                    <Label
+                        FontAttributes="Italic"
+                        Text="24.-"
+                        TextColor="Gray"
+                        VerticalOptions="Center" />
+                    <Entry
+                        BackgroundColor="Transparent"
+                        FontAttributes="Italic"
+                        FontSize="16"
+                        HeightRequest="38"
+                        HorizontalOptions="FillAndExpand"
+                        IsReadOnly="True"
+                        IsSpellCheckEnabled="False"
+                        IsTextPredictionEnabled="False"
+                        Text="{Binding WalletSeedWordsList[23]}"
+                        TextColor="White"
+                        VerticalTextAlignment="Center" />
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

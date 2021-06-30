@@ -29,18 +29,6 @@ namespace GrinPlusPlus
 
             string destination = "InitPage";
 
-            if (Settings.Node.Status.Equals("Running"))
-            {
-                if (Settings.IsLoggedIn)
-                {
-                    destination = "/OpeningWalletPage";
-                }
-                else
-                {
-                    destination = "/SharedTransitionNavigationPage/DashboardCarouselPage";
-                }
-            }
-
             await NavigationService.NavigateAsync(destination);
         }
 
@@ -76,6 +64,7 @@ namespace GrinPlusPlus
             containerRegistry.RegisterForNavigation<ErrorPage, ErrorPageViewModel>();
             containerRegistry.RegisterForNavigation<ConfirmWalletSeedPage, ConfirmWalletSeedPageViewModel>();
             containerRegistry.RegisterForNavigation<WalletSeedPage, WalletSeedPageViewModel>();
+            containerRegistry.RegisterForNavigation<WalletSeedBackupPage, WalletSeedBackupPageViewModel>();
         }
 
         protected override void OnSleep()

@@ -52,20 +52,6 @@ namespace GrinPlusPlus.ViewModels
             set => SetProperty(ref _password, value);
         }
 
-        private string _walletSeed = "";
-        public string WalletSeed
-        {
-            get => _walletSeed.Trim();
-            set => SetProperty(ref _walletSeed, value);
-        }
-
-        public DelegateCommand CopyWalletSeedCommand => new DelegateCommand(CopyWalletSeed);
-
-        private async void CopyWalletSeed()
-        {
-            await Clipboard.SetTextAsync(WalletSeed);
-        }
-
         public DelegateCommand BackupWalletCommand => new DelegateCommand(BackupWallet);
 
         private async void BackupWallet()
@@ -88,10 +74,9 @@ namespace GrinPlusPlus.ViewModels
                 {
                     _cancel = new CancellationTokenSource();
 
-                    var wallet = Username.ToUpper();
                     var message = AppResources.ResourceManager.GetString("ConfirmIdentity");
 
-                    var dialogConfig = new AuthenticationRequestConfiguration(wallet, message)
+                    var dialogConfig = new AuthenticationRequestConfiguration("FingerPrint", message)
                     {
                         CancelTitle = null,
                         FallbackTitle = null,
@@ -106,7 +91,7 @@ namespace GrinPlusPlus.ViewModels
                     }
                 }
 
-                WalletSeed = seed;
+                await NavigationService.NavigateAsync("WalletSeedBackupPage", new NavigationParameters { { "wallet_seed", seed } });
             }
             catch (Exception ex)
             {

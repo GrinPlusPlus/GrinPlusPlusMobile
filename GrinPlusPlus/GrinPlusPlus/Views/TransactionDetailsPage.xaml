@@ -78,7 +78,7 @@
                 Orientation="Vertical">
                 <Label Text="{x:Static resource:AppResources.Status}" TextColor="Gray" />
                 <Label
-                    FontSize="16"
+                    FontSize="18"
                     Text="{Binding SelectedTransaction.Status}"
                     TextColor="White" />
             </StackLayout>

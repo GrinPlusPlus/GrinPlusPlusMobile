@@ -14,8 +14,7 @@
         <StackLayout Spacing="10">
             <Label Text="{x:Static resource:AppResources.Status}" TextColor="Gray" />
             <Label
-                FontAttributes="Bold"
-                FontSize="Large"
+                FontSize="24"
                 HorizontalOptions="Start"
                 Text="{Binding Status}"
                 TextColor="White"
@@ -42,6 +41,7 @@
                 <Label
                     Grid.Row="1"
                     Grid.Column="0"
+                    FontSize="16"
                     Text="{Binding HeaderHeight}"
                     TextColor="White" />
                 <Label
@@ -52,6 +52,7 @@
                 <Label
                     Grid.Row="1"
                     Grid.Column="1"
+                    FontSize="16"
                     Text="{Binding Blocks}"
                     TextColor="White" />
                 <Label
@@ -62,6 +63,7 @@
                 <Label
                     Grid.Row="1"
                     Grid.Column="2"
+                    FontSize="16"
                     Text="{Binding NetworkHeight}"
                     TextColor="White" />
             </Grid>
@@ -69,7 +71,10 @@
             <CollectionView ItemsSource="{Binding ConnectedPeers}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Label Text="{Binding Address}" TextColor="White" />
+                        <Label
+                            FontSize="16"
+                            Text="{Binding Address}"
+                            TextColor="White" />
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
                 <CollectionView.EmptyView>

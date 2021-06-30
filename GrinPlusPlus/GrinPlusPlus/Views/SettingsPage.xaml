@@ -5,9 +5,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
+    xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     Title="{x:Static resource:AppResources.Settings}"
     prism:ViewModelLocator.AutowireViewModel="True"
+    sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromRight"
     BackgroundColor="Black"
     IconImageSource="baseline_settings_applications_white_24.png">
     <ContentPage.ToolbarItems>
@@ -44,6 +46,7 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 Padding="20,0,0,0"
+                FontSize="16"
                 Text="{x:Static resource:AppResources.Confirmations}"
                 TextColor="WhiteSmoke"
                 VerticalOptions="Center" />
@@ -77,6 +80,7 @@
                 Grid.Row="2"
                 Grid.Column="0"
                 Padding="20,0,0,0"
+                FontSize="16"
                 Text="{x:Static resource:AppResources.MinimumPeers}"
                 TextColor="WhiteSmoke"
                 VerticalOptions="Center" />
@@ -110,6 +114,7 @@
                 Grid.Row="4"
                 Grid.Column="0"
                 Padding="20,0,0,0"
+                FontSize="16"
                 Text="{x:Static resource:AppResources.MaximumPeers}"
                 TextColor="WhiteSmoke"
                 VerticalOptions="Center" />
@@ -144,6 +149,7 @@
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
                 Padding="20,0,0,0"
+                FontSize="16"
                 Text="GrinChck API URL"
                 TextColor="WhiteSmoke"
                 VerticalOptions="Center" />
@@ -179,6 +185,7 @@
                 BackgroundColor="#0C0C0C"
                 Command="{Binding OpenBackupWalletPageCommand}"
                 CornerRadius="5"
+                FontSize="16"
                 Text="{x:Static resource:AppResources.BackupWallet}"
                 TextColor="Orange"
                 TextTransform="None"
