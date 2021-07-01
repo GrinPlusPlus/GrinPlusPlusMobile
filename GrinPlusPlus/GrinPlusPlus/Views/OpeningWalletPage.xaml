@@ -8,6 +8,7 @@
     Padding="20,0,20,40"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="Black"
+    BackgroundImageSource="country_quilt_dark.png"
     NavigationPage.HasBackButton="False">
     <ContentPage.Content>
         <StackLayout

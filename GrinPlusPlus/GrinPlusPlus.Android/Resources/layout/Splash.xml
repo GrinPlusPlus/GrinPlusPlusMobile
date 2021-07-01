@@ -1,15 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:layout_gravity="center_horizontal"
     android:theme="@style/MainTheme.Splash"
-    android:layout_width="match_parent"
     android:background="@android:color/black"
+    android:layout_width="wrap_content"
+    android:layout_centerInParent="true"
     android:layout_height="match_parent">
     <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:paddingLeft="40dp"
+        android:paddingTop="100dp"
+        android:paddingRight="40dp"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/demoImageView"
         android:src="@drawable/banner"
         android:scaleType="fitCenter"
+        android:layout_centerInParent="true"
         android:contentDescription="" /> 
+    <TextView android:text="Fast. Private. Secure."
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center_horizontal"
+        android:textSize="26dp"
+        android:textStyle="italic"
+        android:textColor="@android:color/white" />
 </LinearLayout>

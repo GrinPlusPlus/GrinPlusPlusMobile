@@ -12,6 +12,8 @@
     Padding="10,0,10,5"
     prism:ViewModelLocator.AutowireViewModel="True"
     sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromRight"
+    BackgroundColor="Black"
+    BackgroundImageSource="country_quilt_dark.png"
     IconImageSource="outline_account_balance_wallet_white_24.png">
     <NavigationPage.TitleView>
         <Grid Margin="0" Padding="0">
@@ -108,6 +110,7 @@
                     <Label
                         Grid.Row="0"
                         Grid.Column="0"
+                        FontSize="14"
                         Text="{x:Static resource:AppResources.Spendable}"
                         TextColor="Black"
                         TextTransform="None"
@@ -154,6 +157,7 @@
                     <Label
                         Grid.Row="4"
                         Grid.Column="0"
+                        FontSize="14"
                         VerticalOptions="Center"
                         VerticalTextAlignment="Center">
                         <Label.FormattedText>
@@ -190,6 +194,7 @@
                     <Label
                         Grid.Row="5"
                         Grid.Column="0"
+                        FontSize="14"
                         VerticalOptions="Center"
                         VerticalTextAlignment="Center">
                         <Label.FormattedText>
@@ -226,6 +231,7 @@
                     <Label
                         Grid.Row="6"
                         Grid.Column="0"
+                        FontSize="14"
                         VerticalOptions="Center"
                         VerticalTextAlignment="Center">
                         <Label.FormattedText>
@@ -409,14 +415,14 @@
                                 <Label
                                     Grid.Row="0"
                                     Grid.Column="0"
-                                    FontSize="Default"
+                                    FontSize="14"
                                     Text="{Binding Status}"
-                                    TextColor="WhiteSmoke"
+                                    TextColor="White"
                                     VerticalOptions="End" />
                                 <Label
                                     Grid.Row="0"
                                     Grid.Column="1"
-                                    FontSize="Caption"
+                                    FontSize="12"
                                     HorizontalOptions="End"
                                     Text="{Binding Date, Converter={StaticResource RelativeDateTimeConverter}}"
                                     TextColor="Gray"
@@ -441,7 +447,7 @@
                                                     Text="{Binding Amount}"
                                                     TextColor="WhiteSmoke" />
                                                 <Span Text="." TextColor="WhiteSmoke" />
-                                                <Span Text="{Binding Decimals}" TextColor="WhiteSmoke" />
+                                                <Span Text="{Binding Decimals}" TextColor="White" />
                                                 <Span
                                                     FontSize="12"
                                                     Text="  ツ"
@@ -490,7 +496,7 @@
                             Title="{x:Static resource:AppResources.SelectStatus}"
                             Grid.Row="0"
                             Grid.Column="2"
-                            FontSize="Body"
+                            FontSize="16"
                             HorizontalOptions="End"
                             HorizontalTextAlignment="Center"
                             ItemDisplayBinding="{Binding Label}"

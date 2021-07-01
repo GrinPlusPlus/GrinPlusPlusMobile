@@ -10,7 +10,8 @@
     Title="{x:Static resource:AppResources.RestoreWallet}"
     Padding="20,0,20,40"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="Black">
+    BackgroundColor="Black"
+    BackgroundImageSource="country_quilt_dark.png">
     <ContentPage.Content>
         <StackLayout
             HorizontalOptions="FillAndExpand"
@@ -23,8 +24,8 @@
                 TextTransform="Uppercase" />
             <Entry
                 BackgroundColor="#191919"
-                FontSize="Medium"
-                HeightRequest="48"
+                FontSize="18"
+                HeightRequest="44"
                 IsSpellCheckEnabled="False"
                 IsTextPredictionEnabled="False"
                 Text="{Binding Username}"
@@ -43,8 +44,8 @@
                 TextTransform="Uppercase" />
             <Entry
                 BackgroundColor="#191919"
-                FontSize="Medium"
-                HeightRequest="48"
+                FontSize="18"
+                HeightRequest="44"
                 IsPassword="True"
                 IsSpellCheckEnabled="False"
                 IsTextPredictionEnabled="False"
@@ -60,8 +61,8 @@
             </Entry>
             <Entry
                 BackgroundColor="#191919"
-                FontSize="Medium"
-                HeightRequest="48"
+                FontSize="18"
+                HeightRequest="44"
                 IsPassword="True"
                 IsSpellCheckEnabled="False"
                 IsTextPredictionEnabled="False"
@@ -82,6 +83,7 @@
             <Editor
                 AutoSize="Disabled"
                 BackgroundColor="#191919"
+                CharacterSpacing="5"
                 FontSize="Body"
                 HeightRequest="110"
                 IsSpellCheckEnabled="False"
@@ -102,8 +104,8 @@
                     BackgroundColor="#0C0C0C"
                     Command="{Binding RestoreWalletCommand}"
                     CornerRadius="5"
-                    FontSize="Medium"
-                    HeightRequest="48"
+                    FontSize="16"
+                    HeightRequest="44"
                     IsEnabled="{Binding WalletSeed, Converter={xct:IsNotNullOrEmptyConverter}}"
                     IsVisible="{Binding IsBusy, Converter={xct:InvertedBoolConverter}}"
                     Text="{x:Static resource:AppResources.Restore}"

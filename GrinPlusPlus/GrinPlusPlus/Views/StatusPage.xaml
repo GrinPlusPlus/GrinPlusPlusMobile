@@ -9,6 +9,7 @@
     Padding="20"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="Black"
+    BackgroundImageSource="country_quilt_dark.png"
     IconImageSource="baseline_network_check_white_24.png">
     <ContentPage.Content>
         <StackLayout Spacing="10">

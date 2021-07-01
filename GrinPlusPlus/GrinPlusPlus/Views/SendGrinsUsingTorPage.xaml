@@ -6,7 +6,8 @@
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="Black">
+    BackgroundColor="Black"
+    BackgroundImageSource="country_quilt_dark.png">
     <ContentPage.Content>
         <StackLayout
             Margin="20,0,20,0"

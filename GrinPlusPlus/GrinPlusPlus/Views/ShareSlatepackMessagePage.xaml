@@ -5,7 +5,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
-    prism:ViewModelLocator.AutowireViewModel="True">
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="Black"
+    BackgroundImageSource="country_quilt_dark.png">
     <ContentPage.Content>
         <StackLayout
             HorizontalOptions="FillAndExpand"
@@ -18,16 +20,16 @@
                 TextColor="White" />
             <Label
                 Margin="30,0,30,0"
-                Text="Slatepack Message"
+                Text="Slatepack"
                 TextColor="#2f2f2f"
                 TextTransform="Uppercase" />
             <Editor
                 Margin="30,0,30,10"
                 AutoSize="Disabled"
-                BackgroundColor="#191919"
-                CharacterSpacing="1"
+                BackgroundColor="#0C0C0C"
+                CharacterSpacing="4"
                 FontSize="14"
-                HeightRequest="150"
+                HeightRequest="220"
                 IsReadOnly="True"
                 IsSpellCheckEnabled="False"
                 IsTextPredictionEnabled="False"
@@ -38,6 +40,7 @@
                 BackgroundColor="#191919"
                 Command="{Binding CopySlatepackMessageCommand}"
                 CornerRadius="5"
+                FontFamily="16"
                 HeightRequest="44"
                 Text="{x:Static resource:AppResources.CopySlatepackMessage}"
                 TextColor="White" />
@@ -46,6 +49,7 @@
                 BackgroundColor="#191919"
                 Command="{Binding ShareSlatepackMessageCommand}"
                 CornerRadius="5"
+                FontFamily="16"
                 HeightRequest="44"
                 Text="{x:Static resource:AppResources.ShareSlatepackMessage}"
                 TextColor="White" />
@@ -54,6 +58,7 @@
                 BackgroundColor="#191919"
                 Command="{Binding CloseScreenCommand}"
                 CornerRadius="5"
+                FontFamily="16"
                 HeightRequest="44"
                 Text="{x:Static resource:AppResources.Close}"
                 TextColor="White"

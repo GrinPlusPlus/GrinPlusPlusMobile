@@ -10,7 +10,8 @@
     Title="{x:Static resource:AppResources.Send}"
     prism:ViewModelLocator.AutowireViewModel="True"
     sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromBottom"
-    BackgroundColor="{StaticResource BackgroundColor}">
+    BackgroundColor="{StaticResource BackgroundColor}"
+    BackgroundImageSource="country_quilt_dark.png">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Color x:Key="BackgroundColor">#000000</Color>
@@ -94,11 +95,18 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-                <Label FontSize="18" TextColor="White">
+                <Label TextColor="White">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="{x:Static resource:AppResources.Fee}" TextColor="Gray" />
-                            <Span Text=": " TextColor="Gray" />
+                            <Span
+                                FontSize="16"
+                                Text="{x:Static resource:AppResources.Fee}"
+                                TextColor="Gray"
+                                TextTransform="Uppercase" />
+                            <Span
+                                FontSize="16"
+                                Text=": "
+                                TextColor="Gray" />
                             <Span
                                 FontAttributes="Bold"
                                 FontSize="20"
@@ -115,6 +123,7 @@
                 BackgroundColor="#0C0C0C"
                 Command="{Binding ContinueButtonClickedCommand}"
                 CornerRadius="5"
+                FontSize="16"
                 HeightRequest="44"
                 IsEnabled="{Binding IsValid}"
                 Text="{x:Static resource:AppResources.Continue}"

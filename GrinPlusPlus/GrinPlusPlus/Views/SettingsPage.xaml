@@ -11,6 +11,7 @@
     prism:ViewModelLocator.AutowireViewModel="True"
     sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromRight"
     BackgroundColor="Black"
+    BackgroundImageSource="country_quilt_dark.png"
     IconImageSource="baseline_settings_applications_white_24.png">
     <ContentPage.ToolbarItems>
         <ToolbarItem

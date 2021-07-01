@@ -27,7 +27,7 @@ namespace GrinPlusPlus
             
             InitializeComponent();
 
-            string destination = "InitPage";
+            string destination = "/SharedTransitionNavigationPage/InitPage";
 
             await NavigationService.NavigateAsync(destination);
         }

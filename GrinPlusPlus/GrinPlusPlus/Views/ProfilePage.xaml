@@ -9,7 +9,8 @@
     xmlns:zxcm="clr-namespace:ZXing.Common;assembly=zxing"
     xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="Black">
+    BackgroundColor="Black"
+    BackgroundImageSource="country_quilt_dark.png">
     <ContentPage.Resources>
         <ResourceDictionary>
             <c:AvailabilityColorConverter x:Key="AvailabilityColorConverter" />
@@ -37,7 +38,8 @@
                 <Label
                     HorizontalOptions="Center"
                     Text="{x:Static resource:AppResources.QRCode}"
-                    TextColor="Gray" />
+                    TextColor="Gray"
+                    TextTransform="Uppercase" />
                 <Frame
                     Padding="10"
                     BackgroundColor="#191919"
@@ -46,12 +48,12 @@
                     <zxing:ZXingBarcodeImageView
                         BarcodeFormat="QR_CODE"
                         BarcodeValue="{Binding SlatepackAddress}"
-                        HeightRequest="200"
-                        WidthRequest="200">
+                        HeightRequest="180"
+                        WidthRequest="180">
                         <zxing:ZXingBarcodeImageView.BarcodeOptions>
                             <zxcm:EncodingOptions
-                                Width="360"
-                                Height="360"
+                                Width="340"
+                                Height="340"
                                 Margin="0"
                                 PureBarcode="True" />
                         </zxing:ZXingBarcodeImageView.BarcodeOptions>
@@ -65,12 +67,14 @@
                 BackgroundColor="Black">
                 <Label
                     HorizontalOptions="Center"
-                    Text="{x:Static resource:AppResources.SlatepackAddress}"
-                    TextColor="Gray" />
+                    Text="{x:Static resource:AppResources.Address}"
+                    TextColor="Gray"
+                    TextTransform="Uppercase" />
                 <Button
                     BackgroundColor="#191919"
                     Command="{Binding CopyAddressCommand}"
                     CornerRadius="5"
+                    FontSize="16"
                     Text="{Binding SlatepackAddress}"
                     TextColor="{Binding Reachable, Converter={StaticResource AvailabilityColorConverter}}"
                     TextTransform="Lowercase" />

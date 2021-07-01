@@ -9,7 +9,8 @@
     x:Name="Login"
     prism:ViewModelLocator.AutowireViewModel="True"
     sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromRight"
-    BackgroundColor="Black">
+    BackgroundColor="Black"
+    BackgroundImageSource="country_quilt_dark.png">
     <NavigationPage.TitleView>
         <Image
             Margin="0"
@@ -31,7 +32,7 @@
             <Label
                 Grid.Row="0"
                 Grid.Column="0"
-                FontSize="Medium"
+                FontSize="18"
                 Text="{x:Static resource:AppResources.YourWallets}"
                 TextColor="White" />
             <CollectionView
@@ -64,7 +65,7 @@
                                 <Label
                                     Grid.Row="0"
                                     Grid.Column="0"
-                                    FontSize="Medium"
+                                    FontSize="18"
                                     Text="{Binding Name}"
                                     TextColor="White" />
                                 <Image
@@ -105,7 +106,7 @@
                         <Label
                             Grid.Row="0"
                             Grid.Column="0"
-                            FontSize="Medium"
+                            FontSize="18"
                             Text="{x:Static resource:AppResources.CreateWallet}"
                             TextColor="White" />
                         <Image
@@ -139,7 +140,7 @@
                         <Label
                             Grid.Row="0"
                             Grid.Column="0"
-                            FontSize="Medium"
+                            FontSize="18"
                             Text="{x:Static resource:AppResources.RestoreExistingWallet}"
                             TextColor="White" />
                         <Image

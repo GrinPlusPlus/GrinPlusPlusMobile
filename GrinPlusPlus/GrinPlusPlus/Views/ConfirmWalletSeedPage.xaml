@@ -8,7 +8,8 @@
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     Title="{x:Static resource:AppResources.Confirm}"
     Padding="20,0,20,0"
-    prism:ViewModelLocator.AutowireViewModel="True">
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundImageSource="country_quilt_dark.png">
     <ContentPage.Resources>
         <ResourceDictionary>
             <c:EmptyToBooleanConverter x:Key="EmptyToBooleanConverter" />

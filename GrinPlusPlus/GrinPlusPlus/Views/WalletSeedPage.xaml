@@ -8,6 +8,8 @@
     Title="{x:Static resource:AppResources.WalletSeed}"
     Padding="20,0,20,0"
     prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="Black"
+    BackgroundImageSource="country_quilt_dark.png"
     NavigationPage.HasBackButton="False">
     <ContentPage.ToolbarItems>
         <ToolbarItem

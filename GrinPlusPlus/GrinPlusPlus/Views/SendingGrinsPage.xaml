@@ -7,7 +7,8 @@
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     Title="{x:Static resource:AppResources.PleaseConfirm}"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="Black">
+    BackgroundColor="Black"
+    BackgroundImageSource="country_quilt_dark.png">
     <ContentPage.Content>
         <StackLayout
             Margin="0"
@@ -18,13 +19,15 @@
             VerticalOptions="FillAndExpand">
             <Label
                 Margin="20,15,20,0"
+                FontSize="16"
                 Text="{x:Static resource:AppResources.Amount}"
-                TextColor="Gray" />
+                TextColor="Gray"
+                TextTransform="Uppercase" />
             <Label Margin="20,0,20,0">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span
-                            FontSize="38"
+                            FontSize="36"
                             Text="{Binding Amount, StringFormat='{}{0:N9}'}"
                             TextColor="White" />
                         <Span
@@ -36,8 +39,10 @@
             </Label>
             <Label
                 Margin="20,15,20,0"
+                FontSize="16"
                 Text="{x:Static resource:AppResources.Fee}"
-                TextColor="Gray" />
+                TextColor="Gray"
+                TextTransform="Uppercase" />
             <Label Margin="20,0,20,0">
                 <Label.FormattedText>
                     <FormattedString>
@@ -68,18 +73,20 @@
                 BackgroundColor="#0C0C0C"
                 Command="{Binding SendUsingTorCommand}"
                 CornerRadius="5"
+                FontSize="16"
                 HeightRequest="44"
                 Text="{x:Static resource:AppResources.Confirm}"
                 TextColor="White"
                 TextTransform="None" />
             <Button
-                Margin="20,0,20,40"
-                BackgroundColor="Transparent"
+                Margin="20,0,20,20"
+                BackgroundColor="#b20000"
                 Command="{Binding CancelCommand}"
                 CornerRadius="5"
                 HeightRequest="44"
                 Text="{x:Static resource:AppResources.Cancel}"
-                TextColor="Red"
+                TextColor="White"
+                TextTransform="None"
                 VerticalOptions="EndAndExpand" />
         </StackLayout>
     </ContentPage.Content>
