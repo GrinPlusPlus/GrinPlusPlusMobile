@@ -9,7 +9,7 @@
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     Title="{x:Static resource:AppResources.Send}"
     prism:ViewModelLocator.AutowireViewModel="True"
-    sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromBottom"
+    sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromRight"
     BackgroundColor="{StaticResource BackgroundColor}"
     BackgroundImageSource="country_quilt_dark.png">
     <ContentPage.Resources>

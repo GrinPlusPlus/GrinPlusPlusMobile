@@ -332,13 +332,12 @@
                                     <Button
                                         Grid.Row="0"
                                         Grid.Column="0"
-                                        BackgroundColor="Transparent"
                                         Command="{prism:NavigateTo 'FinalizeTransactionPage',
                                                                    UseModalNavigation=False,
                                                                    Animated=True}"
+                                        HeightRequest="20"
                                         IsVisible="{Binding CanBeFinalized}"
                                         Text="{x:Static resource:AppResources.Finalize}"
-                                        TextColor="Yellow"
                                         TextTransform="None" />
                                     <Button
                                         Grid.Row="0"
@@ -347,6 +346,7 @@
                                         CommandParameter="{Binding Id}"
                                         IsVisible="{Binding CanBeCanceled}"
                                         Text="{x:Static resource:AppResources.Cancel}"
+                                        TextColor="Red"
                                         TextTransform="None" />
                                 </Grid>
                             </Grid>
@@ -554,6 +554,7 @@
                     HorizontalOptions="End"
                     ImageSource="baseline_north_east_white_20.png"
                     IsEnabled="{Binding UserCanSend}"
+                    IsVisible="{Binding UserCanSend}"
                     Text="{x:Static resource:AppResources.Send}"
                     TextColor="White"
                     TextTransform="None"

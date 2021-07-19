@@ -5,8 +5,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
+    xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
     Title="{x:Static resource:AppResources.PleaseConfirm}"
     prism:ViewModelLocator.AutowireViewModel="True"
+    sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromRight"
     BackgroundColor="Black"
     BackgroundImageSource="country_quilt_dark.png">
     <ContentPage.Content>
@@ -69,22 +71,13 @@
                 Text="{Binding Address}"
                 TextColor="White" />
             <Button
-                Margin="20,100,20,0"
+                Margin="20"
                 BackgroundColor="#0C0C0C"
                 Command="{Binding SendUsingTorCommand}"
                 CornerRadius="5"
                 FontSize="16"
                 HeightRequest="44"
                 Text="{x:Static resource:AppResources.Confirm}"
-                TextColor="White"
-                TextTransform="None" />
-            <Button
-                Margin="20,0,20,20"
-                BackgroundColor="#b20000"
-                Command="{Binding CancelCommand}"
-                CornerRadius="5"
-                HeightRequest="44"
-                Text="{x:Static resource:AppResources.Cancel}"
                 TextColor="White"
                 TextTransform="None"
                 VerticalOptions="EndAndExpand" />

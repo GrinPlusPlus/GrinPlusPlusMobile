@@ -67,24 +67,22 @@ namespace GrinPlusPlus.ViewModels
 
         private void FilterTransactions(int value)
         {
-            FilteredTransactionHistory = new ObservableCollection<Transaction>();
-
             switch (value)
             {
                 case 1:
-                    LoadTransactionHistory(AllTransactions.Where(x => new List<string> { "sending", "receiving" }.Any(y => y == x.Status.ToLower())).ToList());
+                    LoadTransactionHistory(AllTransactions.Where(x => new List<string> { "sending", "receiving" }.Any(y => y.Contains(x.Status.ToLower()))).ToList());
                     break;
                 case 2:
-                    LoadTransactionHistory(AllTransactions.Where(x => new List<string> { "received" }.Any(y => y == x.Status.ToLower())).ToList());
+                    LoadTransactionHistory(AllTransactions.Where(x => new List<string> { "received" }.Any(y => y.Equals(x.Status.ToLower()))).ToList());
                     break;
                 case 3:
-                    LoadTransactionHistory(AllTransactions.Where(x => new List<string> { "sent" }.Any(y => y == x.Status.ToLower())).ToList());
+                    LoadTransactionHistory(AllTransactions.Where(x => new List<string> { "sent" }.Any(y => y.Equals(x.Status.ToLower()))).ToList());
                     break;
                 case 4:
-                    LoadTransactionHistory(AllTransactions.Where(x => new List<string> { "canceled" }.Any(y => y == x.Status.ToLower())).ToList());
+                    LoadTransactionHistory(AllTransactions.Where(x => new List<string> { "canceled" }.Any(y => y.Equals(x.Status.ToLower()))).ToList());
                     break;
                 case 5:
-                    LoadTransactionHistory(AllTransactions.Where(x => new List<string> { "coinbase" }.Any(y => y == x.Status.ToLower())).ToList());
+                    LoadTransactionHistory(AllTransactions.Where(x => new List<string> { "coinbase" }.Any(y => y.Equals(x.Status.ToLower()))).ToList());
                     break;
                 default:
                     LoadTransactionHistory(AllTransactions);
@@ -384,6 +382,15 @@ namespace GrinPlusPlus.ViewModels
         {
             try
             {
+                LoadUnfinalizedTransactions(await DataProvider.GetTransactions(await SecureStorage.GetAsync("token"), new string[] { "SENDING_NOT_FINALIZED" }));
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+
+            try
+            {
                 AllTransactions = await DataProvider.GetTransactions(await SecureStorage.GetAsync("token"), new string[] {
                   "RECEIVING_IN_PROGRESS",
                   "SENDING_FINALIZED",
@@ -394,68 +401,94 @@ namespace GrinPlusPlus.ViewModels
                   "RECEIVED_CANCELED"
                 });
 
-                LoadUnfinalizedTransactions(await DataProvider.GetTransactions(await SecureStorage.GetAsync("token"), new string[] {"SENDING_NOT_FINALIZED"}));
                 FilterTransactions(CurrentSelectedFilterIndex);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
             }
+
         }
 
         private void LoadUnfinalizedTransactions(List<Transaction> transactions)
         {
-            if(UnfinalizedTransactions.Count() != transactions.Count())
+            if(UnfinalizedTransactions.Count() == transactions.Count())
             {
-                UnfinalizedTransactions = new ObservableCollection<Transaction>();
+                return;
             }
+
+            UnfinalizedTransactions = new ObservableCollection<Transaction>();
 
             foreach (var transaction in transactions)
             {
-                try
-                {
-                    var current = UnfinalizedTransactions.First<Transaction>(t => t.Id.Equals(transaction.Id));
-                    
-                    if (!current.Status.Equals(transaction.Status))
-                    {
-                        UnfinalizedTransactions.Remove(current);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex.Message);
-
-                    UnfinalizedTransactions.Add(transaction);
-                }
+                UnfinalizedTransactions.Add(transaction);
             }
         }
 
         private void LoadTransactionHistory(List<Transaction> transactions)
         {
-            if (FilteredTransactionHistory.Count() != transactions.Count())
+            if(transactions.Count() == 0)
             {
                 FilteredTransactionHistory = new ObservableCollection<Transaction>();
+                return;
             }
 
-            foreach (var transaction in transactions)
+            var remove = new List<Transaction>();
+            var add = new List<Transaction>();
+
+            for (int i = 0; i < FilteredTransactionHistory.Count(); i++)
             {
-                try
+                var oldTransaction = FilteredTransactionHistory.ElementAt<Transaction>(i);
+                if (transactions.Exists(t => t.Id.Equals(oldTransaction.Id)))
                 {
-                    var current = FilteredTransactionHistory.First<Transaction>(t => t.Id.Equals(transaction.Id));
-                    
-                    if (!current.Status.Equals(transaction.Status))
+                    var newTransaction = transactions.First<Transaction>(t => t.Id.Equals(FilteredTransactionHistory.ElementAt<Transaction>(i).Id));
+                    if (!newTransaction.Status.Equals(oldTransaction.Status))
                     {
-                        FilteredTransactionHistory.Remove(current);
-                        FilteredTransactionHistory.Add(transaction);
+                        remove.Add(oldTransaction);
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    Debug.WriteLine(ex.Message);
-
-                    FilteredTransactionHistory.Add(transaction);
+                    remove.Add(oldTransaction);
                 }
             }
+            
+            for (int i = 0; i < transactions.Count(); i++)
+            {
+                var newTransaction = transactions.ElementAt<Transaction>(i);
+                if (FilteredTransactionHistory.Any<Transaction>(t => t.Id.Equals(transactions.ElementAt<Transaction>(i).Id)))
+                {
+                    var oldTransaction = FilteredTransactionHistory.First<Transaction>(t => t.Id.Equals(transactions.ElementAt<Transaction>(i).Id));
+                    if (!newTransaction.Status.Equals(oldTransaction.Status))
+                    {
+                        remove.Add(oldTransaction);
+                        add.Add(newTransaction);
+                    }
+                }
+                else
+                {
+                    add.Add(newTransaction);
+                }
+            }
+
+            if(add.Count() == 0 && remove.Count() == 0)
+            {
+                return;
+            }
+
+            var newList = FilteredTransactionHistory.ToList();
+
+            foreach (var transaction in add)
+            {
+                newList.Insert(0, transaction);
+            }
+
+            foreach (var transaction in remove)
+            {
+                newList.Remove(transaction);
+            }
+
+            FilteredTransactionHistory = new ObservableCollection<Transaction>(newList.OrderByDescending(o => o.Date));
         }
 
         async void SendButtonClicked()
