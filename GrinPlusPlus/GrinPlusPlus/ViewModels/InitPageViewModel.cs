@@ -51,32 +51,31 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _grinFacts, value); }
         }
 
-        public InitPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
-            : base(navigationService, dataProvider, dialogService, pageDialogService)
+        public InitPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService,
+            IPageDialogService pageDialogService) : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
             Preferences.Clear();
             SecureStorage.RemoveAll();
 
             FillGrinFacts();
 
-            Device.StartTimer(TimeSpan.FromSeconds(2), () =>
+            DisplayActivityIndicator = true;
+
+            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
-                DisplayActivityIndicator = true;
                 Status = Settings.Node.Status;
                 ProgressBarr = Settings.Node.ProgressPercentage;
                 ProgressPercentage = string.Format($"{ Settings.Node.ProgressPercentage * 100:F}");
 
                 if (Settings.Node.Status.Equals("Running"))
                 {
-                    DisplayActivityIndicator = false;
-
                     return false;
                 } else
                 
                 return true;
             });
 
-            Device.StartTimer(TimeSpan.FromSeconds(30), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(60), () =>
             {
                 if (Settings.Node.Status.Equals("Disconnected"))
                 {
@@ -90,15 +89,16 @@ namespace GrinPlusPlus.ViewModels
                 return false;
             });
 
-            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(3), () =>
             {
                 if (Settings.Node.Status.Equals("Running"))
                 {
+
                     MainThread.BeginInvokeOnMainThread(async () =>
                     {
                         await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/LoginPage");
                     });
-
+                    
                     return false;
                 }
 
