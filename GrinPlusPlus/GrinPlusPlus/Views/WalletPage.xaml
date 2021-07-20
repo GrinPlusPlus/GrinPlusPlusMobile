@@ -74,7 +74,9 @@
             RowSpacing="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="160" />
-                <RowDefinition Height="140" />
+                <RowDefinition Height="35" />
+                <RowDefinition Height="110" />
+                <RowDefinition Height="35" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="48" />
             </Grid.RowDefinitions>
@@ -84,7 +86,7 @@
             <Frame
                 Grid.Row="0"
                 Grid.Column="0"
-                Margin="8,0,8,0"
+                Margin="5,0,5,0"
                 Padding="15,10,15,10"
                 BackgroundColor="#FFEE00"
                 BorderColor="Transparent"
@@ -267,10 +269,46 @@
                     </Label>
                 </Grid>
             </Frame>
-            <CollectionView
+            <Grid
                 Grid.Row="1"
                 Grid.Column="0"
-                Margin="10,5,10,5"
+                Margin="10,0,10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Source="baseline_outlined_flag_white_20.png"
+                    VerticalOptions="CenterAndExpand"
+                    WidthRequest="18" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    FontSize="16"
+                    TextColor="Gray"
+                    VerticalOptions="Center"
+                    VerticalTextAlignment="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static resource:AppResources.UnfinalizedTransactions}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Picker
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    IsEnabled="False" />
+            </Grid>
+            <CollectionView
+                Grid.Row="2"
+                Grid.Column="0"
+                Margin="10,0,10,0"
                 ItemsSource="{Binding UnfinalizedTransactions}"
                 SelectedItem="{Binding SelectedUnfinalizedTransaction}"
                 SelectionMode="None">
@@ -353,48 +391,57 @@
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
-                <CollectionView.Header>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="20" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="20" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Image
-                            Grid.Row="0"
-                            Grid.Column="0"
-                            Source="baseline_outlined_flag_white_20.png"
-                            VerticalOptions="CenterAndExpand"
-                            WidthRequest="18" />
-                        <Label
-                            Grid.Row="0"
-                            Grid.Column="1"
-                            FontSize="16"
-                            TextColor="Gray"
-                            VerticalOptions="Center"
-                            VerticalTextAlignment="Center">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="{x:Static resource:AppResources.UnfinalizedTransactions}" />
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                        <Picker
-                            Grid.Row="0"
-                            Grid.Column="2"
-                            IsEnabled="False" />
-                    </Grid>
-                </CollectionView.Header>
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.EmptyView />
             </CollectionView>
+            <Grid
+                Grid.Row="3"
+                Grid.Column="0"
+                Margin="10,0,10,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="38" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Image
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Source="baseline_history_white_20.png"
+                    VerticalOptions="Center"
+                    WidthRequest="18" />
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    FontSize="16"
+                    TextColor="Gray"
+                    VerticalOptions="Center"
+                    VerticalTextAlignment="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{x:Static resource:AppResources.TransactionHistory}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Picker
+                    Title="{x:Static resource:AppResources.SelectStatus}"
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    FontSize="16"
+                    HorizontalOptions="End"
+                    HorizontalTextAlignment="Center"
+                    ItemDisplayBinding="{Binding Label}"
+                    ItemsSource="{Binding TransactionStatusOptions}"
+                    SelectedIndex="{Binding CurrentSelectedFilterIndex}"
+                    TextColor="Yellow"
+                    TitleColor="White" />
+            </Grid>
             <CollectionView
-                Grid.Row="2"
+                Grid.Row="4"
                 Grid.Column="0"
                 Margin="10,5,10,5"
                 ItemsSource="{Binding FilteredTransactionHistory}"
@@ -460,59 +507,13 @@
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
-                <CollectionView.Header>
-                    <Grid
-                        Margin="0"
-                        Padding="0"
-                        VerticalOptions="End">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="38" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="20" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Image
-                            Grid.Row="0"
-                            Grid.Column="0"
-                            Source="baseline_history_white_20.png"
-                            VerticalOptions="Center"
-                            WidthRequest="18" />
-                        <Label
-                            Grid.Row="0"
-                            Grid.Column="1"
-                            FontSize="16"
-                            TextColor="Gray"
-                            VerticalOptions="Center"
-                            VerticalTextAlignment="Center">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="{x:Static resource:AppResources.TransactionHistory}" />
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                        <Picker
-                            Title="{x:Static resource:AppResources.SelectStatus}"
-                            Grid.Row="0"
-                            Grid.Column="2"
-                            FontSize="16"
-                            HorizontalOptions="End"
-                            HorizontalTextAlignment="Center"
-                            ItemDisplayBinding="{Binding Label}"
-                            ItemsSource="{Binding TransactionStatusOptions}"
-                            SelectedIndex="{Binding CurrentSelectedFilterIndex}"
-                            TextColor="Yellow"
-                            TitleColor="White" />
-                    </Grid>
-                </CollectionView.Header>
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.EmptyView />
             </CollectionView>
             <Grid
-                Grid.Row="3"
+                Grid.Row="5"
                 Grid.Column="0"
                 VerticalOptions="Center">
                 <Grid.RowDefinitions>
