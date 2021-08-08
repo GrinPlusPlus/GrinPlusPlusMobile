@@ -5,7 +5,6 @@ using Prism.Services;
 using Prism.Services.Dialogs;
 using System;
 using System.Diagnostics;
-using System.IO;
 using Xamarin.Essentials;
 
 

@@ -1,7 +1,4 @@
-﻿using GrinPlusPlus.Service;
-using System;
-
-namespace GrinPlusPlus.Models
+﻿namespace GrinPlusPlus.Models
 {
     public class Chain
     {

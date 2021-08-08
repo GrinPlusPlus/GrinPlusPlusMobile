@@ -9,7 +9,6 @@ using Prism.Services.Dialogs;
 using System;
 using System.Diagnostics;
 using System.Threading;
-using Xamarin.Essentials;
 
 namespace GrinPlusPlus.ViewModels
 {

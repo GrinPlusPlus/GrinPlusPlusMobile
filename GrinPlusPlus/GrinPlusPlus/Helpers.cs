@@ -86,7 +86,7 @@ namespace GrinPlusPlus
             {
                 t = "0";
             }
-            
+
             return double.Parse(t, NumberStyles.Any, CultureInfo.InvariantCulture);
         }
     }

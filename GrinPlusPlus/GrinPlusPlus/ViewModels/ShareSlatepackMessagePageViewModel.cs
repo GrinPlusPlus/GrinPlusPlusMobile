@@ -1,11 +1,10 @@
-﻿using Prism.Commands;
-using GrinPlusPlus.Api;
+﻿using GrinPlusPlus.Api;
+using GrinPlusPlus.Models;
+using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
-using System.IO;
 using Xamarin.Essentials;
-using GrinPlusPlus.Models;
 
 namespace GrinPlusPlus.ViewModels
 {
@@ -49,7 +48,7 @@ namespace GrinPlusPlus.ViewModels
         public ShareSlatepackMessagePageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
-            
+
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)

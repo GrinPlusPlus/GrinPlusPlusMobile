@@ -12,13 +12,15 @@ namespace GrinPlusPlus.Converters
 
             var status = ((string)value).ToLower();
 
-            if(status.Contains("not finalized"))
+            if (status.Contains("not finalized"))
             {
                 return "-";
-            } else if (status.Contains("receiving"))
+            }
+            else if (status.Contains("receiving"))
             {
                 return "+";
-            } else if (status.Contains("sending"))
+            }
+            else if (status.Contains("sending"))
             {
                 return "-";
             }

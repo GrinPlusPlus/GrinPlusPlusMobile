@@ -1,7 +1,6 @@
 using GrinPlusPlus.Api;
 using GrinPlusPlus.ViewModels;
 using GrinPlusPlus.Views;
-using Plugin.SharedTransitions;
 using Prism;
 using Prism.Common;
 using Prism.Ioc;
@@ -24,10 +23,10 @@ namespace GrinPlusPlus
         protected override async void OnInitialized()
         {
             Thread.CurrentThread.CurrentUICulture = CultureInfo.InstalledUICulture;
-            
+
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/InitPage");
+            await NavigationService.NavigateAsync("/NavigationPage/InitPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -36,7 +35,6 @@ namespace GrinPlusPlus
 
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
 
-            containerRegistry.RegisterForNavigation<SharedTransitionNavigationPage>();
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
             containerRegistry.RegisterForNavigation<CreateWalletPage, CreateWalletPageViewModel>();

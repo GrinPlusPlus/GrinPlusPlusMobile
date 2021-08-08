@@ -1,6 +1,4 @@
 ﻿using GrinPlusPlus.Api;
-using GrinPlusPlus.Models;
-using GrinPlusPlus.Resources;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
@@ -71,7 +69,7 @@ namespace GrinPlusPlus.ViewModels
 
                 Settings.IsLoggedIn = false;
 
-                await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/LoginPage");
+                await NavigationService.NavigateAsync("/NavigationPage/LoginPage");
             }
             catch (Exception ex)
             {

@@ -1,13 +1,8 @@
 ﻿using GrinPlusPlus.Api;
-using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Collections.ObjectModel;
-using Xamarin.Essentials;
 using System.Linq;
 
 
@@ -28,7 +23,7 @@ namespace GrinPlusPlus.ViewModels
             }
         }
 
-        public WalletSeedBackupPageViewModel (INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
+        public WalletSeedBackupPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
 

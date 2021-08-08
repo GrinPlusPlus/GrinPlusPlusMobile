@@ -10,7 +10,7 @@ namespace GrinPlusPlus.Converters
         {
             if (value == null) return string.Empty;
 
-            return (bool)value == true ? "Green" : "Orange" ;
+            return (bool)value == true ? "Green" : "Orange";
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

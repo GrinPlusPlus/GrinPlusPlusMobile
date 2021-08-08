@@ -77,8 +77,8 @@ namespace GrinPlusPlus.ViewModels
 
         public CultureInfo Culture { get; private set; }
 
-        public SetAmountPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, 
-                                      IPageDialogService pageDialogService) 
+        public SetAmountPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService,
+                                      IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
             Culture = new CultureInfo("en-US");

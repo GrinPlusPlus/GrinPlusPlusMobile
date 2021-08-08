@@ -1,14 +1,11 @@
 ﻿using GrinPlusPlus.Api;
 using GrinPlusPlus.Models;
 using GrinPlusPlus.Resources;
-using GrinPlusPlus.Extensions;
-using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
 using System;
 using System.Collections.ObjectModel;
-using System.Threading;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -61,7 +58,21 @@ namespace GrinPlusPlus.ViewModels
 
             DisplayActivityIndicator = true;
 
-            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(120), () =>
+            {
+                if (Settings.Node.Status.Equals("Disconnected"))
+                {
+                    DisplayActivityIndicator = false;
+
+                    MainThread.BeginInvokeOnMainThread(async () =>
+                    {
+                        await NavigationService.NavigateAsync("/NavigationPage/ErrorPage");
+                    });
+                }
+                return false;
+            });
+
+            Device.StartTimer(TimeSpan.FromSeconds(2), () =>
             {
                 Status = Settings.Node.Status;
                 ProgressBarr = Settings.Node.ProgressPercentage;
@@ -70,24 +81,11 @@ namespace GrinPlusPlus.ViewModels
                 if (Settings.Node.Status.Equals("Running"))
                 {
                     return false;
-                } else
-                
+                }
+
                 return true;
             });
 
-            Device.StartTimer(TimeSpan.FromSeconds(60), () =>
-            {
-                if (Settings.Node.Status.Equals("Disconnected"))
-                {
-                    DisplayActivityIndicator = false;
-
-                    MainThread.BeginInvokeOnMainThread(async () =>
-                    {
-                        await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/ErrorPage");
-                    });
-                }
-                return false;
-            });
 
             Device.StartTimer(TimeSpan.FromSeconds(3), () =>
             {
@@ -96,9 +94,9 @@ namespace GrinPlusPlus.ViewModels
 
                     MainThread.BeginInvokeOnMainThread(async () =>
                     {
-                        await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/LoginPage");
+                        await NavigationService.NavigateAsync("/NavigationPage/LoginPage");
                     });
-                    
+
                     return false;
                 }
 
@@ -108,18 +106,16 @@ namespace GrinPlusPlus.ViewModels
 
         private void FillGrinFacts()
         {
-            _grinFacts.Add(new Fact{ Title = AppResources.ResourceManager.GetString("Emission"), Details = AppResources.ResourceManager.GetString("FactEmission") });
+            _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Addresses"), Details = AppResources.ResourceManager.GetString("FactAddresses") });
+            _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Amounts"), Details = AppResources.ResourceManager.GetString("FactsAmounts") });
+            _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Emission"), Details = AppResources.ResourceManager.GetString("FactEmission") });
             _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Slatepack"), Details = AppResources.ResourceManager.GetString("FactSlatepack") });
             _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Transactions"), Details = AppResources.ResourceManager.GetString("FactTransactions") });
-            _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Addresses"), Details = AppResources.ResourceManager.GetString("FactAddresses") });
             _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Private"), Details = AppResources.ResourceManager.GetString("FactPrivate") });
             _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Scalable"), Details = AppResources.ResourceManager.GetString("FactsScalable") });
-            _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Amounts"), Details = AppResources.ResourceManager.GetString("FactsAmounts") });
             _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Open"), Details = AppResources.ResourceManager.GetString("FactsOpen") });
             _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Dandelion"), Details = AppResources.ResourceManager.GetString("FactsDandelion") });
             _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Mimblewimble"), Details = AppResources.ResourceManager.GetString("FactsMimblewimble") });
-
-            _grinFacts.Shuffle();
         }
     }
 }

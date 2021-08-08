@@ -1,6 +1,6 @@
-using System;
 using Android.App;
 using Android.Runtime;
+using System;
 
 namespace GrinPlusPlus.Droid
 {

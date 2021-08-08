@@ -12,13 +12,15 @@ namespace GrinPlusPlus.Converters
 
             var status = ((string)value).ToLower();
 
-            if(status.Contains("not finalized"))
+            if (status.Contains("not finalized"))
             {
                 return "baseline_rule_white_20.png";
-            } else if (status.Contains("receiving"))
+            }
+            else if (status.Contains("receiving"))
             {
                 return "baseline_hourglass_top_white_20.png";
-            } else if (status.Contains("sending"))
+            }
+            else if (status.Contains("sending"))
             {
                 return "baseline_hourglass_top_white_20.png";
             }

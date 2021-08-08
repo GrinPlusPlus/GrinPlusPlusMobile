@@ -100,7 +100,7 @@ namespace GrinPlusPlus.ViewModels
             new TransactionStatus() { Label = AppResources.ResourceManager.GetString("Coinbase")},
         };
         public ObservableCollection<TransactionStatus> TransactionStatusOptions
-        { 
+        {
             get
             {
                 return _transactionStatuseOptions;
@@ -199,7 +199,8 @@ namespace GrinPlusPlus.ViewModels
             {
                 if (value != null)
                 {
-                    MainThread.BeginInvokeOnMainThread(async () => {
+                    MainThread.BeginInvokeOnMainThread(async () =>
+                    {
                         await NavigationService.NavigateAsync("TransactionDetailsPage", new NavigationParameters {
                         {
                           "transaction",
@@ -223,7 +224,8 @@ namespace GrinPlusPlus.ViewModels
             {
                 if (value != null)
                 {
-                    MainThread.BeginInvokeOnMainThread(async () => {
+                    MainThread.BeginInvokeOnMainThread(async () =>
+                    {
                         await NavigationService.NavigateAsync("TransactionDetailsPage", new NavigationParameters {
                         {
                           "transaction",
@@ -253,33 +255,38 @@ namespace GrinPlusPlus.ViewModels
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
         {
-            Device.StartTimer(TimeSpan.FromSeconds(5), () => {
+            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+            {
                 if (Settings.IsLoggedIn == false)
                 {
                     return false;
                 }
 
-                MainThread.BeginInvokeOnMainThread(async () => {
+                MainThread.BeginInvokeOnMainThread(async () =>
+                {
                     await GetWalletBalance();
                 });
 
                 return true;
             });
 
-            Device.StartTimer(TimeSpan.FromSeconds(5), () => {
+            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+            {
                 if (Settings.IsLoggedIn == false)
                 {
                     return false;
                 }
 
-                MainThread.BeginInvokeOnMainThread(async () => {
+                MainThread.BeginInvokeOnMainThread(async () =>
+                {
                     await LoadTransactions();
                 });
 
                 return true;
             });
 
-            Device.StartTimer(TimeSpan.FromSeconds(5), () => {
+            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+            {
                 if (Settings.IsLoggedIn == false)
                 {
                     return false;
@@ -302,7 +309,7 @@ namespace GrinPlusPlus.ViewModels
             SlatepackAddress = await SecureStorage.GetAsync("slatepack_address");
         }
 
-        public WalletPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, 
+        public WalletPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService,
             IPageDialogService pageDialogService) : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
             Balance = new Balance
@@ -318,15 +325,18 @@ namespace GrinPlusPlus.ViewModels
 
             CancelTransactionCommand = new DelegateCommand<object>(CancelTransaction);
 
-            MainThread.BeginInvokeOnMainThread(async () => {
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
                 await GetWalletBalance();
             });
 
-            MainThread.BeginInvokeOnMainThread(async () => {
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
                 await LoadTransactions();
             });
 
-            Device.StartTimer(TimeSpan.FromSeconds(30), () => {
+            Device.StartTimer(TimeSpan.FromSeconds(30), () =>
+            {
                 if (Settings.IsLoggedIn == false)
                 {
                     return false;
@@ -340,7 +350,8 @@ namespace GrinPlusPlus.ViewModels
 
         void UpdateAvailability()
         {
-            MainThread.BeginInvokeOnMainThread(async () => {
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
 
                 if (string.IsNullOrEmpty(TorAddress))
                 {
@@ -365,7 +376,7 @@ namespace GrinPlusPlus.ViewModels
             try
             {
                 var balance = await DataProvider.GetWalletBalance(await SecureStorage.GetAsync("token"));
-                if (Balance.Total != balance.Total || Balance.Spendable != balance.Spendable || Balance.Immature != balance.Immature || 
+                if (Balance.Total != balance.Total || Balance.Spendable != balance.Spendable || Balance.Immature != balance.Immature ||
                     Balance.Unconfirmed != balance.Unconfirmed || Balance.Locked != balance.Locked)
                 {
                     Balance = balance;
@@ -412,7 +423,7 @@ namespace GrinPlusPlus.ViewModels
 
         private void LoadUnfinalizedTransactions(List<Transaction> transactions)
         {
-            if(UnfinalizedTransactions.Count() == transactions.Count())
+            if (UnfinalizedTransactions.Count() == transactions.Count())
             {
                 return;
             }
@@ -427,7 +438,7 @@ namespace GrinPlusPlus.ViewModels
 
         private void LoadTransactionHistory(List<Transaction> transactions)
         {
-            if(transactions.Count() == 0)
+            if (transactions.Count() == 0)
             {
                 FilteredTransactionHistory = new ObservableCollection<Transaction>();
                 return;
@@ -452,7 +463,7 @@ namespace GrinPlusPlus.ViewModels
                     remove.Add(oldTransaction);
                 }
             }
-            
+
             for (int i = 0; i < transactions.Count(); i++)
             {
                 var newTransaction = transactions.ElementAt<Transaction>(i);
@@ -471,7 +482,7 @@ namespace GrinPlusPlus.ViewModels
                 }
             }
 
-            if(add.Count() == 0 && remove.Count() == 0)
+            if (add.Count() == 0 && remove.Count() == 0)
             {
                 return;
             }
@@ -523,9 +534,9 @@ namespace GrinPlusPlus.ViewModels
             }
         }
 
-       public class TransactionStatus
-       {
-           public string Label { get; set; }
-       }
+        public class TransactionStatus
+        {
+            public string Label { get; set; }
+        }
     }
 }

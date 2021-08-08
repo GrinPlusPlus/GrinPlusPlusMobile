@@ -243,12 +243,12 @@ namespace GrinPlusPlus.Api
             };
 
             var response = await httpclient.PostAsync(url, encodedContent).ConfigureAwait(false);
-            
+
             var content = string.Empty;
-            
+
             if (response.StatusCode == HttpStatusCode.OK)
             {
-                content =  (await response.Content.ReadAsStringAsync()).Trim().ToLower();
+                content = (await response.Content.ReadAsStringAsync()).Trim().ToLower();
             }
             return content.Equals("reachable");
         }

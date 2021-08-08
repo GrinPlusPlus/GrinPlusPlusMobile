@@ -57,11 +57,12 @@ namespace GrinPlusPlus.ViewModels
                 }
                 finally
                 {
-                    if(Settings.IsLoggedIn)
+                    if (Settings.IsLoggedIn)
                     {
                         SecureStorage.Remove("wallet_seed");
-                        await NavigationService.NavigateAsync("/SharedTransitionNavigationPage/WalletPage");
-                    } else
+                        await NavigationService.NavigateAsync("/NavigationPage/WalletPage");
+                    }
+                    else
                     {
                         Thread.Sleep(2000);
                         await NavigationService.GoBackToRootAsync();
@@ -82,7 +83,7 @@ namespace GrinPlusPlus.ViewModels
         private async Task GetWalletBalance()
         {
             var balance = await DataProvider.GetWalletBalance(await SecureStorage.GetAsync("token"));
-            
+
             Preferences.Set("balance_spendable", balance.Spendable);
             Preferences.Set("balance_locked", balance.Locked);
             Preferences.Set("balance_immature", balance.Immature);

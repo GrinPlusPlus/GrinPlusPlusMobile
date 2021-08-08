@@ -1,6 +1,4 @@
-﻿using Xamarin.CommunityToolkit.Extensions;
-using Xamarin.Essentials;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace GrinPlusPlus.Views
 {

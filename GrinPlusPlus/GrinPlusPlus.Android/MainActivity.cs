@@ -1,8 +1,6 @@
 ﻿using Android.App;
-using Android.Content;
 using Android.Content.PM;
 using Android.OS;
-using Android.Views;
 using Plugin.Fingerprint;
 using Prism;
 using Prism.Ioc;
@@ -42,7 +40,7 @@ namespace GrinPlusPlus.Droid
             // always call the base implementation!
             base.OnSaveInstanceState(outState);
         }
-        
+
         protected override void OnRestoreInstanceState(Bundle savedInstanceState)
         {
             base.OnRestoreInstanceState(savedInstanceState);

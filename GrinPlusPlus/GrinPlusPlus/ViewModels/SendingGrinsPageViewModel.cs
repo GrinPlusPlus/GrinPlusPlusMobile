@@ -133,7 +133,7 @@ namespace GrinPlusPlus.ViewModels
             if (parameters.ContainsKey("address"))
             {
                 Address = (string)parameters["address"];
-                if(!string.IsNullOrEmpty(Address))
+                if (!string.IsNullOrEmpty(Address))
                 {
                     IsAddressLabelVisible = true;
                 }

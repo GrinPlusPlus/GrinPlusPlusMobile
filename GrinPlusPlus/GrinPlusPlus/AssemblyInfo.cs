@@ -1,5 +1,4 @@
 using System.Resources;
-using Xamarin.Forms.Xaml;
 
 // The resources from the neutral language .resx file are stored directly
 // within the library assembly. For that reason, changing en-US to a different

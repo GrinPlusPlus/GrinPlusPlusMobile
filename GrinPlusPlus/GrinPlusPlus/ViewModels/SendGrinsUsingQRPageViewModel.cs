@@ -4,8 +4,6 @@ using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
-using System;
-using System.IO;
 using Xamarin.Essentials;
 
 namespace GrinPlusPlus.ViewModels

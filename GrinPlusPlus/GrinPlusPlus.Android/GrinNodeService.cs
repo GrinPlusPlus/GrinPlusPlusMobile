@@ -70,9 +70,11 @@ namespace GrinPlusPlus.Droid
                 {
                     Log.Info(TAG, "Stop Service called.");
 
-                    try { 
+                    try
+                    {
                         Xamarin.Essentials.Platform.CurrentActivity.Finish();
-                    } catch (Exception e)
+                    }
+                    catch (Exception e)
                     {
                         Log.Verbose(TAG, e.Message);
                     }
@@ -142,8 +144,12 @@ namespace GrinPlusPlus.Droid
             {
                 Log.Error(TAG, $"Error Communication: {ex.Message}");
             }
-            Preferences.Set("Status", label);
-            RegisterForegroundService(label);
+
+            if (!label.Equals(Preferences.Get("Status", string.Empty)))
+            {
+                Preferences.Set("Status", label);
+                RegisterForegroundService(label);
+            }
         }
 
         private void RegisterForegroundService(string status)

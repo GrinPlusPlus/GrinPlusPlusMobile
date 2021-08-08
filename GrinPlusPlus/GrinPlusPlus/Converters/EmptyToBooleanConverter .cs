@@ -8,7 +8,7 @@ namespace GrinPlusPlus.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if(string.IsNullOrEmpty((string)value))
+            if (string.IsNullOrEmpty((string)value))
             {
                 return false;
             }

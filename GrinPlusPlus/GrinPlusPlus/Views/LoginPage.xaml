@@ -5,10 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
-    xmlns:sharedTransitions="clr-namespace:Plugin.SharedTransitions;assembly=Plugin.SharedTransitions"
     x:Name="Login"
     prism:ViewModelLocator.AutowireViewModel="True"
-    sharedTransitions:SharedTransitionNavigationPage.BackgroundAnimation="SlideFromRight"
     BackgroundColor="Black"
     BackgroundImageSource="country_quilt_dark.png">
     <NavigationPage.TitleView>

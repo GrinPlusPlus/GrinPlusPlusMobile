@@ -112,7 +112,7 @@ namespace GrinPlusPlus.ViewModels
 
         private async Task ListConnectedPeersAsync()
         {
-            
+
             try
             {
                 var connectedPeers = await DataProvider.GetNodeConnectedPeers();
@@ -139,7 +139,7 @@ namespace GrinPlusPlus.ViewModels
             {
                 Debug.WriteLine(ex.Message);
             }
-            
+
         }
     }
 }

@@ -6,7 +6,6 @@ using Prism.Services;
 using Prism.Services.Dialogs;
 using System;
 using System.Diagnostics;
-using System.Reflection;
 using Xamarin.Essentials;
 
 namespace GrinPlusPlus.ViewModels
@@ -50,7 +49,8 @@ namespace GrinPlusPlus.ViewModels
             {
                 Username = parameters.GetValue<string>("username");
                 Title = Username.ToUpper();
-            } else
+            }
+            else
             {
                 await NavigationService.GoBackToRootAsync();
             }
@@ -73,7 +73,7 @@ namespace GrinPlusPlus.ViewModels
                 await SecureStorage.SetAsync("username", Username);
                 await SecureStorage.SetAsync("slatepack_address", wallet.SlatepackAdddress);
                 await SecureStorage.SetAsync("tor_address", wallet.TorAddress ?? string.Empty);
-                
+
                 var tc = new TorControlClient();
                 await tc.ConnectAsync("127.0.0.1", 3423);
                 await tc.AuthenticateAsync("MyPassword");

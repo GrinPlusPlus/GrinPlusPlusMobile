@@ -8,7 +8,6 @@ using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -50,9 +49,9 @@ namespace GrinPlusPlus.ViewModels
                 try
                 {
                     var accounts = await DataProvider.GetAccounts();
-                    if(Accounts.ToList().Count != accounts.Count)
+                    if (Accounts.ToList().Count != accounts.Count)
                     {
-                       Accounts = new ObservableCollection<Account>(accounts.ToArray());
+                        Accounts = new ObservableCollection<Account>(accounts.ToArray());
                     }
 
                     failCounter = 0;

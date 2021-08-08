@@ -102,7 +102,7 @@ namespace GrinPlusPlus.ViewModels
             try
             {
                 IsBusy = true;
-                
+
                 var login = await DataProvider.RestoreWallet(Username, Password, WalletSeed);
                 await SecureStorage.SetAsync("token", login.Token);
                 await SecureStorage.SetAsync("username", Username);
