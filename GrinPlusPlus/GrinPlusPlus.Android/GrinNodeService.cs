@@ -145,11 +145,8 @@ namespace GrinPlusPlus.Droid
                 Log.Error(TAG, $"Error Communication: {ex.Message}");
             }
 
-            if (!label.Equals(Preferences.Get("Status", string.Empty)))
-            {
-                Preferences.Set("Status", label);
-                RegisterForegroundService(label);
-            }
+            RegisterForegroundService(label);
+            Preferences.Set("Status", label);
         }
 
         private void RegisterForegroundService(string status)
@@ -341,7 +338,7 @@ namespace GrinPlusPlus.Droid
         {
             var action = "Run";
             var status = Preferences.Get("Status", string.Empty);
-            if (!status.Equals("Disconnected"))
+            if (!status.Equals("Not Running"))
             {
                 action = "Restart";
             }
@@ -363,7 +360,7 @@ namespace GrinPlusPlus.Droid
 		Notification.Action BuildResyncNodeAction()
         {
             var status = Preferences.Get("Status", string.Empty);
-            if (status.Equals("Disconnected"))
+            if (status.Equals("Not Running"))
             {
                 return null;
             }
@@ -387,7 +384,7 @@ namespace GrinPlusPlus.Droid
 		Notification.Action BuildStopServiceAction()
         {
             var status = Preferences.Get("Status", string.Empty);
-            if (status.Equals("Disconnected"))
+            if (status.Equals("Not Running"))
             {
                 return null;
             }

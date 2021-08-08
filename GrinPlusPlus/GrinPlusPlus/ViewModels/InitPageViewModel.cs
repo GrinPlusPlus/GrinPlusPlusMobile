@@ -60,7 +60,7 @@ namespace GrinPlusPlus.ViewModels
 
             Device.StartTimer(TimeSpan.FromSeconds(120), () =>
             {
-                if (Settings.Node.Status.Equals("Disconnected"))
+                if (Settings.Node.Status.Equals("Not Running"))
                 {
                     DisplayActivityIndicator = false;
 

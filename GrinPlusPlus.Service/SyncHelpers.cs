@@ -31,7 +31,7 @@ namespace GrinPlusPlus.Service
                 case "NOT_CONNECTED":
                     return "Waiting for Peers";
                 default:
-                    return "Disconnected";
+                    return "Not Running";
             }
         }
 
