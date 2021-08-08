@@ -53,7 +53,6 @@
     value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
-
     mimetype: application/x-microsoft.net.object.bytearray.base64
     value   : The object must be serialized into a byte array 
             : using a System.ComponentModel.TypeConverter
@@ -129,9 +128,6 @@
   <data name="Addresses" xml:space="preserve">
     <value>Адреса</value>
   </data>
-  <data name="AddressNote" xml:space="preserve">
-    <value>The receiver's address is also used to encrypt the transaction information, it use is not mandatory but highly recommended</value>
-  </data>
   <data name="AlignQRCode" xml:space="preserve">
     <value>Выровнять QR код по рамке</value>
   </data>
@@ -178,19 +174,16 @@
     <value>Выполнено</value>
   </data>
   <data name="Confirm" xml:space="preserve">
-    <value>Потвердить</value>
+    <value>Подтвердить</value>
   </data>
   <data name="Confirmations" xml:space="preserve">
-    <value>Потверждения</value>
-  </data>
-  <data name="ConfirmedHeight" xml:space="preserve">
-    <value>Confirmed Height</value>
+    <value>Подтверждения</value>
   </data>
   <data name="ConfirmIdentity" xml:space="preserve">
-    <value>Потвердите свою личность для продолжения</value>
+    <value>Подтвердите свою личность для продолжения</value>
   </data>
   <data name="ConfirmPassword" xml:space="preserve">
-    <value>Потвердить пароль</value>
+    <value>Подтвердить пароль</value>
   </data>
   <data name="ConnectedPeers" xml:space="preserve">
     <value>Подключенные пиры</value>
@@ -200,9 +193,6 @@
   </data>
   <data name="Continue" xml:space="preserve">
     <value>Продолжить</value>
-  </data>
-  <data name="Copy" xml:space="preserve">
-    <value>Copy</value>
   </data>
   <data name="CopySlatepackMessage" xml:space="preserve">
     <value>Скопировать Slatepack сообщение</value>
@@ -234,9 +224,6 @@
   <data name="DeleteWallet" xml:space="preserve">
     <value>Удалить кошелек</value>
   </data>
-  <data name="Details" xml:space="preserve">
-    <value>Details</value>
-  </data>
   <data name="Emission" xml:space="preserve">
     <value>Эмиссия</value>
   </data>
@@ -247,7 +234,7 @@
     <value>Ошибка</value>
   </data>
   <data name="ErrorConnectingToNode" xml:space="preserve">
-    <value>Прошла ошибка при инициализации GRIN ноды.</value>
+    <value>Произошла ошибка при инициализации GRIN ноды.</value>
   </data>
   <data name="ErrorConnectingToNodeAdvice" xml:space="preserve">
     <value>Пожалуйста попробуйте запустить ноду заново, путем клика по соответствующей кнопке в уведомлениях устройства</value>
@@ -271,13 +258,13 @@
     <value>Slatepack - это универсальный стандарт транзакций для Grin. Пакеты Slatepack зашифровываются, когда пользователь использует адрес grin1 для отправки GRIN; в противном случае информация о транзакции только запутывается</value>
   </data>
   <data name="FactsMimblewimble" xml:space="preserve">
-    <value>Mimblewimble - это протокол блокчейна, который позволяет использовать платформу для полностью закрытых транзакций с помощью уникальной структуры безопасности, которая заметно отличается от псевдоаномнимной криптовалюты Биткойн. В Mimblewimble нет адресов, и транзакции полностью конфиденциальны. Его распределенный реестр также относительно компактнее, чем другие цепочки в криптопространстве.</value>
+    <value>Mimblewimble - это протокол блокчейна, который позволяет использовать платформу для полностью закрытых транзакций с помощью уникальной структуры безопасности. В Mimblewimble нет адресов и транзакции полностью конфиденциальны. Его размер также компактнее, чем другие решения.</value>
   </data>
   <data name="FactsOpen" xml:space="preserve">
-    <value>Grin разрабатывается открыто отдельными участниками со всего мира. За этим нет ни компании, ни фонда, ни ICO, ни вознаграждения основателя, ни налога на разработку, ни до майнинга. Распределение монет должно быть настолько справедливым (но не бесплатным), насколько это возможно.</value>
+    <value>Grin разрабатывается открыто отдельными участниками со всего мира. За этим нет ни компании, ни фонда, ни ICO, ни вознаграждения основателя, ни налога на разработку, ни пре майнинга. Распределение монет должно быть настолько справедливым (но не бесплатным), насколько это возможно.</value>
   </data>
   <data name="FactsScalable" xml:space="preserve">
-    <value>Grin масштабируется в основном с количеством пользователей и минимально с количеством транзакций. Данные прошлых транзакций могут быть удалены, что значительно упрощает усмешку по сравнению с другими блокчейнами.</value>
+    <value>Grin масштабируется в основном с количеством пользователей и минимально с количеством транзакций. Данные прошлых транзакций могут быть удалены, что значительно упрощает GRIN по сравнению с другими блокчейнами.</value>
   </data>
   <data name="FactTransactions" xml:space="preserve">
     <value>Транзакции Mimblewimble являются интерактивными, то есть обеим сторонам требуется какое-то взаимодействие, чтобы взаимодействовать друг с другом и обмениваться необходимыми данными для создания транзакции..</value>
@@ -287,9 +274,6 @@
   </data>
   <data name="Fee" xml:space="preserve">
     <value>Комиссия </value>
-  </data>
-  <data name="FillEmptyBoxes" xml:space="preserve">
-    <value>Please, fill the empty boxes before continuing</value>
   </data>
   <data name="Finalize" xml:space="preserve">
     <value>Завершение</value>
@@ -566,9 +550,6 @@
   </data>
   <data name="WalletSeed" xml:space="preserve">
     <value>Seed кошелька</value>
-  </data>
-  <data name="WalletSeedInit" xml:space="preserve">
-    <value>Your seed phrase is the only backup to your private keys, which can give you access to your crypto assets. Copy each word in a safe place.</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Да</value>
