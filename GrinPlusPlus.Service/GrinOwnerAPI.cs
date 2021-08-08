@@ -28,7 +28,7 @@ namespace GrinPlusPlus.Service
                     {
                         httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
                     }
-                    
+
                 }
                 httpClient.Timeout = TimeSpan.FromMinutes(10);
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
