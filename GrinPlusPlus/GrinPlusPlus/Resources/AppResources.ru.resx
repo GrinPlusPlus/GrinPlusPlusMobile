@@ -53,6 +53,7 @@
     value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
+
     mimetype: application/x-microsoft.net.object.bytearray.base64
     value   : The object must be serialized into a byte array 
             : using a System.ComponentModel.TypeConverter
@@ -238,6 +239,9 @@
   </data>
   <data name="ErrorConnectingToNodeAdvice" xml:space="preserve">
     <value>Пожалуйста попробуйте запустить ноду заново, путем клика по соответствующей кнопке в уведомлениях устройства</value>
+  </data>
+  <data name="ExportLogs" xml:space="preserve">
+    <value>Экспортные журналы.</value>
   </data>
   <data name="FactAddresses" xml:space="preserve">
     <value>Примечательно, что здесь нет и сетевых адресов, поскольку построение транзакций является интерактивным. Ключи, используемые в SlatepackAddresses, являются производными от пути от основного начального числа в данной учетной записи кошелька.</value>
@@ -462,7 +466,7 @@
     <value>Отправить как файл</value>
   </data>
   <data name="ShareSlatePackMessageQuote" xml:space="preserve">
-    <value>The Receiver should introduce this Slatepack Message into their Wallet in order to receive the transaction.</value>
+    <value>Получатель должен ввести это сообщение слейтпака в свой кошелек, чтобы получить транзакцию</value>
   </data>
   <data name="ShareSlatePackMessageQuoteToFinalize" xml:space="preserve">
     <value>Отправьте это сообщение Slatepack Отправителю, чтобы завершить транзакцию.</value>

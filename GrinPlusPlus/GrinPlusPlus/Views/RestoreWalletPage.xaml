@@ -83,9 +83,9 @@
             <Editor
                 AutoSize="Disabled"
                 BackgroundColor="#191919"
-                CharacterSpacing="5"
+                CharacterSpacing="2"
                 FontSize="Body"
-                HeightRequest="110"
+                HeightRequest="140"
                 IsSpellCheckEnabled="False"
                 IsTextPredictionEnabled="False"
                 Text="{Binding WalletSeed}"

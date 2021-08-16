@@ -3,7 +3,6 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Util;
-
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -34,6 +33,9 @@ namespace GrinPlusPlus.Droid
         private Java.Lang.Process pTor;
 
         public Java.IO.File dataFolder { get; private set; }
+        public Java.IO.File backendFolder { get; private set; }
+
+        public string dbLockFile { get; private set; }
 
         public override IBinder OnBind(Intent intent)
         {
@@ -55,6 +57,16 @@ namespace GrinPlusPlus.Droid
             SetTimer();
 
             dataFolder = new Java.IO.File(Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), ".GrinPP/MAINNET/NODE"));
+
+            Preferences.Set("DataFolder", dataFolder.AbsolutePath);
+
+            Preferences.Set("LogsFolder", new Java.IO.File(Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), ".GrinPP/MAINNET/LOGS")).AbsolutePath);
+
+            backendFolder = new Java.IO.File(Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), ".GrinPP/MAINNET/"));
+
+            Preferences.Set("BackendFolder", backendFolder.AbsolutePath);
+
+            dbLockFile = Path.Combine(backendFolder.AbsolutePath, "DB", "CHAIN", "LOCK");
         }
 
         public override StartCommandResult OnStartCommand(Intent intent, StartCommandFlags flags, int startId)
@@ -74,7 +86,7 @@ namespace GrinPlusPlus.Droid
                     {
                         Xamarin.Essentials.Platform.CurrentActivity.Finish();
                     }
-                    catch (Exception e)
+                    catch (System.Exception e)
                     {
                         Log.Verbose(TAG, e.Message);
                     }
@@ -192,6 +204,8 @@ namespace GrinPlusPlus.Droid
 
         void RunBackend()
         {
+            StopBackend();
+            
             RunTor();
             RunGrinNode();
         }
@@ -199,6 +213,12 @@ namespace GrinPlusPlus.Droid
         private void RunGrinNode()
         {
             Log.Info(TAG, "Starting Grin Node...");
+
+            if (File.Exists(dbLockFile))
+            {
+                File.Delete(dbLockFile);
+            }
+
             pNode = Java.Lang.Runtime.GetRuntime().Exec(libgrin.AbsolutePath);
             try
             {
@@ -290,11 +310,13 @@ namespace GrinPlusPlus.Droid
                     pTor.DestroyForcibly();
                 }
             }
+            
             Java.Lang.Runtime.GetRuntime().Exec(new string[] {
-                    "kill",
+                    "killall",
                     "-9",
                     "libtor.so"
                 });
+
             Log.Info(TAG, "Tor Stopped.");
         }
 
@@ -305,7 +327,7 @@ namespace GrinPlusPlus.Droid
             {
                 Directory.Delete(dataFolder.AbsolutePath, true);
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 Log.Error(TAG, ex.Message);
             }
@@ -384,11 +406,7 @@ namespace GrinPlusPlus.Droid
 		Notification.Action BuildStopServiceAction()
         {
             var status = Preferences.Get("Status", string.Empty);
-            if (status.Equals("Not Running"))
-            {
-                return null;
-            }
-
+            
             var stopServiceIntent = new Intent(this, GetType());
             stopServiceIntent.SetAction(Constants.ACTION_STOP_SERVICE);
             var stopServicePendingIntent = PendingIntent.GetService(this, 0, stopServiceIntent, 0);

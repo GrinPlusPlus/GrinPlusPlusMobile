@@ -252,6 +252,9 @@
   <data name="ErrorConnectingToNodeAdvice" xml:space="preserve">
     <value>Будь ласка спробуйте запустити ноду заново, шляхом кліка по відповідній кнопці в повідомленнях пристрої</value>
   </data>
+  <data name="ExportLogs" xml:space="preserve">
+    <value>Экспортные журналы.</value>
+  </data>
   <data name="FactAddresses" xml:space="preserve">
     <value>Тут немає мережевих адрес, оскільки побудова транзакцій є інтерактивним. Ключі, що використовуються в SlatepackAddresses, є похідними шляху від основного початкового числа в цього облікового запису гаманця.</value>
   </data>

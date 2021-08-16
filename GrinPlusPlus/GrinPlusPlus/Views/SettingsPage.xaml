@@ -179,7 +179,18 @@
             <Button
                 Grid.Row="9"
                 Grid.Column="0"
-                Grid.ColumnSpan="2"
+                Margin="20,10,20,0"
+                BackgroundColor="#0C0C0C"
+                Command="{Binding ExportLogsButtonClickedCommand}"
+                CornerRadius="5"
+                FontSize="16"
+                Text="{x:Static resource:AppResources.ExportLogs}"
+                TextColor="White"
+                TextTransform="None"
+                WidthRequest="50" />
+            <Button
+                Grid.Row="9"
+                Grid.Column="1"
                 Margin="20,10,20,0"
                 BackgroundColor="#0C0C0C"
                 Command="{Binding OpenBackupWalletPageCommand}"
@@ -197,7 +208,7 @@
                 VerticalOptions="End">
                 <Label
                     HorizontalOptions="Center"
-                    Text="Grin++ v0.3.0"
+                    Text="Grin++ v0.3.0 (node v1.2.6)"
                     TextColor="#333333" />
             </StackLayout>
         </Grid>

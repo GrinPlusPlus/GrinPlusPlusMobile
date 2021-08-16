@@ -466,6 +466,15 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Export Logs.
+        /// </summary>
+        internal static string ExportLogs {
+            get {
+                return ResourceManager.GetString("ExportLogs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notably, there are no on-chain addresses either, as transaction building is interactive. Keys used in SlatepackAddresses are derived from a path from the master seed in a given wallet account.
         /// </summary>
         internal static string FactAddresses {

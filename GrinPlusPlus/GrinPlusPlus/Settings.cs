@@ -97,5 +97,23 @@ namespace GrinPlusPlus
             get => Preferences.Get(nameof(Reachable), false);
             set => Preferences.Set(nameof(Reachable), value);
         }
+
+        public static string BackendFolder
+        {
+            get => Preferences.Get(nameof(BackendFolder), string.Empty);
+            set => Preferences.Set(nameof(BackendFolder), value);
+        }
+
+        public static string LogsFolder
+        {
+            get => Preferences.Get(nameof(LogsFolder), string.Empty);
+            set => Preferences.Set(nameof(LogsFolder), value);
+        }
+
+        public static string DataFolder
+        {
+            get => Preferences.Get(nameof(DataFolder), string.Empty);
+            set => Preferences.Set(nameof(DataFolder), value);
+        }
     }
 }

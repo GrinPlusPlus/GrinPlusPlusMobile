@@ -23,5 +23,16 @@
             Command="{Binding SupportButtonClickedCommand}"
             Text="{x:Static resource:AppResources.Support}"
             TextColor="LightGray" />
+        <Button
+            BackgroundColor="#191919"
+            Command="{Binding ExportLogsButtonClickedCommand}"
+            Text="{x:Static resource:AppResources.ExportLogs}"
+            TextColor="LightGray" />
+        <Button
+            Margin="0,50,0,0"
+            BackgroundColor="#191919"
+            Command="{Binding DeleteChainButtonClickedCommand}"
+            Text="Delete Blockchain"
+            TextColor="Red" />
     </StackLayout>
 </ContentPage>

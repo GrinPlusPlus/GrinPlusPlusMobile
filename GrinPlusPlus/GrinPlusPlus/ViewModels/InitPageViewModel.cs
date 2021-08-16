@@ -51,14 +51,13 @@ namespace GrinPlusPlus.ViewModels
         public InitPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService,
             IPageDialogService pageDialogService) : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
-            Preferences.Clear();
             SecureStorage.RemoveAll();
 
             FillGrinFacts();
 
             DisplayActivityIndicator = true;
 
-            Device.StartTimer(TimeSpan.FromSeconds(120), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(60), () =>
             {
                 if (Settings.Node.Status.Equals("Not Running"))
                 {

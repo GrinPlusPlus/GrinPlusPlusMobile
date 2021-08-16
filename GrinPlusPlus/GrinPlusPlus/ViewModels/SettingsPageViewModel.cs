@@ -5,6 +5,8 @@ using Prism.Services;
 using Prism.Services.Dialogs;
 using System;
 using System.Diagnostics;
+using System.IO;
+using System.IO.Compression;
 using Xamarin.Essentials;
 
 
@@ -39,6 +41,8 @@ namespace GrinPlusPlus.ViewModels
             get => _grinchckurl.Trim();
             set => SetProperty(ref _grinchckurl, value);
         }
+
+        public DelegateCommand ExportLogsButtonClickedCommand => new DelegateCommand(ExportLogsButtonClicked);
 
         public DelegateCommand OpenBackupWalletPageCommand => new DelegateCommand(OpenBackupWalletPage);
 
@@ -82,6 +86,30 @@ namespace GrinPlusPlus.ViewModels
             try
             {
                 await DataProvider.UpdateNodeSettings(MinimumPeers, MaximumPeers, Confirmations);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+        }
+
+        async void ExportLogsButtonClicked()
+        {
+            string zipPath = Path.Combine(Settings.BackendFolder, "logs.zip");
+            try
+            {
+                if (File.Exists(zipPath))
+                {
+                    File.Delete(zipPath);
+                }
+
+                ZipFile.CreateFromDirectory(Settings.LogsFolder, zipPath);
+
+                await Share.RequestAsync(new ShareFileRequest
+                {
+                    Title = "Logs",
+                    File = new ShareFile(zipPath)
+                });
             }
             catch (Exception ex)
             {
