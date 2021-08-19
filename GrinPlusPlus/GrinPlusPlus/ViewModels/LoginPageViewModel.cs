@@ -15,9 +15,7 @@ namespace GrinPlusPlus.ViewModels
 {
     public class LoginPageViewModel : ViewModelBase
     {
-        int failCounter = 0;
-
-        private ObservableCollection<Account> _accounts = new ObservableCollection<Account>();
+        private ObservableCollection<Account> _accounts;
         public ObservableCollection<Account> Accounts
         {
             get { return _accounts; }
@@ -29,38 +27,20 @@ namespace GrinPlusPlus.ViewModels
         public LoginPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
-            Device.StartTimer(TimeSpan.FromSeconds(0), () =>
-            {
-                if (Settings.IsLoggedIn == true || failCounter.Equals(100))
-                {
-                    return false;
-                }
+            Settings.IsLoggedIn = false;
 
-                ListWallets();
-
-                return true;
-            });
-        }
-
-        private void ListWallets()
-        {
             MainThread.BeginInvokeOnMainThread(async () =>
             {
                 try
                 {
-                    var accounts = await DataProvider.GetAccounts();
-                    if (Accounts.ToList().Count != accounts.Count)
-                    {
-                        Accounts = new ObservableCollection<Account>(accounts.ToArray());
-                    }
-
-                    failCounter = 0;
+                    Accounts = new ObservableCollection<Account>((await DataProvider.GetAccounts()).ToArray());
+                    // Collect all generations of memory.
+                    GC.Collect();
                 }
 
                 catch (Exception ex)
                 {
                     Debug.WriteLine(ex.Message);
-                    failCounter += 1;
                 }
             });
         }

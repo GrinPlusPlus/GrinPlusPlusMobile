@@ -32,8 +32,7 @@ namespace GrinPlusPlus.Droid
         private Java.Lang.Process pNode;
         private Java.Lang.Process pTor;
 
-        public Java.IO.File dataFolder { get; private set; }
-        public Java.IO.File backendFolder { get; private set; }
+        public string dataFolder { get; private set; }
 
         public string dbLockFile { get; private set; }
 
@@ -56,17 +55,17 @@ namespace GrinPlusPlus.Droid
 
             SetTimer();
 
-            dataFolder = new Java.IO.File(Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), ".GrinPP/MAINNET/NODE"));
+            dataFolder = new Java.IO.File(Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), ".GrinPP/MAINNET/NODE")).AbsolutePath;
 
-            Preferences.Set("DataFolder", dataFolder.AbsolutePath);
+            Preferences.Set("DataFolder", dataFolder);
 
             Preferences.Set("LogsFolder", new Java.IO.File(Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), ".GrinPP/MAINNET/LOGS")).AbsolutePath);
 
-            backendFolder = new Java.IO.File(Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), ".GrinPP/MAINNET/"));
+            string backendFolder = new Java.IO.File(Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), ".GrinPP/MAINNET/")).AbsolutePath;
 
-            Preferences.Set("BackendFolder", backendFolder.AbsolutePath);
+            Preferences.Set("BackendFolder", backendFolder);
 
-            dbLockFile = Path.Combine(backendFolder.AbsolutePath, "DB", "CHAIN", "LOCK");
+            dbLockFile = Path.Combine(backendFolder, "DB", "CHAIN", "LOCK");
         }
 
         public override StartCommandResult OnStartCommand(Intent intent, StartCommandFlags flags, int startId)
@@ -127,7 +126,7 @@ namespace GrinPlusPlus.Droid
 
         private void SetTimer()
         {
-            timer = new System.Timers.Timer(2000);
+            timer = new System.Timers.Timer(3000);
             timer.Elapsed += OnTimedEvent;
             timer.Start();
         }
@@ -303,6 +302,7 @@ namespace GrinPlusPlus.Droid
         private void StopTor()
         {
             Log.Info(TAG, "Stopping Tor...");
+
             if (pTor != null)
             {
                 if (pTor.IsAlive)
@@ -325,7 +325,7 @@ namespace GrinPlusPlus.Droid
             StopBackend();
             try
             {
-                Directory.Delete(dataFolder.AbsolutePath, true);
+                Directory.Delete(dataFolder, true);
             }
             catch (System.Exception ex)
             {

@@ -8,8 +8,7 @@
     Title="{x:Static resource:AppResources.WalletSeed}"
     Padding="20,20,20,0"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="Black"
-    BackgroundImageSource="country_quilt_dark.png">
+    BackgroundColor="#151515">
     <ContentPage.Content>
         <ScrollView VerticalScrollBarVisibility="Never">
             <Grid ColumnSpacing="20">

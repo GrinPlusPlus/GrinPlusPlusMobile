@@ -10,8 +10,7 @@
     Title="{x:Static resource:AppResources.Details}"
     Padding="20,0,20,10"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="Black"
-    BackgroundImageSource="country_quilt_dark.png">
+    BackgroundColor="#151515">
     <ContentPage.Resources>
         <ResourceDictionary>
             <c:RelativeDateTimeConverter x:Key="RelativeDateTimeConverter" />

@@ -10,10 +10,10 @@
     Title="{x:Static resource:AppResources.RestoreWallet}"
     Padding="20,0,20,40"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="Black"
-    BackgroundImageSource="country_quilt_dark.png">
+    BackgroundColor="#151515">
     <ContentPage.Content>
         <StackLayout
+            BackgroundColor="#151515"
             HorizontalOptions="FillAndExpand"
             Orientation="Vertical"
             Spacing="10"
@@ -23,7 +23,7 @@
                 TextColor="Gray"
                 TextTransform="Uppercase" />
             <Entry
-                BackgroundColor="#191919"
+                BackgroundColor="#252525"
                 FontSize="18"
                 HeightRequest="44"
                 IsSpellCheckEnabled="False"
@@ -43,7 +43,7 @@
                 TextColor="Gray"
                 TextTransform="Uppercase" />
             <Entry
-                BackgroundColor="#191919"
+                BackgroundColor="#252525"
                 FontSize="18"
                 HeightRequest="44"
                 IsPassword="True"
@@ -60,7 +60,7 @@
                 </Entry.Effects>
             </Entry>
             <Entry
-                BackgroundColor="#191919"
+                BackgroundColor="#252525"
                 FontSize="18"
                 HeightRequest="44"
                 IsPassword="True"
@@ -82,7 +82,7 @@
                 TextTransform="Uppercase" />
             <Editor
                 AutoSize="Disabled"
-                BackgroundColor="#191919"
+                BackgroundColor="#252525"
                 CharacterSpacing="2"
                 FontSize="Body"
                 HeightRequest="140"

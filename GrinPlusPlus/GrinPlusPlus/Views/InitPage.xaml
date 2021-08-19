@@ -7,10 +7,12 @@
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     Padding="10,20,10,20"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="#000000"
-    BackgroundImageSource="country_quilt_dark.png">
+    BackgroundColor="#151515">
     <NavigationPage.TitleView>
-        <Grid Margin="0,0,10,0">
+        <Grid
+            BackgroundColor="#151515"
+            HorizontalOptions="CenterAndExpand"
+            VerticalOptions="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40" />
             </Grid.RowDefinitions>
@@ -30,9 +32,8 @@
                 Grid.Column="1"
                 HorizontalOptions="EndAndExpand"
                 IsRunning="true"
-                IsVisible="{Binding DisplayActivityIndicator}"
                 WidthRequest="38"
-                Color="Yellow" />
+                Color="#FFD717" />
         </Grid>
     </NavigationPage.TitleView>
     <ContentPage.Content>
@@ -43,16 +44,15 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="7*" />
-                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <CarouselView
                 Grid.Row="0"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
-                Margin="5,0,5,0"
+                Margin="15,0,15,0"
                 IndicatorView="CarouselStepBar"
-                ItemsSource="{Binding GrinFacts}">
+                ItemsSource="{Binding GrinFacts, Mode=OneTime}">
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
                         <Grid Padding="0,40,0,0">
@@ -61,19 +61,11 @@
                                 <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="30" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <Image
-                                Grid.Row="0"
-                                Grid.Column="0"
-                                Aspect="AspectFit"
-                                Source="baseline_privacy_tip_white_24.png"
-                                VerticalOptions="Center"
-                                WidthRequest="20" />
                             <Label
                                 Grid.Row="0"
-                                Grid.Column="1"
+                                Grid.Column="0"
                                 FontSize="22"
                                 Text="{Binding Title}"
                                 TextColor="White"
@@ -82,9 +74,7 @@
                                 Grid.Row="1"
                                 Grid.Column="0"
                                 Grid.ColumnSpan="2"
-                                Padding="10,5,10,0"
-                                FontAttributes="Italic"
-                                FontSize="18"
+                                FontSize="16"
                                 LineBreakMode="TailTruncation"
                                 MaxLines="18"
                                 Text="{Binding Details}"
@@ -101,7 +91,7 @@
                 Margin="0"
                 HorizontalOptions="FillAndExpand"
                 IndicatorColor="Gray"
-                ItemsSource="{Binding GrinFacts}"
+                ItemsSource="{Binding GrinFacts, Mode=OneTime}"
                 MaximumVisible="10"
                 SelectedIndicatorColor="White"
                 VerticalOptions="Center" />
@@ -124,8 +114,8 @@
                 <Label
                     Grid.Row="0"
                     Grid.Column="0"
-                    FontSize="18"
-                    Text="{Binding Status}"
+                    FontSize="20"
+                    Text="{Binding Status, Mode=OneWay}"
                     TextColor="White" />
                 <Label
                     Grid.Row="0"
@@ -135,12 +125,12 @@
                         <FormattedString>
                             <Span
                                 FontSize="20"
-                                Text="{Binding ProgressPercentage}"
-                                TextColor="Yellow" />
+                                Text="{Binding ProgressPercentage, Mode=OneWay}"
+                                TextColor="#FFD717" />
                             <Span
                                 FontSize="16"
                                 Text=" %"
-                                TextColor="Yellow" />
+                                TextColor="#FFD717" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
@@ -148,8 +138,8 @@
                     Grid.Row="1"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
-                    Progress="{Binding ProgressBarr}"
-                    ProgressColor="Yellow" />
+                    Progress="{Binding ProgressBarr, Mode=OneWay}"
+                    ProgressColor="#FFD717" />
                 <Label
                     Grid.Row="2"
                     Grid.Column="0"

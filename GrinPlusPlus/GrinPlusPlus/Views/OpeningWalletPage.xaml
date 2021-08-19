@@ -7,11 +7,11 @@
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     Padding="20,0,20,40"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="Black"
-    BackgroundImageSource="country_quilt_dark.png"
+    BackgroundColor="#151515"
     NavigationPage.HasBackButton="False">
     <ContentPage.Content>
         <StackLayout
+            BackgroundColor="#151515"
             HorizontalOptions="Center"
             Spacing="10"
             VerticalOptions="Center">

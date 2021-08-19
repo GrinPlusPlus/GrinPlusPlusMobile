@@ -6,8 +6,7 @@
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="Black"
-    BackgroundImageSource="country_quilt_dark.png">
+    BackgroundColor="#151515">
     <ContentPage.Content>
         <StackLayout
             Margin="20,0,20,0"
@@ -28,7 +27,7 @@
                 HorizontalOptions="Center"
                 IsRunning="true"
                 WidthRequest="50"
-                Color="Yellow" />
+                Color="#FFD717" />
             <Label
                 HorizontalOptions="Center"
                 Text="{Binding ExceptionMessage}"

@@ -9,8 +9,7 @@
     xmlns:zxcm="clr-namespace:ZXing.Common;assembly=zxing"
     xmlns:zxing="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="Black"
-    BackgroundImageSource="country_quilt_dark.png">
+    BackgroundColor="#151515">
     <ContentPage.Resources>
         <ResourceDictionary>
             <c:AvailabilityColorConverter x:Key="AvailabilityColorConverter" />
@@ -34,7 +33,7 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 Padding="20"
-                BackgroundColor="Black">
+                BackgroundColor="#151515">
                 <Label
                     HorizontalOptions="Center"
                     Text="{x:Static resource:AppResources.QRCode}"
@@ -42,7 +41,7 @@
                     TextTransform="Uppercase" />
                 <Frame
                     Padding="10"
-                    BackgroundColor="#191919"
+                    BackgroundColor="#252525"
                     CornerRadius="4"
                     HorizontalOptions="Center">
                     <zxing:ZXingBarcodeImageView
@@ -64,14 +63,14 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 Padding="20"
-                BackgroundColor="Black">
+                BackgroundColor="#151515">
                 <Label
                     HorizontalOptions="Center"
                     Text="{x:Static resource:AppResources.Address}"
                     TextColor="Gray"
                     TextTransform="Uppercase" />
                 <Button
-                    BackgroundColor="#191919"
+                    BackgroundColor="#252525"
                     Command="{Binding CopyAddressCommand}"
                     CornerRadius="5"
                     FontSize="16"

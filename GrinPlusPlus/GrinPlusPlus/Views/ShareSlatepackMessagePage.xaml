@@ -6,8 +6,7 @@
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="Black"
-    BackgroundImageSource="country_quilt_dark.png">
+    BackgroundColor="#151515">
     <ContentPage.Content>
         <StackLayout
             HorizontalOptions="FillAndExpand"
@@ -37,7 +36,7 @@
                 TextColor="LightGray" />
             <Button
                 Margin="50,0,50,0"
-                BackgroundColor="#191919"
+                BackgroundColor="#252525"
                 Command="{Binding CopySlatepackMessageCommand}"
                 CornerRadius="5"
                 FontFamily="16"
@@ -46,7 +45,7 @@
                 TextColor="White" />
             <Button
                 Margin="50,0,50,0"
-                BackgroundColor="#191919"
+                BackgroundColor="#252525"
                 Command="{Binding ShareSlatepackMessageCommand}"
                 CornerRadius="5"
                 FontFamily="16"
@@ -55,7 +54,7 @@
                 TextColor="White" />
             <Button
                 Margin="50,0,50,20"
-                BackgroundColor="#191919"
+                BackgroundColor="#252525"
                 Command="{Binding CloseScreenCommand}"
                 CornerRadius="5"
                 FontFamily="16"

@@ -9,8 +9,7 @@
     Title="{x:Static resource:AppResources.OpenWallet}"
     Padding="20,0,20,40"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="Black"
-    BackgroundImageSource="country_quilt_dark.png">
+    BackgroundColor="#151515">
     <ContentPage.Content>
         <StackLayout
             HorizontalOptions="FillAndExpand"
@@ -22,7 +21,7 @@
                 TextColor="Gray"
                 TextTransform="Uppercase" />
             <Entry
-                BackgroundColor="#191919"
+                BackgroundColor="#252525"
                 FontSize="18"
                 HeightRequest="44"
                 IsPassword="True"
@@ -38,7 +37,7 @@
             <StackLayout
                 Margin="0,10,0,20"
                 Padding="0"
-                BackgroundColor="#Black"
+                BackgroundColor="#151515"
                 HeightRequest="44"
                 Spacing="0">
                 <Button
@@ -56,17 +55,17 @@
                     HeightRequest="40"
                     IsRunning="{Binding IsBusy}"
                     IsVisible="{Binding IsBusy}"
-                    Color="Yellow" />
+                    Color="#FFD717" />
             </StackLayout>
             <Button
-                BackgroundColor="#b20000"
+                BackgroundColor="#AF0404"
                 Command="{Binding DeleteWalletCommand}"
                 CornerRadius="5"
                 FontSize="16"
                 HeightRequest="44"
-                IsEnabled="{Binding Password, Converter={xct:IsNotNullOrEmptyConverter}}"
+                IsVisible="{Binding Password, Converter={xct:IsNotNullOrEmptyConverter}}"
                 Text="{x:Static resource:AppResources.DeleteWallet}"
-                TextColor="White"
+                TextColor="#FFD717"
                 TextTransform="None"
                 VerticalOptions="EndAndExpand" />
         </StackLayout>

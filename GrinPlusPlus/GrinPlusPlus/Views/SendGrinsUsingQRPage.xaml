@@ -9,8 +9,7 @@
     Title="{x:Static resource:AppResources.SlatepackMessage}"
     Padding="20"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="Black"
-    BackgroundImageSource="country_quilt_dark.png"
+    BackgroundColor="#151515"
     NavigationPage.HasBackButton="False">
     <ContentPage.Content>
         <StackLayout

@@ -8,8 +8,7 @@
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     Title="{x:Static resource:AppResources.Send}"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="{StaticResource BackgroundColor}"
-    BackgroundImageSource="country_quilt_dark.png">
+    BackgroundColor="{StaticResource BackgroundColor}">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Color x:Key="BackgroundColor">#000000</Color>
@@ -47,7 +46,7 @@
                 HorizontalOptions="Fill"
                 Orientation="Horizontal">
                 <Entry
-                    BackgroundColor="#191919"
+                    BackgroundColor="#252525"
                     HorizontalOptions="FillAndExpand"
                     IsSpellCheckEnabled="False"
                     IsTextPredictionEnabled="False"
@@ -89,7 +88,7 @@
                             <Span
                                 FontSize="52"
                                 Text="{Binding Amount}"
-                                TextColor="Yellow" />
+                                TextColor="#FFD717" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>

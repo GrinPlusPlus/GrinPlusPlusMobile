@@ -7,8 +7,7 @@
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     x:Name="Login"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="Black"
-    BackgroundImageSource="country_quilt_dark.png">
+    BackgroundColor="#151515">
     <NavigationPage.TitleView>
         <Image
             Margin="0"
@@ -27,17 +26,16 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label
-                Grid.Row="0"
-                Grid.Column="0"
-                FontSize="18"
-                Text="{x:Static resource:AppResources.YourWallets}"
-                TextColor="White" />
             <CollectionView
                 Grid.Row="1"
                 Grid.Column="0"
-                ItemsSource="{Binding Accounts}"
+                ItemsSource="{Binding Accounts, Mode=OneWay}"
                 VerticalOptions="FillAndExpand">
+                <CollectionView.EmptyView>
+                    <ContentView>
+                        <Label Text="{x:Static resource:AppResources.NoWalletFound}" TextColor="WhiteSmoke" />
+                    </ContentView>
+                </CollectionView.EmptyView>
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout
                         Orientation="Vertical"
@@ -49,7 +47,8 @@
                         <Frame
                             Margin="0"
                             Padding="0"
-                            BackgroundColor="#191919"
+                            BackgroundColor="#050505"
+                            BorderColor="#323232"
                             CornerRadius="5"
                             HeightRequest="48">
                             <Grid Padding="20,0,20,0" VerticalOptions="Center">
@@ -90,7 +89,7 @@
                     Margin="0"
                     Padding="0"
                     BackgroundColor="#050505"
-                    BorderColor="#191919"
+                    BorderColor="#FFD717"
                     CornerRadius="5"
                     HeightRequest="48">
                     <Grid Padding="20,0,20,0" VerticalOptions="Center">
@@ -124,7 +123,7 @@
                     Margin="0"
                     Padding="0"
                     BackgroundColor="#050505"
-                    BorderColor="#191919"
+                    BorderColor="#323232"
                     CornerRadius="5"
                     HeightRequest="48">
                     <Grid Padding="20,0,20,0" VerticalOptions="Center">

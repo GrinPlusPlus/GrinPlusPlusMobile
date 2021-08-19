@@ -475,7 +475,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Notably, there are no on-chain addresses either, as transaction building is interactive. Keys used in SlatepackAddresses are derived from a path from the master seed in a given wallet account.
+        ///   Looks up a localized string similar to Notably, there are no on-chain addresses either, as transaction building is interactive. Keys used in SlatepackAddresses are derived from a path from the master seed in a given wallet account..
         /// </summary>
         internal static string FactAddresses {
             get {
@@ -484,7 +484,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A new grin ツ is emitted every second, forever, meaning the emission rate stays constant and completely linear. As time passes, the relative dilution becomes smaller; After 10 years, it falls below 10%. After 20, below 5%. This results in a decreasing inflation rate, known as disinflation.
+        ///   Looks up a localized string similar to A new grin ツ is emitted every second, forever, meaning the emission rate stays constant and completely linear. As time passes, the relative dilution becomes smaller; After 10 years, it falls below 10%. After 20, below 5%. This results in a decreasing inflation rate, known as disinflation..
         /// </summary>
         internal static string FactEmission {
             get {
@@ -493,7 +493,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Privacy by default. Transactions have no amount, no addresses and can be trivially aggregated. This enables complete fungibility without precluding the ability to selectively disclose information as needed.
+        ///   Looks up a localized string similar to Privacy by default. Transactions have no amount, no addresses and can be trivially aggregated. This enables complete fungibility without precluding the ability to selectively disclose information as needed..
         /// </summary>
         internal static string FactPrivate {
             get {
@@ -502,7 +502,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to First, there are no amounts. A mimblewimble implementation natively uses Confidential Transactions, meaning all amounts are hidden; They are provably impossible to uncover, yet easily verified. Even before anything else, simply hiding amounts makes any analysis significantly more challenging.
+        ///   Looks up a localized string similar to First, there are no amounts. A mimblewimble implementation natively uses Confidential Transactions, meaning all amounts are hidden; They are provably impossible to uncover, yet easily verified. Even before anything else, simply hiding amounts makes any analysis significantly more challenging..
         /// </summary>
         internal static string FactsAmounts {
             get {
@@ -520,7 +520,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Slatepack is the universal transaction standard for Grin. Slatepacks  are encrypted when the user uses a grin1 address to send gins; otherwise, the transaction information is only obfuscated.
+        ///   Looks up a localized string similar to Slatepack is the universal transaction standard for Grin. Slatepacks  are encrypted when the user uses a grin1 address to send gins; otherwise, the transaction information is only obfuscated..
         /// </summary>
         internal static string FactSlatepack {
             get {
@@ -538,7 +538,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Grin is developed openly, by individual contributors all over the world. There&apos;s no company or foundation behind it, and no ICO, founder reward, pre-mine or dev-tax. The coin distribution is designed to be as fair (but not gratis) as is known to be possible.
+        ///   Looks up a localized string similar to Grin is developed openly, by individual contributors all over the world. There&apos;s no company or foundation behind it, and no ICO, founder reward, pre-mine or dev-tax. The coin distribution is designed to be as fair (but not gratis) as is known to be possible..
         /// </summary>
         internal static string FactsOpen {
             get {
@@ -547,7 +547,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Grin scales mostly with the number of users and minimally with the number of transactions. Past transactional data can be pruned, making grin drastically lightweight compared to other blockchains.
+        ///   Looks up a localized string similar to Grin scales mostly with the number of users and minimally with the number of transactions. Past transactional data can be pruned, making grin drastically lightweight compared to other blockchains..
         /// </summary>
         internal static string FactsScalable {
             get {
@@ -799,7 +799,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No accounts were found.
+        ///   Looks up a localized string similar to No wallets were found. Please, create a new wallet or restore an existing one using your wallet seed..
         /// </summary>
         internal static string NoWalletFound {
             get {

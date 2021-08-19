@@ -9,15 +9,15 @@
     Title="{x:Static resource:AppResources.Confirm}"
     Padding="20,0,20,0"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundImageSource="country_quilt_dark.png">
+    BackgroundColor="#151515">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <c:EmptyToBooleanConverter x:Key="EmptyToBooleanConverter" />
+            <c:NotEmptyToBooleanConverter x:Key="NotEmptyToBooleanConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
         <ScrollView VerticalScrollBarVisibility="Never">
-            <Grid ColumnSpacing="20">
+            <Grid BackgroundColor="#151515" ColumnSpacing="20">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="38" />
@@ -49,6 +49,7 @@
                 <StackLayout
                     Grid.Row="1"
                     Grid.Column="0"
+                    IsVisible="{Binding DisplayedWalletSeedWordsList[0], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
                         FontAttributes="Italic"
@@ -62,7 +63,6 @@
                         FontSize="16"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
-                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[0], Converter={StaticResource EmptyToBooleanConverter}}"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
                         Text="{Binding DisplayedWalletSeedWordsList[0]}"
@@ -79,6 +79,7 @@
                 <StackLayout
                     Grid.Row="1"
                     Grid.Column="1"
+                    IsVisible="{Binding DisplayedWalletSeedWordsList[12], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
                         FontAttributes="Italic"
@@ -92,7 +93,6 @@
                         FontSize="16"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
-                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[12], Converter={StaticResource EmptyToBooleanConverter}}"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
                         Text="{Binding DisplayedWalletSeedWordsList[12]}"
@@ -109,6 +109,7 @@
                 <StackLayout
                     Grid.Row="2"
                     Grid.Column="0"
+                    IsVisible="{Binding DisplayedWalletSeedWordsList[1], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
                         FontAttributes="Italic"
@@ -122,7 +123,6 @@
                         FontSize="16"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
-                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[1], Converter={StaticResource EmptyToBooleanConverter}}"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
                         Text="{Binding DisplayedWalletSeedWordsList[1]}"
@@ -140,6 +140,7 @@
                 <StackLayout
                     Grid.Row="2"
                     Grid.Column="1"
+                    IsVisible="{Binding DisplayedWalletSeedWordsList[13], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
                         FontAttributes="Italic"
@@ -153,7 +154,6 @@
                         FontSize="16"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
-                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[13], Converter={StaticResource EmptyToBooleanConverter}}"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
                         Text="{Binding DisplayedWalletSeedWordsList[13]}"
@@ -171,6 +171,7 @@
                 <StackLayout
                     Grid.Row="3"
                     Grid.Column="0"
+                    IsVisible="{Binding DisplayedWalletSeedWordsList[2], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
                         FontAttributes="Italic"
@@ -184,7 +185,6 @@
                         FontSize="16"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
-                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[2], Converter={StaticResource EmptyToBooleanConverter}}"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
                         Text="{Binding DisplayedWalletSeedWordsList[2]}"
@@ -201,6 +201,7 @@
                 <StackLayout
                     Grid.Row="3"
                     Grid.Column="1"
+                    IsVisible="{Binding DisplayedWalletSeedWordsList[14], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
                         FontAttributes="Italic"
@@ -214,7 +215,6 @@
                         FontSize="16"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
-                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[14], Converter={StaticResource EmptyToBooleanConverter}}"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
                         Text="{Binding DisplayedWalletSeedWordsList[14]}"
@@ -231,6 +231,7 @@
                 <StackLayout
                     Grid.Row="4"
                     Grid.Column="0"
+                    IsVisible="{Binding DisplayedWalletSeedWordsList[3], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
                         FontAttributes="Italic"
@@ -244,7 +245,6 @@
                         FontSize="16"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
-                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[3], Converter={StaticResource EmptyToBooleanConverter}}"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
                         Text="{Binding DisplayedWalletSeedWordsList[3]}"
@@ -261,6 +261,7 @@
                 <StackLayout
                     Grid.Row="4"
                     Grid.Column="1"
+                    IsVisible="{Binding DisplayedWalletSeedWordsList[15], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
                         FontAttributes="Italic"
@@ -274,7 +275,6 @@
                         FontSize="16"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
-                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[15], Converter={StaticResource EmptyToBooleanConverter}}"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
                         Text="{Binding DisplayedWalletSeedWordsList[15]}"
@@ -291,6 +291,7 @@
                 <StackLayout
                     Grid.Row="5"
                     Grid.Column="0"
+                    IsVisible="{Binding DisplayedWalletSeedWordsList[4], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
                         FontAttributes="Italic"
@@ -304,7 +305,6 @@
                         FontSize="16"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
-                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[4], Converter={StaticResource EmptyToBooleanConverter}}"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
                         Text="{Binding DisplayedWalletSeedWordsList[4]}"
@@ -321,6 +321,7 @@
                 <StackLayout
                     Grid.Row="5"
                     Grid.Column="1"
+                    IsVisible="{Binding DisplayedWalletSeedWordsList[16], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
                         FontAttributes="Italic"
@@ -334,7 +335,6 @@
                         FontSize="16"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
-                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[16], Converter={StaticResource EmptyToBooleanConverter}}"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
                         Text="{Binding DisplayedWalletSeedWordsList[16]}"
@@ -351,6 +351,7 @@
                 <StackLayout
                     Grid.Row="6"
                     Grid.Column="0"
+                    IsVisible="{Binding DisplayedWalletSeedWordsList[5], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
                         FontAttributes="Italic"
@@ -364,7 +365,6 @@
                         FontSize="16"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
-                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[5], Converter={StaticResource EmptyToBooleanConverter}}"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
                         Text="{Binding DisplayedWalletSeedWordsList[5]}"
@@ -381,6 +381,7 @@
                 <StackLayout
                     Grid.Row="6"
                     Grid.Column="1"
+                    IsVisible="{Binding DisplayedWalletSeedWordsList[17], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
                         FontAttributes="Italic"
@@ -394,7 +395,6 @@
                         FontSize="16"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
-                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[17], Converter={StaticResource EmptyToBooleanConverter}}"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
                         Text="{Binding DisplayedWalletSeedWordsList[17]}"
@@ -411,6 +411,7 @@
                 <StackLayout
                     Grid.Row="7"
                     Grid.Column="0"
+                    IsVisible="{Binding DisplayedWalletSeedWordsList[6], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
                         FontAttributes="Italic"
@@ -424,7 +425,6 @@
                         FontSize="16"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
-                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[6], Converter={StaticResource EmptyToBooleanConverter}}"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
                         Text="{Binding DisplayedWalletSeedWordsList[6]}"
@@ -441,6 +441,7 @@
                 <StackLayout
                     Grid.Row="7"
                     Grid.Column="1"
+                    IsVisible="{Binding DisplayedWalletSeedWordsList[18], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
                         FontAttributes="Italic"
@@ -454,7 +455,6 @@
                         FontSize="16"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
-                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[18], Converter={StaticResource EmptyToBooleanConverter}}"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
                         Text="{Binding DisplayedWalletSeedWordsList[18]}"
@@ -471,6 +471,7 @@
                 <StackLayout
                     Grid.Row="8"
                     Grid.Column="0"
+                    IsVisible="{Binding DisplayedWalletSeedWordsList[7], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
                         FontAttributes="Italic"
@@ -484,7 +485,6 @@
                         FontSize="16"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
-                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[7], Converter={StaticResource EmptyToBooleanConverter}}"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
                         Text="{Binding DisplayedWalletSeedWordsList[7]}"
@@ -501,6 +501,7 @@
                 <StackLayout
                     Grid.Row="8"
                     Grid.Column="1"
+                    IsVisible="{Binding DisplayedWalletSeedWordsList[19], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
                         FontAttributes="Italic"
@@ -514,7 +515,6 @@
                         FontSize="16"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
-                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[19], Converter={StaticResource EmptyToBooleanConverter}}"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
                         Text="{Binding DisplayedWalletSeedWordsList[19]}"
@@ -531,6 +531,7 @@
                 <StackLayout
                     Grid.Row="9"
                     Grid.Column="0"
+                    IsVisible="{Binding DisplayedWalletSeedWordsList[8], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
                         FontAttributes="Italic"
@@ -544,7 +545,6 @@
                         FontSize="16"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
-                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[8], Converter={StaticResource EmptyToBooleanConverter}}"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
                         Text="{Binding DisplayedWalletSeedWordsList[8]}"
@@ -561,6 +561,7 @@
                 <StackLayout
                     Grid.Row="9"
                     Grid.Column="1"
+                    IsVisible="{Binding DisplayedWalletSeedWordsList[20], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
                         FontAttributes="Italic"
@@ -574,7 +575,6 @@
                         FontSize="16"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
-                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[20], Converter={StaticResource EmptyToBooleanConverter}}"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
                         Text="{Binding DisplayedWalletSeedWordsList[20]}"
@@ -591,6 +591,7 @@
                 <StackLayout
                     Grid.Row="10"
                     Grid.Column="0"
+                    IsVisible="{Binding DisplayedWalletSeedWordsList[9], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
                         FontAttributes="Italic"
@@ -604,7 +605,6 @@
                         FontSize="16"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
-                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[9], Converter={StaticResource EmptyToBooleanConverter}}"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
                         Text="{Binding DisplayedWalletSeedWordsList[9]}"
@@ -621,6 +621,7 @@
                 <StackLayout
                     Grid.Row="10"
                     Grid.Column="1"
+                    IsVisible="{Binding DisplayedWalletSeedWordsList[21], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
                         FontAttributes="Italic"
@@ -634,7 +635,6 @@
                         FontSize="16"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
-                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[21], Converter={StaticResource EmptyToBooleanConverter}}"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
                         Text="{Binding DisplayedWalletSeedWordsList[21]}"
@@ -651,6 +651,7 @@
                 <StackLayout
                     Grid.Row="11"
                     Grid.Column="0"
+                    IsVisible="{Binding DisplayedWalletSeedWordsList[10], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
                         FontAttributes="Italic"
@@ -664,7 +665,6 @@
                         FontSize="16"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
-                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[10], Converter={StaticResource EmptyToBooleanConverter}}"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
                         Text="{Binding DisplayedWalletSeedWordsList[10]}"
@@ -681,6 +681,7 @@
                 <StackLayout
                     Grid.Row="11"
                     Grid.Column="1"
+                    IsVisible="{Binding DisplayedWalletSeedWordsList[22], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
                         FontAttributes="Italic"
@@ -694,7 +695,6 @@
                         FontSize="16"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
-                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[22], Converter={StaticResource EmptyToBooleanConverter}}"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
                         Text="{Binding DisplayedWalletSeedWordsList[22]}"
@@ -711,6 +711,7 @@
                 <StackLayout
                     Grid.Row="12"
                     Grid.Column="0"
+                    IsVisible="{Binding DisplayedWalletSeedWordsList[11], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
                         FontAttributes="Italic"
@@ -724,7 +725,6 @@
                         FontSize="16"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
-                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[11], Converter={StaticResource EmptyToBooleanConverter}}"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
                         Text="{Binding DisplayedWalletSeedWordsList[11]}"
@@ -741,6 +741,7 @@
                 <StackLayout
                     Grid.Row="12"
                     Grid.Column="1"
+                    IsVisible="{Binding DisplayedWalletSeedWordsList[23], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
                         FontAttributes="Italic"
@@ -754,7 +755,6 @@
                         FontSize="16"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
-                        IsReadOnly="{Binding DisplayedWalletSeedWordsList[23], Converter={StaticResource EmptyToBooleanConverter}}"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
                         Text="{Binding DisplayedWalletSeedWordsList[23]}"

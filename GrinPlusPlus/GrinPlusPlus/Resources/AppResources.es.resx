@@ -256,7 +256,7 @@
     <value>Exportar Logs</value>
   </data>
   <data name="FactAddresses" xml:space="preserve">
-    <value>En particular, tampoco hay direcciones en la blockchain, ya que la creación de transacciones es interactiva. Las keys utilizadas se derivan de una ruta desde la master seed </value>
+    <value>En particular, tampoco hay direcciones en la blockchain, ya que la creación de transacciones es interactiva. Las keys utilizadas se derivan de una ruta desde la master seed.</value>
   </data>
   <data name="FactEmission" xml:space="preserve">
     <value>Se emite un grin ツ cada segundo, para siempre, lo que significa que la tasa de emisión permanece constante y completamente lineal. A medida que pasa el tiempo, la dilución relativa se vuelve más pequeña; Después de 10 años, cae por debajo del 10%. Después de 20, por debajo del 5%. Esto da como resultado una tasa de inflación decreciente, conocida como desinflación.</value>
@@ -271,16 +271,16 @@
     <value>Un dato importante que comúnmente se filtra es la dirección IP que envió originalmente la transacción. Para abordar este problema, grin emplea Dandelion ++ (originalmente propuesto como BIP), un protocolo diseñado para ocultar la dirección IP de origen de una transacción.</value>
   </data>
   <data name="FactSlatepack" xml:space="preserve">
-    <value>Slatepack es el estándar de transacción universal para Grin. Los Slatepacks se cifran cuando el usuario usa una dirección grin1 para enviar grins; de lo contrario, la información de la transacción solo se ofusca</value>
+    <value>Slatepack es el estándar de transacción universal para Grin. Los Slatepacks se cifran cuando el usuario usa una dirección grin1 para enviar grins; de lo contrario, la información de la transacción solo se ofusca.</value>
   </data>
   <data name="FactsMimblewimble" xml:space="preserve">
-    <value>Mimblewimble es un protocolo que permite una plataforma de transacciones completamente privada a través de un marco de seguridad único que es marcadamente diferente al de la criptomoneda Bitcoin seudónima. En Mimblewimble, no hay direcciones y las transacciones son completamente confidenciales. Su libro mayor distribuido también es relativamente más compacto que las otras cadenas en el espacio criptográfico</value>
+    <value>Mimblewimble es un protocolo que permite una plataforma de transacciones completamente privada a través de un marco de seguridad único que es marcadamente diferente al de la criptomoneda Bitcoin seudónima. En Mimblewimble, no hay direcciones y las transacciones son completamente confidenciales. Su libro mayor distribuido también es relativamente más compacto que las otras cadenas en el espacio criptográfico.</value>
   </data>
   <data name="FactsOpen" xml:space="preserve">
-    <value>Grin se desarrolla abiertamente, por colaboradores individuales de todo el mundo. No hay una empresa o fundación detrás de esto, y no hay ICO, recompensa de fundador, pre-mina o dev-tax. La distribución de monedas está diseñada para ser tan justa (pero no gratuita) como se sabe que es posible</value>
+    <value>Grin se desarrolla abiertamente, por colaboradores individuales de todo el mundo. No hay una empresa o fundación detrás de esto, y no hay ICO, recompensa de fundador, pre-mina o dev-tax. La distribución de monedas está diseñada para ser tan justa (pero no gratuita) como se sabe que es posible.</value>
   </data>
   <data name="FactsScalable" xml:space="preserve">
-    <value>Grin escala principalmente con el número de usuarios y mínimamente con el número de transacciones. Los datos de transacciones anteriores se pueden eliminar, lo que hace que la sonrisa sea drásticamente liviana en comparación con otras cadenas de bloques</value>
+    <value>Grin escala principalmente con el número de usuarios y mínimamente con el número de transacciones. Los datos de transacciones anteriores se pueden eliminar, lo que hace que la sonrisa sea drásticamente liviana en comparación con otras cadenas de bloques.</value>
   </data>
   <data name="FactTransactions" xml:space="preserve">
     <value>Las transacciones de Mimblewimble son interactivas, lo que significa que ambas partes necesitan algún tipo de comunicación para interactuar e intercambiar los datos necesarios para crear una transacción.</value>
@@ -364,7 +364,7 @@
     <value>No alcanzable</value>
   </data>
   <data name="NoWalletFound" xml:space="preserve">
-    <value>No existen cuentas</value>
+    <value>No se encontraron walletsPor favor, cree una nueva wallet o restaure una existente usando la semilla de su billetera.</value>
   </data>
   <data name="OfflineTransaction" xml:space="preserve">
     <value>Fuera de linea</value>

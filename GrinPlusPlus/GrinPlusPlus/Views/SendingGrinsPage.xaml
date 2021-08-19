@@ -7,8 +7,7 @@
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     Title="{x:Static resource:AppResources.PleaseConfirm}"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="Black"
-    BackgroundImageSource="country_quilt_dark.png">
+    BackgroundColor="#151515">
     <ContentPage.Content>
         <StackLayout
             Margin="0"

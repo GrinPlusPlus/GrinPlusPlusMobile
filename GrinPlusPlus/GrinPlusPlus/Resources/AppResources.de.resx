@@ -364,7 +364,7 @@
     <value>Nicht erreichbar</value>
   </data>
   <data name="NoWalletFound" xml:space="preserve">
-    <value>Es gibt keine Konten</value>
+    <value>Es wurden keine Geldbörsen gefunden. Bitte erstellen Sie eine neue Wallet oder stellen Sie eine vorhandene mit Ihrem Wallet-Seed wieder her.</value>
   </data>
   <data name="OfflineTransaction" xml:space="preserve">
     <value>Offline</value>

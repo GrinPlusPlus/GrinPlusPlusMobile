@@ -8,10 +8,10 @@
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     Title="{x:Static resource:AppResources.ReceiveTransaction}"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="Black"
-    BackgroundImageSource="country_quilt_dark.png">
+    BackgroundColor="#151515">
     <ContentPage.Content>
         <StackLayout
+            BackgroundColor="#151515"
             HorizontalOptions="FillAndExpand"
             Orientation="Vertical"
             Spacing="10"
@@ -24,7 +24,7 @@
             <Editor
                 Margin="20,0,20,10"
                 AutoSize="Disabled"
-                BackgroundColor="#0C0C0C"
+                BackgroundColor="#252525"
                 CharacterSpacing="4"
                 FontSize="12"
                 HeightRequest="220"

@@ -83,19 +83,13 @@ namespace GrinPlusPlus.ViewModels
             set => SetProperty(ref _isBusy, value);
         }
 
-        private bool _isIdle = true;
-        public bool IsIdle
-        {
-            get => _isIdle;
-            set => SetProperty(ref _isIdle, value);
-        }
+        public DelegateCommand CreateWalletCommand => new DelegateCommand(CreateWallet);
 
         public CreateWalletPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
         }
 
-        public DelegateCommand CreateWalletCommand => new DelegateCommand(CreateWallet);
 
         private async void CreateWallet()
         {
@@ -104,7 +98,6 @@ namespace GrinPlusPlus.ViewModels
                 ExceptionMessage = string.Empty;
 
                 IsBusy = true;
-                IsIdle = false;
 
                 var wallet = await DataProvider.CreateWallet(Username, Password, int.Parse(SeedLength));
 
@@ -128,7 +121,6 @@ namespace GrinPlusPlus.ViewModels
             finally
             {
                 IsBusy = false;
-                IsIdle = true;
             }
         }
     }

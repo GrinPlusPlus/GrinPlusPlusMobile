@@ -6,7 +6,7 @@
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="Black">
+    BackgroundColor="#151515">
     <StackLayout Margin="35" Spacing="10">
         <Label
             FontSize="Title"
@@ -19,18 +19,18 @@
             TextColor="White" />
         <Label Text="{x:Static resource:AppResources.ErrorConnectingToNodeAdvice}" TextColor="White" />
         <Button
-            BackgroundColor="#191919"
+            BackgroundColor="#252525"
             Command="{Binding SupportButtonClickedCommand}"
             Text="{x:Static resource:AppResources.Support}"
             TextColor="LightGray" />
         <Button
-            BackgroundColor="#191919"
+            BackgroundColor="#252525"
             Command="{Binding ExportLogsButtonClickedCommand}"
             Text="{x:Static resource:AppResources.ExportLogs}"
             TextColor="LightGray" />
         <Button
             Margin="0,50,0,0"
-            BackgroundColor="#191919"
+            BackgroundColor="#252525"
             Command="{Binding DeleteChainButtonClickedCommand}"
             Text="Delete Blockchain"
             TextColor="Red" />

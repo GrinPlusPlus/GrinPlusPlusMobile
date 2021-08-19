@@ -10,8 +10,7 @@
     Title="{Binding Wallet}"
     Padding="10,0,10,5"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="Black"
-    BackgroundImageSource="country_quilt_dark.png"
+    BackgroundColor="#151515"
     IconImageSource="outline_account_balance_wallet_white_24.png">
     <NavigationPage.TitleView>
         <Grid Margin="0" Padding="0">
@@ -86,7 +85,7 @@
                 Grid.Column="0"
                 Margin="5,0,5,0"
                 Padding="15,10,15,10"
-                BackgroundColor="#FFEE00"
+                BackgroundColor="#FFD717"
                 BorderColor="Transparent"
                 CornerRadius="10">
                 <Grid
@@ -153,7 +152,7 @@
                         Grid.Row="2"
                         Grid.Column="0"
                         Grid.ColumnSpan="4"
-                        BackgroundColor="Black" />
+                        BackgroundColor="#151515" />
                     <Label
                         Grid.Row="4"
                         Grid.Column="0"
@@ -435,7 +434,7 @@
                     ItemDisplayBinding="{Binding Label}"
                     ItemsSource="{Binding TransactionStatusOptions}"
                     SelectedIndex="{Binding CurrentSelectedFilterIndex}"
-                    TextColor="Yellow"
+                    TextColor="#FFD717"
                     TitleColor="White" />
             </Grid>
             <CollectionView
@@ -526,7 +525,7 @@
                 <Button
                     Grid.Row="0"
                     Grid.Column="0"
-                    BackgroundColor="Black"
+                    BackgroundColor="#151515"
                     Command="{prism:NavigateTo 'SettingsPage',
                                                UseModalNavigation=False,
                                                Animated=True}"
@@ -536,7 +535,7 @@
                 <Button
                     Grid.Row="0"
                     Grid.Column="1"
-                    BackgroundColor="Black"
+                    BackgroundColor="#151515"
                     Command="{prism:NavigateTo 'StatusPage',
                                                UseModalNavigation=False,
                                                Animated=True}"
@@ -546,7 +545,7 @@
                 <Button
                     Grid.Row="0"
                     Grid.Column="2"
-                    BackgroundColor="Black"
+                    BackgroundColor="#151515"
                     Command="{Binding SendButtonClickedCommand}"
                     FontSize="16"
                     HeightRequest="48"
@@ -561,7 +560,7 @@
                 <Button
                     Grid.Row="0"
                     Grid.Column="3"
-                    BackgroundColor="Black"
+                    BackgroundColor="#151515"
                     Command="{prism:NavigateTo 'ReceiveTransactionPage',
                                                UseModalNavigation=False,
                                                Animated=True}"

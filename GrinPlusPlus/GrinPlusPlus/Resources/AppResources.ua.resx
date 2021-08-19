@@ -364,7 +364,7 @@
     <value>Не доступно</value>
   </data>
   <data name="NoWalletFound" xml:space="preserve">
-    <value>Немає акаунтів</value>
+    <value>Гаманців не знайшли. Будь ласка, створіть новий гаманець або відновіть існуючий за допомогою насінника гаманця.</value>
   </data>
   <data name="OfflineTransaction" xml:space="preserve">
     <value>Текст - QR код - Файл</value>

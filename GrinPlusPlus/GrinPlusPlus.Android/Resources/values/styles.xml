@@ -6,16 +6,16 @@
     <item name="windowActionBar">false</item>
     <item name="android:textColorPrimary">#000000</item>
     <item name="android:textColorSecondary">#484848</item>
-    <item name="colorPrimary">#000000</item>
-    <item name="colorPrimaryDark">#000000</item>
-    <item name="colorAccent">#000000</item>
+    <item name="colorPrimary">#151515</item>
+    <item name="colorPrimaryDark">#151515</item>
+    <item name="colorAccent">#151515</item>
     <item name="windowActionModeOverlay">true</item>
-    <item name="android:colorBackground">#000000</item>
+    <item name="android:colorBackground">#151515</item>
     <item name="android:alertDialogTheme">@style/AlertDialogCustom</item>
     <item name="android:windowDisablePreview">true</item>
   </style>
   <style name="AlertDialogCustom" parent="@android:style/Theme.Material.Dialog">
-    <item name="android:textColor">#FFFFFF</item>
+    <item name="android:textColor">#000000</item>
     <item name="android:textColorPrimary">#FFFFFF</item>
     <item name="android:textColorTertiary">#FFFFFF</item>
     <item name="android:buttonBarButtonStyle">@style/MyApp.DialogButton</item>

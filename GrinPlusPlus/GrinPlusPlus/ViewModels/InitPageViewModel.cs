@@ -34,13 +34,6 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _progressPercentage, value); }
         }
 
-        private bool displayActivityIndicator = false;
-        public bool DisplayActivityIndicator
-        {
-            get { return displayActivityIndicator; }
-            set { SetProperty(ref displayActivityIndicator, value); }
-        }
-
         private ObservableCollection<Fact> _grinFacts = new ObservableCollection<Fact>();
         public ObservableCollection<Fact> GrinFacts
         {
@@ -53,16 +46,14 @@ namespace GrinPlusPlus.ViewModels
         {
             SecureStorage.RemoveAll();
 
-            FillGrinFacts();
-
-            DisplayActivityIndicator = true;
+            Status = Settings.Node.Status;
+            ProgressBarr = Settings.Node.ProgressPercentage;
+            ProgressPercentage = string.Format($"{ Settings.Node.ProgressPercentage * 100:F}");
 
             Device.StartTimer(TimeSpan.FromSeconds(60), () =>
             {
                 if (Settings.Node.Status.Equals("Not Running"))
                 {
-                    DisplayActivityIndicator = false;
-
                     MainThread.BeginInvokeOnMainThread(async () =>
                     {
                         await NavigationService.NavigateAsync("/NavigationPage/ErrorPage");
@@ -70,27 +61,22 @@ namespace GrinPlusPlus.ViewModels
                 }
                 return false;
             });
+            
+        }
 
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
             Device.StartTimer(TimeSpan.FromSeconds(2), () =>
             {
-                Status = Settings.Node.Status;
-                ProgressBarr = Settings.Node.ProgressPercentage;
-                ProgressPercentage = string.Format($"{ Settings.Node.ProgressPercentage * 100:F}");
+                MainThread.BeginInvokeOnMainThread(() =>
+                {
+                    Status = Settings.Node.Status;
+                    ProgressBarr = Settings.Node.ProgressPercentage;
+                    ProgressPercentage = string.Format($"{ Settings.Node.ProgressPercentage * 100:F}");
+                });
 
                 if (Settings.Node.Status.Equals("Running"))
                 {
-                    return false;
-                }
-
-                return true;
-            });
-
-
-            Device.StartTimer(TimeSpan.FromSeconds(3), () =>
-            {
-                if (Settings.Node.Status.Equals("Running"))
-                {
-
                     MainThread.BeginInvokeOnMainThread(async () =>
                     {
                         await NavigationService.NavigateAsync("/NavigationPage/LoginPage");
@@ -101,10 +87,8 @@ namespace GrinPlusPlus.ViewModels
 
                 return true;
             });
-        }
 
-        private void FillGrinFacts()
-        {
+            _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Mimblewimble"), Details = AppResources.ResourceManager.GetString("FactsMimblewimble") });
             _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Addresses"), Details = AppResources.ResourceManager.GetString("FactAddresses") });
             _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Amounts"), Details = AppResources.ResourceManager.GetString("FactsAmounts") });
             _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Emission"), Details = AppResources.ResourceManager.GetString("FactEmission") });
@@ -114,7 +98,6 @@ namespace GrinPlusPlus.ViewModels
             _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Scalable"), Details = AppResources.ResourceManager.GetString("FactsScalable") });
             _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Open"), Details = AppResources.ResourceManager.GetString("FactsOpen") });
             _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Dandelion"), Details = AppResources.ResourceManager.GetString("FactsDandelion") });
-            _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Mimblewimble"), Details = AppResources.ResourceManager.GetString("FactsMimblewimble") });
         }
     }
 }

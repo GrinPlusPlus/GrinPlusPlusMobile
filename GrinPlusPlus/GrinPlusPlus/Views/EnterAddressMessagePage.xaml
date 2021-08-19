@@ -8,8 +8,7 @@
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     Title="{x:Static resource:AppResources.Address}"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="Black"
-    BackgroundImageSource="country_quilt_dark.png">
+    BackgroundColor="#151515">
     <ContentPage.Content>
         <StackLayout Spacing="10" VerticalOptions="FillAndExpand">
             <Label
@@ -19,7 +18,7 @@
                 TextTransform="Uppercase" />
             <Entry
                 Margin="20,0,20,0"
-                BackgroundColor="#191919"
+                BackgroundColor="#252525"
                 HorizontalOptions="FillAndExpand"
                 IsSpellCheckEnabled="False"
                 IsTextPredictionEnabled="False"
@@ -30,7 +29,7 @@
                 </Entry.Behaviors>
             </Entry>
             <Button
-                BackgroundColor="Yellow"
+                BackgroundColor="#FFD717"
                 Command="{Binding OnQRButtonClickedCommand}"
                 HeightRequest="40"
                 HorizontalOptions="Center"
@@ -43,7 +42,7 @@
                 TextTransform="Uppercase" />
             <Entry
                 Margin="20,0,20,0"
-                BackgroundColor="#191919"
+                BackgroundColor="#252525"
                 HorizontalOptions="FillAndExpand"
                 IsSpellCheckEnabled="False"
                 IsTextPredictionEnabled="False"
@@ -51,12 +50,12 @@
                 TextColor="White" />
             <Button
                 Margin="50,100,50,100"
-                BackgroundColor="#191919"
+                BackgroundColor="#252525"
                 Command="{Binding SendButtonClickedCommand}"
                 CornerRadius="5"
                 HeightRequest="44"
                 Text="{x:Static resource:AppResources.Send}"
-                TextColor="Yellow" />
+                TextColor="#FFD717" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

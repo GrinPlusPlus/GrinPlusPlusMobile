@@ -9,8 +9,7 @@
     Title="{x:Static resource:AppResources.BackupWallet}"
     Padding="20"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="Black"
-    BackgroundImageSource="country_quilt_dark.png">
+    BackgroundColor="#151515">
     <ContentPage.Content>
         <StackLayout Spacing="8">
             <Label
@@ -18,7 +17,7 @@
                 TextColor="Gray"
                 TextTransform="Uppercase" />
             <Entry
-                BackgroundColor="#191919"
+                BackgroundColor="#252525"
                 IsPassword="True"
                 IsSpellCheckEnabled="False"
                 IsTextPredictionEnabled="False"
@@ -47,7 +46,7 @@
             <ActivityIndicator
                 HeightRequest="40"
                 IsRunning="{Binding IsBusy}"
-                Color="Yellow" />
+                Color="#FFD717" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -8,8 +8,7 @@
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     Title="{x:Static resource:AppResources.Settings}"
     prism:ViewModelLocator.AutowireViewModel="True"
-    BackgroundColor="Black"
-    BackgroundImageSource="country_quilt_dark.png"
+    BackgroundColor="#151515"
     IconImageSource="baseline_settings_applications_white_24.png">
     <ContentPage.ToolbarItems>
         <ToolbarItem
@@ -73,7 +72,7 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
-                BackgroundColor="#191919"
+                BackgroundColor="#252525"
                 HeightRequest="1" />
             <Label
                 Grid.Row="2"
@@ -107,7 +106,7 @@
                 Grid.Row="3"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
-                BackgroundColor="#191919"
+                BackgroundColor="#252525"
                 HeightRequest="1" />
             <Label
                 Grid.Row="4"
@@ -141,7 +140,7 @@
                 Grid.Row="5"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
-                BackgroundColor="#191919"
+                BackgroundColor="#252525"
                 HeightRequest="1" />
             <Label
                 Grid.Row="6"
@@ -157,7 +156,7 @@
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
                 Margin="20,0,20,0"
-                BackgroundColor="#191919"
+                BackgroundColor="#252525"
                 FontSize="Body"
                 HorizontalTextAlignment="Center"
                 IsSpellCheckEnabled="False"
@@ -174,7 +173,7 @@
                 Grid.Row="8"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
-                BackgroundColor="#191919"
+                BackgroundColor="#252525"
                 HeightRequest="1" />
             <Button
                 Grid.Row="9"
