@@ -10,6 +10,7 @@
     <ContentPage.Content>
         <StackLayout
             Margin="20,0,20,0"
+            BackgroundColor="#151515"
             HorizontalOptions="Center"
             Spacing="30"
             VerticalOptions="Center">

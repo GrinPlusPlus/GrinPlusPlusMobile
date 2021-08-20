@@ -63,7 +63,7 @@
                 CornerRadius="5"
                 FontSize="16"
                 HeightRequest="44"
-                IsVisible="{Binding Password, Converter={xct:IsNotNullOrEmptyConverter}}"
+                IsEnabled="{Binding Password, Converter={xct:IsNotNullOrEmptyConverter}}"
                 Text="{x:Static resource:AppResources.DeleteWallet}"
                 TextColor="#FFD717"
                 TextTransform="None"

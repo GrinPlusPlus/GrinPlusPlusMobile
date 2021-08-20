@@ -26,6 +26,12 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                FontSize="18"
+                Text="{x:Static resource:AppResources.YourWallets}"
+                TextColor="White" />
             <CollectionView
                 Grid.Row="1"
                 Grid.Column="0"

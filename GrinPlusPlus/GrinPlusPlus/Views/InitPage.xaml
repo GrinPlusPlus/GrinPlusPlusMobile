@@ -11,7 +11,7 @@
     <NavigationPage.TitleView>
         <Grid
             BackgroundColor="#151515"
-            HorizontalOptions="CenterAndExpand"
+            HorizontalOptions="FillAndExpand"
             VerticalOptions="Center">
             <Grid.RowDefinitions>
                 <RowDefinition Height="40" />

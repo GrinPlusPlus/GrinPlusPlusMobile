@@ -21,6 +21,7 @@
         <Grid
             Margin="0,10,0,0"
             Padding="0"
+            BackgroundColor="#151515"
             ColumnSpacing="0"
             RowSpacing="0">
             <Grid.RowDefinitions>

@@ -3,20 +3,16 @@ using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
+using System;
+using System.Diagnostics;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 
 namespace GrinPlusPlus.ViewModels
 {
     public class ProfilePageViewModel : ViewModelBase
     {
-        private string _availability = string.Empty;
-        public string Availability
-        {
-            get { return _availability; }
-            set { SetProperty(ref _availability, value); }
-        }
-
-        private bool _reachable = Settings.Reachable;
+        private bool _reachable;
         public bool Reachable
         {
             get { return _reachable; }
@@ -37,23 +33,14 @@ namespace GrinPlusPlus.ViewModels
             await Clipboard.SetTextAsync(SlatepackAddress);
         }
 
-        public DelegateCommand ShareAddressCommand => new DelegateCommand(ShareAddress);
-
-        private async void ShareAddress()
-        {
-            await Share.RequestAsync(new ShareTextRequest
-            {
-                Text = SlatepackAddress,
-                Title = "grin"
-            });
-        }
-
         public ProfilePageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
-            MainThread.BeginInvokeOnMainThread(async () =>
+            Reachable = Settings.Reachable;
+
+            Task.Factory.StartNew(async () =>
             {
-                SlatepackAddress = await SecureStorage.GetAsync("slatepack_address");
+                SlatepackAddress = await SecureStorage.GetAsync("slatepack_address").ConfigureAwait(false);
             });
         }
     }

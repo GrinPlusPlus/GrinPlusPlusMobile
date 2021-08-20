@@ -136,7 +136,7 @@ namespace GrinPlusPlus.Droid
             var label = string.Empty;
             try
             {
-                var nodeStatus = await Service.Node.Instance.Status();
+                var nodeStatus = await Service.Node.Instance.Status().ConfigureAwait(false);
 
                 Preferences.Set("ProgressPercentage", Service.SyncHelpers.GetProgressPercentage(nodeStatus));
 

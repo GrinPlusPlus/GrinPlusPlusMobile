@@ -34,81 +34,65 @@ namespace GrinPlusPlus.ViewModels
         public OpeningWalletPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
-            MainThread.BeginInvokeOnMainThread(async () =>
+            Task.Factory.StartNew(async () =>
             {
-                Wallet = (await SecureStorage.GetAsync("username")).ToUpper();
-            });
-
-            MainThread.BeginInvokeOnMainThread(async () =>
-            {
-                try
-                {
-                    await GetNodePreferences();
-                    await GetWalletBalance();
-                    Settings.IsLoggedIn = true;
-                }
-                catch (Exception ex)
-                {
-                    ExceptionMessage = ex.Message;
-
-                    Debug.WriteLine(ex.Message);
-
-                    await Logout();
-                }
-                finally
-                {
-                    if (Settings.IsLoggedIn)
-                    {
-                        SecureStorage.Remove("wallet_seed");
-                        await NavigationService.NavigateAsync("/NavigationPage/WalletPage");
-                    }
-                    else
-                    {
-                        Thread.Sleep(2000);
-                        await NavigationService.GoBackToRootAsync();
-                    }
-                }
+                Wallet = await SecureStorage.GetAsync("username");
             });
         }
 
-        private async Task GetNodePreferences()
+        public override async void OnNavigatedTo(INavigationParameters parameters)
         {
-            var preferences = await DataProvider.GetNodeSettings();
-
-            Settings.Confirmations = preferences.Confirmations;
-            Settings.MinimumPeers = preferences.MinimumPeers;
-            Settings.MaximumPeers = preferences.MaximumPeers;
-        }
-
-        private async Task GetWalletBalance()
-        {
-            var balance = await DataProvider.GetWalletBalance(await SecureStorage.GetAsync("token"));
-
-            Preferences.Set("balance_spendable", balance.Spendable);
-            Preferences.Set("balance_locked", balance.Locked);
-            Preferences.Set("balance_immature", balance.Immature);
-            Preferences.Set("balance_unconfirmed", balance.Unconfirmed);
-            Preferences.Set("balance_total", balance.Total);
-
-            if (await CrossFingerprint.Current.IsAvailableAsync(true))
+            try
             {
-                var _cancel = new CancellationTokenSource();
+                var balance = await DataProvider.GetWalletBalance(await SecureStorage.GetAsync("token").ConfigureAwait(false)).ConfigureAwait(false);
 
-                var message = AppResources.ResourceManager.GetString("ConfirmIdentity");
+                Preferences.Set("balance_spendable", balance.Spendable);
+                Preferences.Set("balance_locked", balance.Locked);
+                Preferences.Set("balance_immature", balance.Immature);
+                Preferences.Set("balance_unconfirmed", balance.Unconfirmed);
+                Preferences.Set("balance_total", balance.Total);
 
-                var dialogConfig = new AuthenticationRequestConfiguration("Fingerprint", message)
+                await MainThread.InvokeOnMainThreadAsync(async () =>
                 {
-                    CancelTitle = null,
-                    FallbackTitle = null,
-                    AllowAlternativeAuthentication = true
-                };
+                    if (await CrossFingerprint.Current.IsAvailableAsync(true))
+                    {
+                        var _cancel = new CancellationTokenSource();
 
-                var result = await CrossFingerprint.Current.AuthenticateAsync(dialogConfig, _cancel.Token);
+                        var message = AppResources.ResourceManager.GetString("ConfirmIdentity");
 
-                if (!result.Authenticated)
+                        var dialogConfig = new AuthenticationRequestConfiguration("Fingerprint", message)
+                        {
+                            CancelTitle = null,
+                            FallbackTitle = null,
+                            AllowAlternativeAuthentication = true
+                        };
+
+                        var result = await CrossFingerprint.Current.AuthenticateAsync(dialogConfig, _cancel.Token);
+
+                        if (!result.Authenticated)
+                        {
+                            ExceptionMessage = "Can't be authenticated";
+                            Debug.WriteLine("Can't be authenticated");
+                            Thread.Sleep(2000);
+                            await Logout();
+                            await NavigationService.GoBackToRootAsync();
+                        }
+                    }
+
+                    SecureStorage.Remove("wallet_seed");
+                    await NavigationService.NavigateAsync("/NavigationPage/WalletPage");
+                }).ConfigureAwait(false) ;
+            }
+            catch (Exception ex)
+            {
+                ExceptionMessage = ex.Message;
+                Debug.WriteLine(ex.Message);
+                Thread.Sleep(2000);
+                await Logout();
+                await MainThread.InvokeOnMainThreadAsync(async () =>
                 {
-                    throw new Exception("Not authenticated.");
-                }
+                    await NavigationService.GoBackToRootAsync();
+                }).ConfigureAwait(false);
             }
         }
 
@@ -116,17 +100,23 @@ namespace GrinPlusPlus.ViewModels
         {
             try
             {
-                await DataProvider.DoLogout(await SecureStorage.GetAsync("token"));
+                await DataProvider.DoLogout(await SecureStorage.GetAsync("token").ConfigureAwait(false)).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
+                ExceptionMessage = ex.Message;
                 Debug.WriteLine(ex.Message);
             }
 
-            Preferences.Clear();
             SecureStorage.RemoveAll();
 
             Settings.IsLoggedIn = false;
+
+            Preferences.Remove("balance_spendable");
+            Preferences.Remove("balance_locked");
+            Preferences.Remove("balance_immature");
+            Preferences.Remove("balance_unconfirmed");
+            Preferences.Remove("balance_total");
         }
     }
 }

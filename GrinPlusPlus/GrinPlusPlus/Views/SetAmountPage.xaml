@@ -11,7 +11,7 @@
     BackgroundColor="{StaticResource BackgroundColor}">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Color x:Key="BackgroundColor">#000000</Color>
+            <Color x:Key="BackgroundColor">#151515</Color>
             <Color x:Key="TextColor">#818181</Color>
         </ResourceDictionary>
     </ContentPage.Resources>

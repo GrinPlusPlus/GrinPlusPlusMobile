@@ -6,6 +6,7 @@ using Prism.Services;
 using Prism.Services.Dialogs;
 using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
@@ -46,38 +47,28 @@ namespace GrinPlusPlus.ViewModels
         {
             SecureStorage.RemoveAll();
 
+            Settings.IsLoggedIn = false;
+            Settings.Node.Status = "Initializing Node...";
+            Settings.Node.ProgressPercentage = 0;
+
             Status = Settings.Node.Status;
             ProgressBarr = Settings.Node.ProgressPercentage;
             ProgressPercentage = string.Format($"{ Settings.Node.ProgressPercentage * 100:F}");
 
-            Device.StartTimer(TimeSpan.FromSeconds(60), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
             {
-                if (Settings.Node.Status.Equals("Not Running"))
-                {
-                    MainThread.BeginInvokeOnMainThread(async () =>
-                    {
-                        await NavigationService.NavigateAsync("/NavigationPage/ErrorPage");
-                    });
-                }
-                return false;
+                Status = Settings.Node.Status;
+                ProgressBarr = Settings.Node.ProgressPercentage;
+                ProgressPercentage = string.Format($"{ Settings.Node.ProgressPercentage * 100:F}");
+
+                return !Settings.Node.Status.Equals("Running");
             });
-            
-        }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
-        {
-            Device.StartTimer(TimeSpan.FromSeconds(2), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(3), () =>
             {
-                MainThread.BeginInvokeOnMainThread(() =>
-                {
-                    Status = Settings.Node.Status;
-                    ProgressBarr = Settings.Node.ProgressPercentage;
-                    ProgressPercentage = string.Format($"{ Settings.Node.ProgressPercentage * 100:F}");
-                });
-
                 if (Settings.Node.Status.Equals("Running"))
                 {
-                    MainThread.BeginInvokeOnMainThread(async () =>
+                    Device.BeginInvokeOnMainThread(async () =>
                     {
                         await NavigationService.NavigateAsync("/NavigationPage/LoginPage");
                     });
@@ -88,16 +79,32 @@ namespace GrinPlusPlus.ViewModels
                 return true;
             });
 
-            _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Mimblewimble"), Details = AppResources.ResourceManager.GetString("FactsMimblewimble") });
-            _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Addresses"), Details = AppResources.ResourceManager.GetString("FactAddresses") });
-            _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Amounts"), Details = AppResources.ResourceManager.GetString("FactsAmounts") });
-            _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Emission"), Details = AppResources.ResourceManager.GetString("FactEmission") });
-            _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Slatepack"), Details = AppResources.ResourceManager.GetString("FactSlatepack") });
-            _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Transactions"), Details = AppResources.ResourceManager.GetString("FactTransactions") });
-            _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Private"), Details = AppResources.ResourceManager.GetString("FactPrivate") });
-            _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Scalable"), Details = AppResources.ResourceManager.GetString("FactsScalable") });
-            _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Open"), Details = AppResources.ResourceManager.GetString("FactsOpen") });
-            _grinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Dandelion"), Details = AppResources.ResourceManager.GetString("FactsDandelion") });
+            Task.Factory.StartNew(() =>
+            {
+                GrinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Mimblewimble"), Details = AppResources.ResourceManager.GetString("FactsMimblewimble") });
+                GrinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Addresses"), Details = AppResources.ResourceManager.GetString("FactAddresses") });
+                GrinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Amounts"), Details = AppResources.ResourceManager.GetString("FactsAmounts") });
+                GrinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Emission"), Details = AppResources.ResourceManager.GetString("FactEmission") });
+                GrinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Slatepack"), Details = AppResources.ResourceManager.GetString("FactSlatepack") });
+                GrinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Transactions"), Details = AppResources.ResourceManager.GetString("FactTransactions") });
+                GrinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Private"), Details = AppResources.ResourceManager.GetString("FactPrivate") });
+                GrinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Scalable"), Details = AppResources.ResourceManager.GetString("FactsScalable") });
+                GrinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Open"), Details = AppResources.ResourceManager.GetString("FactsOpen") });
+                GrinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Dandelion"), Details = AppResources.ResourceManager.GetString("FactsDandelion") });
+            });
+
+            Device.StartTimer(TimeSpan.FromSeconds(60), () =>
+            {
+                MainThread.BeginInvokeOnMainThread(async () =>
+                {
+                    if (Settings.Node.Status.Equals("Not Running"))
+                    {
+                        await NavigationService.NavigateAsync("/NavigationPage/ErrorPage");
+                    }
+                });
+
+                return false;
+            });
         }
     }
 }

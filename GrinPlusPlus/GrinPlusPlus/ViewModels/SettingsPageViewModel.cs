@@ -85,7 +85,7 @@ namespace GrinPlusPlus.ViewModels
         {
             try
             {
-                await DataProvider.UpdateNodeSettings(MinimumPeers, MaximumPeers, Confirmations);
+                await DataProvider.UpdateNodeSettings(MinimumPeers, MaximumPeers, Confirmations).ConfigureAwait(false);
             }
             catch (Exception ex)
             {

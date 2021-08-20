@@ -136,19 +136,6 @@ namespace GrinPlusPlus.ViewModels
             }
         }
 
-        private string _torAddress = string.Empty;
-        public string TorAddress
-        {
-            get
-            {
-                return _torAddress;
-            }
-            set
-            {
-                SetProperty(ref _torAddress, value);
-            }
-        }
-
         private string _wallet = "";
         public string Wallet
         {
@@ -253,7 +240,57 @@ namespace GrinPlusPlus.ViewModels
             });
         }
 
-        public override async void OnNavigatedTo(INavigationParameters parameters)
+        public WalletPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService,
+            IPageDialogService pageDialogService) : base(navigationService, dataProvider, dialogService, pageDialogService)
+        {
+            Balance = new Balance
+            {
+                Spendable = Preferences.Get("balance_spendable", 0.0),
+                Locked = Preferences.Get("balance_locked", 0.0),
+                Immature = Preferences.Get("balance_immature", 0.0),
+                Unconfirmed = Preferences.Get("balance_unconfirmed", 0.0),
+                Total = Preferences.Get("balance_total", 0.0)
+            };
+
+            UserCanSend = Balance.Spendable > 0;
+
+            CancelTransactionCommand = new DelegateCommand<object>(CancelTransaction);
+
+            Task.Factory.StartNew(async () =>
+            {
+                Wallet = await SecureStorage.GetAsync("username");
+                SlatepackAddress = await SecureStorage.GetAsync("slatepack_address");
+            });
+
+            Task.Factory.StartNew(async () =>
+            {
+                await GetWalletBalance();
+            });
+
+            Task.Factory.StartNew(async () =>
+            {
+                await LoadTransactions();
+            });
+
+            Task.Factory.StartNew(() =>
+            {
+                UpdateRecheability();
+            });
+
+            Device.StartTimer(TimeSpan.FromSeconds(60), () =>
+            {
+                if (!Settings.IsLoggedIn)
+                {
+                    return false;
+                }
+
+                UpdateRecheability();
+
+                return true;
+            });
+        }
+
+        public override void OnNavigatedTo(INavigationParameters parameters)
         {
             Device.StartTimer(TimeSpan.FromSeconds(5), () =>
             {
@@ -262,7 +299,7 @@ namespace GrinPlusPlus.ViewModels
                     return false;
                 }
 
-                MainThread.BeginInvokeOnMainThread(async () =>
+                Task.Factory.StartNew(async () =>
                 {
                     await GetWalletBalance();
                 });
@@ -277,7 +314,7 @@ namespace GrinPlusPlus.ViewModels
                     return false;
                 }
 
-                MainThread.BeginInvokeOnMainThread(async () =>
+                Task.Factory.StartNew(async () =>
                 {
                     await LoadTransactions();
                 });
@@ -303,70 +340,27 @@ namespace GrinPlusPlus.ViewModels
 
                 return true;
             });
-
-            Wallet = await SecureStorage.GetAsync("username");
-            TorAddress = await SecureStorage.GetAsync("tor_address");
-            SlatepackAddress = await SecureStorage.GetAsync("slatepack_address");
         }
 
-        public WalletPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService,
-            IPageDialogService pageDialogService) : base(navigationService, dataProvider, dialogService, pageDialogService)
+        private void UpdateRecheability()
         {
-            Balance = new Balance
+            Task.Factory.StartNew(async () =>
             {
-                Spendable = Preferences.Get("balance_spendable", 0.0),
-                Locked = Preferences.Get("balance_locked", 0.0),
-                Immature = Preferences.Get("balance_immature", 0.0),
-                Unconfirmed = Preferences.Get("balance_unconfirmed", 0.0),
-                Total = Preferences.Get("balance_total", 0.0)
-            };
+                var address = await SecureStorage.GetAsync("tor_address");
 
-            UserCanSend = Balance.Spendable > 0;
-
-            CancelTransactionCommand = new DelegateCommand<object>(CancelTransaction);
-
-            MainThread.BeginInvokeOnMainThread(async () =>
-            {
-                await GetWalletBalance();
-            });
-
-            MainThread.BeginInvokeOnMainThread(async () =>
-            {
-                await LoadTransactions();
-            });
-
-            Device.StartTimer(TimeSpan.FromSeconds(30), () =>
-            {
-                if (Settings.IsLoggedIn == false)
-                {
-                    return false;
-                }
-
-                UpdateAvailability();
-
-                return true;
-            });
-        }
-
-        void UpdateAvailability()
-        {
-            MainThread.BeginInvokeOnMainThread(async () =>
-            {
-
-                if (string.IsNullOrEmpty(TorAddress))
+                if (string.IsNullOrEmpty(address))
                 {
                     Settings.Reachable = false;
                     return;
                 }
                 try
                 {
-                    Settings.Reachable = await DataProvider.CheckAddressAvailability(TorAddress, Settings.GrinChckAPIURL);
+                    Settings.Reachable = await DataProvider.CheckAddressAvailability(address, Settings.GrinChckAPIURL).ConfigureAwait(false);
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine(ex.Message);
-
                     Settings.Reachable = false;
+                    Debug.WriteLine(ex.Message);
                 }
             });
         }
@@ -375,7 +369,7 @@ namespace GrinPlusPlus.ViewModels
         {
             try
             {
-                var balance = await DataProvider.GetWalletBalance(await SecureStorage.GetAsync("token"));
+                var balance = await DataProvider.GetWalletBalance(await SecureStorage.GetAsync("token")).ConfigureAwait(false);
                 if (Balance.Total != balance.Total || Balance.Spendable != balance.Spendable || Balance.Immature != balance.Immature ||
                     Balance.Unconfirmed != balance.Unconfirmed || Balance.Locked != balance.Locked)
                 {
@@ -393,7 +387,7 @@ namespace GrinPlusPlus.ViewModels
         {
             try
             {
-                LoadUnfinalizedTransactions(await DataProvider.GetTransactions(await SecureStorage.GetAsync("token"), new string[] { "SENDING_NOT_FINALIZED" }));
+                LoadUnfinalizedTransactions(await DataProvider.GetTransactions(await SecureStorage.GetAsync("token"), new string[] { "SENDING_NOT_FINALIZED" }).ConfigureAwait(false));
             }
             catch (Exception ex)
             {
@@ -402,7 +396,7 @@ namespace GrinPlusPlus.ViewModels
 
             try
             {
-                AllTransactions = await DataProvider.GetTransactions(await SecureStorage.GetAsync("token"), new string[] {
+                AllTransactions = await DataProvider.GetTransactions(await SecureStorage.GetAsync("token").ConfigureAwait(false), new string[] {
                   "RECEIVING_IN_PROGRESS",
                   "SENDING_FINALIZED",
                   "COINBASE",
@@ -410,7 +404,7 @@ namespace GrinPlusPlus.ViewModels
                   "RECEIVED",
                   "SENT_CANCELED",
                   "RECEIVED_CANCELED"
-                });
+                }).ConfigureAwait(false);
 
                 FilterTransactions(CurrentSelectedFilterIndex);
             }
@@ -502,15 +496,18 @@ namespace GrinPlusPlus.ViewModels
             FilteredTransactionHistory = new ObservableCollection<Transaction>(newList.OrderByDescending(o => o.Date));
         }
 
-        async void SendButtonClicked()
+        void SendButtonClicked()
         {
             if (UserCanSend)
             {
-                await NavigationService.NavigateAsync("SetAmountPage", new NavigationParameters {
-                  {
-                    "spendable",
-                    Balance.Spendable / Math.Pow(10, 9)
-                  }
+                MainThread.BeginInvokeOnMainThread(async () =>
+                {
+                    await NavigationService.NavigateAsync("SetAmountPage", new NavigationParameters {
+                      {
+                        "spendable",
+                        Balance.Spendable / Math.Pow(10, 9)
+                      }
+                    });
                 });
             }
         }
@@ -523,7 +520,7 @@ namespace GrinPlusPlus.ViewModels
             {
                 try
                 {
-                    await DataProvider.CancelTransaction(await SecureStorage.GetAsync("token"), (int)id);
+                    await DataProvider.CancelTransaction(await SecureStorage.GetAsync("token").ConfigureAwait(false), (int)id).ConfigureAwait(false);
                 }
                 catch (Exception ex)
                 {

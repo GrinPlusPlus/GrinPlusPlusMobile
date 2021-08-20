@@ -27,7 +27,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <Grid RowSpacing="8">
+        <Grid BackgroundColor="#151515" RowSpacing="8">
             <Grid.RowDefinitions>
                 <RowDefinition Height="55" />
                 <RowDefinition Height="50" />

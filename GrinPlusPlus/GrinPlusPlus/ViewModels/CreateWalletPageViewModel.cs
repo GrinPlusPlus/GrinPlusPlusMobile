@@ -99,7 +99,7 @@ namespace GrinPlusPlus.ViewModels
 
                 IsBusy = true;
 
-                var wallet = await DataProvider.CreateWallet(Username, Password, int.Parse(SeedLength));
+                var wallet = await DataProvider.CreateWallet(Username, Password, int.Parse(SeedLength)).ConfigureAwait(false);
 
                 if (!string.IsNullOrEmpty(wallet.Token))
                 {

@@ -9,6 +9,7 @@
     BackgroundColor="#151515">
     <ContentPage.Content>
         <StackLayout
+            BackgroundColor="#151515"
             HorizontalOptions="FillAndExpand"
             Orientation="Vertical"
             Spacing="10"

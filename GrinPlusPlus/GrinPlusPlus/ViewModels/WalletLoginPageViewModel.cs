@@ -40,7 +40,6 @@ namespace GrinPlusPlus.ViewModels
         public WalletLoginPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
-            SecureStorage.RemoveAll();
         }
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
@@ -58,67 +57,55 @@ namespace GrinPlusPlus.ViewModels
 
         private async void OpenWallet()
         {
+            SecureStorage.RemoveAll();
+            IsBusy = true;
+
             try
             {
-                IsBusy = true;
-
-                if (string.IsNullOrEmpty(Password))
-                {
-                    throw new Exception(AppResources.ResourceManager.GetString("PasswordCanNotBeEmpty"));
-                }
-
-                var wallet = await DataProvider.DoLogin(Username, Password);
-
+                var wallet = await DataProvider.DoLogin(Username, Password).ConfigureAwait(false);
+                
+                
                 await SecureStorage.SetAsync("token", wallet.Token);
                 await SecureStorage.SetAsync("username", Username);
                 await SecureStorage.SetAsync("slatepack_address", wallet.SlatepackAdddress);
                 await SecureStorage.SetAsync("tor_address", wallet.TorAddress ?? string.Empty);
 
-                var tc = new TorControlClient();
-                await tc.ConnectAsync("127.0.0.1", 3423);
-                await tc.AuthenticateAsync("MyPassword");
-                await tc.CleanCircuitsAsync();
-                await tc.QuitAsync();
+                Settings.IsLoggedIn = true;
 
-                await NavigationService.NavigateAsync("OpeningWalletPage");
+                MainThread.BeginInvokeOnMainThread(async () =>
+                {
+                    await NavigationService.NavigateAsync("OpeningWalletPage");
+                });
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
-
-                await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
-            }
-            finally
-            {
                 IsBusy = false;
+                Debug.WriteLine(ex.Message);
+                MainThread.BeginInvokeOnMainThread(async () =>
+                {
+                    await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
+                });
             }
         }
 
         private async void DeleteWalletC()
         {
+            IsBusy = true;
+
             try
             {
-                IsBusy = true;
-
-                if (string.IsNullOrEmpty(Password))
-                {
-                    throw new Exception(AppResources.ResourceManager.GetString("PasswordCanNotBeEmpty"));
-                }
-                var wallet = await DataProvider.DeleteWallet(Username, Password);
-
+                await DataProvider.DeleteWallet(Username, Password).ConfigureAwait(false);
                 await NavigationService.GoBackToRootAsync();
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
-
-                await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
-            }
-            finally
-            {
                 IsBusy = false;
+                Debug.WriteLine(ex.Message);
+                MainThread.BeginInvokeOnMainThread(async () =>
+                {
+                    await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
+                });
             }
         }
-
     }
 }

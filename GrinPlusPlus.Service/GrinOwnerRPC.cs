@@ -9,6 +9,8 @@ namespace GrinPlusPlus.Service
 {
     class GrinOwnerRPC
     {
+        static readonly HttpClient httpClient = new HttpClient() { Timeout = TimeSpan.FromMinutes(5)};
+
         static string BuildPayload(string method, Dictionary<string, object> keyValuePairs)
         {
             Dictionary<string, object> payload = new Dictionary<string, object>
@@ -60,17 +62,13 @@ namespace GrinPlusPlus.Service
 
         private static async Task<string> MakeRequestAsync(string payload, Dictionary<string, string> headers = null)
         {
-            string response = string.Empty;
+            httpClient.CancelPendingRequests();
+            httpClient.DefaultRequestHeaders.Clear();
 
-            using (HttpClient httpClient = new HttpClient())
-            {
-                httpClient.Timeout = TimeSpan.FromMinutes(10);
-                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                var result = await httpClient.PostAsync("http://127.0.0.1:3421/v2", new StringContent(payload));
-                response = await result.Content.ReadAsStringAsync();
-            }
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            var result = await httpClient.PostAsync("http://localhost:3421/v2", new StringContent(payload)).ConfigureAwait(false);
 
-            return response;
+            return await result.Content.ReadAsStringAsync().ConfigureAwait(false);
         }
     }
 }

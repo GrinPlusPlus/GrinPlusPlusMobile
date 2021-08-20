@@ -13,6 +13,7 @@
     NavigationPage.HasBackButton="False">
     <ContentPage.Content>
         <StackLayout
+            BackgroundColor="#151515"
             HorizontalOptions="FillAndExpand"
             Orientation="Vertical"
             Spacing="10"

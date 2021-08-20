@@ -9,6 +9,8 @@ namespace GrinPlusPlus.Service
 {
     class GrinOwnerAPI
     {
+        static readonly HttpClient httpClient = new HttpClient() { Timeout = TimeSpan.FromMinutes(5) };
+
         public static async Task<T> Request<T>(string endpoint, Dictionary<string, string> headers = null)
         {
             string response = await GrinOwnerAPI.MakeRequestAsync(endpoint, headers);
@@ -18,25 +20,21 @@ namespace GrinPlusPlus.Service
 
         private static async Task<string> MakeRequestAsync(string endpoint, Dictionary<string, string> headers = null)
         {
-            string response = string.Empty;
+            httpClient.CancelPendingRequests();
+            httpClient.DefaultRequestHeaders.Clear();
 
-            using (HttpClient httpClient = new HttpClient())
+            if (headers != null)
             {
-                if (headers != null)
+                foreach (KeyValuePair<string, string> header in headers)
                 {
-                    foreach (KeyValuePair<string, string> header in headers)
-                    {
-                        httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
-                    }
-
+                    httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
                 }
-                httpClient.Timeout = TimeSpan.FromMinutes(10);
-                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                string url = "http://127.0.0.1:3420/v1/wallet/owner/" + endpoint;
-                response = await (await httpClient.GetAsync(url)).Content.ReadAsStringAsync();
+
             }
 
-            return response;
+            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            string url = "http://localhost:3420/v1/wallet/owner/" + endpoint;
+            return await (await httpClient.GetAsync(url).ConfigureAwait(false)).Content.ReadAsStringAsync().ConfigureAwait(false);
         }
     }
 }

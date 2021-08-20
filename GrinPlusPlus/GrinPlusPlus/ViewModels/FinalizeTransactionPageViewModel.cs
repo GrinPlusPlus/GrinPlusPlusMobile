@@ -46,7 +46,7 @@ namespace GrinPlusPlus.ViewModels
         {
             try
             {
-                var finalized = await DataProvider.FinalizeTransaction(await SecureStorage.GetAsync("token"), SlatepackMessage);
+                var finalized = await DataProvider.FinalizeTransaction(await SecureStorage.GetAsync("token"), SlatepackMessage).ConfigureAwait(false);
                 await NavigationService.GoBackToRootAsync();
             }
             catch (Exception ex)

@@ -8,6 +8,7 @@ using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 
 namespace GrinPlusPlus.ViewModels
@@ -150,24 +151,31 @@ namespace GrinPlusPlus.ViewModels
             TriggerFeeCalculation();
         }
 
-        async void ContinueButtonClicked()
+        void ContinueButtonClicked()
         {
             try
             {
-                await NavigationService.NavigateAsync("SendingGrinsPage",
-                    new NavigationParameters
-                    {
-                        { "address", Address },
-                        { "amount", __amount },
-                        { "max", SendMax }
-                    }
-                );
+                MainThread.BeginInvokeOnMainThread(async () =>
+                {
+                    await NavigationService.NavigateAsync("SendingGrinsPage",
+                        new NavigationParameters
+                        {
+                            { "address", Address },
+                            { "amount", __amount },
+                            { "max", SendMax }
+                        }
+                    );
+                });
+
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
 
-                await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
+                MainThread.BeginInvokeOnMainThread(async () =>
+                {
+                    await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
+                });
             }
         }
 
@@ -192,11 +200,12 @@ namespace GrinPlusPlus.ViewModels
                 return;
             }
 
-            MainThread.BeginInvokeOnMainThread(async () =>
+            Task.Factory.StartNew(async () =>
             {
                 try
                 {
-                    FeeEstimation estimation = await DataProvider.EstimateFee(await SecureStorage.GetAsync("token"), __amount);
+                    FeeEstimation estimation = await DataProvider.EstimateFee(await SecureStorage.GetAsync("token").ConfigureAwait(false), __amount).ConfigureAwait(false);
+
                     Fee = (estimation.Fee / Math.Pow(10, 9)).ToString("F9");
                     IsValid = true;
                 }
@@ -206,7 +215,11 @@ namespace GrinPlusPlus.ViewModels
                     Fee = "0";
 
                     Debug.WriteLine(ex.Message);
-                    await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
+
+                    MainThread.BeginInvokeOnMainThread(async () =>
+                    {
+                        await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
+                    });
                 }
             });
         }

@@ -10,6 +10,7 @@ using Prism.Services.Dialogs;
 using System;
 using System.Diagnostics;
 using System.Threading;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 
 namespace GrinPlusPlus.ViewModels
@@ -102,15 +103,18 @@ namespace GrinPlusPlus.ViewModels
                 }
             }
 
-            await NavigationService.NavigateAsync("SendGrinsUsingTorPage",
-                new NavigationParameters
-                {
-                    { "address", Address },
-                    { "message", Message },
-                    { "amount", Amount },
-                    { "max", SendMax }
-                }
-            );
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                await NavigationService.NavigateAsync("SendGrinsUsingTorPage",
+                    new NavigationParameters
+                    {
+                        { "address", Address },
+                        { "message", Message },
+                        { "amount", Amount },
+                        { "max", SendMax }
+                    }
+                );
+            });
         }
 
         public SendingGrinsPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
@@ -150,18 +154,21 @@ namespace GrinPlusPlus.ViewModels
 
             if (!SendMax)
             {
-                MainThread.BeginInvokeOnMainThread(async () =>
+                Task.Factory.StartNew(async () =>
                 {
                     try
                     {
-                        FeeEstimation estimation = await DataProvider.EstimateFee(await SecureStorage.GetAsync("token"), Amount);
+                        FeeEstimation estimation = await DataProvider.EstimateFee(await SecureStorage.GetAsync("token").ConfigureAwait(false), Amount).ConfigureAwait(false);
                         Fee = (estimation.Fee / Math.Pow(10, 9)).ToString("F9");
                     }
                     catch (Exception ex)
                     {
                         Debug.WriteLine(ex.Message);
 
-                        await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
+                        MainThread.BeginInvokeOnMainThread(async () =>
+                        {
+                            await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
+                        });
                     }
                 });
             }

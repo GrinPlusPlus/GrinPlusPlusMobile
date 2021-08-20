@@ -11,7 +11,7 @@
     BackgroundColor="#151515"
     IconImageSource="baseline_network_check_white_24.png">
     <ContentPage.Content>
-        <StackLayout Spacing="10">
+        <StackLayout BackgroundColor="#151515" Spacing="10">
             <Label Text="{x:Static resource:AppResources.Status}" TextColor="Gray" />
             <Label
                 FontSize="24"

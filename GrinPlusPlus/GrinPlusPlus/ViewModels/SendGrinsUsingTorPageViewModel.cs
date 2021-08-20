@@ -6,6 +6,7 @@ using Prism.Services.Dialogs;
 using System;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 
 namespace GrinPlusPlus.ViewModels
@@ -41,7 +42,7 @@ namespace GrinPlusPlus.ViewModels
         }
 
 
-        private bool _isBusy = true;
+        private bool _isBusy;
         public bool IsBusy
         {
             get { return _isBusy; }
@@ -65,9 +66,10 @@ namespace GrinPlusPlus.ViewModels
         public SendGrinsUsingTorPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
+            IsBusy = true;
         }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
+        public override async void OnNavigatedTo(INavigationParameters parameters)
         {
             if (parameters.ContainsKey("amount"))
             {
@@ -89,29 +91,33 @@ namespace GrinPlusPlus.ViewModels
                 SendMax = (bool)parameters["max"];
             }
 
-            MainThread.BeginInvokeOnMainThread(async () =>
+            try
             {
-                try
+                SendingResponse = await DataProvider.SendGrins(await SecureStorage.GetAsync("token").ConfigureAwait(false), Address, Amount, Message, null, "SMALLEST", SendMax).ConfigureAwait(false);
+
+                if (SendingResponse.Status.ToLower().Equals("finalized"))
                 {
-                    string token = await SecureStorage.GetAsync("token");
-                    SendingResponse = await DataProvider.SendGrins(token, Address, Amount, Message, null, "SMALLEST", SendMax);
-                    if (SendingResponse.Status.ToLower().Equals("finalized"))
+                    MainThread.BeginInvokeOnMainThread(async () =>
                     {
                         await NavigationService.GoBackToRootAsync();
-                    }
-                    else
+                    });
+                }
+                else
+                {
+                    MainThread.BeginInvokeOnMainThread(async () =>
                     {
                         await NavigationService.NavigateAsync("SendGrinsUsingQRPage", new NavigationParameters { { "sending_response", SendingResponse } });
-                    }
+                    });
                 }
-                catch (Exception ex)
-                {
-                    ExceptionMessage = ex.Message;
+            }
+            catch (Exception ex)
+            {
+                ExceptionMessage = ex.Message;
 
-                    Debug.WriteLine(ex.Message);
-                }
-                IsBusy = false;
-            });
+                Debug.WriteLine(ex.Message);
+            }
+
+            IsBusy = false;
         }
 
         public override void OnNavigatedFrom(INavigationParameters parameters)

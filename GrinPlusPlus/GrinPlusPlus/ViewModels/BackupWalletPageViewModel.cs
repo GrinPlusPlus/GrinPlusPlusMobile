@@ -67,7 +67,7 @@ namespace GrinPlusPlus.ViewModels
                     throw new Exception(AppResources.ResourceManager.GetString("PasswordCanNotBeEmpty"));
                 }
 
-                var seed = await DataProvider.BackupWallet(Username, Password);
+                var seed = await DataProvider.BackupWallet(Username, Password).ConfigureAwait(false);
 
                 if (await CrossFingerprint.Current.IsAvailableAsync(true))
                 {
