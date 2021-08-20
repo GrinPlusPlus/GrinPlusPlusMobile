@@ -39,7 +39,7 @@ namespace GrinPlusPlus.Service
         public static async Task<T> Request<T>(string method, Dictionary<string, object> keyValuePairs,
             Dictionary<string, string> headers = null)
         {
-            string response = await GrinForeignRPC.MakeRequestAsync(BuildPayload(method, keyValuePairs), headers);
+            string response = await GrinForeignRPC.MakeRequestAsync(BuildPayload(method, keyValuePairs), headers).ConfigureAwait(false);
 
             try
             {
@@ -62,7 +62,7 @@ namespace GrinPlusPlus.Service
 
         public static async Task<T> Request<T>(string method, Dictionary<string, string> headers = null)
         {
-            string response = await GrinForeignRPC.MakeRequestAsync(BuildPayload(method), headers);
+            string response = await GrinForeignRPC.MakeRequestAsync(BuildPayload(method), headers).ConfigureAwait(false);
 
             try
             {
@@ -85,7 +85,7 @@ namespace GrinPlusPlus.Service
 
         public static async Task Request(string method, Dictionary<string, object> keyValuePairs, Dictionary<string, string> headers = null)
         {
-            string response = await GrinForeignRPC.MakeRequestAsync(BuildPayload(method, keyValuePairs), headers);
+            string response = await GrinForeignRPC.MakeRequestAsync(BuildPayload(method, keyValuePairs), headers).ConfigureAwait(false);
 
             var deserializeObject = JsonConvert.DeserializeObject<Models.RPC.ErrorResponse>(response);
 

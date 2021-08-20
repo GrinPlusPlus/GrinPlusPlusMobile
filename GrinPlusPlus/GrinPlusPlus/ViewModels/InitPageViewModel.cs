@@ -55,7 +55,7 @@ namespace GrinPlusPlus.ViewModels
             ProgressBarr = Settings.Node.ProgressPercentage;
             ProgressPercentage = string.Format($"{ Settings.Node.ProgressPercentage * 100:F}");
 
-            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(10), () =>
             {
                 Status = Settings.Node.Status;
                 ProgressBarr = Settings.Node.ProgressPercentage;
@@ -68,7 +68,7 @@ namespace GrinPlusPlus.ViewModels
             {
                 if (Settings.Node.Status.Equals("Running"))
                 {
-                    Device.BeginInvokeOnMainThread(async () =>
+                    MainThread.BeginInvokeOnMainThread(async () =>
                     {
                         await NavigationService.NavigateAsync("/NavigationPage/LoginPage");
                     });

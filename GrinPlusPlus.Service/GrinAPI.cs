@@ -12,14 +12,14 @@ namespace GrinPlusPlus.Service
 
         public static async Task<T> Request<T>(string endpoint)
         {
-            string response = await GrinAPI.MakeRequestAsync(endpoint);
+            string response = await GrinAPI.MakeRequestAsync(endpoint).ConfigureAwait(false);
 
             return JsonConvert.DeserializeObject<T>(response);
         }
 
         public static async Task Request(string endpoint)
         {
-            await MakeRequestAsync(endpoint);
+            await MakeRequestAsync(endpoint).ConfigureAwait(false);
         }
 
         private static async Task<string> MakeRequestAsync(string endpoint)

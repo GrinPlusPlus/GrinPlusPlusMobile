@@ -58,32 +58,32 @@ namespace GrinPlusPlus.ViewModels
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
             UnfocusedEntryCommand = new DelegateCommand<object>(UnfocusedEntry);
+        }
 
-            MainThread.BeginInvokeOnMainThread(async () =>
+        public override async void OnNavigatedTo(INavigationParameters parameters)
+        {
+            WalletSeed = await SecureStorage.GetAsync("wallet_seed").ConfigureAwait(false);
+            WalletSeedWordsList = new ObservableCollection<string>(WalletSeed.Split(' ').ToList());
+
+            var walletSeed = new ObservableCollection<string>(WalletSeed.Split(' ').ToList());
+
+            int hiddenWords = 0;
+            do
             {
-                WalletSeed = await SecureStorage.GetAsync("wallet_seed");
-                WalletSeedWordsList = new ObservableCollection<string>(WalletSeed.Split(' ').ToList());
-
-                var walletSeed = new ObservableCollection<string>(WalletSeed.Split(' ').ToList());
-
-                int hiddenWords = 0;
-                do
+                foreach (string word in walletSeed)
                 {
-                    foreach (string word in walletSeed)
+                    Random r = new Random();
+                    int index = r.Next(0, 24);
+                    if (!string.IsNullOrEmpty(walletSeed[index]))
                     {
-                        Random r = new Random();
-                        int index = r.Next(0, 24);
-                        if (!string.IsNullOrEmpty(walletSeed[index]))
-                        {
-                            walletSeed[index] = string.Empty;
-                            hiddenWords++;
-                            break;
-                        }
+                        walletSeed[index] = string.Empty;
+                        hiddenWords++;
+                        break;
                     }
-                } while (hiddenWords <= 4);
+                }
+            } while (hiddenWords <= 4);
 
-                DisplayedWalletSeedWordsList = walletSeed;
-            });
+            DisplayedWalletSeedWordsList = walletSeed;
         }
 
         private void UnfocusedEntry(object param)

@@ -34,11 +34,13 @@ namespace GrinPlusPlus.ViewModels
         public WalletSeedPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
-            MainThread.BeginInvokeOnMainThread(async () =>
-            {
-                WalletSeed = await SecureStorage.GetAsync("wallet_seed");
-                WalletSeedWordsList = new ObservableCollection<string>(WalletSeed.Split(' ').ToList());
-            });
+            
+        }
+
+        public override async void OnNavigatedTo(INavigationParameters parameters)
+        {
+            WalletSeed = await SecureStorage.GetAsync("wallet_seed").ConfigureAwait(false);
+            WalletSeedWordsList = new ObservableCollection<string>(WalletSeed.Split(' ').ToList());
         }
     }
 }

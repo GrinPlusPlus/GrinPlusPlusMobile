@@ -13,7 +13,7 @@ namespace GrinPlusPlus.Service
 
         public static async Task<T> Request<T>(string endpoint, Dictionary<string, string> headers = null)
         {
-            string response = await GrinOwnerAPI.MakeRequestAsync(endpoint, headers);
+            string response = await GrinOwnerAPI.MakeRequestAsync(endpoint, headers).ConfigureAwait(false);
 
             return JsonConvert.DeserializeObject<T>(response);
         }
@@ -33,7 +33,7 @@ namespace GrinPlusPlus.Service
             }
 
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            string url = "http://localhost:3420/v1/wallet/owner/" + endpoint;
+            string url = "http://127.0.0.1:3420/v1/wallet/owner/" + endpoint;
             return await (await httpClient.GetAsync(url).ConfigureAwait(false)).Content.ReadAsStringAsync().ConfigureAwait(false);
         }
     }

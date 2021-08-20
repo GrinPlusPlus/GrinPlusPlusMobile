@@ -25,24 +25,30 @@ namespace GrinPlusPlus.ViewModels
         public LoginPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
-            MainThread.BeginInvokeOnMainThread(async () =>
-            {
-                try
-                {
-                    Accounts = new ObservableCollection<Account>((await DataProvider.GetAccounts().ConfigureAwait(false)).ToArray());
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex.Message);
 
-                    await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
-                }
-            });
         }
 
+        public override async void OnNavigatedTo(INavigationParameters parameters)
+        {
+            try
+            {
+                Accounts = new ObservableCollection<Account>((await DataProvider.GetAccounts().ConfigureAwait(false)).ToArray());
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+
+                MainThread.BeginInvokeOnMainThread(async () =>
+                {
+                    await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
+                });
+            }
+        }
+        
         async void AccountNameClicked(string username)
         {
             await NavigationService.NavigateAsync("WalletLoginPage", new NavigationParameters { { "username", username } });
         }
+
     }
 }

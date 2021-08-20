@@ -38,6 +38,8 @@ namespace GrinPlusPlus.ViewModels
             {
                 Wallet = await SecureStorage.GetAsync("username");
             });
+
+            SecureStorage.Remove("wallet_seed"); // in case of a newly created wallet
         }
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
@@ -52,36 +54,37 @@ namespace GrinPlusPlus.ViewModels
                 Preferences.Set("balance_unconfirmed", balance.Unconfirmed);
                 Preferences.Set("balance_total", balance.Total);
 
-                await MainThread.InvokeOnMainThreadAsync(async () =>
+                if (await CrossFingerprint.Current.IsAvailableAsync(true))
                 {
-                    if (await CrossFingerprint.Current.IsAvailableAsync(true))
+                    var _cancel = new CancellationTokenSource();
+
+                    var message = AppResources.ResourceManager.GetString("ConfirmIdentity");
+
+                    var dialogConfig = new AuthenticationRequestConfiguration("Fingerprint", message)
                     {
-                        var _cancel = new CancellationTokenSource();
+                        CancelTitle = null,
+                        FallbackTitle = null,
+                        AllowAlternativeAuthentication = true
+                    };
 
-                        var message = AppResources.ResourceManager.GetString("ConfirmIdentity");
-
-                        var dialogConfig = new AuthenticationRequestConfiguration("Fingerprint", message)
-                        {
-                            CancelTitle = null,
-                            FallbackTitle = null,
-                            AllowAlternativeAuthentication = true
-                        };
-
+                    await MainThread.InvokeOnMainThreadAsync(async () =>
+                    {
                         var result = await CrossFingerprint.Current.AuthenticateAsync(dialogConfig, _cancel.Token);
 
                         if (!result.Authenticated)
                         {
-                            ExceptionMessage = "Can't be authenticated";
-                            Debug.WriteLine("Can't be authenticated");
+                            ExceptionMessage = "Authentication Failed";
+                            Debug.WriteLine("Authentication Failed");
                             Thread.Sleep(2000);
                             await Logout();
-                            await NavigationService.GoBackToRootAsync();
-                        }
-                    }
 
-                    SecureStorage.Remove("wallet_seed");
-                    await NavigationService.NavigateAsync("/NavigationPage/WalletPage");
-                }).ConfigureAwait(false) ;
+                            await NavigationService.GoBackToRootAsync();
+                        } else
+                        {
+                            await NavigationService.NavigateAsync("/NavigationPage/WalletPage");
+                        }
+                    });
+                }
             }
             catch (Exception ex)
             {
@@ -92,7 +95,7 @@ namespace GrinPlusPlus.ViewModels
                 await MainThread.InvokeOnMainThreadAsync(async () =>
                 {
                     await NavigationService.GoBackToRootAsync();
-                }).ConfigureAwait(false);
+                });
             }
         }
 

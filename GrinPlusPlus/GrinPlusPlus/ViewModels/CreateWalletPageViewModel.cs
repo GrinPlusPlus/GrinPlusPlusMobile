@@ -109,7 +109,10 @@ namespace GrinPlusPlus.ViewModels
 
                     await SecureStorage.SetAsync("wallet_seed", wallet.Seed);
 
-                    await NavigationService.NavigateAsync("WalletSeedPage");
+                    await MainThread.InvokeOnMainThreadAsync(async () =>
+                    {
+                        await NavigationService.NavigateAsync("WalletSeedPage");
+                    });
                 }
             }
             catch (Exception ex)

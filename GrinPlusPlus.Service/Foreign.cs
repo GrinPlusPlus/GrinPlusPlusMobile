@@ -39,12 +39,12 @@ namespace GrinPlusPlus.Service
                 {"min_confirmations", confirmations}
             };
 
-            await GrinForeignRPC.Request(Endpoints.UpdateSettings, payload);
+            await GrinForeignRPC.Request(Endpoints.UpdateSettings, payload).ConfigureAwait(false);
         }
 
         public async Task<Models.Node.Settings> GetSettings()
         {
-            return await GrinForeignRPC.Request<Models.Node.Settings>(Endpoints.GetSettings);
+            return await GrinForeignRPC.Request<Models.Node.Settings>(Endpoints.GetSettings).ConfigureAwait(false);
         }
     }
 }

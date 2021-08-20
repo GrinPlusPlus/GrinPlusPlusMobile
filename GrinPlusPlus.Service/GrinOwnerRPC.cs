@@ -27,7 +27,7 @@ namespace GrinPlusPlus.Service
         public static async Task<T> Request<T>(string method, Dictionary<string, object> keyValuePairs,
             Dictionary<string, string> headers = null)
         {
-            string response = await GrinOwnerRPC.MakeRequestAsync(BuildPayload(method, keyValuePairs), headers);
+            string response = await GrinOwnerRPC.MakeRequestAsync(BuildPayload(method, keyValuePairs), headers).ConfigureAwait(false);
 
             try
             {
@@ -50,7 +50,7 @@ namespace GrinPlusPlus.Service
 
         public static async Task Request(string method, Dictionary<string, object> keyValuePairs, Dictionary<string, string> headers = null)
         {
-            string response = await GrinOwnerRPC.MakeRequestAsync(BuildPayload(method, keyValuePairs), headers);
+            string response = await GrinOwnerRPC.MakeRequestAsync(BuildPayload(method, keyValuePairs), headers).ConfigureAwait(false);
 
             var deserializeObject = JsonConvert.DeserializeObject<Models.RPC.ErrorResponse>(response);
 
@@ -66,7 +66,7 @@ namespace GrinPlusPlus.Service
             httpClient.DefaultRequestHeaders.Clear();
 
             httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            var result = await httpClient.PostAsync("http://localhost:3421/v2", new StringContent(payload)).ConfigureAwait(false);
+            var result = await httpClient.PostAsync("http://127.0.0.1:3421/v2", new StringContent(payload)).ConfigureAwait(false);
 
             return await result.Content.ReadAsStringAsync().ConfigureAwait(false);
         }
