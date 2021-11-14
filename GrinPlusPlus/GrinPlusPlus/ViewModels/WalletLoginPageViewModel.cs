@@ -47,7 +47,6 @@ namespace GrinPlusPlus.ViewModels
             if (parameters.ContainsKey("username"))
             {
                 Username = parameters.GetValue<string>("username");
-                Title = Username.ToUpper();
             }
             else
             {
@@ -57,13 +56,11 @@ namespace GrinPlusPlus.ViewModels
 
         private async void OpenWallet()
         {
-            SecureStorage.RemoveAll();
             IsBusy = true;
 
             try
             {
                 var wallet = await DataProvider.DoLogin(Username, Password).ConfigureAwait(false);
-                
                 
                 await SecureStorage.SetAsync("token", wallet.Token);
                 await SecureStorage.SetAsync("username", Username);

@@ -24,8 +24,8 @@
                 TextTransform="Uppercase" />
             <Entry
                 BackgroundColor="#252525"
-                FontSize="18"
-                HeightRequest="44"
+                FontSize="20"
+                HeightRequest="48"
                 IsSpellCheckEnabled="False"
                 IsTextPredictionEnabled="False"
                 Text="{Binding Username}"
@@ -44,8 +44,8 @@
                 TextTransform="Uppercase" />
             <Entry
                 BackgroundColor="#252525"
-                FontSize="18"
-                HeightRequest="44"
+                FontSize="20"
+                HeightRequest="48"
                 IsPassword="True"
                 IsSpellCheckEnabled="False"
                 IsTextPredictionEnabled="False"
@@ -61,7 +61,7 @@
             </Entry>
             <Entry
                 BackgroundColor="#252525"
-                FontSize="18"
+                FontSize="20"
                 HeightRequest="44"
                 IsPassword="True"
                 IsSpellCheckEnabled="False"
@@ -79,19 +79,19 @@
             <StackLayout
                 Margin="0,10,0,0"
                 Padding="0"
-                BackgroundColor="#0C0C0C"
-                HeightRequest="44"
+                BackgroundColor="#151515"
+                HeightRequest="48"
                 Spacing="0">
                 <Button
-                    BackgroundColor="#0C0C0C"
+                    BackgroundColor="Transparent"
                     Command="{Binding CreateWalletCommand}"
                     CornerRadius="5"
-                    FontSize="16"
-                    HeightRequest="44"
+                    FontSize="18"
+                    TextColor="#FFD717"
+                    HeightRequest="48"
                     IsEnabled="{Binding IsPasswordConfirmationValid}"
                     IsVisible="{Binding IsBusy, Converter={xct:InvertedBoolConverter}}"
                     Text="{x:Static resource:AppResources.Create}"
-                    TextColor="White"
                     TextTransform="None" />
                 <ActivityIndicator
                     HeightRequest="40"

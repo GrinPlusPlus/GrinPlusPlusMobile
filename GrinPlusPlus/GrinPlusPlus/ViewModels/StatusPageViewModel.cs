@@ -50,48 +50,55 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _connectedPeers, value); }
         }
 
+        private string _progressPercentage = string.Format($"{ Settings.Node.ProgressPercentage * 100:F}");
+        public string ProgressPercentage
+        {
+            get { return _progressPercentage; }
+            set { SetProperty(ref _progressPercentage, value); }
+        }
+
+        private bool StopTimer = false;
 
         public StatusPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
             UpdateStatus();
+
             MainThread.BeginInvokeOnMainThread(async () =>
             {
                 await ListConnectedPeersAsync();
             });
         }
+
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
-                if (Settings.IsLoggedIn == false)
-                {
-                    return false;
-                }
-
                 UpdateStatus();
 
-                return true;
+                return !StopTimer;
             });
 
             Device.StartTimer(TimeSpan.FromSeconds(10), () =>
             {
-                if (Settings.IsLoggedIn == false)
-                {
-                    return false;
-                }
-
                 MainThread.BeginInvokeOnMainThread(async () =>
                 {
                     await ListConnectedPeersAsync();
                 });
 
-                return true;
+                return !StopTimer;
             });
+        }
+
+        public override void OnNavigatedFrom(INavigationParameters parameters)
+        {
+            StopTimer = true;
         }
 
         private void UpdateStatus()
         {
+            ProgressPercentage = string.Format($"{ Settings.Node.ProgressPercentage * 100:F}");
+
             if (!Status.Equals(Settings.Node.Status))
             {
                 Status = Settings.Node.Status;
@@ -112,7 +119,6 @@ namespace GrinPlusPlus.ViewModels
 
         private async Task ListConnectedPeersAsync()
         {
-
             try
             {
                 var connectedPeers = await DataProvider.GetNodeConnectedPeers().ConfigureAwait(false);

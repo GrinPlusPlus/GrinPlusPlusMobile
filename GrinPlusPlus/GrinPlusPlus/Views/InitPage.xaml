@@ -52,7 +52,7 @@
                 Grid.ColumnSpan="2"
                 Margin="15,0,15,0"
                 IndicatorView="CarouselStepBar"
-                ItemsSource="{Binding GrinFacts, Mode=OneTime}">
+                ItemsSource="{Binding Facts, Mode=OneTime}">
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
                         <Grid Padding="0,40,0,0">
@@ -91,7 +91,7 @@
                 Margin="0"
                 HorizontalOptions="FillAndExpand"
                 IndicatorColor="Gray"
-                ItemsSource="{Binding GrinFacts, Mode=OneTime}"
+                ItemsSource="{Binding Facts, Mode=OneTime}"
                 MaximumVisible="10"
                 SelectedIndicatorColor="White"
                 VerticalOptions="Center" />
@@ -117,23 +117,6 @@
                     FontSize="20"
                     Text="{Binding Status, Mode=OneWay}"
                     TextColor="White" />
-                <Label
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    HorizontalOptions="EndAndExpand">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span
-                                FontSize="20"
-                                Text="{Binding ProgressPercentage, Mode=OneWay}"
-                                TextColor="#FFD717" />
-                            <Span
-                                FontSize="16"
-                                Text=" %"
-                                TextColor="#FFD717" />
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
                 <ProgressBar
                     Grid.Row="1"
                     Grid.Column="0"

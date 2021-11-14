@@ -1,4 +1,5 @@
 ﻿using GrinPlusPlus.Api;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using Prism.Services;
@@ -12,6 +13,9 @@ namespace GrinPlusPlus.ViewModels
         protected IDataProvider DataProvider { get; private set; }
         protected IDialogService DialogService { get; private set; }
         protected IPageDialogService PageDialogService { get; private set; }
+
+        public DelegateCommand OpenSettingsScreenCommand => new DelegateCommand(OpenSettingsScreen);
+        public DelegateCommand OpenNodeStatusScreenCommand => new DelegateCommand(OpenNodeStatusScreen);
 
         private string _title;
         public string Title
@@ -46,6 +50,16 @@ namespace GrinPlusPlus.ViewModels
         public virtual void Destroy()
         {
 
+        }
+
+        async void OpenSettingsScreen()
+        {
+            await NavigationService.NavigateAsync("SettingsPage");
+        }
+
+        async void OpenNodeStatusScreen()
+        {
+            await NavigationService.NavigateAsync("StatusPage");
         }
     }
 }

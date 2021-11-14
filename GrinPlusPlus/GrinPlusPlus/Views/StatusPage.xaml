@@ -13,12 +13,21 @@
     <ContentPage.Content>
         <StackLayout BackgroundColor="#151515" Spacing="10">
             <Label Text="{x:Static resource:AppResources.Status}" TextColor="Gray" />
-            <Label
-                FontSize="24"
-                HorizontalOptions="Start"
-                Text="{Binding Status}"
-                TextColor="White"
-                VerticalOptions="Center" />
+            <Label TextColor="White" HorizontalOptions="Start">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{Binding Status}" FontSize="28" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label TextColor="White" HorizontalOptions="Start">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{Binding ProgressPercentage}" FontSize="22" />
+                        <Span Text="%" FontSize="18" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
             <Grid
                 Margin="0,10,0,10"
                 ColumnSpacing="10"

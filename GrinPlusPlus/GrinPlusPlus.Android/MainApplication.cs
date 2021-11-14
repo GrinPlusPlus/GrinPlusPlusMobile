@@ -18,6 +18,7 @@ namespace GrinPlusPlus.Droid
         {
             base.OnCreate();
             Xamarin.Essentials.Platform.Init(this);
+            AndroidX.AppCompat.App.AppCompatDelegate.DefaultNightMode = AndroidX.AppCompat.App.AppCompatDelegate.ModeNightYes;
         }
     }
 }

@@ -52,15 +52,15 @@
                     IsVisible="{Binding DisplayedWalletSeedWordsList[0], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
-                        FontAttributes="Italic"
+                        FontAttributes="None"
                         Text="1.-"
                         TextColor="Gray"
                         VerticalOptions="Center" />
                     <Entry
                         x:Name="Entry1"
                         BackgroundColor="Transparent"
-                        FontAttributes="Italic"
-                        FontSize="16"
+                        FontAttributes="None"
+                        FontSize="18"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
@@ -82,15 +82,15 @@
                     IsVisible="{Binding DisplayedWalletSeedWordsList[12], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
-                        FontAttributes="Italic"
+                        FontAttributes="None"
                         Text="13.-"
                         TextColor="Gray"
                         VerticalOptions="Center" />
                     <Entry
                         x:Name="Entry13"
                         BackgroundColor="Transparent"
-                        FontAttributes="Italic"
-                        FontSize="16"
+                        FontAttributes="None"
+                        FontSize="18"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
@@ -112,15 +112,15 @@
                     IsVisible="{Binding DisplayedWalletSeedWordsList[1], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
-                        FontAttributes="Italic"
+                        FontAttributes="None"
                         Text="2.-"
                         TextColor="Gray"
                         VerticalOptions="Center" />
                     <Entry
                         x:Name="Entry2"
                         BackgroundColor="Transparent"
-                        FontAttributes="Italic"
-                        FontSize="16"
+                        FontAttributes="None"
+                        FontSize="18"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
@@ -143,15 +143,15 @@
                     IsVisible="{Binding DisplayedWalletSeedWordsList[13], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
-                        FontAttributes="Italic"
+                        FontAttributes="None"
                         Text="14.-"
                         TextColor="Gray"
                         VerticalOptions="Center" />
                     <Entry
                         x:Name="Entry14"
                         BackgroundColor="Transparent"
-                        FontAttributes="Italic"
-                        FontSize="16"
+                        FontAttributes="None"
+                        FontSize="18"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
@@ -174,15 +174,15 @@
                     IsVisible="{Binding DisplayedWalletSeedWordsList[2], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
-                        FontAttributes="Italic"
+                        FontAttributes="None"
                         Text="3.-"
                         TextColor="Gray"
                         VerticalOptions="Center" />
                     <Entry
                         x:Name="Entry3"
                         BackgroundColor="Transparent"
-                        FontAttributes="Italic"
-                        FontSize="16"
+                        FontAttributes="None"
+                        FontSize="18"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
@@ -204,15 +204,15 @@
                     IsVisible="{Binding DisplayedWalletSeedWordsList[14], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
-                        FontAttributes="Italic"
+                        FontAttributes="None"
                         Text="15.-"
                         TextColor="Gray"
                         VerticalOptions="Center" />
                     <Entry
                         x:Name="Entry15"
                         BackgroundColor="Transparent"
-                        FontAttributes="Italic"
-                        FontSize="16"
+                        FontAttributes="None"
+                        FontSize="18"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
@@ -234,15 +234,15 @@
                     IsVisible="{Binding DisplayedWalletSeedWordsList[3], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
-                        FontAttributes="Italic"
+                        FontAttributes="None"
                         Text="4.-"
                         TextColor="Gray"
                         VerticalOptions="Center" />
                     <Entry
                         x:Name="Entry4"
                         BackgroundColor="Transparent"
-                        FontAttributes="Italic"
-                        FontSize="16"
+                        FontAttributes="None"
+                        FontSize="18"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
@@ -264,15 +264,15 @@
                     IsVisible="{Binding DisplayedWalletSeedWordsList[15], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
-                        FontAttributes="Italic"
+                        FontAttributes="None"
                         Text="16.-"
                         TextColor="Gray"
                         VerticalOptions="Center" />
                     <Entry
                         x:Name="Entry16"
                         BackgroundColor="Transparent"
-                        FontAttributes="Italic"
-                        FontSize="16"
+                        FontAttributes="None"
+                        FontSize="18"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
@@ -294,15 +294,15 @@
                     IsVisible="{Binding DisplayedWalletSeedWordsList[4], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
-                        FontAttributes="Italic"
+                        FontAttributes="None"
                         Text="5.-"
                         TextColor="Gray"
                         VerticalOptions="Center" />
                     <Entry
                         x:Name="Entry5"
                         BackgroundColor="Transparent"
-                        FontAttributes="Italic"
-                        FontSize="16"
+                        FontAttributes="None"
+                        FontSize="18"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
@@ -324,15 +324,15 @@
                     IsVisible="{Binding DisplayedWalletSeedWordsList[16], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
-                        FontAttributes="Italic"
+                        FontAttributes="None"
                         Text="17.-"
                         TextColor="Gray"
                         VerticalOptions="Center" />
                     <Entry
                         x:Name="Entry17"
                         BackgroundColor="Transparent"
-                        FontAttributes="Italic"
-                        FontSize="16"
+                        FontAttributes="None"
+                        FontSize="18"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
@@ -354,15 +354,15 @@
                     IsVisible="{Binding DisplayedWalletSeedWordsList[5], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
-                        FontAttributes="Italic"
+                        FontAttributes="None"
                         Text="6.-"
                         TextColor="Gray"
                         VerticalOptions="Center" />
                     <Entry
                         x:Name="Entry6"
                         BackgroundColor="Transparent"
-                        FontAttributes="Italic"
-                        FontSize="16"
+                        FontAttributes="None"
+                        FontSize="18"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
@@ -384,15 +384,15 @@
                     IsVisible="{Binding DisplayedWalletSeedWordsList[17], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
-                        FontAttributes="Italic"
+                        FontAttributes="None"
                         Text="18.-"
                         TextColor="Gray"
                         VerticalOptions="Center" />
                     <Entry
                         x:Name="Entry18"
                         BackgroundColor="Transparent"
-                        FontAttributes="Italic"
-                        FontSize="16"
+                        FontAttributes="None"
+                        FontSize="18"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
@@ -414,15 +414,15 @@
                     IsVisible="{Binding DisplayedWalletSeedWordsList[6], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
-                        FontAttributes="Italic"
+                        FontAttributes="None"
                         Text="7.-"
                         TextColor="Gray"
                         VerticalOptions="Center" />
                     <Entry
                         x:Name="Entry7"
                         BackgroundColor="Transparent"
-                        FontAttributes="Italic"
-                        FontSize="16"
+                        FontAttributes="None"
+                        FontSize="18"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
@@ -444,15 +444,15 @@
                     IsVisible="{Binding DisplayedWalletSeedWordsList[18], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
-                        FontAttributes="Italic"
+                        FontAttributes="None"
                         Text="19.-"
                         TextColor="Gray"
                         VerticalOptions="Center" />
                     <Entry
                         x:Name="Entry19"
                         BackgroundColor="Transparent"
-                        FontAttributes="Italic"
-                        FontSize="16"
+                        FontAttributes="None"
+                        FontSize="18"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
@@ -474,15 +474,15 @@
                     IsVisible="{Binding DisplayedWalletSeedWordsList[7], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
-                        FontAttributes="Italic"
+                        FontAttributes="None"
                         Text="8.-"
                         TextColor="Gray"
                         VerticalOptions="Center" />
                     <Entry
                         x:Name="Entry8"
                         BackgroundColor="Transparent"
-                        FontAttributes="Italic"
-                        FontSize="16"
+                        FontAttributes="None"
+                        FontSize="18"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
@@ -504,15 +504,15 @@
                     IsVisible="{Binding DisplayedWalletSeedWordsList[19], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
-                        FontAttributes="Italic"
+                        FontAttributes="None"
                         Text="20.-"
                         TextColor="Gray"
                         VerticalOptions="Center" />
                     <Entry
                         x:Name="Entry20"
                         BackgroundColor="Transparent"
-                        FontAttributes="Italic"
-                        FontSize="16"
+                        FontAttributes="None"
+                        FontSize="18"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
@@ -534,15 +534,15 @@
                     IsVisible="{Binding DisplayedWalletSeedWordsList[8], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
-                        FontAttributes="Italic"
+                        FontAttributes="None"
                         Text="9.-"
                         TextColor="Gray"
                         VerticalOptions="Center" />
                     <Entry
                         x:Name="Entry9"
                         BackgroundColor="Transparent"
-                        FontAttributes="Italic"
-                        FontSize="16"
+                        FontAttributes="None"
+                        FontSize="18"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
@@ -564,15 +564,15 @@
                     IsVisible="{Binding DisplayedWalletSeedWordsList[20], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
-                        FontAttributes="Italic"
+                        FontAttributes="None"
                         Text="21.-"
                         TextColor="Gray"
                         VerticalOptions="Center" />
                     <Entry
                         x:Name="Entry21"
                         BackgroundColor="Transparent"
-                        FontAttributes="Italic"
-                        FontSize="16"
+                        FontAttributes="None"
+                        FontSize="18"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
@@ -594,15 +594,15 @@
                     IsVisible="{Binding DisplayedWalletSeedWordsList[9], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
-                        FontAttributes="Italic"
+                        FontAttributes="None"
                         Text="10.-"
                         TextColor="Gray"
                         VerticalOptions="Center" />
                     <Entry
                         x:Name="Entry10"
                         BackgroundColor="Transparent"
-                        FontAttributes="Italic"
-                        FontSize="16"
+                        FontAttributes="None"
+                        FontSize="18"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
@@ -624,15 +624,15 @@
                     IsVisible="{Binding DisplayedWalletSeedWordsList[21], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
-                        FontAttributes="Italic"
+                        FontAttributes="None"
                         Text="22.-"
                         TextColor="Gray"
                         VerticalOptions="Center" />
                     <Entry
                         x:Name="Entry22"
                         BackgroundColor="Transparent"
-                        FontAttributes="Italic"
-                        FontSize="16"
+                        FontAttributes="None"
+                        FontSize="18"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
@@ -654,15 +654,15 @@
                     IsVisible="{Binding DisplayedWalletSeedWordsList[10], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
-                        FontAttributes="Italic"
+                        FontAttributes="None"
                         Text="11.-"
                         TextColor="Gray"
                         VerticalOptions="Center" />
                     <Entry
                         x:Name="Entry11"
                         BackgroundColor="Transparent"
-                        FontAttributes="Italic"
-                        FontSize="16"
+                        FontAttributes="None"
+                        FontSize="18"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
@@ -684,15 +684,15 @@
                     IsVisible="{Binding DisplayedWalletSeedWordsList[22], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
-                        FontAttributes="Italic"
+                        FontAttributes="None"
                         Text="23.-"
                         TextColor="Gray"
                         VerticalOptions="Center" />
                     <Entry
                         x:Name="Entry23"
                         BackgroundColor="Transparent"
-                        FontAttributes="Italic"
-                        FontSize="16"
+                        FontAttributes="None"
+                        FontSize="18"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
@@ -714,15 +714,15 @@
                     IsVisible="{Binding DisplayedWalletSeedWordsList[11], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
-                        FontAttributes="Italic"
+                        FontAttributes="None"
                         Text="12.-"
                         TextColor="Gray"
                         VerticalOptions="Center" />
                     <Entry
                         x:Name="Entry12"
                         BackgroundColor="Transparent"
-                        FontAttributes="Italic"
-                        FontSize="16"
+                        FontAttributes="None"
+                        FontSize="18"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
@@ -744,15 +744,15 @@
                     IsVisible="{Binding DisplayedWalletSeedWordsList[23], Converter={StaticResource NotEmptyToBooleanConverter}}"
                     Orientation="Horizontal">
                     <Label
-                        FontAttributes="Italic"
+                        FontAttributes="None"
                         Text="24.-"
                         TextColor="Gray"
                         VerticalOptions="Center" />
                     <Entry
                         x:Name="Entry24"
                         BackgroundColor="Transparent"
-                        FontAttributes="Italic"
-                        FontSize="16"
+                        FontAttributes="None"
+                        FontSize="18"
                         HeightRequest="38"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"

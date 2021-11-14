@@ -1,11 +1,16 @@
 ﻿using GrinPlusPlus.Api;
 using GrinPlusPlus.Models;
 using GrinPlusPlus.Resources;
+using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
+using System.IO.Compression;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -35,18 +40,18 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _progressPercentage, value); }
         }
 
-        private ObservableCollection<Fact> _grinFacts = new ObservableCollection<Fact>();
-        public ObservableCollection<Fact> GrinFacts
+        private ObservableCollection<Fact> _facts = new ObservableCollection<Fact>();
+        public ObservableCollection<Fact> Facts
         {
-            get { return _grinFacts; }
-            set { SetProperty(ref _grinFacts, value); }
+            get { return _facts; }
+            set { SetProperty(ref _facts, value); }
         }
+
+        private bool StopTimer = false;
 
         public InitPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService,
             IPageDialogService pageDialogService) : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
-            SecureStorage.RemoveAll();
-
             Settings.IsLoggedIn = false;
             Settings.Node.Status = "Initializing Node...";
             Settings.Node.ProgressPercentage = 0;
@@ -55,56 +60,109 @@ namespace GrinPlusPlus.ViewModels
             ProgressBarr = Settings.Node.ProgressPercentage;
             ProgressPercentage = string.Format($"{ Settings.Node.ProgressPercentage * 100:F}");
 
-            Device.StartTimer(TimeSpan.FromSeconds(10), () =>
-            {
-                Status = Settings.Node.Status;
-                ProgressBarr = Settings.Node.ProgressPercentage;
-                ProgressPercentage = string.Format($"{ Settings.Node.ProgressPercentage * 100:F}");
-
-                return !Settings.Node.Status.Equals("Running");
-            });
-
-            Device.StartTimer(TimeSpan.FromSeconds(3), () =>
-            {
-                if (Settings.Node.Status.Equals("Running"))
-                {
-                    MainThread.BeginInvokeOnMainThread(async () =>
-                    {
-                        await NavigationService.NavigateAsync("/NavigationPage/LoginPage");
-                    });
-
-                    return false;
-                }
-
-                return true;
-            });
-
-            Task.Factory.StartNew(() =>
-            {
-                GrinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Mimblewimble"), Details = AppResources.ResourceManager.GetString("FactsMimblewimble") });
-                GrinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Addresses"), Details = AppResources.ResourceManager.GetString("FactAddresses") });
-                GrinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Amounts"), Details = AppResources.ResourceManager.GetString("FactsAmounts") });
-                GrinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Emission"), Details = AppResources.ResourceManager.GetString("FactEmission") });
-                GrinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Slatepack"), Details = AppResources.ResourceManager.GetString("FactSlatepack") });
-                GrinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Transactions"), Details = AppResources.ResourceManager.GetString("FactTransactions") });
-                GrinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Private"), Details = AppResources.ResourceManager.GetString("FactPrivate") });
-                GrinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Scalable"), Details = AppResources.ResourceManager.GetString("FactsScalable") });
-                GrinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Open"), Details = AppResources.ResourceManager.GetString("FactsOpen") });
-                GrinFacts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Dandelion"), Details = AppResources.ResourceManager.GetString("FactsDandelion") });
-            });
+            Facts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Mimblewimble"), Details = AppResources.ResourceManager.GetString("FactsMimblewimble") });
+            Facts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Addresses"), Details = AppResources.ResourceManager.GetString("FactAddresses") });
+            Facts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Amounts"), Details = AppResources.ResourceManager.GetString("FactsAmounts") });
+            Facts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Emission"), Details = AppResources.ResourceManager.GetString("FactEmission") });
+            Facts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Slatepack"), Details = AppResources.ResourceManager.GetString("FactSlatepack") });
+            Facts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Transactions"), Details = AppResources.ResourceManager.GetString("FactTransactions") });
+            Facts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Private"), Details = AppResources.ResourceManager.GetString("FactPrivate") });
+            Facts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Scalable"), Details = AppResources.ResourceManager.GetString("FactsScalable") });
+            Facts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Open"), Details = AppResources.ResourceManager.GetString("FactsOpen") });
+            Facts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Dandelion"), Details = AppResources.ResourceManager.GetString("FactsDandelion") });
 
             Device.StartTimer(TimeSpan.FromSeconds(60), () =>
             {
-                MainThread.BeginInvokeOnMainThread(async () =>
+                if (Settings.Node.Status.Equals("Not Running"))
                 {
-                    if (Settings.Node.Status.Equals("Not Running"))
+                    MainThread.BeginInvokeOnMainThread(async () =>
                     {
                         await NavigationService.NavigateAsync("/NavigationPage/ErrorPage");
-                    }
-                });
+                    });
+                }
 
-                return false;
+                return !StopTimer;
             });
+        }
+
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            {
+                if(!StopTimer)
+                {
+                    Status = Settings.Node.Status;
+                    ProgressBarr = Settings.Node.ProgressPercentage;
+                    ProgressPercentage = string.Format($"{ Settings.Node.ProgressPercentage * 100:F}");
+                }
+
+                return !StopTimer;
+            });
+
+            Device.StartTimer(TimeSpan.FromSeconds(4), () =>
+            {
+                if (!StopTimer && !Settings.Node.Status.Equals("Not Connected") && !Settings.Node.Status.Equals("Waiting for Peers"))
+                {
+                    StopTimer = true;
+                    Task.Factory.StartNew(async() =>
+                    {
+                        try
+                        {
+                            List<Account> accounts = await DataProvider.GetAccounts().ConfigureAwait(false);
+                            if (accounts.Count == 0)
+                            {
+                                MainThread.BeginInvokeOnMainThread(async () =>
+                                {
+                                    await NavigationService.NavigateAsync("/NavigationPage/LoginPage");
+                                });
+                            }
+                            else if (accounts.Count == 1)
+                            {
+                                MainThread.BeginInvokeOnMainThread(async () =>
+                                {
+                                    await NavigationService.NavigateAsync("/NavigationPage/WalletLoginPage", new NavigationParameters { { "username", accounts[0].Name } });
+                                });
+                            }
+                            else
+                            {
+                                IActionSheetButton[] buttons = new ActionSheetButton[accounts.Count];
+                                for (int i = 0; i < accounts.Count; i++)
+                                {
+                                    string account = accounts[i].Name;
+                                    buttons[i] = ActionSheetButton.CreateButton(account, () =>
+                                    {
+                                        MainThread.BeginInvokeOnMainThread(async () =>
+                                        {
+                                            await NavigationService.NavigateAsync("/NavigationPage/WalletLoginPage", new NavigationParameters { { "username", account } });
+                                        });
+
+                                    });
+                                }
+                                MainThread.BeginInvokeOnMainThread(async () =>
+                                {
+                                    await PageDialogService.DisplayActionSheetAsync(string.Empty, buttons);
+                                });
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.WriteLine(ex.Message);
+
+                            MainThread.BeginInvokeOnMainThread(async () =>
+                            {
+                                await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
+                            });
+                        }
+                    });
+                }
+
+                return !StopTimer;
+            });
+        }
+
+        public override void OnNavigatedFrom(INavigationParameters parameters)
+        {
+            StopTimer = true;
         }
     }
 }

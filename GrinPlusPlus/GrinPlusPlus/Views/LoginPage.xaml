@@ -5,8 +5,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
-    x:Name="Login"
     prism:ViewModelLocator.AutowireViewModel="True"
+    NavigationPage.HasBackButton="False"
     BackgroundColor="#151515">
     <NavigationPage.TitleView>
         <Image
@@ -16,150 +16,106 @@
             HorizontalOptions="Start"
             Source="banner.png" />
     </NavigationPage.TitleView>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Order="Secondary" Priority="0" Text="{x:Static resource:AppResources.Settings}"
+                     Command="{Binding OpenSettingsScreenCommand}" />
+        <ToolbarItem Order="Secondary" Priority="0" Text="{x:Static resource:AppResources.Status}"
+                     Command="{Binding OpenNodeStatusScreenCommand}" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <Grid Margin="20,10,20,20">
+        <Grid
+            Margin="40"
+            Padding="0"
+            BackgroundColor="#151515"
+            ColumnSpacing="0"
+            RowSpacing="40">
             <Grid.RowDefinitions>
-                <RowDefinition Height="30" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="120" />
+                <RowDefinition Height="55" />
+                <RowDefinition Height="55" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label
-                Grid.Row="0"
-                Grid.Column="0"
-                FontSize="18"
-                Text="{x:Static resource:AppResources.YourWallets}"
-                TextColor="White" />
-            <CollectionView
+            <Frame
                 Grid.Row="1"
-                Grid.Column="0"
-                ItemsSource="{Binding Accounts, Mode=OneWay}"
-                VerticalOptions="FillAndExpand">
-                <CollectionView.EmptyView>
-                    <ContentView>
-                        <Label Text="{x:Static resource:AppResources.NoWalletFound}" TextColor="WhiteSmoke" />
-                    </ContentView>
-                </CollectionView.EmptyView>
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout
-                        Orientation="Vertical"
-                        Span="1"
-                        VerticalItemSpacing="20" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame
-                            Margin="0"
-                            Padding="0"
-                            BackgroundColor="#050505"
-                            BorderColor="#323232"
-                            CornerRadius="5"
-                            HeightRequest="48">
-                            <Grid Padding="20,0,20,0" VerticalOptions="Center">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="9*" />
-                                    <ColumnDefinition Width="1*" />
-                                </Grid.ColumnDefinitions>
-                                <Label
-                                    Grid.Row="0"
-                                    Grid.Column="0"
-                                    FontSize="18"
-                                    Text="{Binding Name}"
-                                    TextColor="White" />
-                                <Image
-                                    Grid.Row="0"
-                                    Grid.Column="1"
-                                    Margin="0"
-                                    Aspect="AspectFit"
-                                    HeightRequest="20"
-                                    HorizontalOptions="End"
-                                    Source="baseline_arrow_forward_ios_white_24.png" />
-                            </Grid>
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding Source={x:Reference Login}, Path=BindingContext.AccountNameClickedCommand}" CommandParameter="{Binding Name}" />
-                            </Frame.GestureRecognizers>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-            <StackLayout
+                Margin="0"
+                Padding="0"
+                BackgroundColor="#FFD717"
+                BorderColor="#050505"
+                CornerRadius="10"
+                HeightRequest="55">
+                <Grid Padding="20,0,20,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="8*" />
+                    </Grid.ColumnDefinitions>
+                    <Image
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="0"
+                        Aspect="AspectFit"
+                        HeightRequest="20"
+                        HorizontalOptions="End"
+                        VerticalOptions="Center"
+                        Source="baseline_add_circle_outline_black_24.png" />
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        FontSize="18"
+                        HorizontalOptions="Start"
+                        VerticalOptions="Center"
+                        Text="{x:Static resource:AppResources.CreateWallet}"
+                        TextColor="Black" />
+                </Grid>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{prism:NavigateTo 'CreateWalletPage', 
+                                                    UseModalNavigation=False, Animated=True}" />
+                </Frame.GestureRecognizers>
+            </Frame>
+            <Frame
                 Grid.Row="2"
-                Grid.Column="0"
-                Spacing="10">
-                <Frame
-                    Margin="0"
-                    Padding="0"
-                    BackgroundColor="#050505"
-                    BorderColor="#FFD717"
-                    CornerRadius="5"
-                    HeightRequest="48">
-                    <Grid Padding="20,0,20,0" VerticalOptions="Center">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="9*" />
-                            <ColumnDefinition Width="1*" />
-                        </Grid.ColumnDefinitions>
-                        <Label
-                            Grid.Row="0"
-                            Grid.Column="0"
-                            FontSize="18"
-                            Text="{x:Static resource:AppResources.CreateWallet}"
-                            TextColor="White" />
-                        <Image
-                            Grid.Row="0"
-                            Grid.Column="1"
-                            Margin="0"
-                            Aspect="AspectFit"
-                            HeightRequest="20"
-                            HorizontalOptions="End"
-                            Source="baseline_add_circle_outline_white_24.png" />
-                    </Grid>
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Command="{prism:NavigateTo 'CreateWalletPage', UseModalNavigation=False, Animated=True}" />
-                    </Frame.GestureRecognizers>
-                </Frame>
-                <Frame
-                    Margin="0"
-                    Padding="0"
-                    BackgroundColor="#050505"
-                    BorderColor="#323232"
-                    CornerRadius="5"
-                    HeightRequest="48">
-                    <Grid Padding="20,0,20,0" VerticalOptions="Center">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="9*" />
-                            <ColumnDefinition Width="1*" />
-                        </Grid.ColumnDefinitions>
-                        <Label
-                            Grid.Row="0"
-                            Grid.Column="0"
-                            FontSize="18"
-                            Text="{x:Static resource:AppResources.RestoreExistingWallet}"
-                            TextColor="White" />
-                        <Image
-                            Grid.Row="0"
-                            Grid.Column="1"
-                            Margin="0"
-                            Aspect="AspectFit"
-                            HeightRequest="20"
-                            HorizontalOptions="End"
-                            Source="baseline_vpn_key_white_24.png" />
-                    </Grid>
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Command="{prism:NavigateTo 'RestoreWalletPage', UseModalNavigation=False, Animated=True}" />
-                    </Frame.GestureRecognizers>
-                </Frame>
-            </StackLayout>
+                Margin="0"
+                Padding="0"
+                BackgroundColor="#050505"
+                BorderColor="#323232"
+                CornerRadius="10"
+                HeightRequest="55">
+                <Grid Padding="20,0,20,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*" />
+                        <ColumnDefinition Width="8*" />
+                    </Grid.ColumnDefinitions>
+                    <Image
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Margin="0"
+                        Aspect="AspectFit"
+                        HeightRequest="20"
+                        VerticalOptions="Center"
+                        HorizontalOptions="End"
+                        Source="baseline_vpn_key_white_24.png" />
+                    <Label
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        FontSize="18"
+                        VerticalOptions="Center"
+                        Text="{x:Static resource:AppResources.RestoreExistingWallet}"
+                        TextColor="White" />
+                </Grid>
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{prism:NavigateTo 'RestoreWalletPage', UseModalNavigation=False, Animated=True}" />
+                </Frame.GestureRecognizers>
+            </Frame>
+            <Label Grid.Row="3" HorizontalOptions="Center" Text="Grin++ v0.3.0 (node v1.2.6)"
+                   TextColor="#333333" VerticalOptions="End" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -10,13 +10,6 @@
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="#151515"
     IconImageSource="baseline_settings_applications_white_24.png">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem
-            Command="{Binding LogoutCommand}"
-            Order="Primary"
-            Priority="0"
-            Text="{x:Static resource:AppResources.Close}" />
-    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid
             Margin="0,10,0,0"
@@ -143,74 +136,6 @@
                 Grid.ColumnSpan="2"
                 BackgroundColor="#252525"
                 HeightRequest="1" />
-            <Label
-                Grid.Row="6"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                Padding="20,0,0,0"
-                FontSize="16"
-                Text="GrinChck API URL"
-                TextColor="WhiteSmoke"
-                VerticalOptions="Center" />
-            <Entry
-                Grid.Row="7"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                Margin="20,0,20,0"
-                BackgroundColor="#252525"
-                FontSize="Body"
-                HorizontalTextAlignment="Center"
-                IsSpellCheckEnabled="False"
-                IsTextPredictionEnabled="False"
-                Keyboard="Url"
-                Text="{Binding GrinChckAPIUrl}"
-                TextColor="White"
-                VerticalOptions="Start">
-                <Entry.Effects>
-                    <xct:RemoveBorderEffect />
-                </Entry.Effects>
-            </Entry>
-            <BoxView
-                Grid.Row="8"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                BackgroundColor="#252525"
-                HeightRequest="1" />
-            <Button
-                Grid.Row="9"
-                Grid.Column="0"
-                Margin="20,10,20,0"
-                BackgroundColor="#0C0C0C"
-                Command="{Binding ExportLogsButtonClickedCommand}"
-                CornerRadius="5"
-                FontSize="16"
-                Text="{x:Static resource:AppResources.ExportLogs}"
-                TextColor="White"
-                TextTransform="None"
-                WidthRequest="50" />
-            <Button
-                Grid.Row="9"
-                Grid.Column="1"
-                Margin="20,10,20,0"
-                BackgroundColor="#0C0C0C"
-                Command="{Binding OpenBackupWalletPageCommand}"
-                CornerRadius="5"
-                FontSize="16"
-                Text="{x:Static resource:AppResources.BackupWallet}"
-                TextColor="Orange"
-                TextTransform="None"
-                WidthRequest="50" />
-            <StackLayout
-                Grid.Row="10"
-                Grid.Column="0"
-                Grid.ColumnSpan="2"
-                Padding="20,0,20,40"
-                VerticalOptions="End">
-                <Label
-                    HorizontalOptions="Center"
-                    Text="Grin++ v0.3.0 (node v1.2.6)"
-                    TextColor="#333333" />
-            </StackLayout>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -22,6 +22,8 @@ namespace GrinPlusPlus
 
         protected override async void OnInitialized()
         {
+            App.Current.UserAppTheme = OSAppTheme.Dark;
+
             Thread.CurrentThread.CurrentUICulture = CultureInfo.InstalledUICulture;
 
             InitializeComponent();

@@ -3,12 +3,11 @@ using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Util;
+using GrinPlusPlus.Droid.Classes;
 using System;
 using System.IO;
-using System.Threading.Tasks;
-using Xamarin.Essentials;
-using AndroidApp = Android.App.Application;
 
+using AndroidApp = Android.App.Application;
 
 namespace GrinPlusPlus.Droid
 {
@@ -17,25 +16,17 @@ namespace GrinPlusPlus.Droid
     {
         static readonly string TAG = typeof(GrinNodeService).FullName;
 
-        private System.Timers.Timer timer;
+        System.Timers.Timer timer;
 
         const string channelId = "default";
         const string channelName = "Default";
         const string channelDescription = "The default channel for notifications.";
 
+        static string nativeLibraryDir;
+
         NotificationManager manager;
         bool channelInitialized = false;
-
-        private Java.IO.File libtor;
-        private Java.IO.File libgrin;
-
-        private Java.Lang.Process pNode;
-        private Java.Lang.Process pTor;
-
-        public string dataFolder { get; private set; }
-
-        public string dbLockFile { get; private set; }
-
+        
         public override IBinder OnBind(Intent intent)
         {
             return null;
@@ -45,38 +36,32 @@ namespace GrinPlusPlus.Droid
         {
             base.OnCreate();
 
-            var librariesPath = PackageManager.GetApplicationInfo(ApplicationInfo.PackageName, PackageInfoFlags.SharedLibraryFiles).NativeLibraryDir;
+            Xamarin.Essentials.Preferences.Set("IsLoggedIn", false);
+            Xamarin.Essentials.Preferences.Set("Status", Service.SyncHelpers.GetStatusLabel(string.Empty));
+            Xamarin.Essentials.Preferences.Set("ProgressPercentage", (double)0);
+            Xamarin.Essentials.Preferences.Set("DataFolder", new Java.IO.File(Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), ".GrinPP/MAINNET/NODE")).AbsolutePath);
+            Xamarin.Essentials.Preferences.Set("LogsFolder", new Java.IO.File(Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), ".GrinPP/MAINNET/LOGS")).AbsolutePath);
+            Xamarin.Essentials.Preferences.Set("BackendFolder", new Java.IO.File(Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), ".GrinPP/MAINNET/")).AbsolutePath);
 
-            libtor = new Java.IO.File(Path.Combine(librariesPath, "libtor.so"));
-            libgrin = new Java.IO.File(Path.Combine(librariesPath, "libgrin.so"));
+            nativeLibraryDir = PackageManager.GetApplicationInfo(ApplicationInfo.PackageName, PackageInfoFlags.SharedLibraryFiles).NativeLibraryDir;
 
-            Preferences.Set("Status", Service.SyncHelpers.GetStatusLabel(string.Empty));
-            Preferences.Set("ProgressPercentage", (double)0);
-
-            SetTimer();
-
-            dataFolder = new Java.IO.File(Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), ".GrinPP/MAINNET/NODE")).AbsolutePath;
-
-            Preferences.Set("DataFolder", dataFolder);
-
-            Preferences.Set("LogsFolder", new Java.IO.File(Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), ".GrinPP/MAINNET/LOGS")).AbsolutePath);
-
-            string backendFolder = new Java.IO.File(Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), ".GrinPP/MAINNET/")).AbsolutePath;
-
-            Preferences.Set("BackendFolder", backendFolder);
-
-            dbLockFile = Path.Combine(backendFolder, "DB", "CHAIN", "LOCK");
+            SetNodeTimer();
         }
 
         public override StartCommandResult OnStartCommand(Intent intent, StartCommandFlags flags, int startId)
         {
             if (intent.Action == null)
             {
+                NodeControl.StartTor(nativeLibraryDir);
+                NodeControl.StartNode(nativeLibraryDir);
+
                 RegisterForegroundService(Service.SyncHelpers.GetStatusLabel(string.Empty));
-                RunBackend();
             }
             else
             {
+                NodeControl.StopNode();
+                NodeControl.StopTor();
+
                 if (intent.Action.Equals(Constants.ACTION_STOP_SERVICE))
                 {
                     Log.Info(TAG, "Stop Service called.");
@@ -85,12 +70,10 @@ namespace GrinPlusPlus.Droid
                     {
                         Xamarin.Essentials.Platform.CurrentActivity.Finish();
                     }
-                    catch (System.Exception e)
+                    catch (Exception e)
                     {
                         Log.Verbose(TAG, e.Message);
                     }
-
-                    StopBackend();
 
                     if (timer != null)
                     {
@@ -104,19 +87,18 @@ namespace GrinPlusPlus.Droid
                 else if (intent.Action.Equals(Constants.ACTION_RESTART_NODE))
                 {
                     Log.Info(TAG, "Restart Grin Node called.");
-                    StopBackend();
-                    RunTor();
-                    Task.Run(async () =>
-                    {
-                        Log.Info(TAG, "Waiting 5 seconds to start the Grin Node again...");
-                        await Task.Delay(5000);
-                        RunGrinNode();
-                    });
+
+                    NodeControl.StartTor(nativeLibraryDir);
+                    NodeControl.StartNode(nativeLibraryDir);
                 }
                 else if (intent.Action.Equals(Constants.ACTION_RESYNC_NODE))
                 {
                     Log.Info(TAG, "Resync Grin Node called.");
-                    ResyncNode();
+                    
+                    NodeControl.DeleteNodeDataFolder(Xamarin.Essentials.Preferences.Get("DataFolder", ""));
+
+                    NodeControl.StartTor(nativeLibraryDir);
+                    NodeControl.StartNode(nativeLibraryDir);
                 }
             }
 
@@ -124,40 +106,79 @@ namespace GrinPlusPlus.Droid
             return StartCommandResult.Sticky;
         }
 
-        private void SetTimer()
+        private void SetNodeTimer()
         {
-            timer = new System.Timers.Timer(3000);
-            timer.Elapsed += OnTimedEvent;
+            timer = new System.Timers.Timer(1475);
+            timer.Elapsed += OnNodeTimedEvent;
             timer.Start();
         }
 
-        private async void OnTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
+        private async void OnNodeTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
         {
-            var label = string.Empty;
-            try
+            var label = Service.SyncHelpers.GetStatusLabel(string.Empty);
+
+            if (!NodeControl.IsTorRunning())
             {
-                var nodeStatus = await Service.Node.Instance.Status().ConfigureAwait(false);
-
-                Preferences.Set("ProgressPercentage", Service.SyncHelpers.GetProgressPercentage(nodeStatus));
-
-                label = Service.SyncHelpers.GetStatusLabel(nodeStatus.SyncStatus);
-
-                Preferences.Set("HeaderHeight", nodeStatus.HeaderHeight);
-                Preferences.Set("Blocks", nodeStatus.Chain.Height);
-                Preferences.Set("NetworkHeight", nodeStatus.Network.Height);
+                Log.Error(TAG, $"Tor is not running, starting Tor...");
+                NodeControl.StartTor(nativeLibraryDir);
             }
-            catch (System.Net.WebException ex)
+
+            if (!NodeControl.IsNodeRunning())
             {
-                Log.Error(TAG, $"Node is not running: {ex.Message}");
+                Log.Error(TAG, $"Node is not running. Starting Node...");
+                NodeControl.StartNode(nativeLibraryDir);
                 label = Service.SyncHelpers.GetStatusLabel(string.Empty);
             }
-            catch (Exception ex)
+            else
             {
-                Log.Error(TAG, $"Error Communication: {ex.Message}");
+                try
+                {
+                    var nodeStatus = await Service.Node.Instance.Status().ConfigureAwait(false);
+
+                    Xamarin.Essentials.Preferences.Set("ProgressPercentage", Service.SyncHelpers.GetProgressPercentage(nodeStatus));
+
+                    label = Service.SyncHelpers.GetStatusLabel(nodeStatus.SyncStatus);
+
+                    Xamarin.Essentials.Preferences.Set("HeaderHeight", nodeStatus.HeaderHeight);
+                    Xamarin.Essentials.Preferences.Set("Blocks", nodeStatus.Chain.Height);
+                    Xamarin.Essentials.Preferences.Set("NetworkHeight", nodeStatus.Network.Height);
+                }
+                catch (System.Net.WebException ex)
+                {
+                    Log.Error(TAG, $"Node is not running: {ex.Message}");
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(TAG, $"Communication Error: {ex.Message}");
+                }
             }
 
-            RegisterForegroundService(label);
-            Preferences.Set("Status", label);
+            Xamarin.Essentials.Preferences.Set("Status", label);
+
+            if (!label.Equals("Not Connected") && !label.Equals("Waiting for Peers"))
+            {
+                var percentage = $"{string.Format($"{ Double.Parse(Xamarin.Essentials.Preferences.Get("ProgressPercentage", "0").ToString()) * 100:F}")} %";
+                RegisterForegroundService($"{label} {percentage}");
+            }
+            else
+            {
+                RegisterForegroundService(label);
+            }
+        }
+
+        public override void OnDestroy()
+        {
+            base.OnDestroy();
+
+            Xamarin.Essentials.Preferences.Set("Status", Service.SyncHelpers.GetStatusLabel(string.Empty));
+
+            NodeControl.StopNode();
+            NodeControl.StopTor();
+
+            if (timer != null)
+            {
+                timer.Stop();
+            }
         }
 
         private void RegisterForegroundService(string status)
@@ -167,7 +188,7 @@ namespace GrinPlusPlus.Droid
                 CreateNotificationChannel();
             }
 
-            // Work has finished, now dispatch anotification to let the user know.
+            // Work has finished, now dispatch a notification to let the user know.
             var notification = new Notification.Builder(AndroidApp.Context, channelId)
                 .SetContentTitle("Grin Node")
                 .SetContentText(status)
@@ -201,142 +222,6 @@ namespace GrinPlusPlus.Droid
             channelInitialized = true;
         }
 
-        void RunBackend()
-        {
-            StopBackend();
-            
-            RunTor();
-            RunGrinNode();
-        }
-
-        private void RunGrinNode()
-        {
-            Log.Info(TAG, "Starting Grin Node...");
-
-            if (File.Exists(dbLockFile))
-            {
-                File.Delete(dbLockFile);
-            }
-
-            pNode = Java.Lang.Runtime.GetRuntime().Exec(libgrin.AbsolutePath);
-            try
-            {
-                var e = pNode.ExitValue();
-                Log.Error(TAG, "ERROR: Grin Node Can't be Started.");
-                RunGrinNode();
-            }
-            catch (Exception)
-            {
-                Log.Info(TAG, "Grin Node Started.");
-            }
-        }
-
-        private void RunTor()
-        {
-            try
-            {
-                pTor = Java.Lang.Runtime.GetRuntime().Exec(new string[] {
-                    libtor.AbsolutePath,
-                    "--ControlPort",
-                    "3423",
-                    "--SocksPort",
-                    "3422",
-                    "--HashedControlPassword",
-                    "16:906248AB51F939ED605CE9937D3B1FDE65DEB4098A889B2A07AC221D8F",
-                    "--ignore-missing-torrc",
-                    "--quiet"
-                });
-            }
-            catch (Exception ex)
-            {
-                RegisterForegroundService(ex.Message);
-                Log.Info(TAG, ex.Message);
-            }
-        }
-
-        public override void OnDestroy()
-        {
-            base.OnDestroy();
-
-            Preferences.Set("Status", Service.SyncHelpers.GetStatusLabel(string.Empty));
-
-            StopBackend();
-
-            if (timer != null)
-            {
-                timer.Stop();
-            }
-        }
-
-        private void StopBackend()
-        {
-            StopTor();
-            StopGrinNode();
-            Preferences.Set("Status", Service.SyncHelpers.GetStatusLabel(string.Empty));
-        }
-
-        private void StopGrinNode()
-        {
-            Log.Info(TAG, "Stopping Grin Node...");
-            try
-            {
-                Service.AsyncHelpers.RunSync(Service.Node.Instance.Shutdown);
-            }
-            catch (Exception ex)
-            {
-                Log.Error(TAG, $"Error Stopping Grin Node: {ex.Message}");
-            }
-            finally
-            {
-                if (pNode != null)
-                {
-                    if (pNode.IsAlive)
-                    {
-                        pNode.DestroyForcibly();
-                    }
-                }
-                Log.Info(TAG, "Grin Node Stopped.");
-            }
-        }
-
-        private void StopTor()
-        {
-            Log.Info(TAG, "Stopping Tor...");
-
-            if (pTor != null)
-            {
-                if (pTor.IsAlive)
-                {
-                    pTor.DestroyForcibly();
-                }
-            }
-            
-            Java.Lang.Runtime.GetRuntime().Exec(new string[] {
-                    "killall",
-                    "-9",
-                    "libtor.so"
-                });
-
-            Log.Info(TAG, "Tor Stopped.");
-        }
-
-        private void ResyncNode()
-        {
-            StopBackend();
-            try
-            {
-                Directory.Delete(dataFolder, true);
-            }
-            catch (System.Exception ex)
-            {
-                Log.Error(TAG, ex.Message);
-            }
-            finally
-            {
-                RunBackend();
-            }
-        }
-
         /// <summary>
         /// Builds a PendingIntent that will display the main activity of the app. This is used when the 
         /// user taps on the notification; it will take them to the main activity of the app.
@@ -359,7 +244,7 @@ namespace GrinPlusPlus.Droid
 		Notification.Action BuildRestartNodeAction()
         {
             var action = "Run";
-            var status = Preferences.Get("Status", string.Empty);
+            var status = Xamarin.Essentials.Preferences.Get("Status", string.Empty);
             if (!status.Equals("Not Running"))
             {
                 action = "Restart";
@@ -381,7 +266,7 @@ namespace GrinPlusPlus.Droid
 		/// <returns>The resync node action.</returns>
 		Notification.Action BuildResyncNodeAction()
         {
-            var status = Preferences.Get("Status", string.Empty);
+            var status = Xamarin.Essentials.Preferences.Get("Status", string.Empty);
             if (status.Equals("Not Running"))
             {
                 return null;
@@ -405,8 +290,6 @@ namespace GrinPlusPlus.Droid
 		/// <returns>The stop service action.</returns>
 		Notification.Action BuildStopServiceAction()
         {
-            var status = Preferences.Get("Status", string.Empty);
-            
             var stopServiceIntent = new Intent(this, GetType());
             stopServiceIntent.SetAction(Constants.ACTION_STOP_SERVICE);
             var stopServicePendingIntent = PendingIntent.GetService(this, 0, stopServiceIntent, 0);
