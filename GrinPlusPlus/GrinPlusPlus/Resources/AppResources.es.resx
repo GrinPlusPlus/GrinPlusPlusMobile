@@ -555,6 +555,9 @@
   <data name="UsingNFC" xml:space="preserve">
     <value>Usando NFC</value>
   </data>
+  <data name="WaitFullySynced" xml:space="preserve">
+    <value>Espera a que el nodo esté completamente sincronizado antes de restaurar tu cartera, por favor.</value>
+  </data>
   <data name="WaitingSync" xml:space="preserve">
     <value>Esperando que el Nodo termine de sincronizar...</value>
   </data>

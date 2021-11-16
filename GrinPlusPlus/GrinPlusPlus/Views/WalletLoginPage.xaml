@@ -52,7 +52,7 @@
                 Spacing="0">
                 <Button
                     Command="{Binding OpenWalletCommand}"
-                    FontSize="18"
+                    FontSize="16"
                     BackgroundColor="Transparent"
                     BorderColor="#050505"
                     CornerRadius="5"

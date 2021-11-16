@@ -555,6 +555,9 @@
   <data name="UsingNFC" xml:space="preserve">
     <value>Verwenden von NFC</value>
   </data>
+  <data name="WaitFullySynced" xml:space="preserve">
+    <value>Warten Sie bitte, bis der Node vollständig synchronisiert ist, bevor Sie Ihre Wallet wiederherstellen.</value>
+  </data>
   <data name="WaitingSync" xml:space="preserve">
     <value>Warten, dass der Knoten die Synchronisierung beendet...</value>
   </data>

@@ -54,7 +54,9 @@ namespace GrinPlusPlus.ViewModels
                 Preferences.Set("balance_unconfirmed", balance.Unconfirmed);
                 Preferences.Set("balance_total", balance.Total);
 
-                if (await CrossFingerprint.Current.IsAvailableAsync(true))
+                FingerprintAvailability availability = await CrossFingerprint.Current.GetAvailabilityAsync();
+
+                if (availability.Equals(FingerprintAvailability.Available) && await CrossFingerprint.Current.IsAvailableAsync())
                 {
                     var _cancel = new CancellationTokenSource();
 
@@ -62,27 +64,32 @@ namespace GrinPlusPlus.ViewModels
 
                     var dialogConfig = new AuthenticationRequestConfiguration("Fingerprint", message)
                     {
-                        CancelTitle = null,
+                        CancelTitle = AppResources.ResourceManager.GetString("Cancel"),
                         FallbackTitle = null,
                         AllowAlternativeAuthentication = true
                     };
 
-                    await MainThread.InvokeOnMainThreadAsync(async () =>
+                    MainThread.BeginInvokeOnMainThread(async () =>
                     {
                         var result = await CrossFingerprint.Current.AuthenticateAsync(dialogConfig, _cancel.Token);
 
                         if (!result.Authenticated)
                         {
-                            ExceptionMessage = "Authentication Failed";
-                            Debug.WriteLine("Authentication Failed");
-                            Thread.Sleep(2000);
+                            await PageDialogService.DisplayAlertAsync("Error", "Authentication Failed", "OK");
                             await Logout();
-
                             await NavigationService.GoBackToRootAsync();
-                        } else
+                        }
+                        else
                         {
                             await NavigationService.NavigateAsync("/NavigationPage/WalletPage");
                         }
+                    });
+                }
+                else
+                {
+                    await MainThread.InvokeOnMainThreadAsync(async () =>
+                    {
+                        await NavigationService.NavigateAsync("/NavigationPage/WalletPage");
                     });
                 }
             }

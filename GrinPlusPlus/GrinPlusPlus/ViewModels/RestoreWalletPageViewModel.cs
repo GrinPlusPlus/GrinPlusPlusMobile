@@ -1,4 +1,5 @@
 ﻿using GrinPlusPlus.Api;
+using GrinPlusPlus.Resources;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
@@ -93,12 +94,20 @@ namespace GrinPlusPlus.ViewModels
         public RestoreWalletPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
+
         }
 
         public DelegateCommand RestoreWalletCommand => new DelegateCommand(RestoreWallet);
 
         private async void RestoreWallet()
         {
+            if(!Settings.Node.Status.Equals("Running"))
+            {
+                string message = AppResources.ResourceManager.GetString("WaitFullySynced");
+                await PageDialogService.DisplayAlertAsync("Error", message, "OK");
+                return;
+            }
+
             try
             {
                 IsBusy = true;

@@ -555,6 +555,9 @@
   <data name="UsingNFC" xml:space="preserve">
     <value>Використовувати NFC</value>
   </data>
+  <data name="WaitFullySynced" xml:space="preserve">
+    <value>Зачекайте, доки вузол повністю синхронізується, перш ніж відновити гаманець.</value>
+  </data>
   <data name="WaitingSync" xml:space="preserve">
     <value>Чекаємо запуску ноди і починаємо...</value>
   </data>

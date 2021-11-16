@@ -19,14 +19,14 @@ namespace GrinPlusPlus.ViewModels
 {
     public class InitPageViewModel : ViewModelBase
     {
-        private string status = Settings.Node.Status;
+        private string status = "Initializing Node...";
         public string Status
         {
             get { return status; }
             set { SetProperty(ref status, value); }
         }
 
-        private double _progressBar = Settings.Node.ProgressPercentage;
+        private double _progressBar = 0;
         public double ProgressBarr
         {
             get { return _progressBar; }
@@ -52,10 +52,6 @@ namespace GrinPlusPlus.ViewModels
         public InitPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService,
             IPageDialogService pageDialogService) : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
-            Settings.IsLoggedIn = false;
-            Settings.Node.Status = "Initializing Node...";
-            Settings.Node.ProgressPercentage = 0;
-
             Status = Settings.Node.Status;
             ProgressBarr = Settings.Node.ProgressPercentage;
             ProgressPercentage = string.Format($"{ Settings.Node.ProgressPercentage * 100:F}");

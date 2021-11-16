@@ -555,6 +555,9 @@
   <data name="UsingNFC" xml:space="preserve">
     <value>Using NFC</value>
   </data>
+  <data name="WaitFullySynced" xml:space="preserve">
+    <value>Wait until the node is fully synced before restoring your wallet, please.</value>
+  </data>
   <data name="WaitingSync" xml:space="preserve">
     <value>Waiting for the Node to be up and Running...</value>
   </data>

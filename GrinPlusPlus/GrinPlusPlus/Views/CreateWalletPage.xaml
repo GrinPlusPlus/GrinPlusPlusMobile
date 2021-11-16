@@ -86,7 +86,7 @@
                     BackgroundColor="Transparent"
                     Command="{Binding CreateWalletCommand}"
                     CornerRadius="5"
-                    FontSize="18"
+                    FontSize="16"
                     TextColor="#FFD717"
                     HeightRequest="48"
                     IsEnabled="{Binding IsPasswordConfirmationValid}"

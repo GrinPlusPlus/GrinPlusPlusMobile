@@ -1,5 +1,4 @@
 ﻿using GrinPlusPlus.Api;
-using GrinPlusPlus.Resources;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
@@ -40,6 +39,7 @@ namespace GrinPlusPlus.ViewModels
         public WalletLoginPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
+
         }
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
@@ -61,7 +61,7 @@ namespace GrinPlusPlus.ViewModels
             try
             {
                 var wallet = await DataProvider.DoLogin(Username, Password).ConfigureAwait(false);
-                
+
                 await SecureStorage.SetAsync("token", wallet.Token);
                 await SecureStorage.SetAsync("username", Username);
                 await SecureStorage.SetAsync("slatepack_address", wallet.SlatepackAdddress);
@@ -78,6 +78,7 @@ namespace GrinPlusPlus.ViewModels
             {
                 IsBusy = false;
                 Debug.WriteLine(ex.Message);
+
                 MainThread.BeginInvokeOnMainThread(async () =>
                 {
                     await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");

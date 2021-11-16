@@ -129,6 +129,9 @@
   <data name="Addresses" xml:space="preserve">
     <value>Адреса</value>
   </data>
+  <data name="AddressNote" xml:space="preserve">
+    <value>Адрес получателя также используется для шифрования информации о транзакции, его использование не является обязательным, но настоятельно рекомендуется.</value>
+  </data>
   <data name="AlignQRCode" xml:space="preserve">
     <value>Выровнять QR код по рамке</value>
   </data>
@@ -180,6 +183,9 @@
   <data name="Confirmations" xml:space="preserve">
     <value>Подтверждения</value>
   </data>
+  <data name="ConfirmedHeight" xml:space="preserve">
+    <value>Высота подтверждения</value>
+  </data>
   <data name="ConfirmIdentity" xml:space="preserve">
     <value>Подтвердите свою личность для продолжения</value>
   </data>
@@ -194,6 +200,9 @@
   </data>
   <data name="Continue" xml:space="preserve">
     <value>Продолжить</value>
+  </data>
+  <data name="Copy" xml:space="preserve">
+    <value>Копировать</value>
   </data>
   <data name="CopySlatepackMessage" xml:space="preserve">
     <value>Скопировать Slatepack сообщение</value>
@@ -224,6 +233,9 @@
   </data>
   <data name="DeleteWallet" xml:space="preserve">
     <value>Удалить кошелек</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Подробности</value>
   </data>
   <data name="Emission" xml:space="preserve">
     <value>Эмиссия</value>
@@ -278,6 +290,9 @@
   </data>
   <data name="Fee" xml:space="preserve">
     <value>Комиссия </value>
+  </data>
+  <data name="FillEmptyBoxes" xml:space="preserve">
+    <value>Пожалуйста, заполните пустые графы, прежде чем продолжить </value>
   </data>
   <data name="Finalize" xml:space="preserve">
     <value>Завершение</value>
@@ -540,6 +555,9 @@
   <data name="UsingNFC" xml:space="preserve">
     <value>Использовать NFC</value>
   </data>
+  <data name="WaitFullySynced" xml:space="preserve">
+    <value>Подождите, пока узел будет полностью синхронизирован, прежде чем восстанавливать кошелек, пожалуйста.</value>
+  </data>
   <data name="WaitingSync" xml:space="preserve">
     <value>Ждем запуска ноды и стартуем...</value>
   </data>
@@ -554,6 +572,9 @@
   </data>
   <data name="WalletSeed" xml:space="preserve">
     <value>Seed кошелька</value>
+  </data>
+  <data name="WalletSeedInit" xml:space="preserve">
+    <value>Su frase inicial es la única copia de seguridad de sus claves privadas, que puede darle acceso a sus activos criptográficos. Copie cada palabra en un lugar seguro</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Да</value>

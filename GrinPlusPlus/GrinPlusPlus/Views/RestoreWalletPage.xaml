@@ -24,7 +24,7 @@
                 TextTransform="Uppercase" />
             <Entry
                 BackgroundColor="#252525"
-                FontSize="18"
+                FontSize="20"
                 HeightRequest="44"
                 IsSpellCheckEnabled="False"
                 IsTextPredictionEnabled="False"
@@ -44,7 +44,7 @@
                 TextTransform="Uppercase" />
             <Entry
                 BackgroundColor="#252525"
-                FontSize="18"
+                FontSize="20"
                 HeightRequest="44"
                 IsPassword="True"
                 IsSpellCheckEnabled="False"
@@ -61,7 +61,7 @@
             </Entry>
             <Entry
                 BackgroundColor="#252525"
-                FontSize="18"
+                FontSize="20"
                 HeightRequest="44"
                 IsPassword="True"
                 IsSpellCheckEnabled="False"
@@ -97,19 +97,19 @@
             <StackLayout
                 Margin="0,10,0,0"
                 Padding="0"
-                BackgroundColor="#0C0C0C"
-                HeightRequest="44"
+                BackgroundColor="#151515"
+                HeightRequest="48"
                 Spacing="0">
                 <Button
-                    BackgroundColor="#0C0C0C"
+                    BackgroundColor="Transparent"
                     Command="{Binding RestoreWalletCommand}"
                     CornerRadius="5"
                     FontSize="16"
-                    HeightRequest="44"
+                    TextColor="#FFD717"
+                    HeightRequest="48"
                     IsEnabled="{Binding WalletSeed, Converter={xct:IsNotNullOrEmptyConverter}}"
                     IsVisible="{Binding IsBusy, Converter={xct:InvertedBoolConverter}}"
                     Text="{x:Static resource:AppResources.Restore}"
-                    TextColor="White"
                     TextTransform="None" />
                 <ActivityIndicator
                     HeightRequest="40"

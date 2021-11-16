@@ -1,13 +1,9 @@
 ﻿using GrinPlusPlus.Api;
 using GrinPlusPlus.Models;
-using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
-using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using Xamarin.Essentials;
 
 namespace GrinPlusPlus.ViewModels
 {
