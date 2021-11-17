@@ -553,7 +553,7 @@
                     VerticalOptions="Center" />
                 <Button
                     Grid.Row="0"
-                    Grid.Column="2"
+                    Grid.Column="3"
                     BackgroundColor="#151515"
                     Command="{Binding SendButtonClickedCommand}"
                     FontSize="16"
@@ -568,7 +568,7 @@
                     VerticalOptions="Center" />
                 <Button
                     Grid.Row="0"
-                    Grid.Column="3"
+                    Grid.Column="4"
                     BackgroundColor="#151515"
                     Command="{prism:NavigateTo 'ReceiveTransactionPage',
                                                UseModalNavigation=False,
