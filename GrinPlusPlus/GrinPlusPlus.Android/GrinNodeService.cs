@@ -119,8 +119,18 @@ namespace GrinPlusPlus.Droid
 
             if (!NodeControl.IsTorRunning())
             {
+                Xamarin.Essentials.Preferences.Set("IsLoggedIn", false);
                 Log.Error(TAG, $"Tor is not running, starting Tor...");
                 NodeControl.StartTor(nativeLibraryDir);
+            }
+
+            bool isTorRunning = NodeControl.IsTorRunning();
+            if (isTorRunning)
+            {
+                Xamarin.Essentials.Preferences.Set("IsTorRunning", true);
+            } else
+            {
+                Xamarin.Essentials.Preferences.Set("IsTorRunning", false);
             }
 
             if (!NodeControl.IsNodeRunning())
@@ -128,6 +138,7 @@ namespace GrinPlusPlus.Droid
                 Log.Error(TAG, $"Node is not running. Starting Node...");
                 NodeControl.StartNode(nativeLibraryDir);
                 label = Service.SyncHelpers.GetStatusLabel(string.Empty);
+                Xamarin.Essentials.Preferences.Set("IsLoggedIn", false);
             }
             else
             {

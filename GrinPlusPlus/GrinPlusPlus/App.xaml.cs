@@ -28,7 +28,7 @@ namespace GrinPlusPlus
 
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("/NavigationPage/InitPage");
+            await NavigationService.NavigateAsync("/NavigationPage/LoginPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

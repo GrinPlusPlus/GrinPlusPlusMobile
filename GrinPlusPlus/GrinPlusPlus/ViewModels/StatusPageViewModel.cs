@@ -15,6 +15,13 @@ namespace GrinPlusPlus.ViewModels
 {
     public class StatusPageViewModel : ViewModelBase
     {
+        private bool isTorRunning = Settings.IsTorRunning;
+        public bool IsTorRunning
+        {
+            get { return isTorRunning; }
+            set { SetProperty(ref isTorRunning, value); }
+        }
+
         private string status = Settings.Node.Status;
         public string Status
         {
@@ -97,6 +104,8 @@ namespace GrinPlusPlus.ViewModels
 
         private void UpdateStatus()
         {
+            IsTorRunning = Settings.IsTorRunning;
+
             ProgressPercentage = string.Format($"{ Settings.Node.ProgressPercentage * 100:F}");
 
             if (!Status.Equals(Settings.Node.Status))

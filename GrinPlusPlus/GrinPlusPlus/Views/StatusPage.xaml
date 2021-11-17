@@ -24,7 +24,7 @@
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="{Binding ProgressPercentage}" FontSize="22" />
-                        <Span Text="%" FontSize="18" />
+                        <Span Text="%" FontSize="16" />
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
@@ -76,6 +76,10 @@
                     Text="{Binding NetworkHeight}"
                     TextColor="White" />
             </Grid>
+            <Label Text="Tor" TextColor="Gray" />
+            <Label FontSize="16"
+                   Text="{Binding IsTorRunning}"
+                   TextColor="White" />
             <Label Text="{x:Static resource:AppResources.ConnectedPeers}" TextColor="Gray" />
             <CollectionView ItemsSource="{Binding ConnectedPeers}">
                 <CollectionView.ItemTemplate>

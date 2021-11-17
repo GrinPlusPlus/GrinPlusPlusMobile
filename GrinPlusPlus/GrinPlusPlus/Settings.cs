@@ -115,5 +115,11 @@ namespace GrinPlusPlus
             get => Preferences.Get(nameof(DataFolder), string.Empty);
             set => Preferences.Set(nameof(DataFolder), value);
         }
+
+        public static bool IsTorRunning
+        {
+            get => Preferences.Get(nameof(IsTorRunning), false);
+            set => Preferences.Set(nameof(IsTorRunning), value);
+        }
     }
 }
