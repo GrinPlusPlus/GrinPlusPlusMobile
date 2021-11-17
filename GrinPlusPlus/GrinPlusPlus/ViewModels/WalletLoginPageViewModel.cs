@@ -93,7 +93,10 @@ namespace GrinPlusPlus.ViewModels
             try
             {
                 await DataProvider.DeleteWallet(Username, Password).ConfigureAwait(false);
-                await NavigationService.GoBackToRootAsync();
+                MainThread.BeginInvokeOnMainThread(async () =>
+                {
+                    await NavigationService.NavigateAsync("/NavigationPage/InitPage");
+                });
             }
             catch (Exception ex)
             {

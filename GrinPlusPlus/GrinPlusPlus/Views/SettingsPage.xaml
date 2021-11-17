@@ -136,6 +136,29 @@
                 Grid.ColumnSpan="2"
                 BackgroundColor="#252525"
                 HeightRequest="1" />
+            <Button
+                Grid.Row="6"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                TextTransform="None"
+                Margin="10,0,10,0"
+                Command="{Binding ExportLogsButtonClickedCommand}"
+                FontSize="Body"
+                Text="{x:Static resource:AppResources.ExportLogs}"
+                VerticalOptions="Center" />
+            <Button
+                Grid.Row="7"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                TextTransform="None"
+                Margin="10,0,10,0"
+                IsVisible="{Binding IsLoggedIn}"
+                Command="{Binding OpenBackupWalletPageCommand}"
+                FontSize="Body"
+                Text="{x:Static resource:AppResources.BackupWallet}"
+                VerticalOptions="Center" />
+            <Label Grid.Row="10" Grid.ColumnSpan="2" HorizontalOptions="Center" Text="Grin++ v0.3.0 (node v1.2.6)"
+                   TextColor="#333333" VerticalOptions="End" Margin="20" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

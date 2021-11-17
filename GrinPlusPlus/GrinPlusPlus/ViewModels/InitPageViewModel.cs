@@ -105,6 +105,7 @@ namespace GrinPlusPlus.ViewModels
                         try
                         {
                             List<Account> accounts = await DataProvider.GetAccounts().ConfigureAwait(false);
+
                             if (accounts.Count == 0)
                             {
                                 MainThread.BeginInvokeOnMainThread(async () =>

@@ -99,6 +99,7 @@ namespace GrinPlusPlus.ViewModels
             new TransactionStatus() { Label = AppResources.ResourceManager.GetString("Cancelled")},
             new TransactionStatus() { Label = AppResources.ResourceManager.GetString("Coinbase")},
         };
+
         public ObservableCollection<TransactionStatus> TransactionStatusOptions
         {
             get
@@ -528,6 +529,33 @@ namespace GrinPlusPlus.ViewModels
 
                     await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
                 }
+            }
+        }
+
+        public DelegateCommand LogoutButtonClickedCommand => new DelegateCommand(Logout);
+
+        async void Logout()
+        {
+            try
+            {
+                string wallet = await SecureStorage.GetAsync("username");
+
+                var token = await SecureStorage.GetAsync("token");
+                await DataProvider.DoLogout(token);
+
+                Preferences.Clear();
+                SecureStorage.RemoveAll();
+
+                Settings.IsLoggedIn = false;
+
+                MainThread.BeginInvokeOnMainThread(async () =>
+                {
+                    await NavigationService.NavigateAsync("/NavigationPage/WalletLoginPage", new NavigationParameters { { "username", wallet } });
+                });
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
             }
         }
 

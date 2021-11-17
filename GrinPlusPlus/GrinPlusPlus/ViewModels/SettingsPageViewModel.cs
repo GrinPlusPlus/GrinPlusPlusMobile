@@ -14,6 +14,13 @@ namespace GrinPlusPlus.ViewModels
 {
     public class SettingsPageViewModel : ViewModelBase
     {
+        private bool _isLogged = Settings.IsLoggedIn;
+        public bool IsLoggedIn
+        {
+            get => _isLogged;
+            set => SetProperty(ref _isLogged, value);
+        }
+
         private int _confirmations = Settings.Confirmations;
         public int Confirmations
         {
@@ -42,47 +49,16 @@ namespace GrinPlusPlus.ViewModels
             set => SetProperty(ref _grinchckurl, value);
         }
 
-        public DelegateCommand ExportLogsButtonClickedCommand => new DelegateCommand(ExportLogsButtonClicked);
-
-        public DelegateCommand OpenBackupWalletPageCommand => new DelegateCommand(OpenBackupWalletPage);
-
-        public DelegateCommand UpdateNodeSettingsCommand => new DelegateCommand(UpdateNodeSetting);
-
-        public DelegateCommand LogoutCommand => new DelegateCommand(Logout);
-
         public SettingsPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
 
         }
 
-        private async void OpenBackupWalletPage()
-        {
-            await NavigationService.NavigateAsync("BackupWalletPage", new NavigationParameters { { "username", await SecureStorage.GetAsync("username") } });
-        }
-
-        async void Logout()
-        {
-            try
-            {
-                var token = await SecureStorage.GetAsync("token");
-                await DataProvider.DoLogout(token);
-
-                Preferences.Clear();
-                SecureStorage.RemoveAll();
-
-                Settings.IsLoggedIn = false;
-
-                await NavigationService.NavigateAsync("/NavigationPage/LoginPage");
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-        }
-
+        public DelegateCommand UpdateNodeSettingsCommand => new DelegateCommand(UpdateNodeSetting);
         async void UpdateNodeSetting()
         {
+            IsLoggedIn = Settings.IsLoggedIn;
             try
             {
                 await DataProvider.UpdateNodeSettings(MinimumPeers, MaximumPeers, Confirmations).ConfigureAwait(false);
@@ -93,6 +69,13 @@ namespace GrinPlusPlus.ViewModels
             }
         }
 
+        public DelegateCommand OpenBackupWalletPageCommand => new DelegateCommand(OpenBackupWalletPage);
+        private async void OpenBackupWalletPage()
+        {
+            await NavigationService.NavigateAsync("BackupWalletPage", new NavigationParameters { { "username", await SecureStorage.GetAsync("username") } });
+        }
+
+        public DelegateCommand ExportLogsButtonClickedCommand => new DelegateCommand(ExportLogsButtonClicked);
         async void ExportLogsButtonClicked()
         {
             string zipPath = Path.Combine(Settings.BackendFolder, "logs.zip");
@@ -103,17 +86,34 @@ namespace GrinPlusPlus.ViewModels
                     File.Delete(zipPath);
                 }
 
-                ZipFile.CreateFromDirectory(Settings.LogsFolder, zipPath);
-
-                await Share.RequestAsync(new ShareFileRequest
+                if(IsLoggedIn)
                 {
-                    Title = "Logs",
-                    File = new ShareFile(zipPath)
-                });
+                    ZipFile.CreateFromDirectory(Settings.LogsFolder, zipPath);
+                    await Share.RequestAsync(new ShareFileRequest
+                    {
+                        Title = "Logs",
+                        File = new ShareFile(zipPath)
+                    });
+                }
+                else
+                {
+                    using (FileStream fs = new FileStream(zipPath, FileMode.Create))
+                    using (ZipArchive arch = new ZipArchive(fs, ZipArchiveMode.Create))
+                    {
+                        var entryFileName = Path.Combine(Settings.LogsFolder, "Node.log");
+                        arch.CreateEntryFromFile(entryFileName, "Node.log");
+                    }
+                }                
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
+            } finally
+            {
+                if (File.Exists(zipPath))
+                {
+                    File.Delete(zipPath);
+                }
             }
         }
     }

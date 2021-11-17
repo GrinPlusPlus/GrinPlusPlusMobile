@@ -22,13 +22,13 @@ namespace GrinPlusPlus
 
         protected override async void OnInitialized()
         {
-            App.Current.UserAppTheme = OSAppTheme.Dark;
+            App.Current.UserAppTheme = OSAppTheme.Light;
 
             Thread.CurrentThread.CurrentUICulture = CultureInfo.InstalledUICulture;
 
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("/NavigationPage/LoginPage");
+            await NavigationService.NavigateAsync("/NavigationPage/InitPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

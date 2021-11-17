@@ -519,12 +519,21 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="48" />
                     <ColumnDefinition Width="48" />
+                    <ColumnDefinition Width="48" />
                     <ColumnDefinition Width="5*" />
                     <ColumnDefinition Width="5*" />
                 </Grid.ColumnDefinitions>
                 <Button
                     Grid.Row="0"
                     Grid.Column="0"
+                    BackgroundColor="#151515"
+                    Command="{Binding LogoutButtonClickedCommand}"
+                    HeightRequest="48"
+                    ImageSource="baseline_logout_white_24.png"
+                    VerticalOptions="Center" />
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="1"
                     BackgroundColor="#151515"
                     Command="{prism:NavigateTo 'SettingsPage',
                                                UseModalNavigation=False,
@@ -534,13 +543,13 @@
                     VerticalOptions="Center" />
                 <Button
                     Grid.Row="0"
-                    Grid.Column="1"
+                    Grid.Column="2"
                     BackgroundColor="#151515"
                     Command="{prism:NavigateTo 'StatusPage',
                                                UseModalNavigation=False,
                                                Animated=True}"
                     HeightRequest="50"
-                    ImageSource="baseline_network_check_white_24.png"
+                    ImageSource="baseline_cloud_sync_white_24.png"
                     VerticalOptions="Center" />
                 <Button
                     Grid.Row="0"
