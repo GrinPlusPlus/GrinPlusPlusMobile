@@ -4,6 +4,7 @@ using GrinPlusPlus.Views;
 using Prism;
 using Prism.Common;
 using Prism.Ioc;
+using System.Diagnostics;
 using System.Globalization;
 using System.Threading;
 using Xamarin.Essentials.Implementation;
@@ -67,7 +68,14 @@ namespace GrinPlusPlus
         protected override void OnSleep()
         {
             base.OnSleep();
-            Settings.CurrentPage = PageUtilities.GetCurrentPage(Application.Current.MainPage).ToString().Split('.')[2];
+            try
+            {
+                Settings.CurrentPage = PageUtilities.GetCurrentPage(Application.Current.MainPage).ToString().Split('.')[2];
+            } 
+            catch (System.Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
         }
 
         protected override void OnResume()

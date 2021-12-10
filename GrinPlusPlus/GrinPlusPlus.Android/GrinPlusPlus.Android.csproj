@@ -12,7 +12,7 @@
     <RootNamespace>GrinPlusPlus.Droid</RootNamespace>
     <AssemblyName>GrinPlusPlus.Android</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkVersion>v11.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v12.0</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidUseIntermediateDesignerFile>true</AndroidUseIntermediateDesignerFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
@@ -115,7 +115,7 @@
       <Version>1.2.1.3</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.CommunityToolkit">
-      <Version>1.2.0</Version>
+      <Version>1.3.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2244" />
     <PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.7.0" />
@@ -807,7 +807,7 @@
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties TriggeredFromHotReload="False" XamarinHotReloadDebuggerTimeoutExceptionGrinPlusPlusAndroidHideInfoBar="True" />
+      <UserProperties XamarinHotReloadDebuggerTimeoutExceptionGrinPlusPlusAndroidHideInfoBar="True" TriggeredFromHotReload="False" />
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>

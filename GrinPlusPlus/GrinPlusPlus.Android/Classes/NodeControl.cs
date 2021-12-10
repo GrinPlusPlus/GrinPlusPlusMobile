@@ -83,7 +83,7 @@ namespace GrinPlusPlus.Droid.Classes
                     "--ignore-missing-torrc",
                     "--quiet"
                 });
-                var e = pNode.ExitValue();
+                var e = pTor.ExitValue();
                 Log.Error(TAG, "Tor can't be Started.");
             }
             catch (Exception)

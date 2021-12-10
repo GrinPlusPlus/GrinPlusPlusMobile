@@ -85,9 +85,9 @@ namespace GrinPlusPlus
                 set => Preferences.Set(nameof(NetworkHeight), value);
             }
 
-            public static double ProgressPercentage
+            public static float ProgressPercentage
             {
-                get => Preferences.Get(nameof(ProgressPercentage), (double)0);
+                get => Preferences.Get(nameof(ProgressPercentage), (float)0);
                 set => Preferences.Set(nameof(ProgressPercentage), value);
             }
         }
@@ -120,6 +120,12 @@ namespace GrinPlusPlus
         {
             get => Preferences.Get(nameof(IsTorRunning), false);
             set => Preferences.Set(nameof(IsTorRunning), value);
+        }
+
+        public static bool IsNodeRunning
+        {
+            get => Preferences.Get(nameof(IsNodeRunning), false);
+            set => Preferences.Set(nameof(IsNodeRunning), value);
         }
     }
 }

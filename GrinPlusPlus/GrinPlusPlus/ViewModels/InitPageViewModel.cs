@@ -1,7 +1,6 @@
 ﻿using GrinPlusPlus.Api;
 using GrinPlusPlus.Models;
 using GrinPlusPlus.Resources;
-using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
@@ -9,8 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.IO;
-using System.IO.Compression;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -33,7 +30,7 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _progressBar, value); }
         }
 
-        private string _progressPercentage = string.Format($"{ Settings.Node.ProgressPercentage * 100:F}");
+        private string _progressPercentage = string.Empty;
         public string ProgressPercentage
         {
             get { return _progressPercentage; }
@@ -49,8 +46,8 @@ namespace GrinPlusPlus.ViewModels
 
         private bool StopTimer = false;
 
-        public InitPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService,
-            IPageDialogService pageDialogService) : base(navigationService, dataProvider, dialogService, pageDialogService)
+        public InitPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService) 
+            : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
             Status = Settings.Node.Status;
             ProgressBarr = Settings.Node.ProgressPercentage;
@@ -85,75 +82,85 @@ namespace GrinPlusPlus.ViewModels
         {
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
-                if(!StopTimer)
-                {
-                    Status = Settings.Node.Status;
-                    ProgressBarr = Settings.Node.ProgressPercentage;
-                    ProgressPercentage = string.Format($"{ Settings.Node.ProgressPercentage * 100:F}");
-                }
+                Status = Settings.Node.Status;
+                ProgressBarr = Settings.Node.ProgressPercentage;
+                ProgressPercentage = string.Format($"{ Settings.Node.ProgressPercentage * 100:F}");
 
                 return !StopTimer;
             });
 
             Device.StartTimer(TimeSpan.FromSeconds(4), () =>
             {
-                if (!StopTimer && !Settings.Node.Status.Equals("Not Connected") && !Settings.Node.Status.Equals("Waiting for Peers"))
+                if (StopTimer)
                 {
-                    StopTimer = true;
-                    Task.Factory.StartNew(async() =>
-                    {
-                        try
-                        {
-                            List<Account> accounts = await DataProvider.GetAccounts().ConfigureAwait(false);
-
-                            if (accounts.Count == 0)
-                            {
-                                MainThread.BeginInvokeOnMainThread(async () =>
-                                {
-                                    await NavigationService.NavigateAsync("/NavigationPage/LoginPage");
-                                });
-                            }
-                            else if (accounts.Count == 1)
-                            {
-                                MainThread.BeginInvokeOnMainThread(async () =>
-                                {
-                                    await NavigationService.NavigateAsync("/NavigationPage/WalletLoginPage", new NavigationParameters { { "username", accounts[0].Name } });
-                                });
-                            }
-                            else
-                            {
-                                IActionSheetButton[] buttons = new ActionSheetButton[accounts.Count];
-                                for (int i = 0; i < accounts.Count; i++)
-                                {
-                                    string account = accounts[i].Name;
-                                    buttons[i] = ActionSheetButton.CreateButton(account, () =>
-                                    {
-                                        MainThread.BeginInvokeOnMainThread(async () =>
-                                        {
-                                            await NavigationService.NavigateAsync("/NavigationPage/WalletLoginPage", new NavigationParameters { { "username", account } });
-                                        });
-
-                                    });
-                                }
-                                MainThread.BeginInvokeOnMainThread(async () =>
-                                {
-                                    await PageDialogService.DisplayActionSheetAsync(string.Empty, buttons);
-                                });
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            Debug.WriteLine(ex.Message);
-
-                            MainThread.BeginInvokeOnMainThread(async () =>
-                            {
-                                await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
-                            });
-                        }
-                    });
+                    return false;
                 }
 
+                if (Settings.Node.Status.Equals("Not Connected") || Settings.Node.Status.Equals("Waiting for Peers"))
+                {
+                    return true;
+                }
+
+                GetWalletAccounts();
+
                 return !StopTimer;
+            });
+        }
+
+        private void GetWalletAccounts()
+        {
+            Task.Factory.StartNew(async () =>
+            {
+                try
+                {
+                    List<Account> accounts = await DataProvider.GetAccounts().ConfigureAwait(false);
+
+                    StopTimer = true;
+
+                    if (accounts.Count == 0)
+                    {
+                        MainThread.BeginInvokeOnMainThread(async () =>
+                        {
+                            await NavigationService.NavigateAsync("/NavigationPage/LoginPage");
+                        });
+                    }
+                    else if (accounts.Count == 1)
+                    {
+                        MainThread.BeginInvokeOnMainThread(async () =>
+                        {
+                            await NavigationService.NavigateAsync("/NavigationPage/WalletLoginPage", new NavigationParameters { { "username", accounts[0].Name } });
+                        });
+                    }
+                    else
+                    {
+                        IActionSheetButton[] buttons = new ActionSheetButton[accounts.Count];
+                        for (int i = 0; i < accounts.Count; i++)
+                        {
+                            string account = accounts[i].Name;
+                            buttons[i] = ActionSheetButton.CreateButton(account, () =>
+                            {
+                                MainThread.BeginInvokeOnMainThread(async () =>
+                                {
+                                    await NavigationService.NavigateAsync("/NavigationPage/WalletLoginPage", new NavigationParameters { { "username", account } });
+                                });
+
+                            });
+                        }
+                        MainThread.BeginInvokeOnMainThread(async () =>
+                        {
+                            await PageDialogService.DisplayActionSheetAsync(string.Empty, buttons);
+                        });
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+
+                    MainThread.BeginInvokeOnMainThread(async () =>
+                    {
+                        await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
+                    });
+                }
             });
         }
 

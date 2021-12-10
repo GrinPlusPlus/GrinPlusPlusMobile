@@ -38,14 +38,12 @@ namespace GrinPlusPlus.Droid
 
             Xamarin.Essentials.Preferences.Set("IsLoggedIn", false);
             Xamarin.Essentials.Preferences.Set("Status", Service.SyncHelpers.GetStatusLabel(string.Empty));
-            Xamarin.Essentials.Preferences.Set("ProgressPercentage", (double)0);
+            Xamarin.Essentials.Preferences.Set("ProgressPercentage", (float)0);
             Xamarin.Essentials.Preferences.Set("DataFolder", new Java.IO.File(Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), ".GrinPP/MAINNET/NODE")).AbsolutePath);
             Xamarin.Essentials.Preferences.Set("LogsFolder", new Java.IO.File(Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), ".GrinPP/MAINNET/LOGS")).AbsolutePath);
             Xamarin.Essentials.Preferences.Set("BackendFolder", new Java.IO.File(Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), ".GrinPP/MAINNET/")).AbsolutePath);
 
             nativeLibraryDir = PackageManager.GetApplicationInfo(ApplicationInfo.PackageName, PackageInfoFlags.SharedLibraryFiles).NativeLibraryDir;
-
-            SetNodeTimer();
         }
 
         public override StartCommandResult OnStartCommand(Intent intent, StartCommandFlags flags, int startId)
@@ -56,6 +54,8 @@ namespace GrinPlusPlus.Droid
                 NodeControl.StartNode(nativeLibraryDir);
 
                 RegisterForegroundService(Service.SyncHelpers.GetStatusLabel(string.Empty));
+
+                SetNodeTimer();
             }
             else
             {
@@ -108,7 +108,7 @@ namespace GrinPlusPlus.Droid
 
         private void SetNodeTimer()
         {
-            timer = new System.Timers.Timer(1475);
+            timer = new System.Timers.Timer(2500);
             timer.Elapsed += OnNodeTimedEvent;
             timer.Start();
         }
@@ -116,16 +116,8 @@ namespace GrinPlusPlus.Droid
         private async void OnNodeTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
         {
             var label = Service.SyncHelpers.GetStatusLabel(string.Empty);
-
-            if (!NodeControl.IsTorRunning())
-            {
-                Xamarin.Essentials.Preferences.Set("IsLoggedIn", false);
-                Log.Error(TAG, $"Tor is not running, starting Tor...");
-                NodeControl.StartTor(nativeLibraryDir);
-            }
-
-            bool isTorRunning = NodeControl.IsTorRunning();
-            if (isTorRunning)
+            
+            if (NodeControl.IsTorRunning())
             {
                 Xamarin.Essentials.Preferences.Set("IsTorRunning", true);
             } else
@@ -133,48 +125,40 @@ namespace GrinPlusPlus.Droid
                 Xamarin.Essentials.Preferences.Set("IsTorRunning", false);
             }
 
-            if (!NodeControl.IsNodeRunning())
-            {
-                Log.Error(TAG, $"Node is not running. Starting Node...");
-                NodeControl.StartNode(nativeLibraryDir);
-                label = Service.SyncHelpers.GetStatusLabel(string.Empty);
-                Xamarin.Essentials.Preferences.Set("IsLoggedIn", false);
-            }
-            else
-            {
-                try
-                {
-                    var nodeStatus = await Service.Node.Instance.Status().ConfigureAwait(false);
-
-                    Xamarin.Essentials.Preferences.Set("ProgressPercentage", Service.SyncHelpers.GetProgressPercentage(nodeStatus));
-
-                    label = Service.SyncHelpers.GetStatusLabel(nodeStatus.SyncStatus);
-
-                    Xamarin.Essentials.Preferences.Set("HeaderHeight", nodeStatus.HeaderHeight);
-                    Xamarin.Essentials.Preferences.Set("Blocks", nodeStatus.Chain.Height);
-                    Xamarin.Essentials.Preferences.Set("NetworkHeight", nodeStatus.Network.Height);
-                }
-                catch (System.Net.WebException ex)
-                {
-                    Log.Error(TAG, $"Node is not running: {ex.Message}");
-                }
-                catch (Exception ex)
-                {
-                    Log.Error(TAG, $"Communication Error: {ex.Message}");
-                }
-            }
-
             Xamarin.Essentials.Preferences.Set("Status", label);
 
-            if (!label.Equals("Not Connected") && !label.Equals("Waiting for Peers"))
+            try
             {
-                var percentage = $"{string.Format($"{ Double.Parse(Xamarin.Essentials.Preferences.Get("ProgressPercentage", "0").ToString()) * 100:F}")} %";
-                RegisterForegroundService($"{label} {percentage}");
+                var nodeStatus = await Service.Node.Instance.Status().ConfigureAwait(false);
+                var percentage = Service.SyncHelpers.GetProgressPercentage(nodeStatus);
+
+                Xamarin.Essentials.Preferences.Set("ProgressPercentage", percentage);
+                Xamarin.Essentials.Preferences.Set("HeaderHeight", nodeStatus.HeaderHeight);
+                Xamarin.Essentials.Preferences.Set("Blocks", nodeStatus.Chain.Height);
+                Xamarin.Essentials.Preferences.Set("NetworkHeight", nodeStatus.Network.Height);
+
+                label = Service.SyncHelpers.GetStatusLabel(nodeStatus.SyncStatus);
+                
+                Xamarin.Essentials.Preferences.Set("Status", label);
+                
+                if (!label.Equals("Not Connected") && !label.Equals("Waiting for Peers"))
+                {
+                    label = $"{label} ({string.Format($"{ percentage * 100:F}")}%)";
+                }
+
+                Xamarin.Essentials.Preferences.Set("IsNodeRunning", true);
             }
-            else
+            catch (System.Net.WebException ex)
             {
-                RegisterForegroundService(label);
+                Log.Error(TAG, $"Node is not running: {ex.Message}");
+                Xamarin.Essentials.Preferences.Set("IsNodeRunning", false);
             }
+            catch (Exception ex)
+            {
+                Log.Error(TAG, ex.Message);
+            }
+
+            RegisterForegroundService(label);
         }
 
         public override void OnDestroy()

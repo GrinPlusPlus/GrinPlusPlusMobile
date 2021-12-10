@@ -4,7 +4,7 @@ namespace GrinPlusPlus.Service
 {
     public static class SyncHelpers
     {
-        public static double GetFraction(ulong numerator, ulong denominator)
+        public static float GetFraction(ulong numerator, ulong denominator)
         {
             if (numerator == 0 || denominator == 0) return 0;
             if (denominator <= 0)
@@ -35,7 +35,7 @@ namespace GrinPlusPlus.Service
             }
         }
 
-        public static double GetProgressPercentage(Models.Node.Status status)
+        public static float GetProgressPercentage(Models.Node.Status status)
         {
             switch (status.SyncStatus)
             {
