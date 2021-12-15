@@ -230,11 +230,9 @@ namespace GrinPlusPlus.Api
             var proxy = new HttpToSocks5Proxy("127.0.0.1", 3422);
             var handler = new HttpClientHandler { Proxy = proxy };
 
-            var url = api ?? "http://grinchck.ahcbagldgzdpa74g2mh74fvk5zjzpfjbvgqin6g3mfuu66tynv2gkiid.onion/check/";
+            var url = api ?? "https://grinchck.uber.space/check/";
 
-            var destination = $"http://{address}.onion";
-
-            var parameters = new Dictionary<string, string> { { "wallet", destination } };
+            var parameters = new Dictionary<string, string> { { "wallet", address } };
             var encodedContent = new FormUrlEncodedContent(parameters);
 
             var httpclient = new HttpClient(handler, true)
@@ -250,6 +248,7 @@ namespace GrinPlusPlus.Api
             {
                 content = (await response.Content.ReadAsStringAsync()).Trim().ToLower();
             }
+
             return content.Equals("reachable");
         }
 

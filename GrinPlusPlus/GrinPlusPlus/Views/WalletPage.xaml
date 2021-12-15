@@ -50,18 +50,26 @@
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem
+            Command="{prism:NavigateTo 'StatusPage',
+                        UseModalNavigation=False,
+                        Animated=True}"
+            IconImageSource="baseline_cloud_sync_white_24.png"
+            Order="Primary"
+            Priority="0"
+            Text="" />
+        <ToolbarItem
             Command="{prism:NavigateTo 'ProfilePage',
                                        UseModalNavigation=False,
                                        Animated=True}"
             IconImageSource="baseline_qr_code_white_24.png"
             Order="Primary"
-            Priority="0"
+            Priority="1"
             Text="" />
         <ToolbarItem
             Command="{Binding ShareAddressCommand}"
             IconImageSource="baseline_share_white_24.png"
             Order="Primary"
-            Priority="1"
+            Priority="2"
             Text="" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
@@ -507,7 +515,6 @@
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
                 </CollectionView.ItemsLayout>
-                <CollectionView.EmptyView />
             </CollectionView>
             <Grid
                 Grid.Row="5"
@@ -517,7 +524,6 @@
                     <RowDefinition Height="48" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="48" />
                     <ColumnDefinition Width="48" />
                     <ColumnDefinition Width="48" />
                     <ColumnDefinition Width="5*" />
@@ -545,16 +551,6 @@
                     Grid.Row="0"
                     Grid.Column="2"
                     BackgroundColor="#151515"
-                    Command="{prism:NavigateTo 'StatusPage',
-                                               UseModalNavigation=False,
-                                               Animated=True}"
-                    HeightRequest="50"
-                    ImageSource="baseline_cloud_sync_white_24.png"
-                    VerticalOptions="Center" />
-                <Button
-                    Grid.Row="0"
-                    Grid.Column="3"
-                    BackgroundColor="#151515"
                     Command="{Binding SendButtonClickedCommand}"
                     FontSize="16"
                     HeightRequest="48"
@@ -568,7 +564,7 @@
                     VerticalOptions="Center" />
                 <Button
                     Grid.Row="0"
-                    Grid.Column="4"
+                    Grid.Column="3"
                     BackgroundColor="#151515"
                     Command="{prism:NavigateTo 'ReceiveTransactionPage',
                                                UseModalNavigation=False,

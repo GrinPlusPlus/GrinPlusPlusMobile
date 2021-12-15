@@ -25,7 +25,7 @@
             <Entry
                 BackgroundColor="#252525"
                 FontSize="20"
-                HeightRequest="48"
+                HeightRequest="44"
                 IsSpellCheckEnabled="False"
                 IsTextPredictionEnabled="False"
                 Text="{Binding Username}"
@@ -45,7 +45,7 @@
             <Entry
                 BackgroundColor="#252525"
                 FontSize="20"
-                HeightRequest="48"
+                HeightRequest="44"
                 IsPassword="True"
                 IsSpellCheckEnabled="False"
                 IsTextPredictionEnabled="False"

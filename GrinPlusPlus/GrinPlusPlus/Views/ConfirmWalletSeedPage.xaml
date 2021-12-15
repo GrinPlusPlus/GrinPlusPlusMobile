@@ -20,19 +20,19 @@
             <Grid BackgroundColor="#151515" ColumnSpacing="20">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="38" />
-                    <RowDefinition Height="38" />
-                    <RowDefinition Height="38" />
-                    <RowDefinition Height="38" />
-                    <RowDefinition Height="38" />
-                    <RowDefinition Height="38" />
-                    <RowDefinition Height="38" />
-                    <RowDefinition Height="38" />
-                    <RowDefinition Height="38" />
-                    <RowDefinition Height="38" />
-                    <RowDefinition Height="38" />
-                    <RowDefinition Height="38" />
-                    <RowDefinition Height="38" />
+                    <RowDefinition Height="39" />
+                    <RowDefinition Height="39" />
+                    <RowDefinition Height="39" />
+                    <RowDefinition Height="39" />
+                    <RowDefinition Height="39" />
+                    <RowDefinition Height="39" />
+                    <RowDefinition Height="39" />
+                    <RowDefinition Height="39" />
+                    <RowDefinition Height="39" />
+                    <RowDefinition Height="39" />
+                    <RowDefinition Height="39" />
+                    <RowDefinition Height="39" />
+                    <RowDefinition Height="39" />
                     <RowDefinition Height="44" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -61,7 +61,7 @@
                         BackgroundColor="Transparent"
                         FontAttributes="None"
                         FontSize="18"
-                        HeightRequest="38"
+                        HeightRequest="39"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
@@ -91,7 +91,7 @@
                         BackgroundColor="Transparent"
                         FontAttributes="None"
                         FontSize="18"
-                        HeightRequest="38"
+                        HeightRequest="39"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
@@ -121,7 +121,7 @@
                         BackgroundColor="Transparent"
                         FontAttributes="None"
                         FontSize="18"
-                        HeightRequest="38"
+                        HeightRequest="39"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
@@ -152,7 +152,7 @@
                         BackgroundColor="Transparent"
                         FontAttributes="None"
                         FontSize="18"
-                        HeightRequest="38"
+                        HeightRequest="39"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
@@ -183,7 +183,7 @@
                         BackgroundColor="Transparent"
                         FontAttributes="None"
                         FontSize="18"
-                        HeightRequest="38"
+                        HeightRequest="39"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
@@ -213,7 +213,7 @@
                         BackgroundColor="Transparent"
                         FontAttributes="None"
                         FontSize="18"
-                        HeightRequest="38"
+                        HeightRequest="39"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
@@ -243,7 +243,7 @@
                         BackgroundColor="Transparent"
                         FontAttributes="None"
                         FontSize="18"
-                        HeightRequest="38"
+                        HeightRequest="39"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
@@ -273,7 +273,7 @@
                         BackgroundColor="Transparent"
                         FontAttributes="None"
                         FontSize="18"
-                        HeightRequest="38"
+                        HeightRequest="39"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
@@ -303,7 +303,7 @@
                         BackgroundColor="Transparent"
                         FontAttributes="None"
                         FontSize="18"
-                        HeightRequest="38"
+                        HeightRequest="39"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
@@ -333,7 +333,7 @@
                         BackgroundColor="Transparent"
                         FontAttributes="None"
                         FontSize="18"
-                        HeightRequest="38"
+                        HeightRequest="39"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
@@ -363,7 +363,7 @@
                         BackgroundColor="Transparent"
                         FontAttributes="None"
                         FontSize="18"
-                        HeightRequest="38"
+                        HeightRequest="39"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
@@ -393,7 +393,7 @@
                         BackgroundColor="Transparent"
                         FontAttributes="None"
                         FontSize="18"
-                        HeightRequest="38"
+                        HeightRequest="39"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
@@ -423,7 +423,7 @@
                         BackgroundColor="Transparent"
                         FontAttributes="None"
                         FontSize="18"
-                        HeightRequest="38"
+                        HeightRequest="39"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
@@ -453,7 +453,7 @@
                         BackgroundColor="Transparent"
                         FontAttributes="None"
                         FontSize="18"
-                        HeightRequest="38"
+                        HeightRequest="39"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
@@ -483,7 +483,7 @@
                         BackgroundColor="Transparent"
                         FontAttributes="None"
                         FontSize="18"
-                        HeightRequest="38"
+                        HeightRequest="39"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
@@ -513,7 +513,7 @@
                         BackgroundColor="Transparent"
                         FontAttributes="None"
                         FontSize="18"
-                        HeightRequest="38"
+                        HeightRequest="39"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
@@ -543,7 +543,7 @@
                         BackgroundColor="Transparent"
                         FontAttributes="None"
                         FontSize="18"
-                        HeightRequest="38"
+                        HeightRequest="39"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
@@ -573,7 +573,7 @@
                         BackgroundColor="Transparent"
                         FontAttributes="None"
                         FontSize="18"
-                        HeightRequest="38"
+                        HeightRequest="39"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
@@ -603,7 +603,7 @@
                         BackgroundColor="Transparent"
                         FontAttributes="None"
                         FontSize="18"
-                        HeightRequest="38"
+                        HeightRequest="39"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
@@ -633,7 +633,7 @@
                         BackgroundColor="Transparent"
                         FontAttributes="None"
                         FontSize="18"
-                        HeightRequest="38"
+                        HeightRequest="39"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
@@ -663,7 +663,7 @@
                         BackgroundColor="Transparent"
                         FontAttributes="None"
                         FontSize="18"
-                        HeightRequest="38"
+                        HeightRequest="39"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
@@ -693,7 +693,7 @@
                         BackgroundColor="Transparent"
                         FontAttributes="None"
                         FontSize="18"
-                        HeightRequest="38"
+                        HeightRequest="39"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
@@ -723,7 +723,7 @@
                         BackgroundColor="Transparent"
                         FontAttributes="None"
                         FontSize="18"
-                        HeightRequest="38"
+                        HeightRequest="39"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
@@ -753,7 +753,7 @@
                         BackgroundColor="Transparent"
                         FontAttributes="None"
                         FontSize="18"
-                        HeightRequest="38"
+                        HeightRequest="39"
                         HorizontalOptions="FillAndExpand"
                         IsSpellCheckEnabled="False"
                         IsTextPredictionEnabled="False"
@@ -777,7 +777,7 @@
                                                UseModalNavigation=False,
                                                Animated=True}"
                     CornerRadius="5"
-                    HeightRequest="44"
+                    HeightRequest="48"
                     IsEnabled="{Binding IsValid}"
                     Text="{x:Static resource:AppResources.Continue}"
                     TextColor="White"

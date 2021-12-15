@@ -24,7 +24,7 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid
-            Margin="40"
+            Margin="50"
             Padding="0"
             BackgroundColor="#151515"
             ColumnSpacing="0"
@@ -45,7 +45,7 @@
                 BackgroundColor="#FFD717"
                 BorderColor="#050505"
                 CornerRadius="10"
-                HeightRequest="55">
+                HeightRequest="50">
                 <Grid Padding="20,0,20,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
@@ -66,7 +66,7 @@
                     <Label
                         Grid.Row="0"
                         Grid.Column="1"
-                        FontSize="18"
+                        FontSize="16"
                         HorizontalOptions="Start"
                         VerticalOptions="Center"
                         Text="{x:Static resource:AppResources.CreateWallet}"
@@ -84,7 +84,7 @@
                 BackgroundColor="#050505"
                 BorderColor="#323232"
                 CornerRadius="10"
-                HeightRequest="55">
+                HeightRequest="50">
                 <Grid Padding="20,0,20,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
@@ -105,7 +105,7 @@
                     <Label
                         Grid.Row="0"
                         Grid.Column="1"
-                        FontSize="18"
+                        FontSize="16"
                         VerticalOptions="Center"
                         Text="{x:Static resource:AppResources.RestoreExistingWallet}"
                         TextColor="White" />

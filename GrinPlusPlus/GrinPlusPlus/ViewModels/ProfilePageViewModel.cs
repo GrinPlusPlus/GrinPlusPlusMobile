@@ -7,6 +7,7 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace GrinPlusPlus.ViewModels
 {
@@ -26,6 +27,8 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _slatepackAddress, value); }
         }
 
+        private bool StopTimer = false;
+
         public DelegateCommand CopyAddressCommand => new DelegateCommand(CopyAddress);
 
         private async void CopyAddress()
@@ -42,6 +45,22 @@ namespace GrinPlusPlus.ViewModels
             {
                 SlatepackAddress = await SecureStorage.GetAsync("slatepack_address").ConfigureAwait(false);
             });
+
+        }
+
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+            {
+                Reachable = Settings.Reachable;
+
+                return !StopTimer;
+            });
+        }
+
+        public override void OnNavigatedFrom(INavigationParameters parameters)
+        {
+            StopTimer = true;
         }
     }
 }
