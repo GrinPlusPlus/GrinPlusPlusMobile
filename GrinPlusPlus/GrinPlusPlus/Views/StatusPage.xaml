@@ -31,7 +31,7 @@
             <Grid
                 Margin="0,10,0,10"
                 ColumnSpacing="10"
-                HeightRequest="80"
+                HeightRequest="100"
                 RowSpacing="10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -50,7 +50,7 @@
                 <Label
                     Grid.Row="1"
                     Grid.Column="0"
-                    FontSize="16"
+                    FontSize="18"
                     Text="{Binding HeaderHeight}"
                     TextColor="White" />
                 <Label
@@ -61,7 +61,7 @@
                 <Label
                     Grid.Row="1"
                     Grid.Column="1"
-                    FontSize="16"
+                    FontSize="18"
                     Text="{Binding Blocks}"
                     TextColor="White" />
                 <Label
@@ -72,20 +72,20 @@
                 <Label
                     Grid.Row="1"
                     Grid.Column="2"
-                    FontSize="16"
+                    FontSize="18"
                     Text="{Binding NetworkHeight}"
                     TextColor="White" />
             </Grid>
             <Label Text="Tor" TextColor="Gray" />
-            <Label FontSize="16"
+            <Label FontSize="18" Margin="0,0,0,10"
                    Text="{Binding IsTorRunning}"
                    TextColor="White" />
-            <Label Text="{x:Static resource:AppResources.ConnectedPeers}" TextColor="Gray" />
+            <Label Text="{x:Static resource:AppResources.ConnectedPeers}" TextColor="Gray"/>
             <CollectionView ItemsSource="{Binding ConnectedPeers}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Label
-                            FontSize="16"
+                            FontSize="18"
                             Text="{Binding Address}"
                             TextColor="White" />
                     </DataTemplate>

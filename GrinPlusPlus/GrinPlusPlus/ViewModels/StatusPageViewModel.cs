@@ -15,8 +15,8 @@ namespace GrinPlusPlus.ViewModels
 {
     public class StatusPageViewModel : ViewModelBase
     {
-        private bool isTorRunning = Settings.IsTorRunning;
-        public bool IsTorRunning
+        private string isTorRunning = Settings.IsTorRunning ? "Running" : "Not Running";
+        public string IsTorRunning
         {
             get { return isTorRunning; }
             set { SetProperty(ref isTorRunning, value); }
@@ -79,7 +79,7 @@ namespace GrinPlusPlus.ViewModels
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
-            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(3), () =>
             {
                 UpdateStatus();
 
@@ -104,26 +104,12 @@ namespace GrinPlusPlus.ViewModels
 
         private void UpdateStatus()
         {
-            IsTorRunning = Settings.IsTorRunning;
-
+            IsTorRunning = Settings.IsTorRunning ? "Running" : "Not Running";
             ProgressPercentage = string.Format($"{ Settings.Node.ProgressPercentage * 100:F}");
-
-            if (!Status.Equals(Settings.Node.Status))
-            {
-                Status = Settings.Node.Status;
-            }
-            if (!HeaderHeight.Equals(Settings.Node.HeaderHeight))
-            {
-                HeaderHeight = Settings.Node.HeaderHeight;
-            }
-            if (!Blocks.Equals(Settings.Node.Blocks))
-            {
-                Blocks = Settings.Node.Blocks;
-            }
-            if (!NetworkHeight.Equals(Settings.Node.NetworkHeight))
-            {
-                NetworkHeight = Settings.Node.NetworkHeight;
-            }
+            Status = Settings.Node.Status;
+            HeaderHeight = Settings.Node.HeaderHeight;
+            Blocks = Settings.Node.Blocks;
+            NetworkHeight = Settings.Node.NetworkHeight;
         }
 
         private async Task ListConnectedPeersAsync()

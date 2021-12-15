@@ -5,7 +5,6 @@ using Android.OS;
 using Android.Util;
 using GrinPlusPlus.Droid.Classes;
 using System;
-using System.IO;
 
 using AndroidApp = Android.App.Application;
 
@@ -39,9 +38,9 @@ namespace GrinPlusPlus.Droid
             Xamarin.Essentials.Preferences.Set("IsLoggedIn", false);
             Xamarin.Essentials.Preferences.Set("Status", Service.SyncHelpers.GetStatusLabel(string.Empty));
             Xamarin.Essentials.Preferences.Set("ProgressPercentage", (float)0);
-            Xamarin.Essentials.Preferences.Set("DataFolder", new Java.IO.File(Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), ".GrinPP/MAINNET/NODE")).AbsolutePath);
-            Xamarin.Essentials.Preferences.Set("LogsFolder", new Java.IO.File(Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), ".GrinPP/MAINNET/LOGS")).AbsolutePath);
-            Xamarin.Essentials.Preferences.Set("BackendFolder", new Java.IO.File(Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), ".GrinPP/MAINNET/")).AbsolutePath);
+            Xamarin.Essentials.Preferences.Set("DataFolder", new Java.IO.File(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), ".GrinPP/MAINNET/NODE")).AbsolutePath);
+            Xamarin.Essentials.Preferences.Set("LogsFolder", new Java.IO.File(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), ".GrinPP/MAINNET/LOGS")).AbsolutePath);
+            Xamarin.Essentials.Preferences.Set("BackendFolder", new Java.IO.File(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), ".GrinPP/MAINNET/")).AbsolutePath);
 
             nativeLibraryDir = PackageManager.GetApplicationInfo(ApplicationInfo.PackageName, PackageInfoFlags.SharedLibraryFiles).NativeLibraryDir;
         }
@@ -125,8 +124,6 @@ namespace GrinPlusPlus.Droid
                 Xamarin.Essentials.Preferences.Set("IsTorRunning", false);
             }
 
-            Xamarin.Essentials.Preferences.Set("Status", label);
-
             try
             {
                 var nodeStatus = await Service.Node.Instance.Status().ConfigureAwait(false);
@@ -140,8 +137,7 @@ namespace GrinPlusPlus.Droid
                 label = Service.SyncHelpers.GetStatusLabel(nodeStatus.SyncStatus);
                 
                 Xamarin.Essentials.Preferences.Set("Status", label);
-                
-                if (!label.Equals("Not Connected") && !label.Equals("Waiting for Peers"))
+                if (!label.Equals("Not Connected") && !label.Equals("Waiting for Peers") && !label.Equals("Running"))
                 {
                     label = $"{label} ({string.Format($"{ percentage * 100:F}")}%)";
                 }
@@ -187,6 +183,7 @@ namespace GrinPlusPlus.Droid
             var notification = new Notification.Builder(AndroidApp.Context, channelId)
                 .SetContentTitle("Grin Node")
                 .SetContentText(status)
+                .SetLargeIcon(Android.Graphics.BitmapFactory.DecodeResource(Resources, Resource.Drawable.logo))
                 .SetSmallIcon(Resource.Drawable.logo)
                 .SetContentIntent(BuildIntentToShowMainActivity())
                 .SetOngoing(true)
@@ -202,17 +199,19 @@ namespace GrinPlusPlus.Droid
         void CreateNotificationChannel()
         {
             manager = (NotificationManager)AndroidApp.Context.GetSystemService(AndroidApp.NotificationService);
-            if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
+
+            var channelNameJava = new Java.Lang.String(channelName);
+            var channel = new NotificationChannel(channelId, channelNameJava, NotificationImportance.None)
             {
-                var channelNameJava = new Java.Lang.String(channelName);
-                var channel = new NotificationChannel(channelId, channelNameJava, NotificationImportance.None)
-                {
-                    Description = channelDescription,
-                };
-                channel.EnableVibration(false);
-                channel.EnableLights(false);
-                manager.CreateNotificationChannel(channel);
-            }
+                Description = channelDescription,
+                Importance = NotificationImportance.Low
+            };
+            channel.EnableVibration(false);
+            channel.EnableLights(false);
+            channel.SetSound(null, null);
+            channel.EnableVibration(false);
+            
+            manager.CreateNotificationChannel(channel);
 
             channelInitialized = true;
         }
