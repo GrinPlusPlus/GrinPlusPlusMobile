@@ -183,7 +183,6 @@ namespace GrinPlusPlus.Droid
             var notification = new Notification.Builder(AndroidApp.Context, channelId)
                 .SetContentTitle("Grin Node")
                 .SetContentText(status)
-                .SetLargeIcon(Android.Graphics.BitmapFactory.DecodeResource(Resources, Resource.Drawable.logo))
                 .SetSmallIcon(Resource.Drawable.logo)
                 .SetContentIntent(BuildIntentToShowMainActivity())
                 .SetOngoing(true)
