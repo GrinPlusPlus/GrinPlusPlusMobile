@@ -64,9 +64,9 @@ namespace GrinPlusPlus.ViewModels
             Facts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Open"), Details = AppResources.ResourceManager.GetString("FactsOpen") });
             Facts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Dandelion"), Details = AppResources.ResourceManager.GetString("FactsDandelion") });
 
-            Device.StartTimer(TimeSpan.FromSeconds(60), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
             {
-                if (Settings.Node.Status.Equals("Not Running"))
+                if (!Settings.IsNodeRunning)
                 {
                     MainThread.BeginInvokeOnMainThread(async () =>
                     {
@@ -82,7 +82,13 @@ namespace GrinPlusPlus.ViewModels
         {
             Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
-                Status = Settings.Node.Status;
+                if(Settings.Node.Status.Equals("Not Connected") && Settings.IsNodeRunning)
+                {
+                    Status = "Initializing Grin Node...";
+                } else
+                {
+                    Status = Settings.Node.Status;
+                }
                 ProgressBarr = Settings.Node.ProgressPercentage;
                 ProgressPercentage = string.Format($"{ Settings.Node.ProgressPercentage * 100:F}");
 

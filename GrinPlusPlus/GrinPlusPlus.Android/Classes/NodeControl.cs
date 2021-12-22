@@ -17,8 +17,13 @@ namespace GrinPlusPlus.Droid.Classes
             string DBLockFile = Path.Combine(Path.Combine(new Java.IO.File(Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), ".GrinPP/MAINNET/")).AbsolutePath, "DB", "CHAIN", "LOCK"), "DB", "CHAIN", "LOCK");
             Java.IO.File libgrin = new Java.IO.File(Path.Combine(nativeLibraryDirectory, "libgrin.so"));
 
+            if (!libgrin.CanExecute())
+            {
+                libgrin.SetExecutable(true);
+            }
+            
             Log.Info(TAG, "Starting Grin Node...");
-
+            
             if (File.Exists(DBLockFile))
             {
                 File.Delete(DBLockFile);
@@ -26,13 +31,18 @@ namespace GrinPlusPlus.Droid.Classes
 
             try
             {
-                pNode = Java.Lang.Runtime.GetRuntime().Exec(libgrin.AbsolutePath);
-                var e = pNode.ExitValue();
-                Log.Error(TAG, "Grin Node can't be Started.");
-            }
-            catch (Exception)
-            {
+                Java.Lang.ProcessBuilder builder = new Java.Lang.ProcessBuilder();
+                pNode = builder.Command(libgrin.AbsolutePath).InheritIO().Start();
+
+                Log.Info(TAG, "============================================================================");
                 Log.Info(TAG, "Grin Node Started.");
+                Log.Info(TAG, "============================================================================");
+            } catch (Exception ex)
+            {
+                Log.Error(TAG, "============================================================================");
+                Log.Error(TAG, "ERROR: Grin Node can't be started.");
+                Log.Error(TAG, ex.ToString());
+                Log.Error(TAG, "============================================================================");
             }
         }
 
@@ -115,12 +125,12 @@ namespace GrinPlusPlus.Droid.Classes
 
         public static bool IsNodeRunning()
         {
-            return IsBinaryRunning("libgrin.so");
+            return GetProcessId(pNode) != -1;
         }
 
         public static bool IsTorRunning()
         {
-            return IsBinaryRunning("libtor.so");
+            return GetProcessId(pTor) != -1;
         }
 
         public static bool DeleteNodeDataFolder(string dataFolder)
@@ -147,38 +157,30 @@ namespace GrinPlusPlus.Droid.Classes
             }
         }
 
-        static bool IsBinaryRunning(string binary)
+        static int GetProcessId(Java.Lang.Process p)
         {
+            int pid;
+
             try
             {
-                Java.Lang.Process process = Java.Lang.Runtime.GetRuntime().Exec("ps -A");
-
-                Java.IO.BufferedReader reader = new Java.IO.BufferedReader(
-                        new Java.IO.InputStreamReader(process.InputStream));
-
-                int read;
-                char[] buffer = new char[4096];
-                Java.Lang.StringBuffer output = new Java.Lang.StringBuffer();
-                while ((read = reader.Read(buffer)) > 0)
+                Java.Lang.Reflect.Field f = p.Class.GetDeclaredField("pid");
+                f.Accessible = true;
+                pid = f.GetInt(p);
+                f.Accessible = false;
+            }
+            catch (Exception)
+            {
+                try
                 {
-                    output.Append(buffer, 0, read);
+                    Java.Util.Regex.Matcher m = Java.Util.Regex.Pattern.Compile("pid=(\\d+)").Matcher(p.ToString());
+                    pid = m.Find() ? Java.Lang.Integer.ParseInt(m.Group(1)) : -1;
                 }
-                reader.Close();
-
-                process.WaitFor();
-
-                return output.ToString().Contains($"{binary}");
+                catch (Exception)
+                {
+                    pid = -1;
+                }
             }
-            catch (IOException e)
-            {
-                Log.Error(TAG, e.ToString());
-            }
-            catch (Java.Lang.InterruptedException e)
-            {
-                Log.Error(TAG, e.ToString());
-            }
-
-            return false;
+            return pid;
         }
     }
 }

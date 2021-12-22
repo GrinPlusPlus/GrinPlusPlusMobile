@@ -115,14 +115,8 @@ namespace GrinPlusPlus.Droid
         private async void OnNodeTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
         {
             var label = Service.SyncHelpers.GetStatusLabel(string.Empty);
-            
-            if (NodeControl.IsTorRunning())
-            {
-                Xamarin.Essentials.Preferences.Set("IsTorRunning", true);
-            } else
-            {
-                Xamarin.Essentials.Preferences.Set("IsTorRunning", false);
-            }
+
+            Xamarin.Essentials.Preferences.Set("IsTorRunning", NodeControl.IsTorRunning());
 
             try
             {
@@ -142,12 +136,18 @@ namespace GrinPlusPlus.Droid
                     label = $"{label} ({string.Format($"{ percentage * 100:F}")}%)";
                 }
 
-                Xamarin.Essentials.Preferences.Set("IsNodeRunning", true);
+                Xamarin.Essentials.Preferences.Set("IsNodeRunning", NodeControl.IsNodeRunning());
             }
             catch (System.Net.WebException ex)
             {
-                Log.Error(TAG, $"Node is not running: {ex.Message}");
-                Xamarin.Essentials.Preferences.Set("IsNodeRunning", false);
+                Log.Error(TAG, "============================================================================");
+                if (!NodeControl.IsNodeRunning())
+                {
+                    Log.Error(TAG, $"ERROR: Grin Node is not running.");
+                }
+                Log.Error(TAG, $"ERROR: {ex.Message}");
+                Log.Error(TAG, "============================================================================");
+                Xamarin.Essentials.Preferences.Set("IsNodeRunning", NodeControl.IsNodeRunning());
             }
             catch (Exception ex)
             {
