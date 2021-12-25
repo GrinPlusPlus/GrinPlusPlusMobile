@@ -127,8 +127,7 @@ namespace GrinPlusPlus.Droid
                 var percentage = Service.SyncHelpers.GetProgressPercentage(nodeStatus);
                 Xamarin.Essentials.Preferences.Set("ProgressPercentage", percentage);
 
-                var label = Service.SyncHelpers.GetStatusLabel(string.Empty);
-                label = Service.SyncHelpers.GetStatusLabel(nodeStatus.SyncStatus);
+                var label = Service.SyncHelpers.GetStatusLabel(nodeStatus.SyncStatus);
                 Xamarin.Essentials.Preferences.Set("Status", label);
 
                 if (!label.Equals("Not Running") && !label.Equals("Waiting for Peers") && !label.Equals("Running"))
@@ -141,20 +140,17 @@ namespace GrinPlusPlus.Droid
 
                 RegisterForegroundService(label);
             }
-            catch (System.Net.WebException ex)
-            {
-                Log.Error(TAG, "============================================================================");
-                if (!NodeControl.IsNodeRunning())
-                {
-                    Log.Error(TAG, $"ERROR: Grin Node is not running.");
-                    RegisterForegroundService("Not Running");
-                }
-                Log.Error(TAG, $"ERROR: {ex.Message}");
-                Log.Error(TAG, "============================================================================");
-            }
             catch (Exception ex)
             {
-                Log.Error(TAG, ex.Message);
+                Log.Error(TAG, "============================ERROR===============================================");
+                Log.Error(TAG, $"{ex.Message}");
+                if (!NodeControl.IsNodeRunning())
+                {
+                    Log.Error(TAG, $"ERROR: Grin local Node is not Running.");
+                    Xamarin.Essentials.Preferences.Set("Status", "Not Running");
+                    RegisterForegroundService("Not Running");
+                }
+                Log.Error(TAG, "============================ERROR===============================================");
             }
         }
 
