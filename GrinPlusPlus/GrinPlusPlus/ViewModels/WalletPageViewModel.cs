@@ -330,7 +330,7 @@ namespace GrinPlusPlus.ViewModels
                     return false;
                 }
 
-                if (Settings.Node.Status.Equals("Not Connected"))
+                if (Settings.Node.Status.Equals("Not Running"))
                 {
                     StatusIcon = "baseline_wifi_off_white_24.png";
                 }

@@ -63,7 +63,7 @@ namespace GrinPlusPlus
         {
             public static string Status
             {
-                get => Preferences.Get(nameof(Status), "Not Connected");
+                get => Preferences.Get(nameof(Status), "Not Running");
                 set => Preferences.Set(nameof(Status), value);
             }
 

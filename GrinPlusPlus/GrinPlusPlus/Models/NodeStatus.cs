@@ -63,7 +63,7 @@
                     case "NOT_CONNECTED":
                         return "Waiting for Peers";
                     default:
-                        return "Not Connected";
+                        return "Not Running";
                 }
             }
             set { _syncStatus = value; }

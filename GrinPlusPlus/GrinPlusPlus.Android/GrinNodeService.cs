@@ -52,7 +52,7 @@ namespace GrinPlusPlus.Droid
                 NodeControl.StartTor(nativeLibraryDir);
                 NodeControl.StartNode(nativeLibraryDir);
 
-                RegisterForegroundService(Service.SyncHelpers.GetStatusLabel(string.Empty));
+                RegisterForegroundService("Initializing Grin Node...");
 
                 SetNodeTimer();
             }
@@ -107,36 +107,39 @@ namespace GrinPlusPlus.Droid
 
         private void SetNodeTimer()
         {
-            timer = new System.Timers.Timer(2500);
+            timer = new System.Timers.Timer(1500);
             timer.Elapsed += OnNodeTimedEvent;
             timer.Start();
         }
 
         private async void OnNodeTimedEvent(Object source, System.Timers.ElapsedEventArgs e)
         {
-            var label = Service.SyncHelpers.GetStatusLabel(string.Empty);
-
             Xamarin.Essentials.Preferences.Set("IsTorRunning", NodeControl.IsTorRunning());
+            Xamarin.Essentials.Preferences.Set("IsNodeRunning", NodeControl.IsNodeRunning());
 
             try
             {
                 var nodeStatus = await Service.Node.Instance.Status().ConfigureAwait(false);
-                var percentage = Service.SyncHelpers.GetProgressPercentage(nodeStatus);
-
-                Xamarin.Essentials.Preferences.Set("ProgressPercentage", percentage);
                 Xamarin.Essentials.Preferences.Set("HeaderHeight", nodeStatus.HeaderHeight);
                 Xamarin.Essentials.Preferences.Set("Blocks", nodeStatus.Chain.Height);
                 Xamarin.Essentials.Preferences.Set("NetworkHeight", nodeStatus.Network.Height);
 
+                var percentage = Service.SyncHelpers.GetProgressPercentage(nodeStatus);
+                Xamarin.Essentials.Preferences.Set("ProgressPercentage", percentage);
+
+                var label = Service.SyncHelpers.GetStatusLabel(string.Empty);
                 label = Service.SyncHelpers.GetStatusLabel(nodeStatus.SyncStatus);
-                
                 Xamarin.Essentials.Preferences.Set("Status", label);
-                if (!label.Equals("Not Connected") && !label.Equals("Waiting for Peers") && !label.Equals("Running"))
+
+                if (!label.Equals("Not Running") && !label.Equals("Waiting for Peers") && !label.Equals("Running"))
                 {
-                    label = $"{label} ({string.Format($"{ percentage * 100:F}")}%)";
+                    try
+                    {
+                        label = $"{label} ({string.Format($"{ percentage * 100:F}")}%)";
+                    } catch { }
                 }
 
-                Xamarin.Essentials.Preferences.Set("IsNodeRunning", NodeControl.IsNodeRunning());
+                RegisterForegroundService(label);
             }
             catch (System.Net.WebException ex)
             {
@@ -144,17 +147,15 @@ namespace GrinPlusPlus.Droid
                 if (!NodeControl.IsNodeRunning())
                 {
                     Log.Error(TAG, $"ERROR: Grin Node is not running.");
+                    RegisterForegroundService("Not Running");
                 }
                 Log.Error(TAG, $"ERROR: {ex.Message}");
                 Log.Error(TAG, "============================================================================");
-                Xamarin.Essentials.Preferences.Set("IsNodeRunning", NodeControl.IsNodeRunning());
             }
             catch (Exception ex)
             {
                 Log.Error(TAG, ex.Message);
             }
-
-            RegisterForegroundService(label);
         }
 
         public override void OnDestroy()
@@ -181,9 +182,9 @@ namespace GrinPlusPlus.Droid
 
             // Work has finished, now dispatch a notification to let the user know.
             var notification = new Notification.Builder(AndroidApp.Context, channelId)
-                .SetContentTitle("Grin Node")
+                .SetContentTitle("Node Status")
                 .SetContentText(status)
-                .SetSmallIcon(Resource.Drawable.logo)
+                .SetSmallIcon(Resource.Drawable.ic_stat_grin)
                 .SetContentIntent(BuildIntentToShowMainActivity())
                 .SetOngoing(true)
                 .AddAction(BuildRestartNodeAction())

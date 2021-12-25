@@ -49,10 +49,6 @@ namespace GrinPlusPlus.ViewModels
         public InitPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService) 
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
-            Status = Settings.Node.Status;
-            ProgressBarr = Settings.Node.ProgressPercentage;
-            ProgressPercentage = string.Format($"{ Settings.Node.ProgressPercentage * 100:F}");
-
             Facts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Mimblewimble"), Details = AppResources.ResourceManager.GetString("FactsMimblewimble") });
             Facts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Addresses"), Details = AppResources.ResourceManager.GetString("FactAddresses") });
             Facts.Add(new Fact { Title = AppResources.ResourceManager.GetString("Amounts"), Details = AppResources.ResourceManager.GetString("FactsAmounts") });
@@ -80,40 +76,34 @@ namespace GrinPlusPlus.ViewModels
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
-            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(2), () =>
             {
-                if(Settings.Node.Status.Equals("Not Connected") && Settings.IsNodeRunning)
-                {
-                    Status = "Initializing Grin Node...";
-                } else
-                {
-                    Status = Settings.Node.Status;
-                }
+                Status = Settings.Node.Status.Equals("Not Running") && Settings.IsNodeRunning ? "Initializing Node..." : Settings.Node.Status;
                 ProgressBarr = Settings.Node.ProgressPercentage;
                 ProgressPercentage = string.Format($"{ Settings.Node.ProgressPercentage * 100:F}");
 
                 return !StopTimer;
             });
 
-            Device.StartTimer(TimeSpan.FromSeconds(4), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
             {
                 if (StopTimer)
                 {
                     return false;
                 }
 
-                if (Settings.Node.Status.Equals("Not Connected") || Settings.Node.Status.Equals("Waiting for Peers"))
+                if (Settings.Node.Status.Equals("Not Running") || Settings.Node.Status.Equals("Waiting for Peers"))
                 {
                     return true;
                 }
 
-                GetWalletAccounts();
+                ContinueNextStep();
 
                 return !StopTimer;
             });
         }
 
-        private void GetWalletAccounts()
+        private void ContinueNextStep()
         {
             Task.Factory.StartNew(async () =>
             {
