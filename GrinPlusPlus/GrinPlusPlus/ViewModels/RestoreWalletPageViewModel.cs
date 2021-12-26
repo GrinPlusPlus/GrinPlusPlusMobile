@@ -91,10 +91,23 @@ namespace GrinPlusPlus.ViewModels
             set => SetProperty(ref _isBusy, value);
         }
 
+        private bool _isNodeFullySynched = false;
+        public bool IsNodeFullySynched
+        {
+            get => _isNodeFullySynched;
+            set => SetProperty(ref _isNodeFullySynched, value);
+        }
+
         public RestoreWalletPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
-
+            if(Settings.Node.HeaderHeight == Settings.Node.NetworkHeight)
+            {
+                if(Settings.Node.HeaderHeight == Settings.Node.Blocks)
+                {
+                    IsNodeFullySynched = true;
+                }
+            }
         }
 
         public DelegateCommand RestoreWalletCommand => new DelegateCommand(RestoreWallet);

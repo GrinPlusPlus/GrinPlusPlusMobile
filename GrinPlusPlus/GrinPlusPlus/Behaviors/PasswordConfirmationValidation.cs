@@ -42,7 +42,7 @@ namespace GrinPlusPlus.Behaviors
 
         void OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            if (e.NewTextValue.Length == 0)
+            if (e.NewTextValue == null || e.NewTextValue.Length == 0)
             {
                 IsValid = false;
                 return;
