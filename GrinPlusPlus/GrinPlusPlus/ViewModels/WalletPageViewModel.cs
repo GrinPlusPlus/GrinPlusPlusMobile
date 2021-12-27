@@ -181,31 +181,6 @@ namespace GrinPlusPlus.ViewModels
             }
         }
 
-        private Transaction _selectedUnfinalizedTransaction;
-        public Transaction SelectedUnfinalizedTransaction
-        {
-            get
-            {
-                return _selectedUnfinalizedTransaction;
-            }
-            set
-            {
-                if (value != null)
-                {
-                    MainThread.BeginInvokeOnMainThread(async () =>
-                    {
-                        await NavigationService.NavigateAsync("TransactionDetailsPage", new NavigationParameters {
-                        {
-                          "transaction",
-                          value
-                        }
-                      });
-                    });
-                }
-                SetProperty(ref _selectedUnfinalizedTransaction, value);
-            }
-        }
-
         private Transaction _selectedFilteredTransaction;
         public Transaction SelectedFilteredTransaction
         {
@@ -215,18 +190,6 @@ namespace GrinPlusPlus.ViewModels
             }
             set
             {
-                if (value != null)
-                {
-                    MainThread.BeginInvokeOnMainThread(async () =>
-                    {
-                        await NavigationService.NavigateAsync("TransactionDetailsPage", new NavigationParameters {
-                        {
-                          "transaction",
-                          value
-                        }
-                      });
-                    });
-                }
                 SetProperty(ref _selectedFilteredTransaction, value);
             }
         }
@@ -545,8 +508,20 @@ namespace GrinPlusPlus.ViewModels
             }
         }
 
-        public DelegateCommand LogoutButtonClickedCommand => new DelegateCommand(Logout);
+        public DelegateCommand<Transaction> OnFilteredTransactionChanged => new DelegateCommand<Transaction>(OpenTransactionDetails);
+        void OpenTransactionDetails(Transaction transaction)
+        {
+            if (transaction == null) return;
 
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                await NavigationService.NavigateAsync("TransactionDetailsPage", new NavigationParameters { { "transaction", transaction }});
+            });
+
+            SelectedFilteredTransaction = null;
+        }
+
+        public DelegateCommand LogoutButtonClickedCommand => new DelegateCommand(Logout);
         async void Logout()
         {
             string wallet = await SecureStorage.GetAsync("username");

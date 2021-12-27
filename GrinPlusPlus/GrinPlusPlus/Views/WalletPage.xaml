@@ -315,7 +315,6 @@
                 Grid.Column="0"
                 Margin="10,0,10,0"
                 ItemsSource="{Binding UnfinalizedTransactions}"
-                SelectedItem="{Binding SelectedUnfinalizedTransaction}"
                 SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
@@ -451,6 +450,8 @@
                 Margin="10,5,10,5"
                 ItemsSource="{Binding FilteredTransactionHistory}"
                 SelectedItem="{Binding SelectedFilteredTransaction}"
+                SelectionChangedCommand="{Binding OnFilteredTransactionChanged}"
+                SelectionChangedCommandParameter="{Binding SelectedFilteredTransaction}"
                 SelectionMode="Single">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
