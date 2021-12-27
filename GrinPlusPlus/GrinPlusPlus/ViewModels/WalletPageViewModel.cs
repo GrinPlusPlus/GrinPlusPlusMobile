@@ -261,6 +261,8 @@ namespace GrinPlusPlus.ViewModels
             {
                 Wallet = await SecureStorage.GetAsync("username");
                 SlatepackAddress = await SecureStorage.GetAsync("slatepack_address");
+
+                await UpdateRecheability();
             });
 
             Task.Factory.StartNew(async () =>
@@ -272,27 +274,25 @@ namespace GrinPlusPlus.ViewModels
             {
                 await LoadTransactions();
             });
+        }
 
-            Task.Factory.StartNew(() =>
-            {
-                UpdateRecheability();
-            });
-
-            Device.StartTimer(TimeSpan.FromSeconds(60), () =>
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            Device.StartTimer(TimeSpan.FromSeconds(30), () =>
             {
                 if (!Settings.IsLoggedIn)
                 {
                     return false;
                 }
 
-                UpdateRecheability();
+                Task.Factory.StartNew(async () =>
+                {
+                    await UpdateRecheability();
+                });
 
                 return true;
             });
-        }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
-        {
             Device.StartTimer(TimeSpan.FromSeconds(5), () =>
             {
                 if (Settings.IsLoggedIn == false)
@@ -308,7 +308,7 @@ namespace GrinPlusPlus.ViewModels
                 return true;
             });
 
-            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(3), () =>
             {
                 if (Settings.IsLoggedIn == false)
                 {
@@ -343,27 +343,24 @@ namespace GrinPlusPlus.ViewModels
             });
         }
 
-        private void UpdateRecheability()
+        private async Task UpdateRecheability()
         {
-            Task.Factory.StartNew(async () =>
-            {
-                var address = await SecureStorage.GetAsync("tor_address");
+            var address = await SecureStorage.GetAsync("tor_address");
 
-                if (string.IsNullOrEmpty(address))
-                {
-                    Settings.Reachable = false;
-                    return;
-                }
-                try
-                {
-                    Settings.Reachable = await DataProvider.CheckAddressAvailability(address, Settings.GrinChckAPIURL).ConfigureAwait(false);
-                }
-                catch (Exception ex)
-                {
-                    Settings.Reachable = false;
-                    Debug.WriteLine(ex.Message);
-                }
-            });
+            if (string.IsNullOrEmpty(address))
+            {
+                Settings.Reachable = false;
+                return;
+            }
+            try
+            {
+                Settings.Reachable = await DataProvider.CheckAddressAvailability(address, Settings.GrinChckAPIURL).ConfigureAwait(false);
+            }
+            catch (Exception ex)
+            {
+                Settings.Reachable = false;
+                Debug.WriteLine(ex.Message);
+            }
         }
 
         private async Task GetWalletBalance()
