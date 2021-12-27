@@ -550,7 +550,12 @@ namespace GrinPlusPlus.ViewModels
 
                 var token = await SecureStorage.GetAsync("token");
                 await DataProvider.DoLogout(token);
-
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            } finally
+            {
                 Preferences.Clear();
                 SecureStorage.RemoveAll();
 
@@ -560,10 +565,6 @@ namespace GrinPlusPlus.ViewModels
                 {
                     await NavigationService.NavigateAsync("/NavigationPage/WalletLoginPage", new NavigationParameters { { "username", wallet } });
                 });
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
             }
         }
 
