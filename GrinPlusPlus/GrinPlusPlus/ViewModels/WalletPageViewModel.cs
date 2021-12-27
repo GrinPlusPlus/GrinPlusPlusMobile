@@ -70,19 +70,24 @@ namespace GrinPlusPlus.ViewModels
             switch (value)
             {
                 case 1:
-                    LoadTransactionHistory(AllTransactions.Where(x => new List<string> { "sending", "receiving" }.Any(y => y.Contains(x.Status.ToLower()))).ToList());
+                    var pending = AllTransactions.Where(x => new List<string> { "sending", "receiving" }.Any(y => x.Status.ToLower().Contains(y))).ToList();
+                    LoadTransactionHistory(pending);
                     break;
                 case 2:
-                    LoadTransactionHistory(AllTransactions.Where(x => new List<string> { "received" }.Any(y => y.Equals(x.Status.ToLower()))).ToList());
+                    var received = AllTransactions.Where(x => new List<string> { "received" }.Any(y => y.Equals(x.Status.ToLower()))).ToList();
+                    LoadTransactionHistory(received);
                     break;
                 case 3:
-                    LoadTransactionHistory(AllTransactions.Where(x => new List<string> { "sent" }.Any(y => y.Equals(x.Status.ToLower()))).ToList());
+                    var sent = AllTransactions.Where(x => new List<string> { "sent" }.Any(y => y.Equals(x.Status.ToLower()))).ToList();
+                    LoadTransactionHistory(sent);
                     break;
                 case 4:
-                    LoadTransactionHistory(AllTransactions.Where(x => new List<string> { "canceled" }.Any(y => y.Equals(x.Status.ToLower()))).ToList());
+                    var canceled = AllTransactions.Where(x => new List<string> { "canceled" }.Any(y => y.Equals(x.Status.ToLower()))).ToList();
+                    LoadTransactionHistory(canceled);
                     break;
                 case 5:
-                    LoadTransactionHistory(AllTransactions.Where(x => new List<string> { "coinbase" }.Any(y => y.Equals(x.Status.ToLower()))).ToList());
+                    var coinbase = AllTransactions.Where(x => new List<string> { "coinbase" }.Any(y => y.Equals(x.Status.ToLower()))).ToList();
+                    LoadTransactionHistory(coinbase);
                     break;
                 default:
                     LoadTransactionHistory(AllTransactions);
@@ -298,7 +303,7 @@ namespace GrinPlusPlus.ViewModels
                 return true;
             });
 
-            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(4), () =>
             {
                 if (Settings.IsLoggedIn == false)
                 {
@@ -313,7 +318,7 @@ namespace GrinPlusPlus.ViewModels
                 return true;
             });
 
-            Device.StartTimer(TimeSpan.FromSeconds(3), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(2), () =>
             {
                 if (Settings.IsLoggedIn == false)
                 {
@@ -544,17 +549,18 @@ namespace GrinPlusPlus.ViewModels
 
         async void Logout()
         {
+            string wallet = await SecureStorage.GetAsync("username");
+
             try
             {
-                string wallet = await SecureStorage.GetAsync("username");
-
                 var token = await SecureStorage.GetAsync("token");
                 await DataProvider.DoLogout(token);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
-            } finally
+            }
+            finally
             {
                 Preferences.Clear();
                 SecureStorage.RemoveAll();
