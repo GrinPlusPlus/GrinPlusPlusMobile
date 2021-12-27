@@ -272,13 +272,18 @@ namespace GrinPlusPlus.ViewModels
 
             Task.Factory.StartNew(async () =>
             {
-                await LoadTransactions();
+                await GetUnfinalizedTransactions();
+            });
+
+            Task.Factory.StartNew(async () =>
+            {
+                await GetTransactions();
             });
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
-            Device.StartTimer(TimeSpan.FromSeconds(30), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(35), () =>
             {
                 if (!Settings.IsLoggedIn)
                 {
@@ -317,7 +322,12 @@ namespace GrinPlusPlus.ViewModels
 
                 Task.Factory.StartNew(async () =>
                 {
-                    await LoadTransactions();
+                    await GetUnfinalizedTransactions();
+                });
+
+                Task.Factory.StartNew(async () =>
+                {
+                    await GetTransactions();
                 });
 
                 return true;
@@ -330,13 +340,9 @@ namespace GrinPlusPlus.ViewModels
                     return false;
                 }
 
-                if (Settings.Node.Status.Equals("Not Running"))
+                if (!Settings.IsNodeRunning)
                 {
-                    StatusIcon = "baseline_wifi_off_white_24.png";
-                }
-                else
-                {
-                    StatusIcon = "baseline_wifi_white_24.png";
+                    Logout();
                 }
 
                 return true;
@@ -381,17 +387,23 @@ namespace GrinPlusPlus.ViewModels
             }
         }
 
-        private async Task LoadTransactions()
+        private async Task GetUnfinalizedTransactions()
         {
             try
             {
-                LoadUnfinalizedTransactions(await DataProvider.GetTransactions(await SecureStorage.GetAsync("token"), new string[] { "SENDING_NOT_FINALIZED" }).ConfigureAwait(false));
+                string token = await SecureStorage.GetAsync("token");
+                string[] filter = new string[] { "SENDING_NOT_FINALIZED" };
+                List<Transaction> unfinalized = await DataProvider.GetTransactions(token, filter).ConfigureAwait(false);
+                LoadUnfinalizedTransactions(unfinalized);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(ex.Message);
             }
+        }
 
+        private async Task GetTransactions()
+        {
             try
             {
                 AllTransactions = await DataProvider.GetTransactions(await SecureStorage.GetAsync("token").ConfigureAwait(false), new string[] {
@@ -410,7 +422,6 @@ namespace GrinPlusPlus.ViewModels
             {
                 Debug.WriteLine(ex.Message);
             }
-
         }
 
         private void LoadUnfinalizedTransactions(List<Transaction> transactions)
