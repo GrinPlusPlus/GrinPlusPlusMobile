@@ -333,7 +333,7 @@ namespace GrinPlusPlus.ViewModels
                 return true;
             });
 
-            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
             {
                 if (Settings.IsLoggedIn == false)
                 {
