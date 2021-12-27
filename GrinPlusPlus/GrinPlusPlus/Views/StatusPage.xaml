@@ -16,14 +16,14 @@
             <Label TextColor="White" HorizontalOptions="Start">
                 <Label.FormattedText>
                     <FormattedString>
-                        <Span Text="{Binding Status}" FontSize="28" />
+                        <Span Text="{Binding Status}" FontSize="26" />
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
             <Label TextColor="White" HorizontalOptions="Start">
                 <Label.FormattedText>
                     <FormattedString>
-                        <Span Text="{Binding ProgressPercentage}" FontSize="22" />
+                        <Span Text="{Binding ProgressPercentage}" FontSize="20" />
                         <Span Text="%" FontSize="16" />
                     </FormattedString>
                 </Label.FormattedText>
@@ -77,7 +77,7 @@
                     TextColor="White" />
             </Grid>
             <Label Text="Tor" TextColor="Gray" />
-            <Label FontSize="18" Margin="0,0,0,10"
+            <Label FontSize="16" Margin="0,0,0,10"
                    Text="{Binding IsTorRunning}"
                    TextColor="White" />
             <Label Text="{x:Static resource:AppResources.ConnectedPeers}" TextColor="Gray"/>
@@ -85,7 +85,7 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Label
-                            FontSize="18"
+                            FontSize="16"
                             Text="{Binding Address}"
                             TextColor="White" />
                     </DataTemplate>
