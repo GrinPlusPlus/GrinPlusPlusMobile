@@ -63,6 +63,7 @@ namespace GrinPlusPlus
             containerRegistry.RegisterForNavigation<ConfirmWalletSeedPage, ConfirmWalletSeedPageViewModel>();
             containerRegistry.RegisterForNavigation<WalletSeedPage, WalletSeedPageViewModel>();
             containerRegistry.RegisterForNavigation<WalletSeedBackupPage, WalletSeedBackupPageViewModel>();
+            containerRegistry.RegisterForNavigation<UnfinalizedTransactionDetailsPage, UnfinalizedTransactionDetailsPageViewModel>();
         }
 
         protected override void OnSleep()

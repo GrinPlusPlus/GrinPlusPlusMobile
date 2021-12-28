@@ -135,7 +135,7 @@ namespace GrinPlusPlus.Service
                 { "statuses", statuses }
             };
 
-            var transactions = await GrinOwnerRPC.Request<Models.Wallet.Transactions>(Endpoints.TransactionsList, payload).ConfigureAwait(false);
+            var transactions = await GrinOwnerRPC.Request<Models.Wallet.Transactions>(Endpoints.TransactionsList, payload);
 
             if (transactions.List == null)
             {

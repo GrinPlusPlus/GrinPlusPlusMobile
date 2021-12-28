@@ -21,47 +21,12 @@ namespace GrinPlusPlus.ViewModels
 
         public DelegateCommand ScanQRCodeCommand => new DelegateCommand(ScanQRCode);
 
-        private async void ScanQRCode()
-        {
-            await NavigationService.NavigateAsync(name: "QRScannerPage", parameters: null, useModalNavigation: true, animated: true);
-        }
-
         public DelegateCommand PasteFromClipboardCommand => new DelegateCommand(PasteFromClipboard);
-
-        private async void PasteFromClipboard()
-        {
-            SlatepackMessage = await Clipboard.GetTextAsync();
-        }
-
-        public DelegateCommand CancelCommand => new DelegateCommand(Cancel);
-
-        async void Cancel()
-        {
-            await NavigationService.GoBackToRootAsync();
-        }
 
         public DelegateCommand FinalizeTransactionCommand => new DelegateCommand(FinalizeTransaction);
 
-        private async void FinalizeTransaction()
-        {
-            try
-            {
-                var finalized = await DataProvider.FinalizeTransaction(await SecureStorage.GetAsync("token"), SlatepackMessage).ConfigureAwait(false);
-                await NavigationService.GoBackToRootAsync();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-        }
-
-        public DelegateCommand CloseScreenCommand => new DelegateCommand(CloseScreen);
-        private async void CloseScreen()
-        {
-            await NavigationService.GoBackToRootAsync();
-        }
-
-        public FinalizeTransactionPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
+        public FinalizeTransactionPageViewModel(INavigationService navigationService, IDataProvider dataProvider, 
+                                                IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
 
@@ -79,6 +44,32 @@ namespace GrinPlusPlus.ViewModels
                         SlatepackMessage = (string)parameters["qr_scanner_result"];
                     }
                     break;
+            }
+        }
+
+        private async void ScanQRCode()
+        {
+            await NavigationService.NavigateAsync(name: "QRScannerPage", parameters: null,
+                                                  useModalNavigation: true, animated: true);
+        }
+
+        private async void PasteFromClipboard()
+        {
+            SlatepackMessage = await Clipboard.GetTextAsync();
+        }
+
+        private async void FinalizeTransaction()
+        {
+            try
+            {
+                var token = await SecureStorage.GetAsync("token");
+                var finalized = await DataProvider.FinalizeTransaction(token, SlatepackMessage).ConfigureAwait(false);
+
+                await NavigationService.GoBackToRootAsync();
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
             }
         }
     }

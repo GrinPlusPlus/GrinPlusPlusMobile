@@ -4,9 +4,9 @@ using Xamarin.Forms.Xaml;
 namespace GrinPlusPlus.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TransactionDetailsPage : ContentPage
+    public partial class UnfinalizedTransactionDetailsPage : ContentPage
     {
-        public TransactionDetailsPage()
+        public UnfinalizedTransactionDetailsPage()
         {
             InitializeComponent();
         }

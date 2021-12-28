@@ -42,7 +42,7 @@
                 Command="{Binding FinalizeTransactionCommand}"
                 CornerRadius="5"
                 FontSize="16"
-                HeightRequest="44"
+                HeightRequest="48"
                 IsEnabled="{Binding SlatepackMessage, Converter={xct:IsNotNullOrEmptyConverter}}"
                 Text="{x:Static resource:AppResources.Finalize}"
                 TextColor="White"

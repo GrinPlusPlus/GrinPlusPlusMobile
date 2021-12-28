@@ -72,7 +72,7 @@ namespace GrinPlusPlus.Service.Models
             [JsonProperty("slate_id")]
             public string Slate { get; set; }
 
-            [JsonProperty("slate_message")]
+            [JsonProperty("armored_slatepack")]
             public string Message { get; set; }
 
             [JsonProperty("confirmed_height")]

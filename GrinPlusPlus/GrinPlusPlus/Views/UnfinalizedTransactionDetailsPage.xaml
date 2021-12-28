@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    x:Class="GrinPlusPlus.Views.UnfinalizedTransactionDetailsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:c="clr-namespace:GrinPlusPlus.Converters"
+    xmlns:prism="http://prismlibrary.com"
+    xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    Title="{x:Static resource:AppResources.Details}"
+    Padding="20,0,20,10"
+    prism:ViewModelLocator.AutowireViewModel="True"
+    BackgroundColor="#151515">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <c:RelativeDateTimeConverter x:Key="RelativeDateTimeConverter" />
+            <c:StatusSignConverter x:Key="StatusSignConverter" />
+            <Color x:Key="CellBackgroundColor">#191919</Color>
+            <Style x:Key="FrameStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{StaticResource CellBackgroundColor}" />
+                <Setter Property="CornerRadius" Value="5" />
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="Padding" Value="10" />
+                <Setter Property="Margin" Value="1" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid BackgroundColor="#151515" RowSpacing="8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60" />
+                <RowDefinition Height="55" />
+                <RowDefinition Height="55" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                HorizontalOptions="Center"
+                VerticalOptions="Start">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span
+                            FontSize="22"
+                            Text="{Binding SelectedTransaction.Status, Converter={StaticResource StatusSignConverter}}"
+                            TextColor="#FFEE00" />
+                        <Span
+                            FontSize="36"
+                            Text="{Binding SelectedTransaction.Amount}"
+                            TextColor="#FFEE00" />
+                        <Span
+                            FontAttributes="Bold"
+                            FontSize="Medium"
+                            Text="."
+                            TextColor="#FFEE00" />
+                        <Span
+                            FontSize="22"
+                            Text="{Binding SelectedTransaction.Decimals, StringFormat='{}{0:N9}'}"
+                            TextColor="#FFEE00" />
+                        <Span
+                            FontSize="14"
+                            Text=" ツ"
+                            TextColor="#FFEE00" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <StackLayout
+                Grid.Row="1"
+                Grid.Column="0"
+                Orientation="Vertical">
+                <Label Text="{x:Static resource:AppResources.Fee}" TextColor="Gray" />
+                <Label FontSize="18" TextColor="White">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding SelectedTransaction.Fee}" />
+                            <Span FontSize="12" Text=" ツ" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+            <StackLayout
+                Grid.Row="2"
+                Grid.Column="0"
+                Orientation="Vertical">
+                <Label Text="{x:Static resource:AppResources.Date}" TextColor="Gray" />
+                <Label
+                    FontSize="18"
+                    Text="{Binding SelectedTransaction.Date, StringFormat='{}{0:dddd, dd MMMM yyyy hh:mm tt}'}"
+                    TextColor="White" />
+            </StackLayout>
+            <StackLayout
+                Grid.Row="3"
+                Grid.Column="0"
+                Orientation="Vertical">
+                <Label Text="Slatepack Message" TextColor="Gray" />
+                <Editor
+                    AutoSize="Disabled"
+                    BackgroundColor="#0C0C0C"
+                    CharacterSpacing="4"
+                    FontSize="Caption"
+                    HeightRequest="250"
+                    IsReadOnly="True"
+                    IsSpellCheckEnabled="False"
+                    IsTextPredictionEnabled="False"
+                    Text="{Binding SelectedTransaction.Message}"
+                    TextColor="LightGray">
+                    <Editor.Effects>
+                        <xct:RemoveBorderEffect />
+                    </Editor.Effects>
+                </Editor>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="44" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*" />
+                        <ColumnDefinition Width="5*" />
+                    </Grid.ColumnDefinitions>
+                    <Button
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    BackgroundColor="#0C0C0C"
+                    Command="{Binding CopySlatepackMessageCommand}"
+                    CornerRadius="5"
+                    HeightRequest="44"
+                    Text="{x:Static resource:AppResources.Copy}"
+                    TextColor="White"
+                    TextTransform="None" />
+                    <Button
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    BackgroundColor="#0C0C0C"
+                    Command="{Binding ShareSlatepackMessageCommand}"
+                    CornerRadius="5"
+                    HeightRequest="44"
+                    Text="{x:Static resource:AppResources.Share}"
+                    TextColor="White"
+                    TextTransform="None" />
+                </Grid>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

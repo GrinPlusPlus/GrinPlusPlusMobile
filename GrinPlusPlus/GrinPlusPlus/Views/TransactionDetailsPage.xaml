@@ -15,7 +15,6 @@
         <ResourceDictionary>
             <c:RelativeDateTimeConverter x:Key="RelativeDateTimeConverter" />
             <c:StatusSignConverter x:Key="StatusSignConverter" />
-            <c:StatusIconConverter x:Key="StatusIconConverter" />
             <Color x:Key="CellBackgroundColor">#191919</Color>
             <Style x:Key="FrameStyle" TargetType="Frame">
                 <Setter Property="BackgroundColor" Value="{StaticResource CellBackgroundColor}" />
@@ -29,13 +28,13 @@
     <ContentPage.Content>
         <Grid BackgroundColor="#151515" RowSpacing="8">
             <Grid.RowDefinitions>
+                <RowDefinition Height="60" />
                 <RowDefinition Height="55" />
-                <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
-                <RowDefinition Height="50" />
-                <RowDefinition Height="25" />
+                <RowDefinition Height="55" />
+                <RowDefinition Height="55" />
+                <RowDefinition Height="55" />
+                <RowDefinition Height="55" />
+                <RowDefinition Height="30" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -53,7 +52,7 @@
                             Text="{Binding SelectedTransaction.Status, Converter={StaticResource StatusSignConverter}}"
                             TextColor="#FFEE00" />
                         <Span
-                            FontSize="35"
+                            FontSize="36"
                             Text="{Binding SelectedTransaction.Amount}"
                             TextColor="#FFEE00" />
                         <Span
@@ -87,7 +86,7 @@
                 Grid.Column="0"
                 Orientation="Vertical">
                 <Label Text="{x:Static resource:AppResources.Fee}" TextColor="Gray" />
-                <Label FontSize="16" TextColor="White">
+                <Label FontSize="18" TextColor="White">
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Text="{Binding SelectedTransaction.Fee}" />
@@ -102,7 +101,7 @@
                 Orientation="Vertical">
                 <Label Text="{x:Static resource:AppResources.Date}" TextColor="Gray" />
                 <Label
-                    FontSize="16"
+                    FontSize="18"
                     Text="{Binding SelectedTransaction.Date, StringFormat='{}{0:dddd, dd MMMM yyyy hh:mm tt}'}"
                     TextColor="White" />
             </StackLayout>
@@ -112,7 +111,7 @@
                 Orientation="Vertical">
                 <Label Text="{x:Static resource:AppResources.ConfirmedHeight}" TextColor="Gray" />
                 <Label
-                    FontSize="16"
+                    FontSize="18"
                     Text="{Binding SelectedTransaction.ConfirmedHeight}"
                     TextColor="White" />
             </StackLayout>

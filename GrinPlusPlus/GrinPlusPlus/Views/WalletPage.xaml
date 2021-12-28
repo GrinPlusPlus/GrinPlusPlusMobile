@@ -15,18 +15,11 @@
     <NavigationPage.TitleView>
         <Grid Margin="0" Padding="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Image
-                Grid.Row="0"
-                Grid.Column="0"
-                Margin="0"
-                HorizontalOptions="Center"
-                Source="{Binding StatusIcon}" />
             <Label
                 Grid.Row="0"
-                Grid.Column="1"
+                Grid.Column="0"
                 FontSize="18"
                 Text="{Binding Wallet}"
                 TextColor="White"
@@ -53,7 +46,7 @@
             Command="{prism:NavigateTo 'StatusPage',
                         UseModalNavigation=False,
                         Animated=True}"
-            IconImageSource="baseline_cloud_sync_white_24.png"
+            IconImageSource="baseline_wifi_white_24.png"
             Order="Primary"
             Priority="0"
             Text="" />
@@ -368,12 +361,21 @@
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="5*" />
-                                        <ColumnDefinition Width="5*" />
+                                        <ColumnDefinition Width="3*" />
+                                        <ColumnDefinition Width="3*" />
+                                        <ColumnDefinition Width="3*" />
                                     </Grid.ColumnDefinitions>
                                     <Button
                                         Grid.Row="0"
                                         Grid.Column="0"
+                                        Command="{Binding Source={x:Reference Wallet}, Path=BindingContext.OpenTransactionDetailsCommand}"
+                                        CommandParameter="{Binding Id}"
+                                        HeightRequest="20"
+                                        Text="{x:Static resource:AppResources.Details}"
+                                        TextTransform="None" />
+                                    <Button
+                                        Grid.Row="0"
+                                        Grid.Column="1"
                                         Command="{prism:NavigateTo 'FinalizeTransactionPage',
                                                                    UseModalNavigation=False,
                                                                    Animated=True}"
@@ -383,7 +385,7 @@
                                         TextTransform="None" />
                                     <Button
                                         Grid.Row="0"
-                                        Grid.Column="1"
+                                        Grid.Column="2"
                                         Command="{Binding Source={x:Reference Wallet}, Path=BindingContext.CancelTransactionCommand}"
                                         CommandParameter="{Binding Id}"
                                         IsVisible="{Binding CanBeCanceled}"

@@ -155,19 +155,6 @@ namespace GrinPlusPlus.ViewModels
             }
         }
 
-        private string _statusIcon = "baseline_wifi_white_24.png";
-        public string StatusIcon
-        {
-            get
-            {
-                return _statusIcon;
-            }
-            set
-            {
-                SetProperty(ref _statusIcon, value);
-            }
-        }
-
         private string _slatepackAddress = string.Empty;
         public string SlatepackAddress
         {
@@ -195,6 +182,8 @@ namespace GrinPlusPlus.ViewModels
         }
 
         public DelegateCommand<object> CancelTransactionCommand { get; private set; }
+        public DelegateCommand<object> OpenTransactionDetailsCommand { get; private set; }
+        public DelegateCommand<object> FinalizeTransactionCommand { get; private set; }
 
         public DelegateCommand SendButtonClickedCommand => new DelegateCommand(SendButtonClicked);
 
@@ -224,6 +213,8 @@ namespace GrinPlusPlus.ViewModels
             UserCanSend = Balance.Spendable > 0;
 
             CancelTransactionCommand = new DelegateCommand<object>(CancelTransaction);
+            OpenTransactionDetailsCommand = new DelegateCommand<object>(OpenUnfinalizedTransaction);
+            FinalizeTransactionCommand = new DelegateCommand<object>(FinalizeTransaction);
 
             Task.Factory.StartNew(async () =>
             {
@@ -491,13 +482,15 @@ namespace GrinPlusPlus.ViewModels
 
         async void CancelTransaction(object id)
         {
-            if (await PageDialogService.DisplayAlertAsync(AppResources.ResourceManager.GetString("CancelTransaction"),
+            var cancel = await PageDialogService.DisplayAlertAsync(AppResources.ResourceManager.GetString("CancelTransaction"),
                                                           AppResources.ResourceManager.GetString("CancelTransactionQuestion"),
-                                                          AppResources.ResourceManager.GetString("Yes"), AppResources.ResourceManager.GetString("No")))
+                                                          AppResources.ResourceManager.GetString("Yes"), AppResources.ResourceManager.GetString("No"));
+            if (cancel)
             {
                 try
                 {
-                    await DataProvider.CancelTransaction(await SecureStorage.GetAsync("token").ConfigureAwait(false), (int)id).ConfigureAwait(false);
+                    var token = await SecureStorage.GetAsync("token");
+                    await DataProvider.CancelTransaction(token, (int)id).ConfigureAwait(false);
                 }
                 catch (Exception ex)
                 {
@@ -519,6 +512,26 @@ namespace GrinPlusPlus.ViewModels
             });
 
             SelectedFilteredTransaction = null;
+        }
+
+        void OpenUnfinalizedTransaction(object transactionId)
+        {
+            var transaction = UnfinalizedTransactions.First(tx => new List<int> { (int)transactionId }.Any(id => tx.Id.Equals(id)));
+
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                await NavigationService.NavigateAsync("UnfinalizedTransactionDetailsPage", new NavigationParameters { { "transaction", transaction } });
+            });
+        }
+
+        void FinalizeTransaction(object transactionId)
+        {
+            var transaction = UnfinalizedTransactions.Where(tx => new List<int> { (int)transactionId }.Any(id => tx.Id.Equals(id))).ToList();
+
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                await NavigationService.NavigateAsync("TransactionDetailsPage", new NavigationParameters { { "transaction", transaction } });
+            });
         }
 
         public DelegateCommand LogoutButtonClickedCommand => new DelegateCommand(Logout);
