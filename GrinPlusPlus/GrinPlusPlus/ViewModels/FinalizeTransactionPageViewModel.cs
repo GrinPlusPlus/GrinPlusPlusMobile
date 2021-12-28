@@ -4,7 +4,6 @@ using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
 using System;
-using System.Diagnostics;
 using Xamarin.Essentials;
 
 
@@ -63,14 +62,20 @@ namespace GrinPlusPlus.ViewModels
             try
             {
                 var token = await SecureStorage.GetAsync("token");
-                var finalized = await DataProvider.FinalizeTransaction(token, SlatepackMessage).ConfigureAwait(false);
-
-                await NavigationService.GoBackToRootAsync();
+                var finalized = await DataProvider.FinalizeTransaction(token, SlatepackMessage);
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
+                MainThread.BeginInvokeOnMainThread(async () =>
+                {
+                    await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
+                });
             }
+
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                await NavigationService.GoBackToRootAsync();
+            });
         }
     }
 }
