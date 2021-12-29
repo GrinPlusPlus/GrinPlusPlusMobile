@@ -69,12 +69,6 @@ namespace GrinPlusPlus.ViewModels
             }
         }
 
-        public DelegateCommand OpenBackupWalletPageCommand => new DelegateCommand(OpenBackupWalletPage);
-        private async void OpenBackupWalletPage()
-        {
-            await NavigationService.NavigateAsync("BackupWalletPage", new NavigationParameters { { "username", await SecureStorage.GetAsync("username") } });
-        }
-
         public DelegateCommand ExportLogsButtonClickedCommand => new DelegateCommand(ExportLogsButtonClicked);
         async void ExportLogsButtonClicked()
         {
