@@ -515,15 +515,13 @@
             </CollectionView>
             <Grid
                 Grid.Row="5"
-                Grid.Column="0"
-                VerticalOptions="Center">
+                Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="48" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="48" />
-                    <ColumnDefinition Width="5*" />
-                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Button
                     Grid.Row="0"
@@ -533,36 +531,47 @@
                     HeightRequest="48"
                     ImageSource="baseline_logout_white_24.png"
                     VerticalOptions="Center" />
-                <Button
+                <Grid
                     Grid.Row="0"
                     Grid.Column="1"
-                    BackgroundColor="#151515"
-                    Command="{Binding SendButtonClickedCommand}"
-                    FontSize="16"
-                    HeightRequest="48"
                     HorizontalOptions="End"
-                    ImageSource="baseline_north_east_white_20.png"
-                    IsEnabled="{Binding UserCanSend}"
-                    IsVisible="{Binding UserCanSend}"
-                    Text="{x:Static resource:AppResources.Send}"
-                    TextColor="White"
-                    TextTransform="None"
-                    VerticalOptions="Center" />
-                <Button
-                    Grid.Row="0"
-                    Grid.Column="2"
-                    BackgroundColor="#151515"
-                    Command="{prism:NavigateTo 'ReceiveTransactionPage',
-                                               UseModalNavigation=False,
-                                               Animated=True}"
-                    FontSize="16"
-                    HeightRequest="48"
-                    HorizontalOptions="End"
-                    ImageSource="baseline_south_west_white_20.png"
-                    Text="{x:Static resource:AppResources.Receive}"
-                    TextColor="White"
-                    TextTransform="None"
-                    VerticalOptions="Center" />
+                    VerticalOptions="Center">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="48" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="120" />
+                    </Grid.ColumnDefinitions>
+                    <Button
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        BackgroundColor="#151515"
+                        Command="{Binding SendButtonClickedCommand}"
+                        FontSize="16"
+                        HeightRequest="48"
+                        ImageSource="baseline_north_east_white_20.png"
+                        IsEnabled="{Binding UserCanSend}"
+                        IsVisible="{Binding UserCanSend}"
+                        Text="{x:Static resource:AppResources.Send}"
+                        TextColor="White"
+                        TextTransform="None"
+                        VerticalOptions="Center" />
+                    <Button
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        BackgroundColor="#151515"
+                        Command="{prism:NavigateTo 'ReceiveTransactionPage',
+                                                    UseModalNavigation=False,
+                                                    Animated=True}"
+                        FontSize="16"
+                        HeightRequest="48"
+                        ImageSource="baseline_south_west_white_20.png"
+                        Text="{x:Static resource:AppResources.Receive}"
+                        TextColor="White"
+                        TextTransform="None"
+                        VerticalOptions="Center" />
+                </Grid>
             </Grid>
         </Grid>
     </ContentPage.Content>
