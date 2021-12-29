@@ -8,7 +8,7 @@
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     x:Name="Wallet"
     Title="{Binding Wallet}"
-    Padding="10,0,10,5"
+    Padding="10,0,10,10"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="#151515"
     IconImageSource="outline_account_balance_wallet_white_24.png">
@@ -513,66 +513,32 @@
                     <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
                 </CollectionView.ItemsLayout>
             </CollectionView>
-            <Grid
-                Grid.Row="5"
-                Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="48" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="48" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+            <StackLayout Grid.Row="5" Grid.Column="0"
+                         Orientation="Horizontal"
+                         Spacing="30">
                 <Button
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    BackgroundColor="#151515"
-                    Command="{Binding LogoutButtonClickedCommand}"
-                    HeightRequest="48"
-                    ImageSource="baseline_logout_white_24.png"
-                    VerticalOptions="Center" />
-                <Grid
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    HorizontalOptions="End"
-                    VerticalOptions="Center">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="48" />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="120" />
-                        <ColumnDefinition Width="120" />
-                    </Grid.ColumnDefinitions>
-                    <Button
-                        Grid.Row="0"
-                        Grid.Column="0"
-                        BackgroundColor="#151515"
-                        Command="{Binding SendButtonClickedCommand}"
-                        FontSize="16"
-                        HeightRequest="48"
-                        ImageSource="baseline_north_east_white_20.png"
-                        IsEnabled="{Binding UserCanSend}"
-                        IsVisible="{Binding UserCanSend}"
-                        Text="{x:Static resource:AppResources.Send}"
-                        TextColor="White"
-                        TextTransform="None"
-                        VerticalOptions="Center" />
-                    <Button
-                        Grid.Row="0"
-                        Grid.Column="1"
-                        BackgroundColor="#151515"
-                        Command="{prism:NavigateTo 'ReceiveTransactionPage',
-                                                    UseModalNavigation=False,
-                                                    Animated=True}"
-                        FontSize="16"
-                        HeightRequest="48"
-                        ImageSource="baseline_south_west_white_20.png"
-                        Text="{x:Static resource:AppResources.Receive}"
-                        TextColor="White"
-                        TextTransform="None"
-                        VerticalOptions="Center" />
-                </Grid>
-            </Grid>
+                    BackgroundColor="#080808"
+                    FontSize="16"
+                    HorizontalOptions="FillAndExpand"
+                    ImageSource="baseline_north_east_white_20.png"
+                    IsEnabled="{Binding UserCanSend}"
+                    IsVisible="{Binding UserCanSend}"
+                    Command="{Binding SendButtonClickedCommand}"
+                    Text="{x:Static resource:AppResources.Send}"
+                    TextColor="White"
+                    TextTransform="None" />
+                <Button
+                    BackgroundColor="#080808"
+                    FontSize="16"
+                    HorizontalOptions="FillAndExpand"
+                    ImageSource="baseline_south_west_white_20.png"
+                    Command="{prism:NavigateTo 'ReceiveTransactionPage',
+                                                UseModalNavigation=False,
+                                                Animated=True}"
+                    Text="{x:Static resource:AppResources.Receive}"
+                    TextColor="White"
+                    TextTransform="None" />
+            </StackLayout>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

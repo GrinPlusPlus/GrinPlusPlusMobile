@@ -534,7 +534,6 @@ namespace GrinPlusPlus.ViewModels
             });
         }
 
-        public DelegateCommand LogoutButtonClickedCommand => new DelegateCommand(Logout);
         async void Logout()
         {
             string wallet = await SecureStorage.GetAsync("username");
