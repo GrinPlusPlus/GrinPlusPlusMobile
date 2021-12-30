@@ -1,10 +1,11 @@
 ﻿using GrinPlusPlus.Api;
+using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
 using System.Collections.ObjectModel;
 using System.Linq;
-
+using Xamarin.Essentials;
 
 namespace GrinPlusPlus.ViewModels
 {
@@ -23,6 +24,9 @@ namespace GrinPlusPlus.ViewModels
             }
         }
 
+        public DelegateCommand GoHomeButtonClickedCommand => new DelegateCommand(GoHomeButtonClicked);
+
+
         public WalletSeedBackupPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
@@ -36,6 +40,14 @@ namespace GrinPlusPlus.ViewModels
                 string seed = parameters.GetValue<string>("wallet_seed");
                 WalletSeedWordsList = new ObservableCollection<string>(seed.Split(' ').ToList());
             }
+        }
+
+        void GoHomeButtonClicked()
+        {
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                await NavigationService.GoBackToRootAsync();
+            });
         }
     }
 }

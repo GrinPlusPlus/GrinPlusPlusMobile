@@ -26,6 +26,7 @@
                     <RowDefinition Height="38" />
                     <RowDefinition Height="38" />
                     <RowDefinition Height="38" />
+                    <RowDefinition Height="48" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="5*" />
@@ -561,6 +562,18 @@
                         TextColor="White"
                         VerticalTextAlignment="Center" />
                 </StackLayout>
+                <Button
+                    Grid.Row="12"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    BackgroundColor="#0C0C0C"
+                    Command="{Binding GoHomeButtonClickedCommand}"
+                    CornerRadius="5"
+                    HeightRequest="48"
+                    IsEnabled="{Binding IsValid}"
+                    Text="{x:Static resource:AppResources.Continue}"
+                    TextColor="White"
+                    TextTransform="None" />
             </Grid>
         </ScrollView>
     </ContentPage.Content>

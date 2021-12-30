@@ -29,9 +29,10 @@
                 </Entry.Effects>
             </Entry>
             <Button
-                BackgroundColor="#0C0C0C"
+                BackgroundColor="#050505"
                 Command="{Binding BackupWalletCommand}"
                 CornerRadius="5"
+                FontSize="16"
                 HeightRequest="48"
                 IsEnabled="{Binding IsIdle}"
                 Text="{x:Static resource:AppResources.GetWalletSeed}"
