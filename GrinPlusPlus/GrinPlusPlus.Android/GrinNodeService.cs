@@ -234,11 +234,9 @@ namespace GrinPlusPlus.Droid
 		Notification.Action BuildRestartNodeAction()
         {
             var action = "Run";
-            var status = Xamarin.Essentials.Preferences.Get("Status", string.Empty);
-            if (!status.Equals("Not Running"))
-            {
-                action = "Restart";
-            }
+            
+            if (NodeControl.IsNodeRunning()) action = "Restart";
+            
             var restartIntent = new Intent(this, GetType());
             restartIntent.SetAction(Constants.ACTION_RESTART_NODE);
             var restartTimerPendingIntent = PendingIntent.GetService(this, 0, restartIntent, 0);
@@ -257,11 +255,7 @@ namespace GrinPlusPlus.Droid
 		Notification.Action BuildResyncNodeAction()
         {
             var status = Xamarin.Essentials.Preferences.Get("Status", string.Empty);
-            if (status.Equals("Not Running"))
-            {
-                return null;
-            }
-
+            
             var resyncNodeIntent = new Intent(this, GetType());
             resyncNodeIntent.SetAction(Constants.ACTION_RESYNC_NODE);
             var restartTimerPendingIntent = PendingIntent.GetService(this, 0, resyncNodeIntent, 0);
@@ -280,6 +274,8 @@ namespace GrinPlusPlus.Droid
 		/// <returns>The stop service action.</returns>
 		Notification.Action BuildStopServiceAction()
         {
+            if (!NodeControl.IsNodeRunning()) return null;
+
             var stopServiceIntent = new Intent(this, GetType());
             stopServiceIntent.SetAction(Constants.ACTION_STOP_SERVICE);
             var stopServicePendingIntent = PendingIntent.GetService(this, 0, stopServiceIntent, 0);

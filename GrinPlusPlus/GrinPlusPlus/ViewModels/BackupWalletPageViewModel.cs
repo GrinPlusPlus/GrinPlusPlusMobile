@@ -53,6 +53,20 @@ namespace GrinPlusPlus.ViewModels
 
         public DelegateCommand BackupWalletCommand => new DelegateCommand(BackupWallet);
 
+        public BackupWalletPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
+            : base(navigationService, dataProvider, dialogService, pageDialogService)
+        {
+
+        }
+
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            if (parameters.ContainsKey("username"))
+            {
+                Username = parameters.GetValue<string>("username");
+            }
+        }
+
         private async void BackupWallet()
         {
             try
@@ -67,7 +81,7 @@ namespace GrinPlusPlus.ViewModels
                     throw new Exception(AppResources.ResourceManager.GetString("PasswordCanNotBeEmpty"));
                 }
 
-                var seed = await DataProvider.BackupWallet(Username, Password).ConfigureAwait(false);
+                var seed = await DataProvider.BackupWallet(Username, Password);
 
                 if (await CrossFingerprint.Current.IsAvailableAsync(true))
                 {
@@ -102,20 +116,6 @@ namespace GrinPlusPlus.ViewModels
             {
                 IsBusy = false;
                 IsIdle = true;
-            }
-        }
-
-        public BackupWalletPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
-            : base(navigationService, dataProvider, dialogService, pageDialogService)
-        {
-
-        }
-
-        public override void OnNavigatedTo(INavigationParameters parameters)
-        {
-            if (parameters.ContainsKey("username"))
-            {
-                Username = parameters.GetValue<string>("username");
             }
         }
     }
