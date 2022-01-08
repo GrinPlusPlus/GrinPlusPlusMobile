@@ -24,10 +24,11 @@
             <Editor
                 Margin="20,0,20,10"
                 AutoSize="Disabled"
-                BackgroundColor="#252525"
-                CharacterSpacing="4"
+                BackgroundColor="#0C0C0C"
+                CharacterSpacing="3"
+                FontFamily="monospace"
                 FontSize="12"
-                HeightRequest="220"
+                HeightRequest="260"
                 IsSpellCheckEnabled="False"
                 IsTextPredictionEnabled="False"
                 Text="{Binding SlatepackMessage}"
@@ -38,7 +39,7 @@
             </Editor>
             <Button
                 Margin="20,0,20,20"
-                BackgroundColor="#0C0C0C"
+                BackgroundColor="#252525"
                 Command="{Binding FinalizeTransactionCommand}"
                 CornerRadius="5"
                 FontSize="16"

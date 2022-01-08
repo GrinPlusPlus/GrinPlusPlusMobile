@@ -32,7 +32,7 @@ namespace GrinPlusPlus.Service
 
         public async Task<Models.Node.Status> Status()
         {
-            return await GrinAPI.Request<Models.Node.Status>(Endpoints.Status).ConfigureAwait(false);
+            return await GrinAPI.Request<Models.Node.Status>(Endpoints.Status);
         }
 
         public async Task<Models.Node.Peer[]> ConnectedPeers()
@@ -42,12 +42,12 @@ namespace GrinPlusPlus.Service
 
         public async Task Resync()
         {
-            await GrinAPI.Request(Endpoints.Resync).ConfigureAwait(false);
+            await GrinAPI.Request(Endpoints.Resync);
         }
 
         public async Task Shutdown()
         {
-            await GrinAPI.Request(Endpoints.Shutdown).ConfigureAwait(false);
+            await GrinAPI.Request(Endpoints.Shutdown);
         }
     }
 }

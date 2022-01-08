@@ -264,7 +264,7 @@
             <Grid
                 Grid.Row="1"
                 Grid.Column="0"
-                Margin="10,0,10,0">
+                Margin="10,5,10,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20" />
                 </Grid.RowDefinitions>
@@ -300,7 +300,7 @@
             <CollectionView
                 Grid.Row="2"
                 Grid.Column="0"
-                Margin="10,0,10,0"
+                Margin="10,5,10,0"
                 ItemsSource="{Binding UnfinalizedTransactions}"
                 SelectionMode="None">
                 <CollectionView.ItemTemplate>
@@ -308,7 +308,7 @@
                         <Frame Style="{StaticResource FrameStyle}">
                             <Grid>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="20" />
+                                    <RowDefinition Height="28" />
                                     <RowDefinition Height="42" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
@@ -323,7 +323,7 @@
                                         <FormattedString>
                                             <Span
                                                 FontAttributes="Bold"
-                                                FontSize="18"
+                                                FontSize="20"
                                                 Text="{Binding Amount}"
                                                 TextColor="WhiteSmoke" />
                                             <Span
@@ -333,7 +333,7 @@
                                             <Span Text="{Binding Decimals}" TextColor="WhiteSmoke" />
                                             <Span
                                                 FontAttributes="Bold"
-                                                FontSize="12"
+                                                FontSize="14"
                                                 Text="  ツ"
                                                 TextColor="WhiteSmoke" />
                                         </FormattedString>
@@ -362,30 +362,42 @@
                                     <Button
                                         Grid.Row="0"
                                         Grid.Column="0"
+                                        BackgroundColor="#151515"
+                                        TextColor="White"
+                                        TextTransform="None"
                                         Command="{Binding Source={x:Reference Wallet}, Path=BindingContext.OpenTransactionDetailsCommand}"
                                         CommandParameter="{Binding Id}"
                                         HeightRequest="20"
-                                        Text="{x:Static resource:AppResources.Details}"
-                                        TextTransform="None" />
+                                        CornerRadius="5"
+                                        FontSize="14"
+                                        Text="{x:Static resource:AppResources.Details}" />
                                     <Button
                                         Grid.Row="0"
                                         Grid.Column="1"
+                                        BackgroundColor="#151515"
+                                        TextColor="White"
+                                        TextTransform="None"
                                         Command="{prism:NavigateTo 'FinalizeTransactionPage',
                                                                    UseModalNavigation=False,
                                                                    Animated=True}"
                                         HeightRequest="20"
+                                        FontSize="14"
+                                        CornerRadius="5"
                                         IsVisible="{Binding CanBeFinalized}"
-                                        Text="{x:Static resource:AppResources.Finalize}"
-                                        TextTransform="None" />
+                                        Text="{x:Static resource:AppResources.Finalize}" />
                                     <Button
                                         Grid.Row="0"
                                         Grid.Column="2"
+                                        BackgroundColor="#151515"
+                                        TextColor="Red"
+                                        TextTransform="None"
+                                        FontSize="14"
+                                        HeightRequest="20"
+                                        CornerRadius="5"
                                         Command="{Binding Source={x:Reference Wallet}, Path=BindingContext.CancelTransactionCommand}"
                                         CommandParameter="{Binding Id}"
                                         IsVisible="{Binding CanBeCanceled}"
-                                        Text="{x:Static resource:AppResources.Cancel}"
-                                        TextColor="Red"
-                                        TextTransform="None" />
+                                        Text="{x:Static resource:AppResources.Cancel}" />
                                 </Grid>
                             </Grid>
                         </Frame>
@@ -394,7 +406,6 @@
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
                 </CollectionView.ItemsLayout>
-                <CollectionView.EmptyView />
             </CollectionView>
             <Grid
                 Grid.Row="3"
@@ -443,7 +454,7 @@
             <CollectionView
                 Grid.Row="4"
                 Grid.Column="0"
-                Margin="10,5,10,5"
+                Margin="10,0,10,5"
                 ItemsSource="{Binding FilteredTransactionHistory}"
                 SelectedItem="{Binding SelectedFilteredTransaction}"
                 SelectionChangedCommand="{Binding OnFilteredTransactionChanged}"
@@ -492,13 +503,13 @@
                                             <FormattedString>
                                                 <Span
                                                     FontAttributes="Bold"
-                                                    FontSize="18"
+                                                    FontSize="20"
                                                     Text="{Binding Amount}"
                                                     TextColor="WhiteSmoke" />
                                                 <Span Text="." TextColor="WhiteSmoke" />
                                                 <Span Text="{Binding Decimals}" TextColor="White" />
                                                 <Span
-                                                    FontSize="12"
+                                                    FontSize="14"
                                                     Text="  ツ"
                                                     TextColor="WhiteSmoke" />
                                             </FormattedString>
@@ -517,21 +528,20 @@
                          Orientation="Horizontal"
                          Spacing="30">
                 <Button
-                    BackgroundColor="#080808"
+                    BackgroundColor="#252525"
                     FontSize="16"
+                    CornerRadius="5"
                     HorizontalOptions="FillAndExpand"
-                    ImageSource="baseline_north_east_white_20.png"
                     IsEnabled="{Binding UserCanSend}"
-                    IsVisible="{Binding UserCanSend}"
                     Command="{Binding SendButtonClickedCommand}"
                     Text="{x:Static resource:AppResources.Send}"
                     TextColor="White"
                     TextTransform="None" />
                 <Button
-                    BackgroundColor="#080808"
+                    BackgroundColor="#252525"
                     FontSize="16"
+                    CornerRadius="5"
                     HorizontalOptions="FillAndExpand"
-                    ImageSource="baseline_south_west_white_20.png"
                     Command="{prism:NavigateTo 'ReceiveTransactionPage',
                                                 UseModalNavigation=False,
                                                 Animated=True}"

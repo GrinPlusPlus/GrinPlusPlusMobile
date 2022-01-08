@@ -116,7 +116,7 @@ namespace GrinPlusPlus.ViewModels
         {
             try
             {
-                var connectedPeers = await DataProvider.GetNodeConnectedPeers().ConfigureAwait(false);
+                var connectedPeers = await DataProvider.GetNodeConnectedPeers();
                 if (ConnectedPeers.Count > 0)
                 {
                     foreach (Peer peer in ConnectedPeers)

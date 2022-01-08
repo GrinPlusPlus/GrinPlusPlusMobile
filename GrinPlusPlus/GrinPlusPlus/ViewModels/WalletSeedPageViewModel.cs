@@ -39,7 +39,7 @@ namespace GrinPlusPlus.ViewModels
 
         public override async void OnNavigatedTo(INavigationParameters parameters)
         {
-            WalletSeed = await SecureStorage.GetAsync("wallet_seed").ConfigureAwait(false);
+            WalletSeed = await SecureStorage.GetAsync("wallet_seed");
             WalletSeedWordsList = new ObservableCollection<string>(WalletSeed.Split(' ').ToList());
         }
     }

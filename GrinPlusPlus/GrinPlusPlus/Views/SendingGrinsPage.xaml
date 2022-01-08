@@ -19,20 +19,27 @@
             <Label
                 Margin="20,15,20,0"
                 FontSize="16"
-                Text="{x:Static resource:AppResources.Amount}"
-                TextColor="Gray"
-                TextTransform="Uppercase" />
+                 >
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span
+                            Text="{x:Static resource:AppResources.Amount}"
+                            TextColor="Gray"
+                            TextTransform="Uppercase" />
+                        <Span
+                            FontSize="16"
+                            Text=" ツ"
+                            TextColor="Gray" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
             <Label Margin="20,0,20,0">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span
                             FontSize="36"
                             Text="{Binding Amount, StringFormat='{}{0:N9}'}"
-                            TextColor="White" />
-                        <Span
-                            FontSize="16"
-                            Text=" ツ"
-                            TextColor="White" />
+                            TextColor="#FFD717" />
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
@@ -41,7 +48,7 @@
                 FontSize="16"
                 Text="{x:Static resource:AppResources.Fee}"
                 TextColor="Gray"
-                TextTransform="Uppercase" />
+                TextTransform="None" />
             <Label Margin="20,0,20,0">
                 <Label.FormattedText>
                     <FormattedString>
@@ -68,16 +75,16 @@
                 Text="{Binding Address}"
                 TextColor="White" />
             <Button
-                Margin="20"
-                BackgroundColor="#0C0C0C"
+                Margin="100,0,100,80"
+                BackgroundColor="#252525"
                 Command="{Binding SendUsingTorCommand}"
                 CornerRadius="5"
                 FontSize="16"
-                HeightRequest="44"
+                HeightRequest="48"
                 Text="{x:Static resource:AppResources.Confirm}"
+                VerticalOptions="EndAndExpand"
                 TextColor="White"
-                TextTransform="None"
-                VerticalOptions="EndAndExpand" />
+                TextTransform="None" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

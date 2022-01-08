@@ -319,7 +319,7 @@ namespace GrinPlusPlus.ViewModels
             }
             try
             {
-                Settings.Reachable = await DataProvider.CheckAddressAvailability(address, Settings.GrinChckAPIURL).ConfigureAwait(false);
+                Settings.Reachable = await DataProvider.CheckAddressAvailability(address, Settings.GrinChckAPIURL);
             }
             catch (Exception ex)
             {
@@ -332,13 +332,8 @@ namespace GrinPlusPlus.ViewModels
         {
             try
             {
-                var balance = await DataProvider.GetWalletBalance(await SecureStorage.GetAsync("token")).ConfigureAwait(false);
-                if (Balance.Total != balance.Total || Balance.Spendable != balance.Spendable || Balance.Immature != balance.Immature ||
-                    Balance.Unconfirmed != balance.Unconfirmed || Balance.Locked != balance.Locked)
-                {
-                    Balance = balance;
-                    UserCanSend = Balance.Spendable > 0;
-                }
+                Balance = await DataProvider.GetWalletBalance(await SecureStorage.GetAsync("token"));
+                UserCanSend = Balance.Spendable > 0;
             }
             catch (Exception ex)
             {
@@ -352,7 +347,7 @@ namespace GrinPlusPlus.ViewModels
             {
                 string token = await SecureStorage.GetAsync("token");
                 string[] filter = new string[] { "SENDING_NOT_FINALIZED" };
-                List<Transaction> unfinalized = await DataProvider.GetTransactions(token, filter).ConfigureAwait(false);
+                List<Transaction> unfinalized = await DataProvider.GetTransactions(token, filter);
                 LoadUnfinalizedTransactions(unfinalized);
             }
             catch (Exception ex)
@@ -365,7 +360,7 @@ namespace GrinPlusPlus.ViewModels
         {
             try
             {
-                AllTransactions = await DataProvider.GetTransactions(await SecureStorage.GetAsync("token").ConfigureAwait(false), new string[] {
+                AllTransactions = await DataProvider.GetTransactions(await SecureStorage.GetAsync("token"), new string[] {
                   "RECEIVING_IN_PROGRESS",
                   "SENDING_FINALIZED",
                   "COINBASE",
@@ -373,7 +368,7 @@ namespace GrinPlusPlus.ViewModels
                   "RECEIVED",
                   "SENT_CANCELED",
                   "RECEIVED_CANCELED"
-                }).ConfigureAwait(false);
+                });
 
                 FilterTransactions(CurrentSelectedFilterIndex);
             }
@@ -490,7 +485,7 @@ namespace GrinPlusPlus.ViewModels
                 try
                 {
                     var token = await SecureStorage.GetAsync("token");
-                    await DataProvider.CancelTransaction(token, (int)id).ConfigureAwait(false);
+                    await DataProvider.CancelTransaction(token, (int)id);
                 }
                 catch (Exception ex)
                 {

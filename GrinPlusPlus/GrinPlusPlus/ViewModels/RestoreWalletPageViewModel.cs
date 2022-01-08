@@ -22,14 +22,14 @@ namespace GrinPlusPlus.ViewModels
         private string _password = "";
         public string Password
         {
-            get { return _password; }
+            get { return _password.Trim(); }
             set { SetProperty(ref _password, value); }
         }
 
         private string _passwordConfirmation = "";
         public string PasswordConfirmation
         {
-            get { return _passwordConfirmation; }
+            get { return _passwordConfirmation.Trim(); }
             set { SetProperty(ref _passwordConfirmation, value); }
         }
 
@@ -114,7 +114,21 @@ namespace GrinPlusPlus.ViewModels
 
         private async void RestoreWallet()
         {
-            if(!Settings.Node.Status.Equals("Running"))
+            if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(Password))
+            {
+                string message = AppResources.ResourceManager.GetString("FillEmptyBoxes");
+                await PageDialogService.DisplayAlertAsync("Error", message, "OK");
+                return;
+            }
+
+            if (Password != PasswordConfirmation)
+            {
+                string message = AppResources.ResourceManager.GetString("ConfirmPassword");
+                await PageDialogService.DisplayAlertAsync("Error", message, "OK");
+                return;
+            }
+
+            if (!Settings.Node.Status.Equals("Running"))
             {
                 string message = AppResources.ResourceManager.GetString("WaitFullySynced");
                 await PageDialogService.DisplayAlertAsync("Error", message, "OK");
@@ -125,7 +139,7 @@ namespace GrinPlusPlus.ViewModels
             {
                 IsBusy = true;
 
-                var login = await DataProvider.RestoreWallet(Username, Password, WalletSeed).ConfigureAwait(false);
+                var login = await DataProvider.RestoreWallet(Username, Password, WalletSeed);
                 await SecureStorage.SetAsync("token", login.Token);
                 await SecureStorage.SetAsync("username", Username);
                 await SecureStorage.SetAsync("slatepack_address", login.SlatepackAdddress);

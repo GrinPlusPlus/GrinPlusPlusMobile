@@ -26,20 +26,12 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _address, value); }
         }
 
-        private string _message = string.Empty;
-        public string Message
-        {
-            get { return _message; }
-            set { SetProperty(ref _message, value); }
-        }
-
         private SendingResponse _sendingResponse;
         public SendingResponse SendingResponse
         {
             get { return _sendingResponse; }
             set { SetProperty(ref _sendingResponse, value); }
         }
-
 
         private bool _isBusy;
         public bool IsBusy
@@ -80,11 +72,6 @@ namespace GrinPlusPlus.ViewModels
                 Address = (string)parameters["address"];
             }
 
-            if (parameters.ContainsKey("message"))
-            {
-                Message = (string)parameters["message"];
-            }
-
             if (parameters.ContainsKey("max"))
             {
                 SendMax = (bool)parameters["max"];
@@ -92,22 +79,13 @@ namespace GrinPlusPlus.ViewModels
 
             try
             {
-                SendingResponse = await DataProvider.SendGrins(await SecureStorage.GetAsync("token").ConfigureAwait(false), Address, Amount, Message, null, "SMALLEST", SendMax).ConfigureAwait(false);
+                var token = await SecureStorage.GetAsync("token");
+                SendingResponse = await DataProvider.SendGrins(token, Address, Amount, string.Empty, null, "SMALLEST", SendMax);
 
-                if (SendingResponse.Status.ToLower().Equals("finalized"))
+                MainThread.BeginInvokeOnMainThread(async () =>
                 {
-                    MainThread.BeginInvokeOnMainThread(async () =>
-                    {
-                        await NavigationService.GoBackToRootAsync();
-                    });
-                }
-                else
-                {
-                    MainThread.BeginInvokeOnMainThread(async () =>
-                    {
-                        await NavigationService.NavigateAsync("SendGrinsUsingQRPage", new NavigationParameters { { "sending_response", SendingResponse } });
-                    });
-                }
+                    await NavigationService.GoBackToRootAsync();
+                });
             }
             catch (Exception ex)
             {

@@ -17,14 +17,12 @@
             Source="banner.png" />
     </NavigationPage.TitleView>
     <ContentPage.ToolbarItems>
-        <ToolbarItem Order="Secondary" Priority="0" Text="{x:Static resource:AppResources.Settings}"
-                     Command="{Binding OpenSettingsScreenCommand}" />
         <ToolbarItem Order="Secondary" Priority="0" Text="{x:Static resource:AppResources.Status}"
                      Command="{Binding OpenNodeStatusScreenCommand}" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid
-            Margin="50"
+            Margin="50,0,50,50"
             Padding="0"
             BackgroundColor="#151515"
             ColumnSpacing="0"

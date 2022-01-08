@@ -19,7 +19,7 @@
             Spacing="10"
             VerticalOptions="FillAndExpand">
             <Label
-                Text="{x:Static resource:AppResources.Account}"
+                Text="{x:Static resource:AppResources.Username}"
                 TextColor="Gray"
                 TextTransform="Uppercase" />
             <Entry
@@ -59,6 +59,10 @@
                     <xct:RemoveBorderEffect />
                 </Entry.Effects>
             </Entry>
+            <Label
+                Text="{x:Static resource:AppResources.ConfirmPassword}"
+                TextColor="Gray"
+                TextTransform="Uppercase" />
             <Entry
                 BackgroundColor="#252525"
                 FontSize="20"

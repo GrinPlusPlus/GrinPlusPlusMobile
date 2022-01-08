@@ -41,7 +41,7 @@
                 Command="{Binding CopySlatepackMessageCommand}"
                 CornerRadius="5"
                 FontFamily="16"
-                HeightRequest="44"
+                HeightRequest="48"
                 Text="{x:Static resource:AppResources.CopySlatepackMessage}"
                 TextColor="White" />
             <Button
@@ -50,7 +50,7 @@
                 Command="{Binding ShareSlatepackMessageCommand}"
                 CornerRadius="5"
                 FontFamily="16"
-                HeightRequest="44"
+                HeightRequest="48"
                 Text="{x:Static resource:AppResources.ShareSlatepackMessage}"
                 TextColor="White" />
             <Button
@@ -59,7 +59,7 @@
                 Command="{Binding CloseScreenCommand}"
                 CornerRadius="5"
                 FontFamily="16"
-                HeightRequest="44"
+                HeightRequest="48"
                 Text="{x:Static resource:AppResources.Close}"
                 TextColor="White"
                 VerticalOptions="EndAndExpand" />

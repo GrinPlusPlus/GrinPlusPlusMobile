@@ -1,40 +1,34 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace GrinPlusPlus.Service
 {
-    class GrinOwnerAPI
+    class GrinOwnerAPI : API
     {
-        static readonly HttpClient httpClient = new HttpClient() { Timeout = TimeSpan.FromMinutes(5) };
-
         public static async Task<T> Request<T>(string endpoint, Dictionary<string, string> headers = null)
         {
-            string response = await GrinOwnerAPI.MakeRequestAsync(endpoint, headers).ConfigureAwait(false);
+            string response = await GrinOwnerAPI.MakeRequestAsync(endpoint, headers);
 
             return JsonConvert.DeserializeObject<T>(response);
         }
 
         private static async Task<string> MakeRequestAsync(string endpoint, Dictionary<string, string> headers = null)
         {
-            httpClient.CancelPendingRequests();
-            httpClient.DefaultRequestHeaders.Clear();
+            string url = "http://127.0.0.1:3420/v1/wallet/owner/" + endpoint;
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, url);
 
             if (headers != null)
             {
                 foreach (KeyValuePair<string, string> header in headers)
                 {
-                    httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
+                    request.Headers.Add(header.Key, header.Value);
                 }
 
             }
 
-            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            string url = "http://127.0.0.1:3420/v1/wallet/owner/" + endpoint;
-            return await (await httpClient.GetAsync(url).ConfigureAwait(false)).Content.ReadAsStringAsync().ConfigureAwait(false);
+            return await (await httpClient.SendAsync(request)).Content.ReadAsStringAsync();
         }
     }
 }

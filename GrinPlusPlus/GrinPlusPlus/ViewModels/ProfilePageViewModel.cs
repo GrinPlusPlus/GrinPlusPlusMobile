@@ -42,7 +42,7 @@ namespace GrinPlusPlus.ViewModels
 
             Task.Factory.StartNew(async () =>
             {
-                SlatepackAddress = await SecureStorage.GetAsync("slatepack_address").ConfigureAwait(false);
+                SlatepackAddress = await SecureStorage.GetAsync("slatepack_address");
             });
 
         }

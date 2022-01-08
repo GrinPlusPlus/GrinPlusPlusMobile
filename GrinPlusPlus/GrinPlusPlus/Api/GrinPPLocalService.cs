@@ -12,12 +12,12 @@ namespace GrinPlusPlus.Api
     {
         public async Task<string> BackupWallet(string username, string password)
         {
-            return await Service.Owner.Instance.GetWalletSeed(username, password).ConfigureAwait(false);
+            return await Service.Owner.Instance.GetWalletSeed(username, password);
         }
 
         public async Task<Login> CreateWallet(string username, string password, int seedLength)
         {
-            var wallet = await Service.Owner.Instance.CreateWallet(username, password, seedLength).ConfigureAwait(false);
+            var wallet = await Service.Owner.Instance.CreateWallet(username, password, seedLength);
             return new Login()
             {
                 Token = wallet.Token,
@@ -30,12 +30,12 @@ namespace GrinPlusPlus.Api
 
         public async Task<bool> DeleteWallet(string username, string password)
         {
-            return await Service.Owner.Instance.DeleteWallet(username, password).ConfigureAwait(false);
+            return await Service.Owner.Instance.DeleteWallet(username, password);
         }
 
         public async Task<Login> DoLogin(string username, string password)
         {
-            var login = await Service.Owner.Instance.OpenWallet(username, password).ConfigureAwait(false);
+            var login = await Service.Owner.Instance.OpenWallet(username, password);
 
             if (login == null)
             {
@@ -54,7 +54,7 @@ namespace GrinPlusPlus.Api
         public async Task<List<Account>> GetAccounts()
         {
             List<Account> accounts = new List<Account>();
-            foreach (var account in (await Service.Owner.Instance.ListAccounts().ConfigureAwait(false)).Wallets)
+            foreach (var account in (await Service.Owner.Instance.ListAccounts()).Wallets)
             {
                 accounts.Add(new Account() { Name = account });
             }
@@ -65,7 +65,7 @@ namespace GrinPlusPlus.Api
         {
             List<Transaction> transactions = new List<Transaction>();
 
-            foreach (var transaction in await Service.Owner.Instance.GetWalletTransactions(token, statuses).ConfigureAwait(false))
+            foreach (var transaction in await Service.Owner.Instance.GetWalletTransactions(token, statuses))
             {
                 List<Kernel> kernels = new List<Kernel>();
                 if (transaction.Kernels != null)
@@ -123,7 +123,7 @@ namespace GrinPlusPlus.Api
 
         public async Task<Balance> GetWalletBalance(string token)
         {
-            var balance = await Service.Owner.Instance.GetWalletBalance(token).ConfigureAwait(false);
+            var balance = await Service.Owner.Instance.GetWalletBalance(token);
             return new Balance()
             {
                 Spendable = balance.Spendable,
@@ -136,7 +136,7 @@ namespace GrinPlusPlus.Api
 
         public async Task<Login> RestoreWallet(string username, string password, string seed)
         {
-            var wallet = await Service.Owner.Instance.RestoreWallet(username, password, seed).ConfigureAwait(false);
+            var wallet = await Service.Owner.Instance.RestoreWallet(username, password, seed);
             return new Login()
             {
                 Token = wallet.Token,
@@ -151,42 +151,42 @@ namespace GrinPlusPlus.Api
             {
                 inputs = new string[] { };
             }
-            var estimation = await Service.Owner.Instance.EstimateTransactionFee(token, amount, message, strategy, inputs).ConfigureAwait(false);
+            var estimation = await Service.Owner.Instance.EstimateTransactionFee(token, amount, message, strategy, inputs);
             var estimationInputs = new List<Output>();
             return new FeeEstimation() { Fee = estimation.Fee, Inputs = estimationInputs };
         }
 
         public async Task<SendingResponse> SendGrins(string token, string address, double amount, string message = "", string[] inputs = null, string strategy = "SMALLEST", bool max = false)
         {
-            var response = await Service.Owner.Instance.SendCoins(token, address, amount, message, inputs, strategy, max).ConfigureAwait(false);
+            var response = await Service.Owner.Instance.SendCoins(token, address, amount, message, inputs, strategy, max);
             return new SendingResponse() { Error = response.Error, Slatepack = response.Slatepack, Status = response.Status };
         }
 
         public async Task<bool> CancelTransaction(string token, int transaction)
         {
-            return await Service.Owner.Instance.CancelTransaction(token, transaction).ConfigureAwait(false);
+            return await Service.Owner.Instance.CancelTransaction(token, transaction);
         }
 
         public async Task<ReceivingResponse> ReceiveTransaction(string token, string slatepack)
         {
-            var response = await Service.Owner.Instance.ReceiveCoins(token, slatepack).ConfigureAwait(false);
+            var response = await Service.Owner.Instance.ReceiveCoins(token, slatepack);
             return new ReceivingResponse() { Error = response.Error, Slatepack = response.Slatepack, Status = response.Status };
         }
 
         public async Task<bool> FinalizeTransaction(string token, string slatepack)
         {
-            return await Service.Owner.Instance.FinalizeTransaction(token, slatepack).ConfigureAwait(false);
+            return await Service.Owner.Instance.FinalizeTransaction(token, slatepack);
         }
 
         public async Task<bool> RepostTransaction(string token, int transaction)
         {
-            return await Service.Owner.Instance.RepostTransaction(token, transaction).ConfigureAwait(false);
+            return await Service.Owner.Instance.RepostTransaction(token, transaction);
         }
 
         public async Task<List<Peer>> GetNodeConnectedPeers()
         {
             var peers = new List<Peer>();
-            foreach (var peer in await Service.Node.Instance.ConnectedPeers().ConfigureAwait(false))
+            foreach (var peer in await Service.Node.Instance.ConnectedPeers())
             {
                 peers.Add(new Peer() { Address = peer.Address, Agent = peer.Agent, Direction = peer.Direction });
             }
@@ -195,7 +195,7 @@ namespace GrinPlusPlus.Api
 
         public async Task<NodeStatus> GetNodeStatus()
         {
-            var nodeStatus = await Service.Node.Instance.Status().ConfigureAwait(false);
+            var nodeStatus = await Service.Node.Instance.Status();
             return new NodeStatus()
             {
                 Chain = new Chain
@@ -240,7 +240,7 @@ namespace GrinPlusPlus.Api
                 Timeout = TimeSpan.FromSeconds(30)
             };
 
-            var response = await httpclient.PostAsync(url, encodedContent).ConfigureAwait(false);
+            var response = await httpclient.PostAsync(url, encodedContent);
 
             var content = string.Empty;
 
@@ -259,12 +259,12 @@ namespace GrinPlusPlus.Api
 
         public async Task UpdateNodeSettings(int MinimumPeers, int MaximumPeers, int Confirmations)
         {
-            await Service.Foreign.Instance.UpdateSettings(MinimumPeers, MaximumPeers, Confirmations).ConfigureAwait(false);
+            await Service.Foreign.Instance.UpdateSettings(MinimumPeers, MaximumPeers, Confirmations);
         }
 
         public async Task<NodePreferences> GetNodeSettings()
         {
-            var settings = await Service.Foreign.Instance.GetSettings().ConfigureAwait(false);
+            var settings = await Service.Foreign.Instance.GetSettings();
             return new NodePreferences()
             {
                 MinimumPeers = settings.MinimumPeers,

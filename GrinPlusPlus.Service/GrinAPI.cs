@@ -1,36 +1,30 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace GrinPlusPlus.Service
 {
-    class GrinAPI
+    class GrinAPI : API
     {
-        static readonly HttpClient httpClient = new HttpClient() { Timeout = TimeSpan.FromMinutes(2) };
-
         public static async Task<T> Request<T>(string endpoint)
         {
-            string response = await GrinAPI.MakeRequestAsync(endpoint).ConfigureAwait(false);
+            string response = await GrinAPI.MakeRequestAsync(endpoint);
 
             return JsonConvert.DeserializeObject<T>(response);
         }
 
         public static async Task Request(string endpoint)
         {
-            await MakeRequestAsync(endpoint).ConfigureAwait(false);
+            await MakeRequestAsync(endpoint);
         }
 
         private static async Task<string> MakeRequestAsync(string endpoint)
         {
-            httpClient.CancelPendingRequests();
-            httpClient.DefaultRequestHeaders.Clear();
-
-            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             string url = "http://127.0.0.1:3413/v1/" + endpoint;
-            
-            return await (await httpClient.GetAsync(url).ConfigureAwait(false)).Content.ReadAsStringAsync().ConfigureAwait(false);
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, url);
+
+            return await (await httpClient.SendAsync(request)).Content.ReadAsStringAsync();
         }
     }
 }

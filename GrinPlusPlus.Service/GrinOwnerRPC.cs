@@ -2,15 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 
 namespace GrinPlusPlus.Service
 {
-    class GrinOwnerRPC
+    class GrinOwnerRPC : API
     {
-        static readonly HttpClient httpClient = new HttpClient() { Timeout = TimeSpan.FromMinutes(5)};
-
         static string BuildPayload(string method, Dictionary<string, object> keyValuePairs)
         {
             Dictionary<string, object> payload = new Dictionary<string, object>
@@ -27,7 +24,7 @@ namespace GrinPlusPlus.Service
         public static async Task<T> Request<T>(string method, Dictionary<string, object> keyValuePairs,
             Dictionary<string, string> headers = null)
         {
-            string response = await GrinOwnerRPC.MakeRequestAsync(BuildPayload(method, keyValuePairs), headers).ConfigureAwait(false);
+            string response = await GrinOwnerRPC.MakeRequestAsync(BuildPayload(method, keyValuePairs), headers);
 
             try
             {
@@ -50,7 +47,7 @@ namespace GrinPlusPlus.Service
 
         public static async Task Request(string method, Dictionary<string, object> keyValuePairs, Dictionary<string, string> headers = null)
         {
-            string response = await GrinOwnerRPC.MakeRequestAsync(BuildPayload(method, keyValuePairs), headers).ConfigureAwait(false);
+            string response = await GrinOwnerRPC.MakeRequestAsync(BuildPayload(method, keyValuePairs), headers);
 
             var deserializeObject = JsonConvert.DeserializeObject<Models.RPC.ErrorResponse>(response);
 
@@ -62,13 +59,14 @@ namespace GrinPlusPlus.Service
 
         private static async Task<string> MakeRequestAsync(string payload, Dictionary<string, string> headers = null)
         {
-            httpClient.CancelPendingRequests();
-            httpClient.DefaultRequestHeaders.Clear();
+            string url = "http://127.0.0.1:3421/v2";
+            
+            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, url);
+            request.Content = new StringContent(payload);
 
-            httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            var result = await httpClient.PostAsync("http://127.0.0.1:3421/v2", new StringContent(payload)).ConfigureAwait(false);
+            var result = await httpClient.SendAsync(request);
 
-            return await result.Content.ReadAsStringAsync().ConfigureAwait(false);
+            return await result.Content.ReadAsStringAsync();
         }
     }
 }

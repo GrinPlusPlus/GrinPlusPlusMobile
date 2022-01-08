@@ -29,14 +29,14 @@
                 </Entry.Effects>
             </Entry>
             <Button
-                BackgroundColor="#050505"
+                BackgroundColor="Transparent"
                 Command="{Binding BackupWalletCommand}"
                 CornerRadius="5"
                 FontSize="16"
                 HeightRequest="48"
                 IsEnabled="{Binding IsIdle}"
                 Text="{x:Static resource:AppResources.GetWalletSeed}"
-                TextColor="White"
+                TextColor="#FFD717"
                 TextTransform="None" />
             <Label
                 HorizontalOptions="Center"

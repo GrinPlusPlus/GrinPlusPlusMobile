@@ -49,7 +49,6 @@ namespace GrinPlusPlus
             containerRegistry.RegisterForNavigation<SendingGrinsPage, SendingGrinsPageViewModel>();
             containerRegistry.RegisterForNavigation<QRScannerPage, QRScannerPageViewModel>();
             containerRegistry.RegisterForNavigation<SendGrinsUsingTorPage, SendGrinsUsingTorPageViewModel>();
-            containerRegistry.RegisterForNavigation<SendGrinsUsingQRPage, SendGrinsUsingQRPageViewModel>();
             containerRegistry.RegisterForNavigation<FinalizeTransactionPage, FinalizeTransactionPageViewModel>();
             containerRegistry.RegisterForNavigation<ReceiveTransactionPage, ReceiveTransactionPageViewModel>();
             containerRegistry.RegisterForNavigation<StatusPage, StatusPageViewModel>();

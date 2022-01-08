@@ -28,7 +28,7 @@
     <ContentPage.Content>
         <Grid BackgroundColor="#151515" RowSpacing="8">
             <Grid.RowDefinitions>
-                <RowDefinition Height="60" />
+                <RowDefinition Height="50" />
                 <RowDefinition Height="55" />
                 <RowDefinition Height="55" />
                 <RowDefinition Height="*" />
@@ -99,9 +99,10 @@
                 <Editor
                     AutoSize="Disabled"
                     BackgroundColor="#0C0C0C"
-                    CharacterSpacing="4"
-                    FontSize="Caption"
-                    HeightRequest="250"
+                    CharacterSpacing="3"
+                    FontSize="12"
+                    HeightRequest="260"
+                    FontFamily="monospace"
                     IsReadOnly="True"
                     IsSpellCheckEnabled="False"
                     IsTextPredictionEnabled="False"
@@ -120,25 +121,27 @@
                         <ColumnDefinition Width="5*" />
                     </Grid.ColumnDefinitions>
                     <Button
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    BackgroundColor="#0C0C0C"
-                    Command="{Binding CopySlatepackMessageCommand}"
-                    CornerRadius="5"
-                    HeightRequest="44"
-                    Text="{x:Static resource:AppResources.Copy}"
-                    TextColor="White"
-                    TextTransform="None" />
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        BackgroundColor="#252525"
+                        Command="{Binding CopySlatepackMessageCommand}"
+                        CornerRadius="5"
+                        HeightRequest="48"
+                        FontSize="16"
+                        Text="{x:Static resource:AppResources.Copy}"
+                        TextColor="White"
+                        TextTransform="None" />
                     <Button
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    BackgroundColor="#0C0C0C"
-                    Command="{Binding ShareSlatepackMessageCommand}"
-                    CornerRadius="5"
-                    HeightRequest="44"
-                    Text="{x:Static resource:AppResources.Share}"
-                    TextColor="White"
-                    TextTransform="None" />
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        BackgroundColor="#252525"
+                        Command="{Binding ShareSlatepackMessageCommand}"
+                        CornerRadius="5"
+                        HeightRequest="48"
+                        FontSize="16"
+                        Text="{x:Static resource:AppResources.Share}"
+                        TextColor="White"
+                        TextTransform="None" />
                 </Grid>
             </StackLayout>
         </Grid>

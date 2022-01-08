@@ -61,7 +61,7 @@ namespace GrinPlusPlus.ViewModels
             IsLoggedIn = Settings.IsLoggedIn;
             try
             {
-                await DataProvider.UpdateNodeSettings(MinimumPeers, MaximumPeers, Confirmations).ConfigureAwait(false);
+                await DataProvider.UpdateNodeSettings(MinimumPeers, MaximumPeers, Confirmations);
             }
             catch (Exception ex)
             {

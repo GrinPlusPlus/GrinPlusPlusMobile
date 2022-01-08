@@ -23,10 +23,10 @@
             RowSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="24" />
-                <RowDefinition Height="44" />
+                <RowDefinition Height="48" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
-                <RowDefinition Height="44" />
+                <RowDefinition Height="48" />
                 <RowDefinition Height="260" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -46,7 +46,7 @@
                 HorizontalOptions="Fill"
                 Orientation="Horizontal">
                 <Entry
-                    BackgroundColor="#252525"
+                    BackgroundColor="#0C0C0C"
                     HorizontalOptions="FillAndExpand"
                     IsSpellCheckEnabled="False"
                     IsTextPredictionEnabled="False"
@@ -58,9 +58,10 @@
                     </Entry.Effects>
                 </Entry>
                 <Button
-                    BackgroundColor="#0C0C0C"
+                    BackgroundColor="#252525"
                     Command="{Binding OnQRButtonClickedCommand}"
-                    HeightRequest="40"
+                    HeightRequest="48"
+                    FontSize="16"
                     ImageSource="baseline_qr_code_white_24.png"
                     WidthRequest="44" />
             </StackLayout>
@@ -68,7 +69,6 @@
                 Grid.Row="2"
                 Grid.Column="0"
                 Margin="20,0,20,0"
-                FontAttributes="Italic"
                 TextColor="Gray">
                 <Label.FormattedText>
                     <FormattedString>
@@ -105,7 +105,6 @@
                                 Text=": "
                                 TextColor="Gray" />
                             <Span
-                                FontAttributes="Bold"
                                 FontSize="20"
                                 Text="{Binding Fee, StringFormat='{}{0:N9}'}" />
                             <Span FontSize="12" Text=" ツ" />
@@ -116,12 +115,14 @@
             <Button
                 Grid.Row="4"
                 Grid.Column="0"
-                Margin="30,0,30,0"
-                BackgroundColor="#0C0C0C"
+                Margin="0,0,10,0"
+                WidthRequest="120"
+                HorizontalOptions="End"
+                BackgroundColor="#252525"
                 Command="{Binding ContinueButtonClickedCommand}"
                 CornerRadius="5"
                 FontSize="16"
-                HeightRequest="44"
+                HeightRequest="48"
                 IsEnabled="{Binding IsValid}"
                 Text="{x:Static resource:AppResources.Continue}"
                 TextColor="White"

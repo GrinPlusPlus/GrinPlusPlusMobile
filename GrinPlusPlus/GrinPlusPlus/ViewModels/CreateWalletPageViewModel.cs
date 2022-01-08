@@ -1,4 +1,5 @@
 ﻿using GrinPlusPlus.Api;
+using GrinPlusPlus.Resources;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
@@ -28,14 +29,14 @@ namespace GrinPlusPlus.ViewModels
         private string _password = "";
         public string Password
         {
-            get { return _password; }
+            get { return _password.Trim(); }
             set { SetProperty(ref _password, value); }
         }
 
         private string _passwordConfirmation = "";
         public string PasswordConfirmation
         {
-            get { return _passwordConfirmation; }
+            get { return _passwordConfirmation.Trim(); }
             set { SetProperty(ref _passwordConfirmation, value); }
         }
 
@@ -93,13 +94,27 @@ namespace GrinPlusPlus.ViewModels
 
         private async void CreateWallet()
         {
+            if (string.IsNullOrEmpty(Username) || string.IsNullOrEmpty(Password) || string.IsNullOrEmpty(Password))
+            {
+                string message = AppResources.ResourceManager.GetString("FillEmptyBoxes");
+                await PageDialogService.DisplayAlertAsync("Error", message, "OK");
+                return;
+            }
+
+            if (Password != PasswordConfirmation)
+            {
+                string message = AppResources.ResourceManager.GetString("ConfirmPassword");
+                await PageDialogService.DisplayAlertAsync("Error", message, "OK");
+                return;
+            }
+
             try
             {
                 ExceptionMessage = string.Empty;
 
                 IsBusy = true;
 
-                var wallet = await DataProvider.CreateWallet(Username, Password, int.Parse(SeedLength)).ConfigureAwait(false);
+                var wallet = await DataProvider.CreateWallet(Username, Password, int.Parse(SeedLength));
 
                 if (!string.IsNullOrEmpty(wallet.Token))
                 {

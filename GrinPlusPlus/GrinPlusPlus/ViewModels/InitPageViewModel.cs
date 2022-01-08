@@ -109,9 +109,11 @@ namespace GrinPlusPlus.ViewModels
             {
                 try
                 {
-                    List<Account> accounts = await DataProvider.GetAccounts().ConfigureAwait(false);
+                    List<Account> accounts = await DataProvider.GetAccounts();
 
                     StopTimer = true;
+
+                    await Task.Delay(TimeSpan.FromSeconds(2));
 
                     if (accounts.Count == 0)
                     {

@@ -60,7 +60,7 @@ namespace GrinPlusPlus.ViewModels
 
             try
             {
-                var wallet = await DataProvider.DoLogin(Username, Password).ConfigureAwait(false);
+                var wallet = await DataProvider.DoLogin(Username, Password);
 
                 await SecureStorage.SetAsync("token", wallet.Token);
                 await SecureStorage.SetAsync("username", Username);
@@ -92,7 +92,7 @@ namespace GrinPlusPlus.ViewModels
 
             try
             {
-                await DataProvider.DeleteWallet(Username, Password).ConfigureAwait(false);
+                await DataProvider.DeleteWallet(Username, Password);
                 MainThread.BeginInvokeOnMainThread(async () =>
                 {
                     await NavigationService.NavigateAsync("/NavigationPage/InitPage");

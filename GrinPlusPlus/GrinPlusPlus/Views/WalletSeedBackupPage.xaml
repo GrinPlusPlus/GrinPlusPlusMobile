@@ -7,6 +7,7 @@
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     Title="{x:Static resource:AppResources.WalletSeed}"
     Padding="20,20,20,0"
+    NavigationPage.HasBackButton="False"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="#151515">
     <ContentPage.Content>
@@ -566,12 +567,13 @@
                     Grid.Row="12"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
-                    BackgroundColor="#0C0C0C"
+                    BackgroundColor="Transparent"
+                    FontSize="16"
                     Command="{Binding GoHomeButtonClickedCommand}"
                     CornerRadius="5"
                     HeightRequest="48"
                     IsEnabled="{Binding IsValid}"
-                    Text="{x:Static resource:AppResources.Continue}"
+                    Text="{x:Static resource:AppResources.Close}"
                     TextColor="White"
                     TextTransform="None" />
             </Grid>

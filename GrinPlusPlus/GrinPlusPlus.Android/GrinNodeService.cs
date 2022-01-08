@@ -119,7 +119,7 @@ namespace GrinPlusPlus.Droid
 
             try
             {
-                var nodeStatus = await Service.Node.Instance.Status().ConfigureAwait(false);
+                var nodeStatus = await Service.Node.Instance.Status();
                 Xamarin.Essentials.Preferences.Set("HeaderHeight", nodeStatus.HeaderHeight);
                 Xamarin.Essentials.Preferences.Set("Blocks", nodeStatus.Chain.Height);
                 Xamarin.Essentials.Preferences.Set("NetworkHeight", nodeStatus.Network.Height);
@@ -254,8 +254,6 @@ namespace GrinPlusPlus.Droid
 		/// <returns>The resync node action.</returns>
 		Notification.Action BuildResyncNodeAction()
         {
-            var status = Xamarin.Essentials.Preferences.Get("Status", string.Empty);
-            
             var resyncNodeIntent = new Intent(this, GetType());
             resyncNodeIntent.SetAction(Constants.ACTION_RESYNC_NODE);
             var restartTimerPendingIntent = PendingIntent.GetService(this, 0, resyncNodeIntent, 0);

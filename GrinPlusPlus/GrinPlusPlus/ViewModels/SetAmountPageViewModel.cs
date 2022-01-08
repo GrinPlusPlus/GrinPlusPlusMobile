@@ -204,7 +204,7 @@ namespace GrinPlusPlus.ViewModels
             {
                 try
                 {
-                    FeeEstimation estimation = await DataProvider.EstimateFee(await SecureStorage.GetAsync("token").ConfigureAwait(false), __amount).ConfigureAwait(false);
+                    FeeEstimation estimation = await DataProvider.EstimateFee(await SecureStorage.GetAsync("token"), __amount);
 
                     Fee = (estimation.Fee / Math.Pow(10, 9)).ToString("F9");
                     IsValid = true;

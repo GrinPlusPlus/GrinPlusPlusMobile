@@ -40,7 +40,7 @@ namespace GrinPlusPlus.ViewModels
         {
             try
             {
-                ReceivingResponse response = await DataProvider.ReceiveTransaction(await SecureStorage.GetAsync("token").ConfigureAwait(false), SlatepackMessage).ConfigureAwait(false);
+                ReceivingResponse response = await DataProvider.ReceiveTransaction(await SecureStorage.GetAsync("token"), SlatepackMessage);
                 await NavigationService.NavigateAsync("ShareSlatepackMessagePage", new NavigationParameters { { "receiving_response", response } });
             }
             catch (Exception ex)

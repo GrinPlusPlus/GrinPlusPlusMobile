@@ -46,7 +46,7 @@ namespace GrinPlusPlus.ViewModels
         {
             try
             {
-                var balance = await DataProvider.GetWalletBalance(await SecureStorage.GetAsync("token").ConfigureAwait(false)).ConfigureAwait(false);
+                var balance = await DataProvider.GetWalletBalance(await SecureStorage.GetAsync("token"));
 
                 Preferences.Set("balance_spendable", balance.Spendable);
                 Preferences.Set("balance_locked", balance.Locked);
@@ -110,7 +110,7 @@ namespace GrinPlusPlus.ViewModels
         {
             try
             {
-                await DataProvider.DoLogout(await SecureStorage.GetAsync("token").ConfigureAwait(false)).ConfigureAwait(false);
+                await DataProvider.DoLogout(await SecureStorage.GetAsync("token"));
             }
             catch (Exception ex)
             {

@@ -772,12 +772,13 @@
                     Grid.Row="13"
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
-                    BackgroundColor="#0C0C0C"
+                    BackgroundColor="#252525"
                     Command="{prism:NavigateTo 'OpeningWalletPage',
                                                UseModalNavigation=False,
                                                Animated=True}"
                     CornerRadius="5"
                     HeightRequest="48"
+                    FontSize="16"
                     IsEnabled="{Binding IsValid}"
                     Text="{x:Static resource:AppResources.Continue}"
                     TextColor="White"
