@@ -77,7 +77,7 @@ namespace GrinPlusPlus.ViewModels
                         {
                             await PageDialogService.DisplayAlertAsync("Error", "Authentication Failed", "OK");
                             await Logout();
-                            await NavigationService.GoBackToRootAsync();
+                            await NavigationService.GoBackAsync();
                         }
                         else
                         {
@@ -120,13 +120,9 @@ namespace GrinPlusPlus.ViewModels
 
             SecureStorage.RemoveAll();
 
-            Settings.IsLoggedIn = false;
+            Preferences.Clear();
 
-            Preferences.Remove("balance_spendable");
-            Preferences.Remove("balance_locked");
-            Preferences.Remove("balance_immature");
-            Preferences.Remove("balance_unconfirmed");
-            Preferences.Remove("balance_total");
+            Settings.IsLoggedIn = false;
         }
     }
 }

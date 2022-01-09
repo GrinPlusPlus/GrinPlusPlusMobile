@@ -42,15 +42,11 @@ namespace GrinPlusPlus.ViewModels
 
         }
 
-        public override async void OnNavigatedTo(INavigationParameters parameters)
+        public override void OnNavigatedTo(INavigationParameters parameters)
         {
             if (parameters.ContainsKey("username"))
             {
                 Username = parameters.GetValue<string>("username");
-            }
-            else
-            {
-                await NavigationService.GoBackToRootAsync();
             }
         }
 
@@ -76,7 +72,6 @@ namespace GrinPlusPlus.ViewModels
             }
             catch (Exception ex)
             {
-                IsBusy = false;
                 Debug.WriteLine(ex.Message);
 
                 MainThread.BeginInvokeOnMainThread(async () =>
@@ -84,9 +79,13 @@ namespace GrinPlusPlus.ViewModels
                     await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
                 });
             }
+            finally
+            {
+                IsBusy = false;
+            }
         }
 
-        private async void DeleteWalletC()
+        async void DeleteWalletC()
         {
             IsBusy = true;
 
@@ -95,7 +94,7 @@ namespace GrinPlusPlus.ViewModels
                 await DataProvider.DeleteWallet(Username, Password);
                 MainThread.BeginInvokeOnMainThread(async () =>
                 {
-                    await NavigationService.NavigateAsync("/NavigationPage/InitPage");
+                    await NavigationService.NavigateAsync("/NavigationPage/LoginPage");
                 });
             }
             catch (Exception ex)
