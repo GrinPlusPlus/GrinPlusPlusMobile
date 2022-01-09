@@ -28,9 +28,9 @@
     <ContentPage.Content>
         <Grid BackgroundColor="#151515" RowSpacing="8">
             <Grid.RowDefinitions>
-                <RowDefinition Height="100" />
-                <RowDefinition Height="60" />
-                <RowDefinition Height="60" />
+                <RowDefinition Height="90" />
+                <RowDefinition Height="70" />
+                <RowDefinition Height="70" />
                 <RowDefinition Height="30" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
@@ -97,10 +97,19 @@
                 Grid.Column="0"
                 Orientation="Vertical">
                 <Label FontSize="16" Text="{x:Static resource:AppResources.ConfirmedHeight}" TextColor="Gray" />
-                <Label
-                    FontSize="18"
-                    Text="{Binding SelectedTransaction.ConfirmedHeight}"
-                    TextColor="White" />
+                <StackLayout Orientation="Horizontal" Spacing="20">
+                    <Label FontSize="18" Text="{Binding SelectedTransaction.ConfirmedHeight}" TextColor="White" VerticalOptions="Start" />
+                    <Button        
+                        IsVisible="{Binding CanBeReposted}"
+                        BackgroundColor="#0C0C0C"
+                        HeightRequest="40"
+                        Padding="0"
+                        Command="{Binding RepostTransactionCommand}"
+                        CornerRadius="5"
+                        FontSize="14"
+                        Text="Repost"
+                        TextColor="White" />
+                </StackLayout>
             </StackLayout>
             <Label
                 Grid.Row="3"

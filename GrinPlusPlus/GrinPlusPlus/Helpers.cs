@@ -89,5 +89,10 @@ namespace GrinPlusPlus
 
             return double.Parse(t, NumberStyles.Any, CultureInfo.InvariantCulture);
         }
+
+        public static string CleanTxType(string status)
+        {
+            return status.Trim().ToLower().Replace("(", "_").Replace(")", "").Replace(" ", "_");
+        }
     }
 }

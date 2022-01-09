@@ -4,6 +4,8 @@ using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
 using Prism.Services.Dialogs;
+using System;
+using System.Diagnostics;
 using Xamarin.Essentials;
 
 namespace GrinPlusPlus.ViewModels
@@ -17,20 +19,22 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _transaction, value); }
         }
 
-        private bool _hasFee;
+        private bool _hasFee = false;
         public bool HasFee
         {
             get { return _hasFee; }
             set { SetProperty(ref _hasFee, value); }
         }
 
-        public DelegateCommand<object> CopyTextCommand => new DelegateCommand<object>(CopyText);
-
-        private async void CopyText(object text)
+        private bool _canBeReposted = false;
+        public bool CanBeReposted
         {
-            await Clipboard.SetTextAsync((string)text);
+            get { return _canBeReposted; }
+            set { SetProperty(ref _canBeReposted, value); }
         }
 
+        public DelegateCommand<object> RepostTransactionCommand => new DelegateCommand<object>(RepostTransaction);
+        public DelegateCommand<object> CopyTextCommand => new DelegateCommand<object>(CopyText);
 
         public TransactionDetailsPageViewModel(INavigationService navigationService,
                                               IDataProvider dataProvider, IDialogService dialogService,
@@ -46,6 +50,29 @@ namespace GrinPlusPlus.ViewModels
             {
                 SelectedTransaction = (Transaction)parameters["transaction"];
                 HasFee = SelectedTransaction.Fee > 0;
+                CanBeReposted = Helpers.CleanTxType(SelectedTransaction.Status).Equals("sending_finalized");
+            }
+        }
+
+        async void CopyText(object text)
+        {
+            await Clipboard.SetTextAsync((string)text);
+        }
+
+        async void RepostTransaction(object text)
+        {
+            string token = await SecureStorage.GetAsync("token");
+            try
+            {
+                await DataProvider.RepostTransaction(token, SelectedTransaction.Id);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            finally
+            {
+                await NavigationService.GoBackToRootAsync();
             }
         }
     }
