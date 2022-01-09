@@ -67,7 +67,7 @@ namespace GrinPlusPlus.Droid
 
                     try
                     {
-                        Xamarin.Essentials.Platform.CurrentActivity.Finish();
+                        Xamarin.Essentials.Platform.CurrentActivity.FinishAffinity();
                     }
                     catch (Exception e)
                     {
@@ -82,6 +82,15 @@ namespace GrinPlusPlus.Droid
 
                     StopForeground(true);
                     StopSelf();
+
+                    try
+                    {
+                        System.Diagnostics.Process.GetCurrentProcess().Kill();
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Verbose(TAG, e.Message);
+                    }
                 }
                 else if (intent.Action.Equals(Constants.ACTION_RESTART_NODE))
                 {
