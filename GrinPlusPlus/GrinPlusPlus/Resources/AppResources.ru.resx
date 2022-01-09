@@ -147,6 +147,9 @@
   <data name="Amounts" xml:space="preserve">
     <value>Балансы</value>
   </data>
+  <data name="AreYouSure" xml:space="preserve">
+    <value>Вы уверены, что хотите продолжать?</value>
+  </data>
   <data name="BackupWallet" xml:space="preserve">
     <value>Резервное копирование</value>
   </data>

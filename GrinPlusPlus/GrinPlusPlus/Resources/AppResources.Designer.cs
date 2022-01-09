@@ -151,6 +151,15 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to continue?.
+        /// </summary>
+        internal static string AreYouSure {
+            get {
+                return ResourceManager.GetString("AreYouSure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Backup Wallet.
         /// </summary>
         internal static string BackupWallet {

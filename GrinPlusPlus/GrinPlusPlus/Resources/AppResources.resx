@@ -147,6 +147,9 @@
   <data name="Amounts" xml:space="preserve">
     <value>Amounts</value>
   </data>
+  <data name="AreYouSure" xml:space="preserve">
+    <value>Are you sure you want to continue?</value>
+  </data>
   <data name="BackupWallet" xml:space="preserve">
     <value>Backup Wallet</value>
   </data>
