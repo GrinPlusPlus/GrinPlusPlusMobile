@@ -39,16 +39,15 @@ namespace GrinPlusPlus.ViewModels
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
             Reachable = Settings.Reachable;
+        }
 
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
             Task.Factory.StartNew(async () =>
             {
                 SlatepackAddress = await SecureStorage.GetAsync("slatepack_address");
             });
 
-        }
-
-        public override void OnNavigatedTo(INavigationParameters parameters)
-        {
             Device.StartTimer(TimeSpan.FromSeconds(5), () =>
             {
                 Reachable = Settings.Reachable;

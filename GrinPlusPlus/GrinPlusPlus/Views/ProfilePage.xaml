@@ -35,7 +35,7 @@
             ColumnSpacing="0"
             RowSpacing="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="300" />
+                <RowDefinition Height="260" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="75" />
                 <RowDefinition Height="1" />
@@ -47,7 +47,7 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 Padding="20"
-                BackgroundColor="#151515">
+                BackgroundColor="#0C0C0C">
                 <Label
                     HorizontalOptions="Center"
                     Text="{x:Static resource:AppResources.QRCode}"
@@ -55,14 +55,14 @@
                     TextTransform="Uppercase" />
                 <Frame
                     Padding="10"
-                    BackgroundColor="#252525"
+                    BackgroundColor="#0C0C0C"
                     CornerRadius="4"
                     HorizontalOptions="Center">
                     <zxing:ZXingBarcodeImageView
                         BarcodeFormat="QR_CODE"
                         BarcodeValue="{Binding SlatepackAddress}"
-                        HeightRequest="180"
-                        WidthRequest="180">
+                        HeightRequest="160"
+                        WidthRequest="160">
                         <zxing:ZXingBarcodeImageView.BarcodeOptions>
                             <zxcm:EncodingOptions
                                 Width="340"
@@ -84,10 +84,12 @@
                     TextColor="Gray"
                     TextTransform="Uppercase" />
                 <Button
-                    BackgroundColor="#252525"
+                    BackgroundColor="#0C0C0C"
+                    HeightRequest="100"
                     Command="{Binding CopyAddressCommand}"
                     CornerRadius="5"
-                    FontSize="16"
+                    CharacterSpacing="1"
+                    FontSize="18"
                     Text="{Binding SlatepackAddress}"
                     TextColor="{Binding Reachable, Converter={StaticResource AvailabilityColorConverter}}"
                     TextTransform="Lowercase" />
@@ -95,14 +97,11 @@
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Text="(" TextColor="Gray" />
-
                             <Span Text="{x:Static resource:AppResources.TabToCopy}" TextColor="Gray" />
                             <Span Text=")" TextColor="Gray" />
-
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-
             </StackLayout>
             <BoxView
                 Grid.Row="3"
