@@ -12,7 +12,7 @@ namespace GrinPlusPlus.ViewModels
 {
     public class ProfilePageViewModel : ViewModelBase
     {
-        private bool _reachable;
+        private bool _reachable = Settings.Reachable;
         public bool Reachable
         {
             get { return _reachable; }
@@ -38,7 +38,14 @@ namespace GrinPlusPlus.ViewModels
         public ProfilePageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
-            Reachable = Settings.Reachable;
+            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+            {
+                if (StopTimer) return false;
+
+                Reachable = Settings.Reachable;
+
+                return !StopTimer;
+            });
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
@@ -46,13 +53,6 @@ namespace GrinPlusPlus.ViewModels
             Task.Factory.StartNew(async () =>
             {
                 SlatepackAddress = await SecureStorage.GetAsync("slatepack_address");
-            });
-
-            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
-            {
-                Reachable = Settings.Reachable;
-
-                return !StopTimer;
             });
         }
 
