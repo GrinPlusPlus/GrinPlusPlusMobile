@@ -242,7 +242,7 @@ namespace GrinPlusPlus.ViewModels
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
-            Device.StartTimer(TimeSpan.FromSeconds(35), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(25), () =>
             {
                 if (!Settings.IsLoggedIn)
                 {
@@ -257,7 +257,7 @@ namespace GrinPlusPlus.ViewModels
                 return true;
             });
 
-            Device.StartTimer(TimeSpan.FromSeconds(4), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
             {
                 if (Settings.IsLoggedIn == false)
                 {
@@ -272,7 +272,22 @@ namespace GrinPlusPlus.ViewModels
                 return true;
             });
 
-            Device.StartTimer(TimeSpan.FromSeconds(2), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(4), () =>
+            {
+                if (Settings.IsLoggedIn == false)
+                {
+                    return false;
+                }
+
+                Task.Factory.StartNew(async () =>
+                {
+                    await GetTransactions();
+                });
+
+                return true;
+            });
+
+            Device.StartTimer(TimeSpan.FromSeconds(3), () =>
             {
                 if (Settings.IsLoggedIn == false)
                 {
@@ -284,15 +299,10 @@ namespace GrinPlusPlus.ViewModels
                     await GetUnfinalizedTransactions();
                 });
 
-                Task.Factory.StartNew(async () =>
-                {
-                    await GetTransactions();
-                });
-
                 return true;
             });
 
-            Device.StartTimer(TimeSpan.FromSeconds(1), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
             {
                 if (Settings.IsLoggedIn == false)
                 {
