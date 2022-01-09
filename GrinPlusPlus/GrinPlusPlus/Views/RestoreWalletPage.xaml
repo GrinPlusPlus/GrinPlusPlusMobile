@@ -104,7 +104,6 @@
                 Padding="0"
                 BackgroundColor="#151515"
                 HeightRequest="48"
-                IsVisible="{Binding IsNodeFullySynched}"
                 Spacing="0">
                 <Button
                     BackgroundColor="Transparent"
