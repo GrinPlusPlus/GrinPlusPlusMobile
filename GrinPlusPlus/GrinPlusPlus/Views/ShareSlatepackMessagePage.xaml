@@ -3,8 +3,10 @@
     x:Class="GrinPlusPlus.Views.ShareSlatepackMessagePage"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
+    Title="{x:Static resource:AppResources.SlatepackMessage}"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="#151515">
     <ContentPage.Content>
@@ -12,57 +14,77 @@
             BackgroundColor="#151515"
             HorizontalOptions="FillAndExpand"
             Orientation="Vertical"
-            Spacing="10"
+            Spacing="20"
             VerticalOptions="FillAndExpand">
             <Label
-                Margin="30,10,30,10"
+                Margin="20,0,20,0"
+                FontSize="16"
                 Text="{x:Static resource:AppResources.ShareSlatePackMessageQuoteToFinalize}"
                 TextColor="White" />
             <Label
-                Margin="30,0,30,0"
-                Text="Slatepack"
-                TextColor="#2f2f2f"
+                Margin="20,0,20,0"
+                Text="{x:Static resource:AppResources.SlatepackMessage}"
+                TextColor="Gray"
                 TextTransform="Uppercase" />
             <Editor
-                Margin="30,0,30,10"
+                Margin="20,0,20,0"
                 AutoSize="Disabled"
                 BackgroundColor="#0C0C0C"
-                CharacterSpacing="4"
-                FontSize="14"
-                HeightRequest="220"
+                CharacterSpacing="3"
+                FontSize="12"
+                FontFamily="monospace"
+                HeightRequest="260"
                 IsReadOnly="True"
                 IsSpellCheckEnabled="False"
                 IsTextPredictionEnabled="False"
                 Text="{Binding ReceivingResponse.Slatepack}"
-                TextColor="LightGray" />
+                TextColor="LightGray" >
+                <Editor.Effects>
+                    <xct:RemoveBorderEffect />
+                </Editor.Effects>
+            </Editor>
+            <Grid Margin="20,0,20,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="44" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="5*" />
+                </Grid.ColumnDefinitions>
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    BackgroundColor="#252525"
+                    Command="{Binding CopySlatepackMessageCommand}"
+                    CornerRadius="5"
+                    FontFamily="16"
+                    HeightRequest="48"
+                    Text="{x:Static resource:AppResources.Copy}"
+                    TextColor="White"
+                    TextTransform="None" />
+                <Button
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    BackgroundColor="#252525"
+                    Command="{Binding ShareSlatepackMessageCommand}"
+                    CornerRadius="5"
+                    FontFamily="16"
+                    HeightRequest="48"
+                    Text="{x:Static resource:AppResources.Share}"
+                    TextColor="White"
+                    TextTransform="None" />
+            </Grid>
             <Button
-                Margin="50,0,50,0"
-                BackgroundColor="#252525"
-                Command="{Binding CopySlatepackMessageCommand}"
-                CornerRadius="5"
-                FontFamily="16"
-                HeightRequest="48"
-                Text="{x:Static resource:AppResources.CopySlatepackMessage}"
-                TextColor="White" />
-            <Button
-                Margin="50,0,50,0"
-                BackgroundColor="#252525"
-                Command="{Binding ShareSlatepackMessageCommand}"
-                CornerRadius="5"
-                FontFamily="16"
-                HeightRequest="48"
-                Text="{x:Static resource:AppResources.ShareSlatepackMessage}"
-                TextColor="White" />
-            <Button
-                Margin="50,0,50,20"
-                BackgroundColor="#252525"
+                Margin="20"
+                VerticalOptions="EndAndExpand"
+                BackgroundColor="Transparent"
                 Command="{Binding CloseScreenCommand}"
                 CornerRadius="5"
                 FontFamily="16"
                 HeightRequest="48"
                 Text="{x:Static resource:AppResources.Close}"
                 TextColor="White"
-                VerticalOptions="EndAndExpand" />
+                TextTransform="None" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
