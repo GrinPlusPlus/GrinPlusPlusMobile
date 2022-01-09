@@ -28,7 +28,11 @@ namespace GrinPlusPlus.Models
         {
             get
             {
-                return Helpers.GetInteger(Math.Abs(AmountCredited - AmountDebited));
+                if( AmountDebited - AmountCredited > 0 )
+                {
+                    return Helpers.GetInteger(Math.Abs(AmountDebited - AmountCredited - _fee));
+                }
+                return Helpers.GetInteger(Math.Abs(AmountDebited - AmountCredited));
             }
         }
 
@@ -36,7 +40,11 @@ namespace GrinPlusPlus.Models
         {
             get
             {
-                return Helpers.GetDecimals(Math.Abs(AmountCredited - AmountDebited));
+                if (AmountDebited - AmountCredited > 0)
+                {
+                    return Helpers.GetDecimals(Math.Abs(AmountDebited - AmountCredited - _fee));
+                }
+                return Helpers.GetDecimals(Math.Abs(AmountDebited - AmountCredited));
             }
         }
 

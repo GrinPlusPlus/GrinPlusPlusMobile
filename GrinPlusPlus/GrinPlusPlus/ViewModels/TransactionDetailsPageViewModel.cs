@@ -17,6 +17,13 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _transaction, value); }
         }
 
+        private bool _hasFee;
+        public bool HasFee
+        {
+            get { return _hasFee; }
+            set { SetProperty(ref _hasFee, value); }
+        }
+
         public DelegateCommand<object> CopyTextCommand => new DelegateCommand<object>(CopyText);
 
         private async void CopyText(object text)
@@ -38,6 +45,7 @@ namespace GrinPlusPlus.ViewModels
             if (parameters.ContainsKey("transaction"))
             {
                 SelectedTransaction = (Transaction)parameters["transaction"];
+                HasFee = SelectedTransaction.Fee > 0;
             }
         }
     }

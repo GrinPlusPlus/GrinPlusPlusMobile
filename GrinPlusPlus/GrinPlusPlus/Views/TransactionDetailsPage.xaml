@@ -28,11 +28,10 @@
     <ContentPage.Content>
         <Grid BackgroundColor="#151515" RowSpacing="8">
             <Grid.RowDefinitions>
-                <RowDefinition Height="90" />
-                <RowDefinition Height="55" />
-                <RowDefinition Height="55" />
-                <RowDefinition Height="55" />
-                <RowDefinition Height="55" />
+                <RowDefinition Height="100" />
+                <RowDefinition Height="60" />
+                <RowDefinition Height="60" />
+                <RowDefinition Height="30" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -72,13 +71,13 @@
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
-                <Label FontSize="18" TextColor="White" HorizontalOptions="Center">
+                <Label FontSize="18" TextColor="White" HorizontalOptions="Center" IsVisible="{Binding HasFee}">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span FontSize="12" Text="( " />
-                            <Span Text="{Binding SelectedTransaction.Fee}" />
-                            <Span FontSize="12" Text=" ツ" />
-                            <Span FontSize="12" Text=" )" />
+                            <Span FontSize="16" TextColor="Gray" Text="{x:Static resource:AppResources.Fee} " />
+                            <Span TextColor="Gray" Text=": " />
+                            <Span FontSize="18" Text="{Binding SelectedTransaction.Fee}" />
+                            <Span FontSize="13" Text=" ツ" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
@@ -87,7 +86,7 @@
                 Grid.Row="1"
                 Grid.Column="0"
                 Orientation="Vertical">
-                <Label Text="{x:Static resource:AppResources.Date}" TextColor="Gray" />
+                <Label FontSize="16" Text="{x:Static resource:AppResources.Date}" TextColor="Gray" />
                 <Label
                     FontSize="18"
                     Text="{Binding SelectedTransaction.Date, StringFormat='{}{0:dddd, dd MMMM yyyy hh:mm tt}'}"
@@ -97,31 +96,20 @@
                 Grid.Row="2"
                 Grid.Column="0"
                 Orientation="Vertical">
-                <Label Text="{x:Static resource:AppResources.ConfirmedHeight}" TextColor="Gray" />
+                <Label FontSize="16" Text="{x:Static resource:AppResources.ConfirmedHeight}" TextColor="Gray" />
                 <Label
                     FontSize="18"
                     Text="{Binding SelectedTransaction.ConfirmedHeight}"
                     TextColor="White" />
             </StackLayout>
-            <StackLayout
+            <Label
                 Grid.Row="3"
                 Grid.Column="0"
-                Orientation="Vertical">
-                <Label Text="{x:Static resource:AppResources.Slate}" TextColor="Gray" />
-                <Label
-                    FontSize="16"
-                    Text="{Binding SelectedTransaction.Slate}"
-                    TextColor="White" />
-            </StackLayout>
-            <Label
-                Grid.Row="4"
-                Grid.Column="0"
-                Margin="0,5,0,0"
                 FontSize="16"
                 Text="{x:Static resource:AppResources.Outputs}"
                 TextColor="Gray" />
             <CollectionView
-                Grid.Row="5"
+                Grid.Row="4"
                 Grid.Column="0"
                 ItemsSource="{Binding SelectedTransaction.Outputs}">
                 <CollectionView.ItemTemplate>
