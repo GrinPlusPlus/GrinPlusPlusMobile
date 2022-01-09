@@ -7,7 +7,7 @@
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
     x:Name="TransactionDetails"
-    Title="{x:Static resource:AppResources.Details}"
+    Title="{Binding SelectedTransaction.Status}"
     Padding="20,0,20,10"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="#151515">
@@ -28,75 +28,63 @@
     <ContentPage.Content>
         <Grid BackgroundColor="#151515" RowSpacing="8">
             <Grid.RowDefinitions>
-                <RowDefinition Height="60" />
+                <RowDefinition Height="90" />
                 <RowDefinition Height="55" />
                 <RowDefinition Height="55" />
                 <RowDefinition Height="55" />
                 <RowDefinition Height="55" />
-                <RowDefinition Height="55" />
-                <RowDefinition Height="30" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Label
+            <StackLayout
                 Grid.Row="0"
                 Grid.Column="0"
-                HorizontalOptions="Center"
-                VerticalOptions="Start">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span
-                            FontSize="22"
-                            Text="{Binding SelectedTransaction.Status, Converter={StaticResource StatusSignConverter}}"
-                            TextColor="#FFEE00" />
-                        <Span
-                            FontSize="36"
-                            Text="{Binding SelectedTransaction.Amount}"
-                            TextColor="#FFEE00" />
-                        <Span
-                            FontAttributes="Bold"
-                            FontSize="Medium"
-                            Text="."
-                            TextColor="#FFEE00" />
-                        <Span
-                            FontSize="22"
-                            Text="{Binding SelectedTransaction.Decimals, StringFormat='{}{0:N9}'}"
-                            TextColor="#FFEE00" />
-                        <Span
-                            FontSize="14"
-                            Text=" ツ"
-                            TextColor="#FFEE00" />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-            <StackLayout
-                Grid.Row="1"
-                Grid.Column="0"
+                HorizontalOptions="FillAndExpand"
                 Orientation="Vertical">
-                <Label Text="{x:Static resource:AppResources.Status}" TextColor="Gray" />
                 <Label
-                    FontSize="18"
-                    Text="{Binding SelectedTransaction.Status}"
-                    TextColor="White" />
-            </StackLayout>
-            <StackLayout
-                Grid.Row="2"
-                Grid.Column="0"
-                Orientation="Vertical">
-                <Label Text="{x:Static resource:AppResources.Fee}" TextColor="Gray" />
-                <Label FontSize="18" TextColor="White">
+                    HorizontalOptions="Center"
+                    VerticalOptions="Start">
                     <Label.FormattedText>
                         <FormattedString>
+                            <Span
+                                FontSize="22"
+                                Text="{Binding SelectedTransaction.Status, Converter={StaticResource StatusSignConverter}}"
+                                TextColor="#FFEE00" />
+                            <Span
+                                FontSize="36"
+                                Text="{Binding SelectedTransaction.Amount}"
+                                TextColor="#FFEE00" />
+                            <Span
+                                FontAttributes="Bold"
+                                FontSize="Medium"
+                                Text="."
+                                TextColor="#FFEE00" />
+                            <Span
+                                FontSize="22"
+                                Text="{Binding SelectedTransaction.Decimals, StringFormat='{}{0:N9}'}"
+                                TextColor="#FFEE00" />
+                            <Span
+                                FontSize="14"
+                                Text=" ツ"
+                                TextColor="#FFEE00" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label FontSize="18" TextColor="White" HorizontalOptions="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span FontSize="12" Text="( " />
                             <Span Text="{Binding SelectedTransaction.Fee}" />
                             <Span FontSize="12" Text=" ツ" />
+                            <Span FontSize="12" Text=" )" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
             </StackLayout>
             <StackLayout
-                Grid.Row="3"
+                Grid.Row="1"
                 Grid.Column="0"
                 Orientation="Vertical">
                 <Label Text="{x:Static resource:AppResources.Date}" TextColor="Gray" />
@@ -106,7 +94,7 @@
                     TextColor="White" />
             </StackLayout>
             <StackLayout
-                Grid.Row="4"
+                Grid.Row="2"
                 Grid.Column="0"
                 Orientation="Vertical">
                 <Label Text="{x:Static resource:AppResources.ConfirmedHeight}" TextColor="Gray" />
@@ -116,7 +104,7 @@
                     TextColor="White" />
             </StackLayout>
             <StackLayout
-                Grid.Row="5"
+                Grid.Row="3"
                 Grid.Column="0"
                 Orientation="Vertical">
                 <Label Text="{x:Static resource:AppResources.Slate}" TextColor="Gray" />
@@ -126,14 +114,14 @@
                     TextColor="White" />
             </StackLayout>
             <Label
-                Grid.Row="6"
+                Grid.Row="4"
                 Grid.Column="0"
                 Margin="0,5,0,0"
                 FontSize="16"
                 Text="{x:Static resource:AppResources.Outputs}"
                 TextColor="Gray" />
             <CollectionView
-                Grid.Row="7"
+                Grid.Row="5"
                 Grid.Column="0"
                 ItemsSource="{Binding SelectedTransaction.Outputs}">
                 <CollectionView.ItemTemplate>

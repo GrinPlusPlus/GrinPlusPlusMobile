@@ -25,7 +25,9 @@ namespace GrinPlusPlus.ViewModels
         }
 
 
-        public TransactionDetailsPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
+        public TransactionDetailsPageViewModel(INavigationService navigationService,
+                                              IDataProvider dataProvider, IDialogService dialogService,
+                                              IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
 
