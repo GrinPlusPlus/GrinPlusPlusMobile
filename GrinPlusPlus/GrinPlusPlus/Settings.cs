@@ -59,6 +59,12 @@ namespace GrinPlusPlus
             set => Preferences.Set(nameof(MaximumPeers), value);
         }
 
+        public static string GrinExplorerURL
+        {
+            get => Preferences.Get(nameof(GrinExplorerURL), "https://grinexplorer.net");
+            set => Preferences.Set(nameof(GrinExplorerURL), value);
+        }
+
         public static class Node
         {
             public static string Status
