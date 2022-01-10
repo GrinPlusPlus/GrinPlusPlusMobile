@@ -1,5 +1,6 @@
 ﻿using GrinPlusPlus.Api;
 using GrinPlusPlus.Models;
+using GrinPlusPlus.Resources;
 using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
@@ -55,15 +56,30 @@ namespace GrinPlusPlus.ViewModels
         }
 
         async void CopyText(object text)
-        {           
-            string commitment = (string)text;
+        {
+            var yes = AppResources.ResourceManager.GetString("Yes");
+            var no = AppResources.ResourceManager.GetString("No");
+            var confirm = AppResources.ResourceManager.GetString("Confirm");
+            var areyousure = AppResources.ResourceManager.GetString("AreYouSure");
 
-            await Clipboard.SetTextAsync(commitment);
-            await Share.RequestAsync(new ShareTextRequest
+            var confirmation = await PageDialogService.DisplayAlertAsync(confirm, areyousure, yes, no);
+            if (!confirmation)
             {
-                Text = commitment,
-                Title = "grin"
-            });
+                return;
+            }
+
+            string commitment = (string)text;
+            await Clipboard.SetTextAsync(commitment);
+            string uri = $"{Settings.GrinExplorerURL}/output/{commitment}"; 
+            try
+            {
+                await Browser.OpenAsync(uri, BrowserLaunchMode.SystemPreferred);
+            }
+            catch (Exception ex)
+            {
+                // An unexpected error occured. No browser may be installed on the device.
+                Debug.WriteLine(ex.Message);
+            }
         }
 
         async void RepostTransaction(object text)
