@@ -57,6 +57,11 @@ namespace GrinPlusPlus.ViewModels
 
         async void CopyText(object text)
         {
+            string commitment = (string)text;
+            await Clipboard.SetTextAsync(commitment);
+
+            if (SelectedTransaction.Status.ToLower().Equals("canceled")) return;
+
             var yes = AppResources.ResourceManager.GetString("Yes");
             var no = AppResources.ResourceManager.GetString("No");
             var confirm = AppResources.ResourceManager.GetString("Confirm");
@@ -68,8 +73,6 @@ namespace GrinPlusPlus.ViewModels
                 return;
             }
 
-            string commitment = (string)text;
-            await Clipboard.SetTextAsync(commitment);
             string uri = $"{Settings.GrinExplorerURL}/output/{commitment}"; 
             try
             {
