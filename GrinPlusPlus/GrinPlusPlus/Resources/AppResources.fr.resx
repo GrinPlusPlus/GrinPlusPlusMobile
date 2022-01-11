@@ -277,7 +277,7 @@
     <value>Slatepack est la norme de transaction universelle pour Grin. Les slatepacks sont cryptés lorsque l'utilisateur utilise une adresse grin1 pour envoyer des grins</value>
   </data>
   <data name="FactsMimblewimble" xml:space="preserve">
-    <value> Mimblewimble est un protocole blockchain qui permet des transactions totalement privées grâce à une sécurité unique, nettement différent de celui de la crypto-monnaie pseudonyme Bitcoin. Dans Mimblewimble, il n'y a pas d'adresses et les transactions sont totalement confidentielles. Sa Blockchain est également relativement plus compact que les autres chaînes de l'espace cryptographique.</value>
+    <value>Mimblewimble est un protocole blockchain qui permet des transactions totalement privées grâce à une sécurité unique, nettement différent de celui de la crypto-monnaie pseudonyme Bitcoin. Dans Mimblewimble, il n'y a pas d'adresses et les transactions sont totalement confidentielles. Sa Blockchain est également relativement plus compact que les autres chaînes de l'espace cryptographique.</value>
   </data>
   <data name="FactsOpen" xml:space="preserve">
     <value>Grin est développé ouvertement, par des contributeurs individuels du monde entier. Il n'y a pas de société ou de fondation derrière, ni d'ICO, de récompense pour les fondateurs, de pré-mine ou de taxe de développement. La distribution de la monnaie est conçue pour être aussi équitable (mais pas gratuite) que possible.</value>
