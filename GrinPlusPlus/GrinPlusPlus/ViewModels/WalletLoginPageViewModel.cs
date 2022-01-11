@@ -139,6 +139,18 @@ namespace GrinPlusPlus.ViewModels
 
             try
             {
+                try
+                {
+                    var token = await SecureStorage.GetAsync("token");
+                    await DataProvider.DoLogout(token);
+                }
+                catch { }
+                finally
+                {
+                    Settings.IsLoggedIn = false;
+                    SecureStorage.RemoveAll();
+                }
+
                 await DataProvider.DeleteWallet(Username, Password);
                 List<Account> accounts = await DataProvider.GetAccounts();
                 if (accounts.Count == 0)
