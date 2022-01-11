@@ -136,7 +136,7 @@
     <value>Aligner le QR dans le cadre</value>
   </data>
   <data name="All" xml:space="preserve">
-    <value>tous</value>
+    <value>Tous</value>
   </data>
   <data name="Amount" xml:space="preserve">
     <value>Montant</value>
@@ -238,7 +238,7 @@
     <value>Effacer porte-monnaie</value>
   </data>
   <data name="Details" xml:space="preserve">
-    <value>Details</value>
+    <value>Détails</value>
   </data>
   <data name="Emission" xml:space="preserve">
     <value>Emission</value>
@@ -307,7 +307,7 @@
     <value>Afficher la phrase secrète</value>
   </data>
   <data name="Headers" xml:space="preserve">
-    <value>entêtes</value>
+    <value>Entêtes</value>
   </data>
   <data name="History" xml:space="preserve">
     <value>Historique</value>
@@ -328,7 +328,7 @@
     <value>Charger à partir d'un fichier</value>
   </data>
   <data name="Locked" xml:space="preserve">
-    <value>Vérouillé</value>
+    <value>Verrouillé</value>
   </data>
   <data name="MaximumPeers" xml:space="preserve">
     <value>Nombre maximum de pairs</value>
@@ -403,7 +403,7 @@
     <value>Selectioner méthode</value>
   </data>
   <data name="PleaseConfirm" xml:space="preserve">
-    <value>Veuillez confirmer</value>
+    <value>Veuillez Confirmer</value>
   </data>
   <data name="PowerSaverMessage" xml:space="preserve">
     <value>Assurez-vous que l'économiseur d'énergie est désactivé</value>
@@ -424,7 +424,7 @@
     <value>Reçu</value>
   </data>
   <data name="ReceiveTransaction" xml:space="preserve">
-    <value>Recevoir Transaction</value>
+    <value>Recevoir</value>
   </data>
   <data name="Repost" xml:space="preserve">
     <value>Reposter</value>
@@ -460,7 +460,7 @@
     <value>Envoi</value>
   </data>
   <data name="SendingPleaseWait" xml:space="preserve">
-    <value>Envoi, Veuillez patienter...</value>
+    <value>Envoi, Veuillez Patienter...</value>
   </data>
   <data name="Sent" xml:space="preserve">
     <value>Envoyée</value>
@@ -508,7 +508,7 @@
     <value>Slatepack Message Text</value>
   </data>
   <data name="Spendable" xml:space="preserve">
-    <value>Dépensable</value>
+    <value>Disponible</value>
   </data>
   <data name="Status" xml:space="preserve">
     <value>Status</value>
@@ -532,7 +532,7 @@
     <value>Le total</value>
   </data>
   <data name="TransactionHistory" xml:space="preserve">
-    <value>Historique de transaction</value>
+    <value>Historique Des Transactions</value>
   </data>
   <data name="Transactions" xml:space="preserve">
     <value>Transactions</value>
@@ -547,7 +547,7 @@
     <value>Non Confirmée</value>
   </data>
   <data name="UnfinalizedTransactions" xml:space="preserve">
-    <value>transactions non finalisées</value>
+    <value>Transactions Non Finalisées</value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>Nom d'utilisateur</value>
