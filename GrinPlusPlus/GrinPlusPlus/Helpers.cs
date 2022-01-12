@@ -92,7 +92,7 @@ namespace GrinPlusPlus
 
         public static string CleanTxType(string status)
         {
-            return status.Trim().ToLower().Replace("(", "_").Replace(")", "").Replace(" ", "_");
+            return status.Trim().ToLower().Replace(" ", "").Replace("(", "_").Replace(")", "").Replace(" ", "_");
         }
     }
 }

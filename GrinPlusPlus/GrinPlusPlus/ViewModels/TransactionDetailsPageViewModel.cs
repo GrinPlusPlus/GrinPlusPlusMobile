@@ -34,7 +34,16 @@ namespace GrinPlusPlus.ViewModels
             set { SetProperty(ref _canBeReposted, value); }
         }
 
+        private bool _canBeCanceled = false;
+        public bool CanBeCanceled
+        {
+            get { return _canBeCanceled; }
+            set { SetProperty(ref _canBeCanceled, value); }
+        }
+
         public DelegateCommand<object> RepostTransactionCommand => new DelegateCommand<object>(RepostTransaction);
+        public DelegateCommand<object> CancelTransactionCommand => new DelegateCommand<object>(CancelTransaction);
+
         public DelegateCommand<object> CopyTextCommand => new DelegateCommand<object>(CopyText);
 
         public TransactionDetailsPageViewModel(INavigationService navigationService,
@@ -52,6 +61,7 @@ namespace GrinPlusPlus.ViewModels
                 SelectedTransaction = (Transaction)parameters["transaction"];
                 HasFee = SelectedTransaction.Fee > 0;
                 CanBeReposted = Helpers.CleanTxType(SelectedTransaction.Status).Equals("sending_finalized");
+                CanBeCanceled = Helpers.CleanTxType(SelectedTransaction.Status).Equals("receiving_unconfirmed");
             }
         }
 
@@ -91,6 +101,23 @@ namespace GrinPlusPlus.ViewModels
             try
             {
                 await DataProvider.RepostTransaction(token, SelectedTransaction.Id);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+            finally
+            {
+                await NavigationService.GoBackToRootAsync();
+            }
+        }
+
+        async void CancelTransaction(object text)
+        {
+            string token = await SecureStorage.GetAsync("token");
+            try
+            {
+                await DataProvider.CancelTransaction(token, SelectedTransaction.Id);
             }
             catch (Exception ex)
             {

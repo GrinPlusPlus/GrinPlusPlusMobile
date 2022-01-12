@@ -109,6 +109,16 @@
                         FontSize="14"
                         Text="Repost"
                         TextColor="White" />
+                    <Button        
+                        IsVisible="{Binding CanBeCanceled}"
+                        BackgroundColor="#0C0C0C"
+                        HeightRequest="40"
+                        Padding="0"
+                        Command="{Binding CancelTransactionCommand}"
+                        CornerRadius="5"
+                        FontSize="14"
+                        Text="{x:Static resource:AppResources.Cancel}"
+                        TextColor="Red" />
                 </StackLayout>
             </StackLayout>
             <Label

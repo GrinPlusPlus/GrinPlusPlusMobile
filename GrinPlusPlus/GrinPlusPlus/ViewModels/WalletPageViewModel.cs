@@ -189,15 +189,6 @@ namespace GrinPlusPlus.ViewModels
 
         public DelegateCommand ShareAddressCommand => new DelegateCommand(ShareAddress);
 
-        private async void ShareAddress()
-        {
-            await Share.RequestAsync(new ShareTextRequest
-            {
-                Text = SlatepackAddress,
-                Title = "grin"
-            });
-        }
-
         public WalletPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService,
             IPageDialogService pageDialogService) : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
@@ -564,6 +555,15 @@ namespace GrinPlusPlus.ViewModels
                     await NavigationService.NavigateAsync("/NavigationPage/WalletLoginPage", new NavigationParameters { { "username", wallet } });
                 });
             }
+        }
+
+        private async void ShareAddress()
+        {
+            await Share.RequestAsync(new ShareTextRequest
+            {
+                Text = SlatepackAddress,
+                Title = "grin"
+            });
         }
 
         public class TransactionStatus
