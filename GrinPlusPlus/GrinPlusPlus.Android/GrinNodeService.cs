@@ -116,7 +116,7 @@ namespace GrinPlusPlus.Droid
 
         private void SetNodeTimer()
         {
-            timer = new System.Timers.Timer(1500);
+            timer = new System.Timers.Timer(1000);
             timer.Elapsed += OnNodeTimedEvent;
             timer.Start();
         }
