@@ -65,7 +65,7 @@
             ColumnSpacing="0"
             RowSpacing="10">
             <Grid.RowDefinitions>
-                <RowDefinition Height="160" />
+                <RowDefinition Height="162" />
                 <RowDefinition Height="35" />
                 <RowDefinition Height="110" />
                 <RowDefinition Height="35" />
@@ -79,27 +79,26 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 Margin="5,0,5,0"
-                Padding="15,10,15,10"
+                Padding="15,0,15,0"
                 BackgroundColor="#FFD717"
                 BorderColor="Transparent"
-                CornerRadius="10">
+                CornerRadius="8">
                 <Grid
                     Margin="0"
                     ColumnSpacing="0"
                     RowSpacing="0">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="20" />
+                        <RowDefinition Height="25" />
                         <RowDefinition Height="50" />
                         <RowDefinition Height="1" />
                         <RowDefinition Height="5" />
-                        <RowDefinition Height="20" />
-                        <RowDefinition Height="20" />
-                        <RowDefinition Height="20" />
+                        <RowDefinition Height="25" />
+                        <RowDefinition Height="25" />
+                        <RowDefinition Height="25" />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="90" />
+                        <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="40" />
                     </Grid.ColumnDefinitions>
                     <Label
                         Grid.Row="0"
@@ -114,7 +113,7 @@
                         Grid.Row="0"
                         Grid.RowSpan="3"
                         Grid.Column="3"
-                        FontSize="25"
+                        FontSize="30"
                         HorizontalOptions="End"
                         Text="ツ"
                         TextColor="Black"
@@ -147,7 +146,7 @@
                         Grid.Row="2"
                         Grid.Column="0"
                         Grid.ColumnSpan="4"
-                        BackgroundColor="#151515" />
+                        BackgroundColor="Black" />
                     <Label
                         Grid.Row="4"
                         Grid.Column="0"
@@ -189,6 +188,7 @@
                         Grid.Row="5"
                         Grid.Column="0"
                         FontSize="14"
+                        HorizontalOptions="Start"
                         VerticalOptions="Center"
                         VerticalTextAlignment="Center">
                         <Label.FormattedText>
