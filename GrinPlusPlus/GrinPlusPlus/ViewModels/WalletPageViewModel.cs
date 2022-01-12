@@ -242,7 +242,7 @@ namespace GrinPlusPlus.ViewModels
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
-            Device.StartTimer(TimeSpan.FromSeconds(25), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(30), () =>
             {
                 if (!Settings.IsLoggedIn)
                 {
@@ -272,7 +272,7 @@ namespace GrinPlusPlus.ViewModels
                 return true;
             });
 
-            Device.StartTimer(TimeSpan.FromSeconds(4), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(3), () =>
             {
                 if (Settings.IsLoggedIn == false)
                 {
@@ -287,7 +287,7 @@ namespace GrinPlusPlus.ViewModels
                 return true;
             });
 
-            Device.StartTimer(TimeSpan.FromSeconds(3), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(2), () =>
             {
                 if (Settings.IsLoggedIn == false)
                 {
@@ -302,7 +302,7 @@ namespace GrinPlusPlus.ViewModels
                 return true;
             });
 
-            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(10), () =>
             {
                 if (Settings.IsLoggedIn == false)
                 {
