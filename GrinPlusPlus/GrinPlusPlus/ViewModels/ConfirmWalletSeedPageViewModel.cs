@@ -54,6 +54,8 @@ namespace GrinPlusPlus.ViewModels
 
         public DelegateCommand<object> UnfocusedEntryCommand { get; private set; }
 
+        public DelegateCommand RedirectCommand => new DelegateCommand(Redirect);
+
         public ConfirmWalletSeedPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
@@ -100,6 +102,25 @@ namespace GrinPlusPlus.ViewModels
             DisplayedWalletSeedWordsList[index] = word;
 
             IsValid = string.Join(" ", DisplayedWalletSeedWordsList.ToArray()) == WalletSeed;
+        }
+
+        async void Redirect()
+        {
+            var username = await SecureStorage.GetAsync("username");
+            
+            try
+            {
+                var token = await SecureStorage.GetAsync("token");
+                await DataProvider.DoLogout(token);
+            }
+            catch { }
+            finally
+            {
+                Settings.IsLoggedIn = false;
+                SecureStorage.RemoveAll();
+            }
+
+            await NavigationService.NavigateAsync("/NavigationPage/WalletLoginPage", new NavigationParameters { { "username", username } });
         }
     }
 }

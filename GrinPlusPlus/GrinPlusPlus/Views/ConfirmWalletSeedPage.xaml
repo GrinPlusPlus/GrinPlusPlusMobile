@@ -773,9 +773,7 @@
                     Grid.Column="0"
                     Grid.ColumnSpan="2"
                     BackgroundColor="#252525"
-                    Command="{prism:NavigateTo 'OpeningWalletPage',
-                                               UseModalNavigation=False,
-                                               Animated=True}"
+                    Command="{Binding RedirectCommand}"
                     CornerRadius="5"
                     HeightRequest="48"
                     FontSize="16"
