@@ -529,6 +529,8 @@
                          Spacing="30">
                 <Button
                     BackgroundColor="#252525"
+                    BorderColor="#FFD717"
+                    BorderWidth="1"
                     FontSize="16"
                     CornerRadius="5"
                     HorizontalOptions="FillAndExpand"
@@ -539,6 +541,8 @@
                     TextTransform="None" />
                 <Button
                     BackgroundColor="#252525"
+                    BorderColor="#FFD717"
+                    BorderWidth="1"
                     FontSize="16"
                     CornerRadius="5"
                     HorizontalOptions="FillAndExpand"
