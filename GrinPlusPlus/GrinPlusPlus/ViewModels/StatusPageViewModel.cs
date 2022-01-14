@@ -6,7 +6,6 @@ using Prism.Services.Dialogs;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -69,29 +68,33 @@ namespace GrinPlusPlus.ViewModels
         public StatusPageViewModel(INavigationService navigationService, IDataProvider dataProvider, IDialogService dialogService, IPageDialogService pageDialogService)
             : base(navigationService, dataProvider, dialogService, pageDialogService)
         {
-            UpdateStatus();
-
-            MainThread.BeginInvokeOnMainThread(async () =>
+            Task.Run(() => 
             {
-                await ListConnectedPeersAsync();
+                UpdateStatus();
+            });
+
+            Task.Run(() =>
+            {
+                ListConnectedPeers();
+
+                UpdateStatus();
             });
         }
 
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
-            Device.StartTimer(TimeSpan.FromSeconds(3), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(2), () =>
             {
                 UpdateStatus();
 
                 return !StopTimer;
             });
 
-            Device.StartTimer(TimeSpan.FromSeconds(10), () =>
+            Device.StartTimer(TimeSpan.FromSeconds(5), () =>
             {
-                MainThread.BeginInvokeOnMainThread(async () =>
-                {
-                    await ListConnectedPeersAsync();
-                });
+                if (StopTimer) return false;
+
+                ListConnectedPeers();
 
                 return !StopTimer;
             });
@@ -112,35 +115,19 @@ namespace GrinPlusPlus.ViewModels
             NetworkHeight = Settings.Node.NetworkHeight;
         }
 
-        private async Task ListConnectedPeersAsync()
+        void ListConnectedPeers()
         {
-            try
+            MainThread.BeginInvokeOnMainThread(async () =>
             {
-                var connectedPeers = await DataProvider.GetNodeConnectedPeers();
-                if (ConnectedPeers.Count > 0)
+                try
                 {
-                    foreach (Peer peer in ConnectedPeers)
-                    {
-                        if (!connectedPeers.Any(p => p.Address.Equals(peer.Address)))
-                        {
-                            ConnectedPeers.Remove(peer);
-                        }
-                    }
+                    ConnectedPeers = new ObservableCollection<Peer>(await DataProvider.GetNodeConnectedPeers());
                 }
-
-                foreach (Peer peer in connectedPeers)
+                catch (Exception ex)
                 {
-                    if (!ConnectedPeers.Any(p => p.Address.Equals(peer.Address)))
-                    {
-                        ConnectedPeers.Add(peer);
-                    }
+                    Debug.WriteLine(ex.Message);
                 }
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-
+            });
         }
     }
 }

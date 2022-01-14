@@ -77,7 +77,7 @@
                     TextColor="White" />
             </Grid>
             <Label Text="Tor" TextColor="Gray" />
-            <Label FontSize="16" Margin="0,0,0,10"
+            <Label FontSize="18" Margin="0,0,0,10"
                    Text="{Binding IsTorRunning}"
                    TextColor="White" />
             <Label Text="{x:Static resource:AppResources.ConnectedPeers}" TextColor="Gray"/>
