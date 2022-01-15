@@ -487,7 +487,7 @@
     <value>Can't communicate with the Receiver via TOR, but do not worry, you are still able of initiating the transaction by sharing this Slatepack message. The Receiver should introduce this Slatepack into their Wallet</value>
   </data>
   <data name="ShareSlatePackMessageQuoteToFinalize" xml:space="preserve">
-    <value>Send this Slatepack Message to the Sender to in order to Finalize the transaction</value>
+    <value>Share this Slatepack Message with the Sender in order to Finalize the transaction</value>
   </data>
   <data name="Slate" xml:space="preserve">
     <value>Slate</value>

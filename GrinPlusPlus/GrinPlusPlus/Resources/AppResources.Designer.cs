@@ -1168,7 +1168,7 @@ namespace GrinPlusPlus.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Send this Slatepack Message to the Sender to in order to Finalize the transaction.
+        ///   Looks up a localized string similar to Share this Slatepack Message with the Sender in order to Finalize the transaction.
         /// </summary>
         internal static string ShareSlatePackMessageQuoteToFinalize {
             get {
