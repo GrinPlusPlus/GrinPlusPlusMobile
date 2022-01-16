@@ -118,43 +118,43 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Account" xml:space="preserve">
-    <value>账户</value>
+    <value>賬戶</value>
   </data>
   <data name="Address" xml:space="preserve">
     <value>地址</value>
   </data>
   <data name="AddressCantBeNull" xml:space="preserve">
-    <value>确定设置接收者的地址</value>
+    <value>確定設置接收者的地址</value>
   </data>
   <data name="Addresses" xml:space="preserve">
     <value>地址</value>
   </data>
   <data name="AddressNote" xml:space="preserve">
-    <value>接收方地址也用于加密交易信息，其使用不是强制性的，但强烈建议使用</value>
+    <value>接收方地址也用於加密交易信息，其使用不是強制性的，但強烈建議使用</value>
   </data>
   <data name="AlignQRCode" xml:space="preserve">
-    <value>在框架内对齐二维码</value>
+    <value>在框架內對齊二維碼</value>
   </data>
   <data name="All" xml:space="preserve">
     <value>全部</value>
   </data>
   <data name="Amount" xml:space="preserve">
-    <value>数量</value>
+    <value>數量</value>
   </data>
   <data name="AmountCantBeNull" xml:space="preserve">
-    <value>数量应大于0</value>
+    <value>數量應大於0</value>
   </data>
   <data name="Amounts" xml:space="preserve">
-    <value>数量</value>
+    <value>數量</value>
   </data>
   <data name="AreYouSure" xml:space="preserve">
-    <value>你確定你要繼續嗎？</value>
+    <value>你确定你要继续吗？</value>
   </data>
   <data name="BackupWallet" xml:space="preserve">
-    <value>备用钱包</value>
+    <value>備用錢包</value>
   </data>
   <data name="Blocks" xml:space="preserve">
-    <value>区块</value>
+    <value>區塊</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>取消</value>
@@ -166,67 +166,67 @@
     <value>取消交易</value>
   </data>
   <data name="CancelTransactionQuestion" xml:space="preserve">
-    <value>您确定要取消此交易吗？</value>
+    <value>您確定要取消此交易嗎？</value>
   </data>
   <data name="Close" xml:space="preserve">
-    <value>关闭</value>
+    <value>關閉</value>
   </data>
   <data name="Coinbase" xml:space="preserve">
-    <value>铸币</value>
+    <value>鑄幣</value>
   </data>
   <data name="Commitment" xml:space="preserve">
-    <value>承诺</value>
+    <value>承諾</value>
   </data>
   <data name="Completed" xml:space="preserve">
     <value>已完成</value>
   </data>
   <data name="Confirm" xml:space="preserve">
-    <value>确定</value>
+    <value>確定</value>
   </data>
   <data name="Confirmations" xml:space="preserve">
-    <value>交易确认</value>
+    <value>交易確認</value>
   </data>
   <data name="ConfirmedHeight" xml:space="preserve">
-    <value>确定高度</value>
+    <value>確定高度</value>
   </data>
   <data name="ConfirmIdentity" xml:space="preserve">
-    <value>请先确认您的身份</value>
+    <value>請先確認您的身份</value>
   </data>
   <data name="ConfirmPassword" xml:space="preserve">
-    <value>确认密码</value>
+    <value>確認密碼</value>
   </data>
   <data name="ConnectedPeers" xml:space="preserve">
-    <value>连接节点</value>
+    <value>連接節點</value>
   </data>
   <data name="ConnectingToNode" xml:space="preserve">
-    <value>正在初始化您的Grin节点... Grin节点在本地运行，初始化需要10到16秒，请稍候... ⏱️</value>
+    <value>正在初始化您的Grin節點... Grin節點在本地運行，初始化需要10到16秒，請稍候... ⏱️</value>
   </data>
   <data name="Continue" xml:space="preserve">
-    <value>继续</value>
+    <value>繼續</value>
   </data>
   <data name="Copy" xml:space="preserve">
-    <value>复制</value>
+    <value>復制</value>
   </data>
   <data name="CopySlatepackMessage" xml:space="preserve">
-    <value>复制Slatepack消息</value>
+    <value>復制Slatepack消息</value>
   </data>
   <data name="CopyToClipboard" xml:space="preserve">
-    <value>复制到剪贴板</value>
+    <value>復制到剪貼板</value>
   </data>
   <data name="Create" xml:space="preserve">
-    <value>创建</value>
+    <value>創建</value>
   </data>
   <data name="CreateOneOrRestoreIt" xml:space="preserve">
-    <value>创建新帐户或使用钱包种子恢复以前的帐户</value>
+    <value>創建新帳戶或使用錢包種子恢復以前的帳戶</value>
   </data>
   <data name="CreateWallet" xml:space="preserve">
-    <value>创建新钱包</value>
+    <value>創建新錢包</value>
   </data>
   <data name="CreateWalletMessage" xml:space="preserve">
-    <value>创建新钱包后，请保存好钱包助记词。</value>
+    <value>創建新錢包後，請保存好錢包助記詞。</value>
   </data>
   <data name="Custom" xml:space="preserve">
-    <value>自定义</value>
+    <value>自定義</value>
   </data>
   <data name="Dandelion" xml:space="preserve">
     <value>Dandelion</value>
@@ -235,67 +235,67 @@
     <value>日期</value>
   </data>
   <data name="DeleteWallet" xml:space="preserve">
-    <value>删除钱包</value>
+    <value>刪除錢包</value>
   </data>
   <data name="Details" xml:space="preserve">
-    <value>详情</value>
+    <value>詳情</value>
   </data>
   <data name="Emission" xml:space="preserve">
-    <value>发出</value>
+    <value>發出</value>
   </data>
   <data name="EnableProximity" xml:space="preserve">
     <value>使用NFC接收</value>
   </data>
   <data name="Error" xml:space="preserve">
-    <value>错误</value>
+    <value>錯誤</value>
   </data>
   <data name="ErrorConnectingToNode" xml:space="preserve">
-    <value>尝试初始化Grin节点时出错。</value>
+    <value>嘗試初始化Grin節點時出錯。</value>
   </data>
   <data name="ErrorConnectingToNodeAdvice" xml:space="preserve">
-    <value>请尝试使用通知栏操作按钮再次运行节点</value>
+    <value>請嘗試使用通知欄操作按鈕再次運行節點</value>
   </data>
   <data name="ExportLogs" xml:space="preserve">
-    <value>导出日志</value>
+    <value>導出日誌</value>
   </data>
   <data name="FactAddresses" xml:space="preserve">
-    <value>注意，没有链上地址，因为交易构建是交互式的。SlatePackage地址中使用的密钥来自给定钱包帐户中主种子的路径。</value>
+    <value>註意，沒有鏈上地址，因為交易構建是交互式的。SlatePackage地址中使用的密鑰來自給定錢包帳戶中主種子的路徑。</value>
   </data>
   <data name="FactEmission" xml:space="preserve">
-    <value>新的古灵币 ツ 每秒钟产生一个，这意味着产出速率保持不变且完全线性。随着时间的推移会逐渐变低；10年后，这一比例降至10%以下。20年以后，低于5%。这导致通货膨胀率下降，即通货紧缩。</value>
+    <value>新的古靈幣 ツ 每秒鐘產生壹個，這意味著產出速率保持不變且完全線性。隨著時間的推移會逐漸變低；10年後，這壹比例降至10%以下。20年以後，低於5%。這導致通貨膨脹率下降，即通貨緊縮。</value>
   </data>
   <data name="FactPrivate" xml:space="preserve">
-    <value>默认情况下是匿名。交易没有金额，没有地址，可以简单地统计。这可以实现完全的可替代性，而且可以根据需要有选择地公开交易的信息。</value>
+    <value>默認情況下是匿名。交易沒有金額，沒有地址，可以簡單地統計。這可以實現完全的可替代性，而且可以根據需要有選擇地公開交易的信息。</value>
   </data>
   <data name="FactsAmounts" xml:space="preserve">
-    <value>首先，没有交易数量。mimblewimble实现本机使用匿名交易，这意味着所有交易数量都是隐藏的；事实证明，它们不可能被发现，但很容易被证实。甚至在做其他事情之前，简单地隐藏交易数量会使任何分析变得更具挑战性。</value>
+    <value>首先，沒有交易數量。mimblewimble實現本機使用匿名交易，這意味著所有交易數量都是隱藏的；事實證明，它們不可能被發現，但很容易被證實。甚至在做其他事情之前，簡單地隱藏交易數量會使任何分析變得更具挑戰性。</value>
   </data>
   <data name="FactsDandelion" xml:space="preserve">
-    <value>通常泄露的一条重要信息是最初发送交易的IP地址。为了解决这个问题，grin使用Dandelion++（最初作为BIP提出），这是一种用于隐藏交易的原始IP地址的协议</value>
+    <value>通常泄露的壹條重要信息是最初發送交易的IP地址。為了解決這個問題，grin使用Dandelion++（最初作為BIP提出），這是壹種用於隱藏交易的原始IP地址的協議</value>
   </data>
   <data name="FactSlatepack" xml:space="preserve">
-    <value>Slatepack是Grin的通用交易标准。当用户使用grin1地址发送Grin时，SlatePack被加密；否则，交易信息只会变得混淆。</value>
+    <value>Slatepack是Grin的通用交易標準。當用戶使用grin1地址發送Grin時，SlatePack被加密；否則，交易信息只會變得混淆。</value>
   </data>
   <data name="FactsMimblewimble" xml:space="preserve">
-    <value>Mimblewimble是一种区块链协议，允许通过一个独特的安全框架实现完全私有的交易平台，该框架明显不同于比特币等加密货币。在Mimblewimble，没有地址，交易是完全保密的。它的分布式账本也比加密空间中的其他链相对更轻便</value>
+    <value>Mimblewimble是壹種區塊鏈協議，允許通過壹個獨特的安全框架實現完全私有的交易平臺，該框架明顯不同於比特幣等加密貨幣。在Mimblewimble，沒有地址，交易是完全保密的。它的分布式賬本也比加密空間中的其他鏈相對更輕便</value>
   </data>
   <data name="FactsOpen" xml:space="preserve">
-    <value>Grin是由世界各地的个人贡献者公开开发的。它没有公司或基金会，也没有ICO，创始奖励，预挖或消费税。代币分配的目的是尽可能公平（但不是免费）。</value>
+    <value>Grin是由世界各地的個人貢獻者公開開發的。它沒有公司或基金會，也沒有ICO，創始獎勵，預挖或消費稅。代幣分配的目的是盡可能公平（但不是免費）。</value>
   </data>
   <data name="FactsScalable" xml:space="preserve">
-    <value>Grin主要根据用户数量进行扩展，最低限度根据交易数量进行扩展。过去的交易数据可以被删减，使grin与其他区块链相比更加轻便。</value>
+    <value>Grin主要根據用戶數量進行擴展，最低限度根據交易數量進行擴展。過去的交易數據可以被刪減，使grin與其他區塊鏈相比更加輕便。</value>
   </data>
   <data name="FactTransactions" xml:space="preserve">
-    <value>Mimblewimble交易是交互式的，这意味着双方都需要某种通信来相互交互并交换创建交易所需的数据。</value>
+    <value>Mimblewimble交易是交互式的，這意味著雙方都需要某種通信來相互交互並交換創建交易所需的數據。</value>
   </data>
   <data name="FastPrivateSecure" xml:space="preserve">
     <value>快速. 匿名. 安全.</value>
   </data>
   <data name="Fee" xml:space="preserve">
-    <value>费用</value>
+    <value>費用</value>
   </data>
   <data name="FillEmptyBoxes" xml:space="preserve">
-    <value>请填写空白的信息</value>
+    <value>請填寫空白的信息</value>
   </data>
   <data name="Finalize" xml:space="preserve">
     <value>完成</value>
@@ -304,34 +304,34 @@
     <value>完成交易</value>
   </data>
   <data name="GetWalletSeed" xml:space="preserve">
-    <value>显示钱包助记词</value>
+    <value>顯示錢包助記詞</value>
   </data>
   <data name="Headers" xml:space="preserve">
-    <value>区块头</value>
+    <value>區塊頭</value>
   </data>
   <data name="History" xml:space="preserve">
-    <value>历史</value>
+    <value>歷史</value>
   </data>
   <data name="Immature" xml:space="preserve">
     <value>未成熟</value>
   </data>
   <data name="InitializingNode" xml:space="preserve">
-    <value>初始化节点</value>
+    <value>初始化節點</value>
   </data>
   <data name="InProgress" xml:space="preserve">
-    <value>进行中</value>
+    <value>進行中</value>
   </data>
   <data name="Kernels" xml:space="preserve">
-    <value>内核</value>
+    <value>內核</value>
   </data>
   <data name="LoadFromFile" xml:space="preserve">
-    <value>从文件加载</value>
+    <value>從文件加載</value>
   </data>
   <data name="Locked" xml:space="preserve">
-    <value>锁定</value>
+    <value>鎖定</value>
   </data>
   <data name="MaximumPeers" xml:space="preserve">
-    <value>最大节点数量</value>
+    <value>最大節點數量</value>
   </data>
   <data name="Message" xml:space="preserve">
     <value>消息</value>
@@ -343,13 +343,13 @@
     <value>Mimblewimble</value>
   </data>
   <data name="MinimumPeers" xml:space="preserve">
-    <value>最小节点数量</value>
+    <value>最小節點數量</value>
   </data>
   <data name="Network" xml:space="preserve">
-    <value>网络</value>
+    <value>網絡</value>
   </data>
   <data name="Next" xml:space="preserve">
-    <value>下一步</value>
+    <value>下壹步</value>
   </data>
   <data name="NFC" xml:space="preserve">
     <value>NFC</value>
@@ -358,64 +358,64 @@
     <value>否</value>
   </data>
   <data name="Node" xml:space="preserve">
-    <value>节点</value>
+    <value>節點</value>
   </data>
   <data name="NonInteractive" xml:space="preserve">
-    <value>没有交互性</value>
+    <value>沒有交互性</value>
   </data>
   <data name="NotReachable" xml:space="preserve">
-    <value>无法获得</value>
+    <value>無法獲得</value>
   </data>
   <data name="NoWalletFound" xml:space="preserve">
-    <value>没有发现钱包。请使用您的钱包助记词创建新钱包或还原现有钱包。</value>
+    <value>沒有發現錢包。請使用您的錢包助記詞創建新錢包或還原現有錢包。</value>
   </data>
   <data name="OfflineTransaction" xml:space="preserve">
-    <value>离线交易</value>
+    <value>離線交易</value>
   </data>
   <data name="Open" xml:space="preserve">
-    <value>打开</value>
+    <value>打開</value>
   </data>
   <data name="OpeningPleaseWait" xml:space="preserve">
-    <value>正在打开钱包，请稍候...</value>
+    <value>正在打開錢包，請稍候...</value>
   </data>
   <data name="OpenWallet" xml:space="preserve">
-    <value>打开钱包</value>
+    <value>打開錢包</value>
   </data>
   <data name="OpenWalletMessage" xml:space="preserve">
-    <value>钱包使用Tor网络进行交互，如果Tor不可用，您可以通过您喜欢的任何渠道使用Slatepack消息手动发送和接收代币</value>
+    <value>錢包使用Tor網絡進行交互，如果Tor不可用，您可以通過您喜歡的任何渠道使用Slatepack消息手動發送和接收代幣</value>
   </data>
   <data name="Outputs" xml:space="preserve">
-    <value>输出</value>
+    <value>輸出</value>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>密码</value>
+    <value>密碼</value>
   </data>
   <data name="PasswordCanNotBeEmpty" xml:space="preserve">
-    <value>密码不能为空</value>
+    <value>密碼不能為空</value>
   </data>
   <data name="PasteFromClipboard" xml:space="preserve">
-    <value>从剪贴板粘贴</value>
+    <value>從剪貼板粘貼</value>
   </data>
   <data name="Pending" xml:space="preserve">
     <value>待定的</value>
   </data>
   <data name="PickSendingMethod" xml:space="preserve">
-    <value>选择方法</value>
+    <value>選擇方法</value>
   </data>
   <data name="PleaseConfirm" xml:space="preserve">
-    <value>请确认</value>
+    <value>請確認</value>
   </data>
   <data name="PowerSaverMessage" xml:space="preserve">
-    <value>请确认已禁用省电模式</value>
+    <value>請確認已禁用省電模式</value>
   </data>
   <data name="Private" xml:space="preserve">
     <value>匿名</value>
   </data>
   <data name="QRCode" xml:space="preserve">
-    <value>二维码</value>
+    <value>二維碼</value>
   </data>
   <data name="Reachable" xml:space="preserve">
-    <value>可获得的</value>
+    <value>可獲得的</value>
   </data>
   <data name="Receive" xml:space="preserve">
     <value>接收</value>
@@ -430,46 +430,46 @@
     <value>重新提交</value>
   </data>
   <data name="Restore" xml:space="preserve">
-    <value>恢复</value>
+    <value>恢復</value>
   </data>
   <data name="RestoreExistingWallet" xml:space="preserve">
-    <value>恢复现有钱包</value>
+    <value>恢復現有錢包</value>
   </data>
   <data name="RestoreWallet" xml:space="preserve">
-    <value>恢复钱包</value>
+    <value>恢復錢包</value>
   </data>
   <data name="Scalable" xml:space="preserve">
-    <value>可扩展</value>
+    <value>可擴展</value>
   </data>
   <data name="ScanningQRCode" xml:space="preserve">
-    <value>正在扫描二维码</value>
+    <value>正在掃描二維碼</value>
   </data>
   <data name="ScanQRCode" xml:space="preserve">
-    <value>扫描二维码</value>
+    <value>掃描二維碼</value>
   </data>
   <data name="SeedLength" xml:space="preserve">
-    <value>助记词长度</value>
+    <value>助記詞長度</value>
   </data>
   <data name="SelectStatus" xml:space="preserve">
-    <value>选择状态</value>
+    <value>選擇狀態</value>
   </data>
   <data name="Send" xml:space="preserve">
-    <value>发送</value>
+    <value>發送</value>
   </data>
   <data name="Sending" xml:space="preserve">
-    <value>正在发送</value>
+    <value>正在發送</value>
   </data>
   <data name="SendingPleaseWait" xml:space="preserve">
-    <value>正在发送，请稍候...</value>
+    <value>正在發送，請稍候...</value>
   </data>
   <data name="Sent" xml:space="preserve">
-    <value>发送</value>
+    <value>發送</value>
   </data>
   <data name="SetAmount" xml:space="preserve">
-    <value>设定数量</value>
+    <value>設定數量</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>设置</value>
+    <value>設置</value>
   </data>
   <data name="Share" xml:space="preserve">
     <value>分享</value>
@@ -481,13 +481,13 @@
     <value>分享Slatepack消息</value>
   </data>
   <data name="ShareSlatepackMessageAsFile" xml:space="preserve">
-    <value>作为文件分享</value>
+    <value>作為文件分享</value>
   </data>
   <data name="ShareSlatePackMessageQuote" xml:space="preserve">
-    <value>无法通过TOR与接收方通信，但不要担心，您仍然可以通过分享此Slatepack消息来启动交易。接收方应该把这个Slatepack消息放进他们的钱包里</value>
+    <value>無法通過TOR與接收方通信，但不要擔心，您仍然可以通過分享此Slatepack消息來啟動交易。接收方應該把這個Slatepack消息放進他們的錢包裏</value>
   </data>
   <data name="ShareSlatePackMessageQuoteToFinalize" xml:space="preserve">
-    <value>将此Slatepack消息发送给发送方，以完成交易</value>
+    <value>將此Slatepack消息發送給發送方，以完成交易</value>
   </data>
   <data name="Slate" xml:space="preserve">
     <value>Slate</value>
@@ -508,49 +508,49 @@
     <value>Slatepack消息文本</value>
   </data>
   <data name="Spendable" xml:space="preserve">
-    <value>可花费</value>
+    <value>可花費</value>
   </data>
   <data name="Status" xml:space="preserve">
-    <value>状态</value>
+    <value>狀態</value>
   </data>
   <data name="Support" xml:space="preserve">
     <value>支持</value>
   </data>
   <data name="SwipeUp2Send" xml:space="preserve">
-    <value>向上滑动以发出Grin 😬</value>
+    <value>向上滑動以發出Grin 😬</value>
   </data>
   <data name="SyncedRedirecting" xml:space="preserve">
-    <value>Grin节点现在已完全同步。重新打开到登录屏幕...</value>
+    <value>Grin節點現在已完全同步。重新打開到登錄屏幕...</value>
   </data>
   <data name="TabToCopy" xml:space="preserve">
-    <value>点击要复制的地址</value>
+    <value>點擊要復制的地址</value>
   </data>
   <data name="TorAddress" xml:space="preserve">
     <value>Tor地址</value>
   </data>
   <data name="Total" xml:space="preserve">
-    <value>合计</value>
+    <value>合計</value>
   </data>
   <data name="TransactionHistory" xml:space="preserve">
-    <value>交易历史</value>
+    <value>交易歷史</value>
   </data>
   <data name="Transactions" xml:space="preserve">
     <value>交易</value>
   </data>
   <data name="TransactionSent" xml:space="preserve">
-    <value>发送交易  〜(ᵐ‿ʷ)〜</value>
+    <value>發送交易  〜(ᵐ‿ʷ)〜</value>
   </data>
   <data name="TryToStartNodeManually" xml:space="preserve">
-    <value>尝试再次启动节点</value>
+    <value>嘗試再次啟動節點</value>
   </data>
   <data name="Unconfirmed" xml:space="preserve">
-    <value>未确认</value>
+    <value>未確認</value>
   </data>
   <data name="UnfinalizedTransactions" xml:space="preserve">
     <value>未完成交易</value>
   </data>
   <data name="Username" xml:space="preserve">
-    <value>用户名</value>
+    <value>用戶名</value>
   </data>
   <data name="UsingInteractivity" xml:space="preserve">
     <value>使用交互式消息</value>
@@ -559,30 +559,30 @@
     <value>使用NFC</value>
   </data>
   <data name="WaitFullySynced" xml:space="preserve">
-    <value>请等到节点完全同步后再还原您的钱包。</value>
+    <value>請等到節點完全同步後再還原您的錢包。</value>
   </data>
   <data name="WaitingSync" xml:space="preserve">
-    <value>正在等待节点启动并运行...</value>
+    <value>正在等待節點啟動並運行...</value>
   </data>
   <data name="Wallet" xml:space="preserve">
-    <value>钱包</value>
+    <value>錢包</value>
   </data>
   <data name="WalletReachable" xml:space="preserve">
-    <value>您的钱包可获得</value>
+    <value>您的錢包可獲得</value>
   </data>
   <data name="WalletReachableNot" xml:space="preserve">
-    <value>您的钱包未获得</value>
+    <value>您的錢包未獲得</value>
   </data>
   <data name="WalletSeed" xml:space="preserve">
-    <value>钱包助记词</value>
+    <value>錢包助記詞</value>
   </data>
   <data name="WalletSeedInit" xml:space="preserve">
-    <value>您的助记词是私钥的唯一备份，它可以让您访问加密资产。请将每个单词复制到安全的地方。</value>
+    <value>您的助記詞是私鑰的唯壹備份，它可以讓您訪問加密資產。請將每個單詞復制到安全的地方。</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>是</value>
   </data>
   <data name="YourWallets" xml:space="preserve">
-    <value>您的钱包</value>
+    <value>您的錢包</value>
   </data>
 </root>
