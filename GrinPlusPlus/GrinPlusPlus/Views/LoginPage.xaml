@@ -112,7 +112,7 @@
                     <TapGestureRecognizer Command="{prism:NavigateTo 'RestoreWalletPage', UseModalNavigation=False, Animated=True}" />
                 </Frame.GestureRecognizers>
             </Frame>
-            <Label Grid.Row="3" HorizontalOptions="Center" Text="Grin++ v0.3.0 (node v1.2.7)"
+            <Label Grid.Row="3" HorizontalOptions="Center" Text="Grin++ v0.3.1 (node v1.2.7)"
                    TextColor="#333333" VerticalOptions="End" />
         </Grid>
     </ContentPage.Content>
