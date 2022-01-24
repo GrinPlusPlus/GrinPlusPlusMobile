@@ -135,22 +135,24 @@ namespace GrinPlusPlus.Droid.Classes
 
         public static bool DeleteNodeDataFolder(string dataFolder)
         {
-            if (IsTorRunning())
+            try
             {
-                StopTor();
-            }
-            if (IsNodeRunning())
+                if (NodeControl.IsNodeRunning())
+                {
+                    NodeControl.StopNode();
+                }
+            } catch (Exception ex)
             {
-                StopNode();
+                Log.Error(TAG, ex.Message);
             }
-
+            
             try
             {
                 Directory.Delete(dataFolder, true);
 
                 return true;
             }
-            catch (System.Exception ex)
+            catch (Exception ex)
             {
                 Log.Error(TAG, ex.Message);
                 return false;
@@ -160,6 +162,8 @@ namespace GrinPlusPlus.Droid.Classes
         static int GetProcessId(Java.Lang.Process p)
         {
             int pid;
+
+            if (p == null) return -1;
 
             try
             {

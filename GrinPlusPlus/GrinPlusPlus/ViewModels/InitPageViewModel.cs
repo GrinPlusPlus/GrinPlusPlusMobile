@@ -72,10 +72,7 @@ namespace GrinPlusPlus.ViewModels
 
                 return !StopTimer;
             });
-        }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
-        {
             Device.StartTimer(TimeSpan.FromSeconds(2), () =>
             {
                 Status = Settings.Node.Status.Equals("Not Running") && Settings.IsNodeRunning ? "Initializing Node..." : Settings.Node.Status;
@@ -105,7 +102,7 @@ namespace GrinPlusPlus.ViewModels
 
         private void ContinueNextStep()
         {
-            Task.Factory.StartNew(async () =>
+            MainThread.BeginInvokeOnMainThread(async () =>
             {
                 try
                 {
@@ -117,17 +114,11 @@ namespace GrinPlusPlus.ViewModels
 
                     if (accounts.Count == 0)
                     {
-                        MainThread.BeginInvokeOnMainThread(async () =>
-                        {
-                            await NavigationService.NavigateAsync("/NavigationPage/LoginPage");
-                        });
+                        await NavigationService.NavigateAsync("/NavigationPage/LoginPage");
                     }
                     else if (accounts.Count == 1)
                     {
-                        MainThread.BeginInvokeOnMainThread(async () =>
-                        {
-                            await NavigationService.NavigateAsync("/NavigationPage/WalletLoginPage", new NavigationParameters { { "username", accounts[0].Name } });
-                        });
+                        await NavigationService.NavigateAsync("/NavigationPage/WalletLoginPage", new NavigationParameters { { "username", accounts[0].Name } });
                     }
                     else
                     {
@@ -135,29 +126,18 @@ namespace GrinPlusPlus.ViewModels
                         for (int i = 0; i < accounts.Count; i++)
                         {
                             string account = accounts[i].Name;
-                            buttons[i] = ActionSheetButton.CreateButton(account, () =>
+                            buttons[i] = ActionSheetButton.CreateButton(account, async () =>
                             {
-                                MainThread.BeginInvokeOnMainThread(async () =>
-                                {
-                                    await NavigationService.NavigateAsync("/NavigationPage/WalletLoginPage", new NavigationParameters { { "username", account } });
-                                });
-
+                                await NavigationService.NavigateAsync("/NavigationPage/WalletLoginPage", new NavigationParameters { { "username", account } });
                             });
                         }
-                        MainThread.BeginInvokeOnMainThread(async () =>
-                        {
-                            await PageDialogService.DisplayActionSheetAsync(string.Empty, buttons);
-                        });
+                        await PageDialogService.DisplayActionSheetAsync(string.Empty, buttons);
                     }
                 }
                 catch (Exception ex)
                 {
                     Debug.WriteLine(ex.Message);
 
-                    MainThread.BeginInvokeOnMainThread(async () =>
-                    {
-                        await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
-                    });
                 }
             });
         }

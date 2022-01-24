@@ -122,6 +122,18 @@ namespace GrinPlusPlus
             set => Preferences.Set(nameof(DataFolder), value);
         }
 
+        public static string PeersFolder
+        {
+            get => Preferences.Get(nameof(PeersFolder), string.Empty);
+            set => Preferences.Set(nameof(PeersFolder), value);
+        }
+
+        public static string NativeLibraryDir
+        {
+            get => Preferences.Get(nameof(NativeLibraryDir), string.Empty);
+            set => Preferences.Set(nameof(NativeLibraryDir), value);
+        }
+
         public static bool IsTorRunning
         {
             get => Preferences.Get(nameof(IsTorRunning), false);

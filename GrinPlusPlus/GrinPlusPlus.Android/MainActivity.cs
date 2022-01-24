@@ -26,6 +26,16 @@ namespace GrinPlusPlus.Droid
 
             Window.SetFlags(WindowManagerFlags.Secure, WindowManagerFlags.Secure);
 
+            Xamarin.Essentials.Preferences.Set("IsLoggedIn", false);
+            Xamarin.Essentials.Preferences.Set("Status", Service.SyncHelpers.GetStatusLabel(string.Empty));
+            Xamarin.Essentials.Preferences.Set("ProgressPercentage", (float)0);
+            Xamarin.Essentials.Preferences.Set("DataFolder", System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), ".GrinPP/MAINNET/NODE"));
+            Xamarin.Essentials.Preferences.Set("PeersFolder", System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), ".GrinPP/MAINNET/NODE/DB/PEERS"));
+            Xamarin.Essentials.Preferences.Set("LogsFolder", System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), ".GrinPP/MAINNET/LOGS"));
+            Xamarin.Essentials.Preferences.Set("BackendFolder", System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), ".GrinPP/MAINNET/"));
+
+            Xamarin.Essentials.Preferences.Set("NativeLibraryDir", PackageManager.GetApplicationInfo(ApplicationInfo.PackageName, PackageInfoFlags.SharedLibraryFiles).NativeLibraryDir);
+
             LoadApplication(new App(new AndroidInitializer()));
         }
 

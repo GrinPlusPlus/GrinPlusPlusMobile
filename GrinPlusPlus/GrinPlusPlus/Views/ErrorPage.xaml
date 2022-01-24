@@ -5,32 +5,59 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:prism="http://prismlibrary.com"
     xmlns:resource="clr-namespace:GrinPlusPlus.Resources"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     prism:ViewModelLocator.AutowireViewModel="True"
     BackgroundColor="#151515">
-    <StackLayout Margin="35" Spacing="10">
+    <StackLayout Margin="10" Spacing="10">
         <Label
-            FontSize="Title"
+            FontSize="Medium"
             Text="{x:Static resource:AppResources.Error}"
             TextColor="White" />
         <Label
-            FontAttributes="Bold"
-            FontSize="Medium"
+            FontSize="Body"
             Text="{x:Static resource:AppResources.ErrorConnectingToNode}"
             TextColor="White" />
-        <Label Text="{x:Static resource:AppResources.ErrorConnectingToNodeAdvice}" TextColor="White" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+            <Button
+                Grid.Column="0"
+                BackgroundColor="#252525"
+                TextTransform="None"
+                Command="{Binding SupportButtonClickedCommand}"
+                Text="{x:Static resource:AppResources.Support}"
+                TextColor="LightGray" />
+            <Button
+                Grid.Column="1"
+                BackgroundColor="#252525"
+                TextTransform="None"
+                Command="{Binding ExportLogsButtonClickedCommand}"
+                Text="{x:Static resource:AppResources.ExportLogs}"
+                TextColor="LightGray"
+                />
+        </Grid>
+        
+        <Editor
+            AutoSize="Disabled"
+            BackgroundColor="#0C0C0C"
+            CharacterSpacing="0"
+            FontFamily="monospace"
+            FontSize="11"
+            HeightRequest="280"
+            IsSpellCheckEnabled="False"
+            IsTextPredictionEnabled="False"
+            Text="{Binding DebugInformation}"
+            TextColor="LightGray">
+            <Editor.Effects>
+                <xct:RemoveBorderEffect />
+            </Editor.Effects>
+        </Editor>
+        
         <Button
             BackgroundColor="#252525"
-            Command="{Binding SupportButtonClickedCommand}"
-            Text="{x:Static resource:AppResources.Support}"
-            TextColor="LightGray" />
-        <Button
-            BackgroundColor="#252525"
-            Command="{Binding ExportLogsButtonClickedCommand}"
-            Text="{x:Static resource:AppResources.ExportLogs}"
-            TextColor="LightGray" />
-        <Button
-            Margin="0,50,0,0"
-            BackgroundColor="#252525"
+            TextTransform="None"
             Command="{Binding DeleteChainButtonClickedCommand}"
             Text="Delete Blockchain"
             TextColor="Red" />

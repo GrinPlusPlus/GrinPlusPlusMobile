@@ -35,13 +35,6 @@ namespace GrinPlusPlus.Droid
         {
             base.OnCreate();
 
-            Xamarin.Essentials.Preferences.Set("IsLoggedIn", false);
-            Xamarin.Essentials.Preferences.Set("Status", Service.SyncHelpers.GetStatusLabel(string.Empty));
-            Xamarin.Essentials.Preferences.Set("ProgressPercentage", (float)0);
-            Xamarin.Essentials.Preferences.Set("DataFolder", new Java.IO.File(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), ".GrinPP/MAINNET/NODE")).AbsolutePath);
-            Xamarin.Essentials.Preferences.Set("LogsFolder", new Java.IO.File(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), ".GrinPP/MAINNET/LOGS")).AbsolutePath);
-            Xamarin.Essentials.Preferences.Set("BackendFolder", new Java.IO.File(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), ".GrinPP/MAINNET/")).AbsolutePath);
-
             nativeLibraryDir = PackageManager.GetApplicationInfo(ApplicationInfo.PackageName, PackageInfoFlags.SharedLibraryFiles).NativeLibraryDir;
         }
 
@@ -49,24 +42,42 @@ namespace GrinPlusPlus.Droid
         {
             if (intent.Action == null)
             {
-                NodeControl.StartTor(nativeLibraryDir);
-                NodeControl.StartNode(nativeLibraryDir);
+                InitializeNodeService();
 
-                RegisterForegroundService("Initializing Grin Node...");
-
-                SetNodeTimer();
+                if(NodeControl.IsNodeRunning())
+                {
+                    RegisterForegroundService("Initializing Node...");
+                    SetNodeTimer();
+                } else
+                {
+                    RegisterForegroundService("Not Running");
+                }
             }
             else
             {
-                NodeControl.StopNode();
-                NodeControl.StopTor();
+                try
+                {
+                    NodeControl.StopNode();
+                }
+                catch { }
+                try
+                {
+                    NodeControl.StopTor();
+                }
+                catch { }
 
                 if (intent.Action.Equals(Constants.ACTION_STOP_SERVICE))
                 {
                     Log.Info(TAG, "Stop Service called.");
-
+                    
                     try
                     {
+                        if (timer != null)
+                        {
+                            timer.Stop();
+                            timer.Enabled = false;
+                        }
+
                         Xamarin.Essentials.Platform.CurrentActivity.FinishAffinity();
                     }
                     catch (Exception e)
@@ -74,44 +85,62 @@ namespace GrinPlusPlus.Droid
                         Log.Verbose(TAG, e.Message);
                     }
 
-                    if (timer != null)
-                    {
-                        timer.Stop();
-                        timer.Enabled = false;
-                    }
-
                     StopForeground(true);
                     StopSelf();
 
-                    try
-                    {
-                        System.Diagnostics.Process.GetCurrentProcess().Kill();
-                    }
-                    catch (Exception e)
-                    {
-                        Log.Verbose(TAG, e.Message);
-                    }
+                    System.Diagnostics.Process.GetCurrentProcess().Kill();
                 }
                 else if (intent.Action.Equals(Constants.ACTION_RESTART_NODE))
                 {
                     Log.Info(TAG, "Restart Grin Node called.");
 
-                    NodeControl.StartTor(nativeLibraryDir);
-                    NodeControl.StartNode(nativeLibraryDir);
-                }
-                else if (intent.Action.Equals(Constants.ACTION_RESYNC_NODE))
-                {
-                    Log.Info(TAG, "Resync Grin Node called.");
-                    
-                    NodeControl.DeleteNodeDataFolder(Xamarin.Essentials.Preferences.Get("DataFolder", ""));
-
-                    NodeControl.StartTor(nativeLibraryDir);
-                    NodeControl.StartNode(nativeLibraryDir);
+                    InitializeNodeService();
                 }
             }
 
             // This tells Android not to restart the service if it is killed to reclaim resources.
             return StartCommandResult.Sticky;
+        }
+
+        private void InitializeNodeService()
+        {
+            try
+            {
+                Log.Verbose(TAG, "Starting Tor...");
+                NodeControl.StartTor(nativeLibraryDir);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(TAG, ex.Message);
+            }
+
+            try
+            {
+                var peersFolder = Xamarin.Essentials.Preferences.Get("PeersFolder", "");
+                NodeControl.DeleteNodeDataFolder(peersFolder);
+            }
+            catch (Exception ex)
+            {
+                Log.Error(TAG, ex.Message);
+            }
+
+            try
+            {
+                Log.Verbose(TAG, "Starting Node...");
+                NodeControl.StartNode(nativeLibraryDir);
+            }
+            catch (Exception ex)
+            {
+                try
+                {
+                    if (NodeControl.IsTorRunning())
+                    {
+                        NodeControl.StopTor();
+                    }
+                } catch { }
+
+                Log.Error(TAG, ex.Message);
+            }
         }
 
         private void SetNodeTimer()
@@ -169,9 +198,16 @@ namespace GrinPlusPlus.Droid
 
             Xamarin.Essentials.Preferences.Set("Status", Service.SyncHelpers.GetStatusLabel(string.Empty));
 
-            NodeControl.StopNode();
-            NodeControl.StopTor();
-
+            try
+            {
+                NodeControl.StopNode();
+            } catch { }
+            try
+            {
+                NodeControl.StopTor();
+            }
+            catch { }
+            
             if (timer != null)
             {
                 timer.Stop();
@@ -193,7 +229,6 @@ namespace GrinPlusPlus.Droid
                 .SetContentIntent(BuildIntentToShowMainActivity())
                 .SetOngoing(true)
                 .AddAction(BuildRestartNodeAction())
-                .AddAction(BuildResyncNodeAction())
                 .AddAction(BuildStopServiceAction())
                 .Build();
 
@@ -232,7 +267,7 @@ namespace GrinPlusPlus.Droid
             notificationIntent.SetAction(Constants.ACTION_MAIN_ACTIVITY);
             notificationIntent.SetFlags(ActivityFlags.SingleTop | ActivityFlags.ClearTask);
 
-            var pendingIntent = PendingIntent.GetActivity(this, 0, notificationIntent, PendingIntentFlags.UpdateCurrent);
+            var pendingIntent = PendingIntent.GetActivity(this, 0, notificationIntent, PendingIntentFlags.Immutable | PendingIntentFlags.UpdateCurrent);
             return pendingIntent;
         }
 
@@ -244,31 +279,14 @@ namespace GrinPlusPlus.Droid
         {
             var action = "Run";
             
-            if (NodeControl.IsNodeRunning()) action = "Restart";
+            if (NodeControl.IsNodeRunning()) return null;
             
             var restartIntent = new Intent(this, GetType());
             restartIntent.SetAction(Constants.ACTION_RESTART_NODE);
-            var restartTimerPendingIntent = PendingIntent.GetService(this, 0, restartIntent, 0);
+            var restartTimerPendingIntent = PendingIntent.GetService(this, 0, restartIntent, PendingIntentFlags.Immutable);
 
             var builder = new Notification.Action.Builder(null,
                                               action,
-                                              restartTimerPendingIntent);
-
-            return builder.Build();
-        }
-
-        /// <summary>
-		/// Builds a Notification.Action that will instruct the service to resync the node.
-		/// </summary>
-		/// <returns>The resync node action.</returns>
-		Notification.Action BuildResyncNodeAction()
-        {
-            var resyncNodeIntent = new Intent(this, GetType());
-            resyncNodeIntent.SetAction(Constants.ACTION_RESYNC_NODE);
-            var restartTimerPendingIntent = PendingIntent.GetService(this, 0, resyncNodeIntent, 0);
-
-            var builder = new Notification.Action.Builder(null,
-                                              "(RE)Synchronize",
                                               restartTimerPendingIntent);
 
             return builder.Build();
@@ -285,10 +303,10 @@ namespace GrinPlusPlus.Droid
 
             var stopServiceIntent = new Intent(this, GetType());
             stopServiceIntent.SetAction(Constants.ACTION_STOP_SERVICE);
-            var stopServicePendingIntent = PendingIntent.GetService(this, 0, stopServiceIntent, 0);
+            var stopServicePendingIntent = PendingIntent.GetService(this, 0, stopServiceIntent, PendingIntentFlags.Immutable);
 
             var builder = new Notification.Action.Builder(null,
-                                                          "EXIT",
+                                                          "Close",
                                                           stopServicePendingIntent);
             return builder.Build();
         }

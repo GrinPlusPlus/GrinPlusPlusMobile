@@ -64,26 +64,21 @@ namespace GrinPlusPlus.ViewModels
             {
                 var wallet = await DataProvider.DoLogin(Username, Password);
 
+                Settings.IsLoggedIn = true;
+
                 await SecureStorage.SetAsync("token", wallet.Token);
                 await SecureStorage.SetAsync("username", Username);
                 await SecureStorage.SetAsync("slatepack_address", wallet.SlatepackAdddress);
                 await SecureStorage.SetAsync("tor_address", wallet.TorAddress ?? string.Empty);
 
-                Settings.IsLoggedIn = true;
-
-                MainThread.BeginInvokeOnMainThread(async () =>
-                {
-                    await NavigationService.NavigateAsync("OpeningWalletPage");
-                });
+                await NavigationService.NavigateAsync("OpeningWalletPage");
             }
             catch (Exception ex)
             {
+                Settings.IsLoggedIn = false;
                 Debug.WriteLine(ex.Message);
 
-                MainThread.BeginInvokeOnMainThread(async () =>
-                {
-                    await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
-                });
+                await PageDialogService.DisplayAlertAsync("Error", ex.Message, "OK");
             }
             finally
             {
@@ -176,10 +171,8 @@ namespace GrinPlusPlus.ViewModels
 
                         });
                     }
-                    MainThread.BeginInvokeOnMainThread(async () =>
-                    {
-                        await PageDialogService.DisplayActionSheetAsync(string.Empty, buttons);
-                    });
+
+                    await PageDialogService.DisplayActionSheetAsync(string.Empty, buttons);
                 }
             }
             catch (Exception ex)
