@@ -116,16 +116,6 @@ namespace GrinPlusPlus.Droid
 
             try
             {
-                var peersFolder = Xamarin.Essentials.Preferences.Get("PeersFolder", "");
-                NodeControl.DeleteNodeDataFolder(peersFolder);
-            }
-            catch (Exception ex)
-            {
-                Log.Error(TAG, ex.Message);
-            }
-
-            try
-            {
                 Log.Verbose(TAG, "Starting Node...");
                 NodeControl.StartNode(nativeLibraryDir);
             }
