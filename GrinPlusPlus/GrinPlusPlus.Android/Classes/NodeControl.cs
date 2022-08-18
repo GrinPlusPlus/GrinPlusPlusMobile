@@ -133,8 +133,10 @@ namespace GrinPlusPlus.Droid.Classes
             return GetProcessId(pTor) != -1;
         }
 
-        public static bool DeleteNodeDataFolder(string dataFolder)
+        public static bool DeleteNodeDataFolder()
         {
+            string dataFolder = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments), ".GrinPP/MAINNET/NODE");
+
             try
             {
                 if (NodeControl.IsNodeRunning())

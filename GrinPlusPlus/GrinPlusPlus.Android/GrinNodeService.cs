@@ -44,11 +44,12 @@ namespace GrinPlusPlus.Droid
             {
                 InitializeNodeService();
 
-                if(NodeControl.IsNodeRunning())
+                if (NodeControl.IsNodeRunning())
                 {
                     RegisterForegroundService("Initializing Node...");
                     SetNodeTimer();
-                } else
+                }
+                else
                 {
                     RegisterForegroundService("Not Running");
                 }
@@ -66,10 +67,8 @@ namespace GrinPlusPlus.Droid
                 }
                 catch { }
 
-                if (intent.Action.Equals(Constants.ACTION_STOP_SERVICE))
+                if (intent.Action.Equals(Constants.ACTION_STOP_SERVICE) || intent.Action.Equals(Constants.ACTION_RESYNC_NODE))
                 {
-                    Log.Info(TAG, "Stop Service called.");
-                    
                     try
                     {
                         if (timer != null)
@@ -85,6 +84,11 @@ namespace GrinPlusPlus.Droid
                         Log.Verbose(TAG, e.Message);
                     }
 
+                    if (intent.Action.Equals(Constants.ACTION_RESYNC_NODE))
+                    {
+                        NodeControl.DeleteNodeDataFolder();
+                    }
+
                     StopForeground(true);
                     StopSelf();
 
@@ -92,8 +96,6 @@ namespace GrinPlusPlus.Droid
                 }
                 else if (intent.Action.Equals(Constants.ACTION_RESTART_NODE))
                 {
-                    Log.Info(TAG, "Restart Grin Node called.");
-
                     InitializeNodeService();
                 }
             }
@@ -220,6 +222,7 @@ namespace GrinPlusPlus.Droid
                 .SetOngoing(true)
                 .AddAction(BuildRestartNodeAction())
                 .AddAction(BuildStopServiceAction())
+                .AddAction(BuildResyncNodeAction())
                 .Build();
 
             // Enlist this instance of the service as a foreground service
@@ -298,6 +301,26 @@ namespace GrinPlusPlus.Droid
             var builder = new Notification.Action.Builder(null,
                                                           "Close",
                                                           stopServicePendingIntent);
+            
+            return builder.Build();
+        }
+
+        /// <summary>
+		/// Builds a Notification.Action that will instruct the service to resync the node.
+		/// </summary>
+		/// <returns>The resync node action.</returns>
+		Notification.Action BuildResyncNodeAction()
+        {
+            var action = "Resync";
+
+            var restartIntent = new Intent(this, GetType());
+            restartIntent.SetAction(Constants.ACTION_RESYNC_NODE);
+            var restartTimerPendingIntent = PendingIntent.GetService(this, 0, restartIntent, PendingIntentFlags.Immutable);
+
+            var builder = new Notification.Action.Builder(null,
+                                              action,
+                                              restartTimerPendingIntent);
+
             return builder.Build();
         }
     }
